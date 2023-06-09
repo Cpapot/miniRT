@@ -2,7 +2,9 @@
 // Created by bpoumeau on 6/9/23.
 //
 
-#ifndef RAYTRACER_PARSING_H
-#define RAYTRACER_PARSING_H
+#ifndef PARSING_H
+# define PARSING_H
 
-#endif //RAYTRACER_PARSING_H
+t_return_status
+
+#endif
