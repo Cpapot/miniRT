@@ -1,0 +1,5 @@
+*.o
+*.txt
+./miniRT
+cmake*
+.idea
