@@ -6,11 +6,36 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:18:24 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/09 14:55:11 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/09 15:26:38 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
+
+typedef struct	s_point
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_point;
+
+typedef struct	s_vec_3
+{
+	double	x;
+	double	y;
+	double	z;
+	double	norme;
+}	t_vec_3;
+
+t_vec_3	set_vec(double x, double y, double z)
+{
+	t_vec_3	vec;
+
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
+	return (vec);
+}
 
 t_vec_3	*scalar_product(t_vec_3 *vec1, t_vec_3 *vec2)
 {
