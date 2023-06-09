@@ -6,12 +6,6 @@
 
 # define STRUCTURES_H
 
-#include "sphere_parsing.h"
-#include "camera_parsing.h"
-#include "light_parsing.h"
-#include "sphere_parsing.h"
-#include "plane_parsing.h"
-
 typedef struct s_minirt_data
 {
 	t_ambient_light	*ambient_light;
@@ -22,7 +16,7 @@ typedef struct s_minirt_data
 	t_cylinder		*cylinder_arr;
 }	t_minirt_data;
 
-typedef struct	s_point
+typedef	struct	s_point
 {
 	double	x;
 	double	y;
@@ -37,12 +31,17 @@ typedef struct	s_vec_3
 	double	norme;
 }	t_vec_3;
 
+typedef struct	s_color
+{
+	char	r;
+	char	g;
+	char	b;
+}	t_color;
+
 typedef struct	s_ambient_light
 {
+	t_color color;
 	float	ratio;
-	char 	r;
-	char 	g;
-	char 	b;
 }	t_ambient_light;
 
 typedef struct	s_camera
@@ -54,14 +53,32 @@ typedef struct	s_camera
 
 typedef struct	s_light
 {
-	t_coordinate	coordinate;
+	t_point			coordinate;
 	t_vec_3			vector;
 	float			brightness;
 }	t_light;
 
-typedef struct	t_sphere
+typedef struct	s_sphere
 {
+	t_point	origin;
+	double	diameter;
+	t_color	color;
+}	t_sphere;
 
-};
+typedef struct	s_plane
+{
+	t_point	coordinate;
+	t_vec_3	normal_vector;
+	t_color	colors;
+}	t_plane;
+
+typedef struct	s_cylinder
+{
+	t_point	coordinate;
+	t_vec_3	normal_vector;
+	double	diameter;
+	double	height;
+	t_color	colors;
+}	t_cylinder;
 
 #endif
