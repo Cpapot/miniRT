@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:32:29 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/06/09 14:32:32 by bpoumeau         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:27:48 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 typedef struct s_minirt_data	t_minirt_data;
 typedef struct s_point			t_point;
 typedef struct s_vec_3			t_vec_3;
-typedef struct s_color			t_color
+typedef struct s_color			t_color;
 typedef struct s_ambient_light	t_ambient_light;
 typedef struct s_camera			t_camera;
 typedef struct s_light			t_light;
 typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
 typedef struct s_cylinder		t_cylinder;
+typedef struct s_ray			t_ray;
 
 struct s_minirt_data
 {
@@ -39,6 +40,12 @@ struct	s_point
 	double	x;
 	double	y;
 	double	z;
+};
+
+struct	s_ray
+{
+	t_vec_3	direction;
+	t_point	origin;
 };
 
 struct	s_vec_3
@@ -65,8 +72,8 @@ struct	s_ambient_light
 struct	s_camera
 {
 	t_vec_3	vector;
-	t_point	coordinate;
-	char 	fov;
+	t_point	origin;
+	float	fov;
 };
 
 struct	s_light

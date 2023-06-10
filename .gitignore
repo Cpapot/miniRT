@@ -3,3 +3,5 @@
 ./miniRT
 cmake*
 .idea
+.vscode
+MiniRT
