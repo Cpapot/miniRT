@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:32:29 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/06/10 17:27:48 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/11 00:13:03 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ struct	s_point
 	double	z;
 };
 
-struct	s_ray
-{
-	t_vec_3	direction;
-	t_point	origin;
-};
-
 struct	s_vec_3
 {
 	double	x;
 	double	y;
 	double	z;
 	double	norme;
+};
+
+struct	s_ray
+{
+	t_vec_3	direction;
+	t_point	origin;
 };
 
 struct	s_color
