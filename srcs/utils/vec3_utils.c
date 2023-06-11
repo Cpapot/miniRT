@@ -6,11 +6,11 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:18:24 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/10 19:12:53 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/11 13:58:07 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#include "../../inc/miniRT.h"
 
 t_vec_3	set_vec(double x, double y, double z)
 {
