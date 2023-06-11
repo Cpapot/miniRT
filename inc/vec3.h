@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   vec3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/10 15:05:06 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/11 13:41:23 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/11 13:26:57 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/11 13:27:51 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	WINDOW_H
-# define	WINDOW_H
+#ifndef	VEC3_H
+# define VEC3_H
 
-//XSIZE > YSIZE
-# define XSIZE		1280
-# define YSIZE		720
+#include "miniRT.h"
 
-typedef struct s_mlx_info
-{
-	void	*win_ptr;
-	void	*mlx_ptr;
-	void	*img_addrs;
-	void	*img;
-	int		xwinsize;
-	int		ywinsize;
-	int		bit_per_p;
-	int		line_len;
-	int		endian;
-}	t_mlx_info;
-
-void	ft_create_win(t_mlx_info *win);
-void	my_mlx_pixel_put(t_mlx_info *win, int x, int y, int color);
-void	init_mlx_info(t_mlx_info *info);
+t_vec_3		adding_vec(t_vec_3 vec1, t_vec_3 vec2);
+t_vec_3		set_vec(double x, double y, double z);
+t_vec_3		scalar_product(t_vec_3 vec1, t_vec_3 vec2);
+t_vec_3		*multiplying_vec(t_vec_3 *vec, double factor);
+double		calculate_norm(t_vec_3 *vec);
+void		normalize_vec(t_vec_3 *vec);
 
 #endif

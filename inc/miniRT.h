@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:03:42 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/11 00:12:30 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/11 13:31:32 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,27 @@
 # define MINI_RT
 
 # include "../libft/includes/libft.h"
-# include "../srcs/parsing/structures.h"
 # include "../mlx_lin/mlx.h"
-# include "window.h"
-
 # include <math.h>
 # include <unistd.h>
-
 /**/
 # include <stdio.h>
 /**/
 
-t_vec_3		adding_vec(t_vec_3 vec1, t_vec_3 vec2);
-t_vec_3		set_vec(double x, double y, double z);
-t_vec_3		scalar_product(t_vec_3 vec1, t_vec_3 vec2);
-t_vec_3		*multiplying_vec(t_vec_3 *vec, double factor);
-double		calculate_norm(t_vec_3 *vec);
-void		normalize_vec(t_vec_3 *vec);
+# include "structure.h"
+# include "window.h"
+# include "vec3.h"
+
+typedef struct s_minirt_data	t_minirt_data;
+
+struct s_minirt_data
+{
+	t_ambient_light	*ambient_light;
+	t_camera		*camera;
+	t_light			*lights_arr;
+	t_sphere		*sphere_arr;
+	t_plane			*plane_arr;
+	t_cylinder		*cylinder_arr;
+};
 
 #endif

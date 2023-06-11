@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/10 15:05:06 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/11 13:41:23 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/11 13:10:40 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/11 13:57:05 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	WINDOW_H
-# define	WINDOW_H
+#ifndef CAMERA_H
+# define CAMERA_H
 
-//XSIZE > YSIZE
-# define XSIZE		1280
-# define YSIZE		720
+# include "miniRT.h"
 
-typedef struct s_mlx_info
-{
-	void	*win_ptr;
-	void	*mlx_ptr;
-	void	*img_addrs;
-	void	*img;
-	int		xwinsize;
-	int		ywinsize;
-	int		bit_per_p;
-	int		line_len;
-	int		endian;
-}	t_mlx_info;
-
-void	ft_create_win(t_mlx_info *win);
-void	my_mlx_pixel_put(t_mlx_info *win, int x, int y, int color);
-void	init_mlx_info(t_mlx_info *info);
+t_ray	find_camray(t_camera cam_info, int x, int y);
 
 #endif

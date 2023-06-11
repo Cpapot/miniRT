@@ -1,6 +1,4 @@
-#include "../srcs/parsing/structures.h"
 #include "../inc/miniRT.h"
-#include "../inc/window.h"
 
 static double	mapping_Xcoord(int pixel_pos, int xsize, int ysize, double fov)
 {
@@ -62,10 +60,10 @@ int main()
 {
     t_camera cam_info;
     cam_info.origin.x = 0;
-	cam_info.origin.y = 0;
-	cam_info.origin.z = 10;// Exemple de coordonnées de l'origine de la caméra
-    cam_info.vector = set_vec(-0.754, 0.5, -1.5); // Exemple de vecteur direction de la caméra
-    cam_info.fov = 90; // Exemple d'angle de champ de vision de la caméra
+	cam_info.origin.y = 9;
+	cam_info.origin.z = 0;// Exemple de coordonnées de l'origine de la caméra
+    cam_info.vector = set_vec(-1, -1, 0); // Exemple de vecteur direction de la caméra
+    cam_info.fov = 120; // Exemple d'angle de champ de vision de la caméra
 
     int xsize = XSIZE; // Exemple de taille horizontale de la fenêtre
     int ysize = YSIZE; // Exemple de taille verticale de la fenêtre
@@ -89,4 +87,4 @@ int main()
     return 0;
 }
 
-//gcc unit_test/test_camray.c srcs/vec3_utils.c -lm
+//gcc unit_test/cam_raytest.c srcs/vec3_utils.c -lm
