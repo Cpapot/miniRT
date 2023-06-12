@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpoumeau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/09 14:32:29 by bpoumeau          #+#    #+#             */
-/*   Updated: 2023/06/09 14:32:32 by bpoumeau         ###   ########.fr       */
+/*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/11 13:35:15 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_H
-# define STRUCTURES_H
+#ifndef STRUCTURE_H
+# define STRUCTURE_H
 
 #include "stdlib.h"
 
 typedef struct s_minirt_data	t_minirt_data;
+typedef struct s_ray			t_ray;
 typedef struct s_point			t_point;
 typedef struct s_vec_3			t_vec_3;
 typedef struct s_color			t_color;
-typedef struct s_ambient_light	t_ambient_light;
 typedef struct s_camera			t_camera;
+typedef struct s_ambient_light	t_ambient_light;
 typedef struct s_light			t_light;
 typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
@@ -57,6 +58,12 @@ struct	s_vec_3
 	double	norme;
 };
 
+struct	s_ray
+{
+	t_vec_3	direction;
+	t_point	origin;
+};
+
 struct	s_color
 {
 	char	r;
@@ -64,17 +71,17 @@ struct	s_color
 	char	b;
 };
 
+struct	s_camera
+{
+	t_vec_3	vector;
+	t_point	origin;
+	float	fov;
+};
+
 struct	s_ambient_light
 {
 	t_color color;
 	float	ratio;
-};
-
-struct	s_camera
-{
-	t_vec_3	vector;
-	t_point	coordinate;
-	char 	fov;
 };
 
 struct	s_light
