@@ -11,7 +11,11 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "errno.h"
+
+t_lstc	*read_lstc_from_fd(int fd);
+void	ft_lstclean(t_lstc *head, void (*del)(void *));
+void	lstc_cpy_in_str(t_lstc	*lst, char **str);
+t_lstc	*lstc_clear(t_lstc *trash);
 
 size_t	lstc_size(t_lstc *lst)
 {
@@ -34,7 +38,7 @@ void	read_lst(t_lstc *lst)
 	}
 }
 
-t_return_status	read_fd_in_str(int fd, char **dst)
+bool	read_fd_in_str(int fd, char **dst)
 {
 	t_lstc	*lst;
 
@@ -42,16 +46,16 @@ t_return_status	read_fd_in_str(int fd, char **dst)
 	read_lst(lst);
 	if (lst == NULL)
 	{
-		*dst = ft_strdup("");
+		*dst = ft_strdup("", NULL);
 		if (errno)
-			return (FAILURE);
-		return (SUCCESS);
+			return (1);
+		return (0);
 	}
 	*dst = malloc(lstc_size(lst) + 1);
 	if (*dst)
 		lstc_cpy_in_str(lst, dst);
 	else
-		return (lstc_clear(lst), FAILED_MALLOC);
+		return (lstc_clear(lst), 1);
 	lstc_clear(lst);
-	return (SUCCESS);
+	return (0);
 }

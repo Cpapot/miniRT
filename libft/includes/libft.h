@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include <errno.h>
 
 # define INT_MAX	2147483647
 # define INT_MIN	-2147483647
@@ -37,7 +38,8 @@
 # define WHITE              "\001\x1b[37m\002"
 
 typedef struct s_list_of_char	t_lstc;
-struct s_lstc
+
+struct s_list_of_char
 {
 	t_lstc	*next;
 	char 	c;

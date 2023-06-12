@@ -11,6 +11,8 @@ SRCS		=	camera.c \
 		parsing/parsing.c \
 		parsing/fill_data/fill_data.c \
 		main.c \
+		parsing/lstc_2.c \
+		parsing/lstc.c \
 		sphere.c
 
 MLXSRC		=	libmlx.a
@@ -92,7 +94,7 @@ $(OBJSDIR)%.o: %.c ${HEAD}
 	@$(MKDIR) .objs
 	@mkdir -p $(dir $@)
 	#@echo -n "${YELLOW}${SUPPR}	⌛ Creating MiniRT objects : $@"
-	$(CC) ${CFLAGS} -c $< -o $@ -I$(HEADERSDIR)
+	$(CC) ${CFLAGS} -c $< -o $@ -I$(HEADERSDIR) -Ilibft/includes
 
 clean:
 	@${MAKE} clean -C ${LIBFTDIR}
