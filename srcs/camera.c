@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:56:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/12 16:39:49 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/12 22:09:00 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static double	mapping_Xcoord(int pixel_pos, int xsize, int ysize, double fov)
 	scale = tan(fov / 2.0 * M_PI / 180);
 	ratio = (double)xsize / (double)ysize;
 	result = ((double)pixel_pos + 0.5) / ((double)xsize);
-	result = (2 * result - 1) * ratio * scale;
+	result = (2 * result - 1) * scale * ratio;
 	return (result);
 }
 
@@ -66,6 +66,7 @@ t_ray	find_camray(t_camera cam_info, int x, int y)
 	ray_dir.z = 1;
 	normalize_vec(&ray_dir);
 	cam_ray.direction = compute_direction(cam_info.vector, ray_dir);
+	calculate_norm(&cam_ray.direction);
 	return (cam_ray);
 }
 

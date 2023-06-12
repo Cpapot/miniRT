@@ -61,11 +61,11 @@ NAME		=	MiniRT
 
 AR			=	ar rc
 
-FLAGS		=	-lX11 -lXext -lm -L$(MLXDIR)
+FLAGS		=	-lX11 -lXext -L$(MLXDIR) -lm
 
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror -O3
 
-CC			=	cc
+CC			=	gcc
 
 RM			=	rm -rf
 
@@ -81,12 +81,12 @@ MKDIR		=	mkdir -p
 all : lib ${NAME}
 
 ${NAME}: $(UTILSOBJS) $(OBJS)  $(LIBFT)
-	@${CC} ${OBJS} ${LIBFT} $(FLAGS) ${MLX} -o ${NAME}
+	@${CC} ${OBJS} ${LIBFT} ${MLX} $(FLAGS) -o ${NAME}
 	@echo -n "${SUPPR}	${GREEN} ${NAME} : 🆗${DEFAULT}\n\n"
 
 $(OBJSDIR)%.o: %.c ${HEAD}
 	@$(MKDIR) .objs
-	mkdir -p $(dir $@)
+	@$(MKDIR) $(dir $@)
 	@echo -n "${YELLOW}${SUPPR}	⌛ Creating MiniRT objects : $@"
 	@$(CC) ${CFLAGS} -c $< -o $@ -I$(HEADERSDIR)
 
