@@ -7,33 +7,40 @@
 
 HEADERS 	=	miniRT.h
 
-SRCS		=	main.c
+SRCS		=	main.c camera.c
 
 MLXSRC		=	libmlx.a
 
 LIBFTSRC	=	libftprintf.a libft.a printffd.a
 
+UTILSSRC	=	mlx_utils.c vec3_utils.c
+
 #					Directories
 
-MLXDIR		=	./mlx_lin/
+UTILSDIR		=	./srcs/utils/
 
-HEADERSDIR	=	./inc/
+MLXDIR			=	./mlx_lin/
 
-SRCSDIR		=	./srcs/
+HEADERSDIR		=	./inc/
 
-LIBFTDIR	=	./libft/
+SRCSDIR			=	./srcs/
 
-OBJSDIR		=	./.objs/
+LIBFTDIR		=	./libft/
+
+OBJSDIR			=	./.objs/
 
 #					Full Path
 
+MLX			=	$(addprefix $(MLXDIR),$(MLXSRC))
+
 HEAD		=	$(addprefix $(HEADERSDIR),$(HEADERS))
 
-SRCSPATH	=	$(addprefix $(SRCSDIR),$(SRCS))
+SRCSPATH	=	$(addprefix $(SRCSDIR),$(SRCS)) \
+				$(addprefix $(UTILSDIR),$(UTILSSRC))
 
 LIBFT		=	$(addprefix $(LIBFTDIR),$(LIBFTSRC))
 
-OBJS	=	$(SRCSPATH:$(SRCSDIR)%.c=$(OBJSDIR)%.o)
+OBJS		=	$(addprefix $(OBJSDIR), $(SRCSPATH:.c=.o))
 
 #		 __      __        _       _     _
 #		 \ \    / /       (_)     | |   | |
@@ -56,7 +63,7 @@ AR			=	ar rc
 
 FLAGS		=	-lX11 -lXext -lm -L$(MLXDIR)
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 
 CC			=	cc
 
@@ -73,13 +80,13 @@ MKDIR		=	mkdir -p
 
 all : lib ${NAME}
 
-${NAME}: $(OBJS) $(LIBFT)
+${NAME}: $(UTILSOBJS) $(OBJS)  $(LIBFT)
 	@${CC} ${OBJS} ${LIBFT} $(FLAGS) ${MLX} -o ${NAME}
 	@echo -n "${SUPPR}	${GREEN} ${NAME} : 🆗${DEFAULT}\n\n"
 
-
-$(OBJSDIR)%.o: ${SRCSDIR}%.c ${HEAD}
+$(OBJSDIR)%.o: %.c ${HEAD}
 	@$(MKDIR) .objs
+	mkdir -p $(dir $@)
 	@echo -n "${YELLOW}${SUPPR}	⌛ Creating MiniRT objects : $@"
 	@$(CC) ${CFLAGS} -c $< -o $@ -I$(HEADERSDIR)
 
