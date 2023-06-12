@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:03:42 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/11 13:31:32 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:10:40 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@
 # include "../mlx_lin/mlx.h"
 # include <math.h>
 # include <unistd.h>
-/**/
-# include <stdio.h>
-/**/
+
 
 # include "structure.h"
 # include "window.h"
 # include "vec3.h"
+
+/**/
+# include <stdio.h>
+
+int	sphere_hited(t_ray camray, t_sphere sphere);
+double	ft_find_light(t_vec_3 normal, t_light light);
+
+/**/
 
 typedef struct s_minirt_data	t_minirt_data;
 

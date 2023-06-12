@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3.h                                             :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 13:26:57 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/12 17:08:46 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/12 17:10:49 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	VEC3_H
-# define VEC3_H
+#include "../inc/miniRT.h"
 
-#include "miniRT.h"
+double	ft_find_light(t_vec_3 normal, t_light light)
+{
+	double	dot;
 
-t_vec_3		adding_vec(t_vec_3 vec1, t_vec_3 vec2);
-t_vec_3		set_vec(double x, double y, double z);
-t_vec_3		vect_product(t_vec_3 vec1, t_vec_3 vec2);
-t_vec_3		*multiplying_vec(t_vec_3 *vec, double factor);
-double		calculate_norm(t_vec_3 *vec);
-void		normalize_vec(t_vec_3 *vec);
-double		scalar_product(t_vec_3 vec1, t_vec_3 vec2);
-
-#endif
+	dot = scalar_product(normal, light.vector);
+	if (dot <= 0)
+		dot = 0;
+	return (dot);
+}

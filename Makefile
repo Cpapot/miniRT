@@ -7,7 +7,7 @@
 
 HEADERS 	=	miniRT.h
 
-SRCS		=	main.c camera.c
+SRCS		=	main.c camera.c sphere.c
 
 MLXSRC		=	libmlx.a
 

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:18:24 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/11 13:58:07 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:08:31 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vec_3	set_vec(double x, double y, double z)
 	return (vec);
 }
 
-t_vec_3	scalar_product(t_vec_3 vec1, t_vec_3 vec2)
+t_vec_3	vect_product(t_vec_3 vec1, t_vec_3 vec2)
 {
 	t_vec_3 result;
 
@@ -67,4 +67,14 @@ void	normalize_vec(t_vec_3 *vec)
 	vec->x = vec->x / norm;
 	vec->y = vec->y / norm;
 	vec->z = vec->z / norm;
+}
+
+double	scalar_product(t_vec_3 vec1, t_vec_3 vec2)
+{
+	double	result;
+	double	tmp;
+
+	tmp = calculate_norm(&vec1) * calculate_norm(&vec2);
+	result = (vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z) / tmp;
+	return (result);
 }
