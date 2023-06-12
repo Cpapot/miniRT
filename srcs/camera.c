@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:56:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/10 20:47:10 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/12 16:39:49 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static t_vec_3	compute_direction(t_vec_3 cam_vector, t_vec_3 ray_dir)
 	if (cam_vector.y == 1 || cam_vector.y == -1)
 		x = set_vec(cam_vector.y, 0, 0);
 	else
-		x = scalar_product(set_vec(0, 1, 0), cam_vector);
-	y = scalar_product(cam_vector, x);
+		x = vect_product(set_vec(0, 1, 0), cam_vector);
+	y = vect_product(cam_vector, x);
 	result.x = ray_dir.x * x.x + ray_dir.y * y.x + ray_dir.z * cam_vector.x;
 	result.y = ray_dir.x * x.y + ray_dir.y * y.y + ray_dir.z * cam_vector.y;
 	result.z = ray_dir.x * x.z + ray_dir.y * y.z + ray_dir.z * cam_vector.z;
