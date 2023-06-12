@@ -7,7 +7,12 @@
 
 HEADERS 	=	miniRT.h
 
-SRCS		=	main.c camera.c
+SRCS		=	camera.c \
+		parsing/parsing.c \
+		parsing/fill_data/fill_data.c \
+		utils/vec3_utils.c \
+		utils/mlx_utils.c \
+		main.c \
 
 MLXSRC		=	libmlx.a
 
@@ -86,9 +91,9 @@ ${NAME}: $(UTILSOBJS) $(OBJS)  $(LIBFT)
 
 $(OBJSDIR)%.o: %.c ${HEAD}
 	@$(MKDIR) .objs
-	mkdir -p $(dir $@)
-	@echo -n "${YELLOW}${SUPPR}	⌛ Creating MiniRT objects : $@"
-	@$(CC) ${CFLAGS} -c $< -o $@ -I$(HEADERSDIR)
+	@mkdir -p $(dir $@)
+	#@echo -n "${YELLOW}${SUPPR}	⌛ Creating MiniRT objects : $@"
+	$(CC) ${CFLAGS} -c $< -o $@ -I$(HEADERSDIR)
 
 clean:
 	@${MAKE} clean -C ${LIBFTDIR}
@@ -110,3 +115,4 @@ lib:
 	@${MAKE} --no-print-directory  --silent -C ${MLXDIR}
 
 .PHONY : re all clean fclean printf lib
+
