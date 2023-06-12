@@ -13,6 +13,7 @@ SRCS		=	camera.c \
 		utils/vec3_utils.c \
 		utils/mlx_utils.c \
 		main.c \
+		sphere.c
 
 MLXSRC		=	libmlx.a
 
