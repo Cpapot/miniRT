@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/12 17:13:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:31:32 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,25 @@ t_camera	init_test_cam(void)
 {
 	t_camera	cam;
 
-	cam.origin.x = 20;
+	cam.origin.x = 10;
 	cam.origin.y = 0;
 	cam.origin.z = 0;
 	cam.vector = set_vec(-1, 0, 0);
-	cam.fov = 90.0;
+	cam.fov = 60.0;
 	return (cam);
 }
 
-int32_t	test_color(t_vec_3	vec)
+int32_t	test_color(double dot)
 {
-	double	t;
-
-	t = 0.5 * (vec.y + 1);
-	return (ft_color((1.0 - t) * 1.0 + t * 0.5, (1.0 - t) * 1.0 + t * 0.7, (1.0 - t) * 1 + t * 1.0, 0));
+	dot = dot *3;
+	return (ft_color(92 * dot, 38 * dot, 145 * dot, 0));
 }
 
 t_light		init_light()
 {
 	t_light	light;
 
-	light.vector = set_vec(1, 0, 0);
+	light.vector = set_vec(0, -10, 0);
 	return (light);
 }
 
@@ -53,9 +51,9 @@ t_sphere	init_sphere()
 	t_sphere	sphere;
 
 	sphere.diameter = 10;
-	sphere.origin.x = 15;
-	sphere.origin.y = 5;
-	sphere.origin.z = 5;
+	sphere.origin.x = 0;
+	sphere.origin.y = -5;
+	sphere.origin.z = 0;
 	return (sphere);
 }
 /**/
@@ -74,9 +72,9 @@ void	screen_loop(t_mlx_info *win)
 		{
 			camray = find_camray(init_test_cam(), x, y);
 			if(sphere_hited(camray, init_sphere()))
-				my_mlx_pixel_put(win, x, y, ft_color(92, 38, 145, 0));
+				my_mlx_pixel_put(win, x, y, test_color(ft_find_light(camray.direction, init_light())));
 			else
-				my_mlx_pixel_put(win, x, y, test_color(camray.direction));
+				my_mlx_pixel_put(win, x, y, ft_color(0, 0, 0, 0));
 			y++;
 		}
 		x++;
