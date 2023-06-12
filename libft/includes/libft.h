@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
+# include <stdbool.h>
 
 # define INT_MAX	2147483647
 # define INT_MIN	-2147483647
@@ -34,6 +35,13 @@
 # define MAGENTA            "\001\x1b[35m\002"
 # define CYAN               "\001\x1b[36m\002"
 # define WHITE              "\001\x1b[37m\002"
+
+typedef struct s_list_of_char	t_lstc;
+struct s_lstc
+{
+	t_lstc	*next;
+	char 	c;
+};
 
 typedef struct s_memstock
 {

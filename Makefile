@@ -10,8 +10,6 @@ HEADERS 	=	miniRT.h
 SRCS		=	camera.c \
 		parsing/parsing.c \
 		parsing/fill_data/fill_data.c \
-		utils/vec3_utils.c \
-		utils/mlx_utils.c \
 		main.c \
 		sphere.c
 
