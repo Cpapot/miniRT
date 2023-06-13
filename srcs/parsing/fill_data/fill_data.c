@@ -2,7 +2,7 @@
 // Created by bpoumeau on 6/9/23.
 //
 
-#include "../structures.h"
+#include "structure.h"
 #include "stdlib.h"
 #include "stdbool.h"
 #include "stdio.h"
@@ -277,6 +277,7 @@ bool	manage_cy(t_minirt_data *data_pt, char *line)
 
 bool	emmit_err(t_minirt_data *data_pt, char *line)
 {
+	(void)data_pt;
 	if (*line == 0)
 		return (true);
 	write(2, "Invalid identifier\n", 19);
@@ -285,6 +286,8 @@ bool	emmit_err(t_minirt_data *data_pt, char *line)
 
 bool	do_nothing(t_minirt_data *data_pt, char *line)
 {
+	(void)data_pt;
+	(void)line;
 	return (true);
 }
 
@@ -309,7 +312,6 @@ static bool	_check_lines(t_minirt_data  *data_pt, char **lines)
 	return (true);
 }
 
-#define TEST
 #ifdef TEST
 
 #include "readline/readline.h"

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/miniRT.h"
+#include "miniRT.h"
 
 t_vec_3	set_vec(double x, double y, double z)
 {
