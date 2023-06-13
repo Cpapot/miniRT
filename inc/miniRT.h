@@ -31,16 +31,5 @@ double	ft_find_light(t_vec_3 normal, t_light light);
 
 /**/
 
-typedef struct s_minirt_data	t_minirt_data;
-
-struct s_minirt_data
-{
-	t_ambient_light	*ambient_light;
-	t_camera		*camera;
-	t_light			*lights_arr;
-	t_sphere		*sphere_arr;
-	t_plane			*plane_arr;
-	t_cylinder		*cylinder_arr;
-};
 
 #endif
