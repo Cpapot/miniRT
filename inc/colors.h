@@ -1,39 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/09 12:03:42 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/13 15:41:49 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/13 15:06:41 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/13 15:07:41 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT
-# define MINI_RT
+#ifndef COLORS_H
+# define COLORS_H
 
-# include "../libft/includes/libft.h"
-# include "../mlx_lin/mlx.h"
-# include <math.h>
-# include <unistd.h>
-
-
-# include "structure.h"
-# include "window.h"
-# include "vec3.h"
-
-/**/
-# include <stdio.h>
-# include "sphere.h"
-
-double			ft_find_light(t_vec_3 normal, t_light light);
-t_minirt_data	create_struct();
-int32_t		check_ray(t_ray camray, t_minirt_data data);
-
-
-
-/**/
-
+int32_t	ft_color(int r, int g, int b, int T);
 
 #endif
