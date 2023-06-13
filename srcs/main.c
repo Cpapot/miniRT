@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/12 22:15:53 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/13 13:13:02 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ t_camera	init_test_cam(void)
 	return (cam);
 }
 
-int32_t	test_color(double dot, double norm)
+int32_t	test_color(t_point hitpoint)
 {
-	dot = dot / norm *3;
-	return (ft_color(92 * dot, 38 * dot, 145 * dot, 10));
+	return (ft_color(100 * (hitpoint.x + 1), 100 * (hitpoint.y + 1), 100 * (hitpoint.z + 1), 10));
 }
 
 t_light		init_light()
@@ -59,7 +58,7 @@ t_sphere	init_sphere()
 }
 /**/
 
-void	screen_loop(t_mlx_info *win, t_light light)
+void	screen_loop(t_mlx_info *win/*, t_light light*/)
 {
 	t_ray	camray;
 	int		x;
@@ -73,7 +72,7 @@ void	screen_loop(t_mlx_info *win, t_light light)
 		{
 			camray = find_camray(init_test_cam(), x, y);
 			if(sphere_hited(camray, init_sphere()) != -1)
-				my_mlx_pixel_put(win, x, y, test_color(ft_find_light(camray.direction, light), camray.direction.norme * light.vector.norme));
+				my_mlx_pixel_put(win, x, y, test_color(find_sphere_hit_coord(sphere_hited(camray, init_sphere()), camray)));
 			else
 				my_mlx_pixel_put(win, x, y, ft_color(0, 0, 0, 0));
 			y++;
@@ -87,7 +86,7 @@ int main()
 	t_mlx_info	win;
 
 	ft_create_win(&win);
-	screen_loop(&win, init_light());
+	screen_loop(&win/*, init_light()*/);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.img, 0, 0);
 	//hook
 	mlx_loop(win.mlx_ptr);
