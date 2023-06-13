@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:46:28 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/12 13:54:27 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/12 18:09:41 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_create_win(t_mlx_info *win)
 {
 	win->xwinsize = XSIZE;
 	win->ywinsize = YSIZE;
-	ft_printf("%d   %d", XSIZE, YSIZE);
 	win->mlx_ptr = mlx_init();
 	win->win_ptr = mlx_new_window(win->mlx_ptr, win->xwinsize,
 		win->ywinsize, "MiniRt");
