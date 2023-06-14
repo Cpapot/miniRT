@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/13 18:03:35 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/14 17:56:54 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ t_camera	init_test_cam(void)
 {
 	t_camera	cam;
 
-	cam.origin.x = 10;
+	cam.origin.x = -5;
 	cam.origin.y = 0;
 	cam.origin.z = 0;
 	cam.vector = set_vec(1, 0, 0);
+	normalize_vec(&cam.vector);
 	cam.fov = 90.0;
 	return (cam);
 }
@@ -48,6 +49,7 @@ void	screen_loop(t_mlx_info *win)
 		}
 		x++;
 	}
+	ft_printf(GREEN"RENDER COMPLETE\n"WHITE);
 }
 
 int main()

@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.h                                            :+:      :+:    :+:   */
+/*   hit.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 15:06:53 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/14 16:33:36 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/14 16:41:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLANE_H
-# define PLANE_H
+#ifndef HIT_H
+# define HIT_H
 
-double	plane_hited(t_ray ray, t_plane plane);
-int		find_near_plane(t_ray camray, size_t count, t_plane *plane_arr);
+enum	e_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER
+};
+
+typedef struct s_hitinfo
+{
+	double	t;
+	int		type;
+	void	*struct_info;
+}			t_hitinfo;
 
 #endif

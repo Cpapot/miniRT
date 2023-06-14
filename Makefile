@@ -15,6 +15,7 @@ SRCS		=	camera.c \
 				utils/mlx_utils.c\
 				hit.c \
 				colors.c \
+				plane.c	\
 				testfiles.c
 
 MLXSRC		=	libmlx.a
