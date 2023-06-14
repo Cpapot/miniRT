@@ -40,13 +40,13 @@ int32_t	test_color(t_vec_3	vec)
 	return (ft_color((1.0 - t) * 1.0 + t * 0.5, (1.0 - t) * 1.0 + t * 0.7, (1.0 - t) * 1 + t * 1.0, 0));
 }
 
-t_light		init_light()
-{
-	t_light	light;
-
-	light.vector = set_vec(1, 0, 0);
-	return (light);
-}
+//t_light		init_light()
+//{
+//	t_light	light;
+//
+//	//light.vector = set_vec(1, 0, 0);
+//	return (light);
+//}
 
 t_sphere	init_sphere()
 {
@@ -83,13 +83,30 @@ void	screen_loop(t_mlx_info *win)
 	}
 }
 
-int main()
-{
-	t_mlx_info	win;
+bool	parsing(t_minirt_data *data_pt, char *file_name);
 
+void	init_minirt_data(t_minirt_data * data)
+{
+	data->sp_nb = 0;
+	data->pl_nb = 0;
+	data->cy_nb = 0;
+	data->lt_nb = 0;
+	data->al_nb = 0;
+	data->ca_nb = 0;
+}
+
+int main(int ac, char **av)
+{
+	(void)ac;
+	t_mlx_info	win;
+	t_minirt_data	data;
+
+	init_minirt_data(&data);
+	if (parsing(&data, av[1]) == false)
+		return (1);
+	return (0);
 	ft_create_win(&win);
 	screen_loop(&win);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.img, 0, 0);
-	//hook
 	mlx_loop(win.mlx_ptr);
 }
