@@ -10,16 +10,20 @@ HEADERS 	=	miniRT.h
 SRCS		=	camera.c \
 		parsing/parsing.c \
 		parsing/fill_data/fill_data.c \
+		parsing/fill_data/filling_ft.c \
+		parsing/fill_data/get_line_data.c \
 		main.c \
 		parsing/lstc_2.c \
 		parsing/lstc.c \
-		sphere.c
+		sphere.c \
+		\
+		debug.c \
 
 MLXSRC		=	libmlx.a
 
 LIBFTSRC	=	libftprintf.a libft.a printffd.a
 
-UTILSSRC	=	mlx_utils.c vec3_utils.c
+UTILSSRC	=	mlx_utils.c vec3_utils.c minirt_data.c
 
 #					Directories
 
@@ -87,7 +91,8 @@ MKDIR		=	mkdir -p
 all : lib ${NAME}
 
 ${NAME}: $(UTILSOBJS) $(OBJS)  $(LIBFT)
-	@${CC} ${OBJS} ${LIBFT} ${MLX} $(FLAGS) -o ${NAME}
+	@${CC} ${OBJS} ${LIBFT}  ${MLX} -o ${NAME} $(FLAGS)
+
 	@echo -n "${SUPPR}	${GREEN} ${NAME} : 🆗${DEFAULT}\n\n"
 
 $(OBJSDIR)%.o: %.c ${HEAD}

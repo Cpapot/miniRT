@@ -46,3 +46,31 @@ int	ft_atoi(const char *str)
 		result = -result;
 	return ((int)result);
 }
+
+bool	ft_atoi_on(const char *str, int *dst)
+{
+	long long int	result;
+	int 			minus;
+
+	result = 0;
+	minus = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			minus--;
+		str++;
+	}
+	while ('9' >= *str && '0' <= *str)
+	{
+		if (result != (result * 10 + (*str - '0')) / 10)
+			return (false);
+		result = result * 10 + (*str - 48);
+		str++;
+	}
+	if (minus == -1)
+		result = -result;
+	*dst = (int)result;
+	return (true);
+}

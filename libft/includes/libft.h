@@ -99,6 +99,7 @@ int			ft_isascii(int c);
 int			ft_isalpha(int c);
 int			ft_isalnum(int c);
 int			ft_atoi(const char *str);
+bool		ft_atoi_on(const char *str, int *dst);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 char		*ft_itoa(int n);
@@ -111,6 +112,7 @@ char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_stsubstr(char const *s, int start, size_t len, t_memlist **st);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		**ft_split(char *str, char *charset, t_memlist **stock);
+char		**ft_split_no(char const *str, char delim);
 int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 size_t		ft_strlcpy(char *dest, const char *src, size_t dstsize);
@@ -119,5 +121,7 @@ t_list		*ft_lstnew(void *content, t_memlist **mem);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), t_memlist **mem);
 long long	ft_atoll(const char *str);
+bool		ft_atoll_on(const char *str, long long *dst);
+void		*ft_free_split(char **split);
 
 #endif

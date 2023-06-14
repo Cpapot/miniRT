@@ -11,14 +11,17 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "stdio.h"
 
 t_lstc	*init_lstc_first_read(int fd)
 {
 	char	buffer[1];
 	t_lstc	*new;
 
-	if (read(fd, buffer, 1) != 1)
+	puts("pre read");
+	if (printf("%zd", read(fd, buffer, 1)) != 1)
 		return (NULL);
+	puts("first read");
 	new = malloc(sizeof(t_lstc));
 	if (!new)
 		return (NULL);
@@ -63,6 +66,7 @@ t_lstc	*read_lstc_from_fd(int fd)
 	lst = init_lstc_first_read(fd);
 	if (!lst)
 		return (NULL);
+	puts("post NULLl");
 	tmp = lst;
 	signal = read(fd, buffer, 1);
 	while (signal == 1)
