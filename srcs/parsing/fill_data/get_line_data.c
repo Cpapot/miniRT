@@ -4,12 +4,15 @@
 
 #include <structure.h>
 #include <libft.h>
+#include "stdio.h"
 
 static void	_go_to_decimal_part(char **line)
 {
+	if (**line == '-')
+		*line = (*line) + 1;
 	while (ft_isdigit(**line))
 		*line = (*line) + 1;
-	if (**line == ',')
+	if (**line == '.')
 		*line = (*line) + 1;
 }
 
@@ -57,12 +60,20 @@ bool	ft_atod_on(char *line, double *dst)
 	long long	tmp;
 	double		decimal;
 
+	tmp = 0;
+	printf("for %s\n", line);
 	if (ft_atoll_on(line, &integer) == false)
 		return (false);
+	printf("i get %lld\n", integer);
 	_go_to_decimal_part(&line);
-	if (ft_atoll_on(line, &tmp) == false)
+	printf("for %s\n", line);
+	if (*line != ' ' && ft_atoll_on(line, &tmp) == false)
 		return (false);
-	decimal = to_decimal_ll(tmp) + integer;
+	printf("i get %lld\n", tmp);
+	if (integer > 0)
+		decimal = to_decimal_ll(tmp) + integer;
+	else
+		decimal = integer - to_decimal(tmp);
 	*dst = decimal;
 	return (true);
 }
@@ -105,24 +116,38 @@ bool	ft_atorgb_on(char *line, t_color *dst)
 
 void	_go_to_next_float(char **line)
 {
+	if (**line == '-')
+		*line = (*line) + 1;
 	while (ft_isdigit(**line) || **line == '.')
 		*line = (*line) + 1;
 	*line = (*line) + 1;
 }
 
+void	print_point(t_point point);
 bool	ft_atocoord_on(char *line, t_point *dst)
 {
+	printf("\n\ncoord\n-%s-\n\n", line);
 	if (ft_atod_on(line, &dst->x) == false)
 		return (false);
+	printf("x:%f\n", dst->x);
 	_go_to_next_float(&line);
+	printf("y %s\n", line);
 	if (ft_atod_on(line, &dst->y) == false)
 		return (false);
+	printf("y:%f\n", dst->y);
 	_go_to_next_float(&line);
-	return (ft_atod_on(line, &dst->z));
+	printf("z: %s\n", line);
+	if (ft_atod_on(line, &dst->z) == false)
+		return (false);
+	printf("z: %f\n", dst->z);
+	print_point(*dst);
+	return (true);
 }
 
+void	print_vector(t_vec_3 vector);
 bool	ft_atovec_on(char *line, t_vec_3 *dst)
 {
+	puts(line);
 	if (ft_atod_on(line, &dst->x) == false)
 		return (false);
 	_go_to_next_float(&line);
@@ -133,6 +158,7 @@ bool	ft_atovec_on(char *line, t_vec_3 *dst)
 		return (false);
 	if (dst->x > 1 || dst->y > 1 || dst->z > 1)
 		return (false);
+	print_vector(*dst);
 	return (true);
 }
 
@@ -158,10 +184,10 @@ bool	get_line_data_a(char *line, t_ambient_light *light_pt)
 {
 	while (ft_isdigit(*line) == false)
 		line++;
-	if (ft_atof_on(line, &light_pt->ratio) == false)
+	if (ft_atof_on(line, &(light_pt->ratio)) == false)
 		return (false);
 	go_to_next_data(&line);
-	return (ft_atorgb_on(line, &light_pt->color));
+	return (ft_atorgb_on(line, &(light_pt->color)));
 }
 
 bool	get_line_data_c(char *line, t_camera *camera)
@@ -170,7 +196,7 @@ bool	get_line_data_c(char *line, t_camera *camera)
 	if (ft_atocoord_on(line, &camera->origin) == false)
 		return (false);
 	go_to_next_data(&line);
-	if (ft_atovec_on(line, &camera->vector))
+	if (ft_atovec_on(line, &camera->vector) == false)
 		return (false);
 	go_to_next_data(&line);
 	return (ft_atofov_on(line, &camera->fov));
@@ -182,7 +208,7 @@ bool	get_line_data_l(char *line, t_light *light)
 	if (ft_atocoord_on(line, &light->coordinate) == false)
 		return (false);
 	go_to_next_data(&line);
-	if (ft_atoratio_on(line, &light->brightness))
+	if (ft_atoratio_on(line, &light->brightness) == false)
 		return (false);
 	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &light->color));
@@ -202,10 +228,10 @@ bool	get_line_data_sp(char *line, t_sphere *sphere)
 bool	get_line_data_pl(char *line, t_plane *plane)
 {
 	go_to_next_data(&line);
-	if (ft_atocoord_on(line, &plane->coordinate))
+	if (ft_atocoord_on(line, &plane->coordinate) == false)
 		return (false);
 	go_to_next_data(&line);
-	if (ft_atovec_on(line, &plane->normal_vector))
+	if (ft_atovec_on(line, &plane->normal_vector) == false)
 		return (false);
 	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &plane->colors));
@@ -214,16 +240,16 @@ bool	get_line_data_pl(char *line, t_plane *plane)
 bool	get_line_data_cy(char *line, t_cylinder *cylinder)
 {
 	go_to_next_data(&line);
-	if (ft_atocoord_on(line, &cylinder->coordinate))
+	if (ft_atocoord_on(line, &cylinder->coordinate) == false)
 		return (false);
 	go_to_next_data(&line);
-	if (ft_atovec_on(line, &cylinder->normal_vector))
+	if (ft_atovec_on(line, &cylinder->normal_vector) == false)
 		return (false);
 	go_to_next_data(&line);
-	if (ft_atod_on(line, &cylinder->diameter))
+	if (ft_atod_on(line, &cylinder->diameter) == false)
 		return (false);
 	go_to_next_data(&line);
-	if (ft_atod_on(line, &cylinder->height))
+	if (ft_atod_on(line, &cylinder->height) == false)
 		return (false);
 	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &cylinder->colors));

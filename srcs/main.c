@@ -85,6 +85,8 @@ void	screen_loop(t_mlx_info *win)
 
 bool	parsing(t_minirt_data *data_pt, char *file_name);
 
+void	print_data(char *msg, t_minirt_data *data);
+
 void	init_minirt_data(t_minirt_data * data)
 {
 	data->sp_nb = 0;
@@ -104,6 +106,7 @@ int main(int ac, char **av)
 	init_minirt_data(&data);
 	if (parsing(&data, av[1]) == false)
 		return (1);
+	print_data("main", &data);
 	return (0);
 	ft_create_win(&win);
 	screen_loop(&win);

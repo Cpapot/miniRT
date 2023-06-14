@@ -42,6 +42,8 @@ bool	fill_a(void *data_pt, int flag)
 		printf("l'addresse de a %p\n", ambient_light_arr);
 		return (true);
 	}
+	printf("%p\n", ambient_light_arr);
+	ambient_light_arr->ratio = 0;
 	if (get_line_data_a((char *)data_pt, ambient_light_arr) == false)
 		return (false);
 	ambient_light_arr++;

@@ -15,7 +15,9 @@ SRCS		=	camera.c \
 		main.c \
 		parsing/lstc_2.c \
 		parsing/lstc.c \
-		sphere.c
+		sphere.c \
+		\
+		debug.c \
 
 MLXSRC		=	libmlx.a
 

@@ -32,13 +32,17 @@ bool	call_filling_ft(char **lines)
 	char 	**tmp;
 
 	tmp = lines;
+	size_t nb = 0;
 	while (*tmp)
 	{
+		nb++;
+		printf("%ld voila la ligne\n", nb);
 		i = 0;
 		while (ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
 			i++;
 		if (ft_arr[i](*tmp, FILLING) == false)
 			return (ft_free_split(lines), false);
+		tmp++;
 	}
 	ft_free_split(lines);
 	return (true);
@@ -47,9 +51,10 @@ bool	call_filling_ft(char **lines)
 bool	fill_lines_in_data(t_minirt_data *data_pt, char **lines)
 {
 	init_filling_ft(data_pt);
+	puts("inited fill in data");
 	if (call_filling_ft(lines) == false)
 		return (free_minirt_data_content(data_pt), false);
-	ft_free_split(lines);
+	puts("call done");
 	return (true);
 }
 
@@ -66,8 +71,8 @@ bool	fill_data(t_minirt_data *data_pt, char *file)
 		return (false);
 	if (allocate_data(data_pt) == false)
 		return (false);
-	fill_lines_in_data(data_pt, lines);
-	return (true);
+	puts("pre fill");
+	return (fill_lines_in_data(data_pt, lines));
 }
 
 typedef bool	(*t_parse_ft)(t_minirt_data *data_pt, char *line);
