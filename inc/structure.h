@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/13 15:32:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/14 15:41:15 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ struct	s_plane
 {
 	t_point	coordinate;
 	t_vec_3	normal_vector;
-	t_color	colors;
+	t_color	color;
 };
 
 struct	s_cylinder
