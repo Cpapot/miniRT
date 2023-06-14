@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/12 17:13:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/13 13:13:02 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_camera	init_test_cam(void)
 {
 	t_camera	cam;
 
-	cam.origin.x = 20;
+	cam.origin.x = 4;
 	cam.origin.y = 0;
 	cam.origin.z = 0;
 	cam.vector = set_vec(-1, 0, 0);
@@ -32,35 +32,34 @@ t_camera	init_test_cam(void)
 	return (cam);
 }
 
-int32_t	test_color(t_vec_3	vec)
+int32_t	test_color(t_point hitpoint)
 {
-	double	t;
-
-	t = 0.5 * (vec.y + 1);
-	return (ft_color((1.0 - t) * 1.0 + t * 0.5, (1.0 - t) * 1.0 + t * 0.7, (1.0 - t) * 1 + t * 1.0, 0));
+	return (ft_color(100 * (hitpoint.x + 1), 100 * (hitpoint.y + 1), 100 * (hitpoint.z + 1), 10));
 }
 
-//t_light		init_light()
-//{
-//	t_light	light;
-//
-//	//light.vector = set_vec(1, 0, 0);
-//	return (light);
-//}
+
+t_light		init_light()
+{
+	t_light	light;
+
+	light.vector = set_vec(1, -10, 8);
+	calculate_norm(&light.vector);
+	return (light);
+}
 
 t_sphere	init_sphere()
 {
 	t_sphere	sphere;
 
-	sphere.diameter = 10;
-	sphere.origin.x = 15;
-	sphere.origin.y = 5;
-	sphere.origin.z = 5;
+	sphere.diameter = 2;
+	sphere.origin.x = 0;
+	sphere.origin.y = 0;
+	sphere.origin.z = 0;
 	return (sphere);
 }
 /**/
 
-void	screen_loop(t_mlx_info *win)
+void	screen_loop(t_mlx_info *win/*, t_light light*/)
 {
 	t_ray	camray;
 	int		x;
@@ -73,10 +72,10 @@ void	screen_loop(t_mlx_info *win)
 		while (y != win->ywinsize)
 		{
 			camray = find_camray(init_test_cam(), x, y);
-			if(sphere_hited(camray, init_sphere()))
-				my_mlx_pixel_put(win, x, y, ft_color(92, 38, 145, 0));
+			if(sphere_hited(camray, init_sphere()) != -1)
+				my_mlx_pixel_put(win, x, y, test_color(find_sphere_hit_coord(sphere_hited(camray, init_sphere()), camray)));
 			else
-				my_mlx_pixel_put(win, x, y, test_color(camray.direction));
+				my_mlx_pixel_put(win, x, y, ft_color(0, 0, 0, 0));
 			y++;
 		}
 		x++;
@@ -109,7 +108,7 @@ int main(int ac, char **av)
 	print_data("main", &data);
 	return (0);
 	ft_create_win(&win);
-	screen_loop(&win);
+	screen_loop(&win/*, init_light()*/);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.img, 0, 0);
 	mlx_loop(win.mlx_ptr);
 }
