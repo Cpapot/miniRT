@@ -13,7 +13,11 @@
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
 
-#include "stdlib.h"
+/**** --size_t-- ****/
+# include <stdbool.h>
+
+/**** --bool-- ****/
+# include <stdlib.h>
 
 typedef struct s_minirt_data	t_minirt_data;
 typedef struct s_ray			t_ray;
@@ -87,8 +91,8 @@ struct	s_ambient_light
 struct	s_light
 {
 	t_point	coordinate;
-	t_vec_3	vector;
 	float	brightness;
+	t_color color;
 };
 
 struct	s_sphere

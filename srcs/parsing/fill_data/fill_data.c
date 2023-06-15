@@ -4,46 +4,75 @@
 
 #include "structure.h"
 #include "stdlib.h"
-#include "stdbool.h"
 #include "stdio.h"
 #include "unistd.h"
+#include "libft.h"
+#include "minirt_data.h"
+
+#define INIT 0
+#define FILLING 1
+
+bool	fill_a(void *data_pt, int flag);
+bool	fill_c(void *data_pt, int flag);
+bool	fill_l(void *data_pt, int flag);
+bool	fill_pl(void *data_pt, int flag);
+bool	fill_sp(void *data_pt, int flag);
+bool	fill_cy(void *data_pt, int flag);
 
 static	bool	_check_lines(t_minirt_data *data_pt, char **lines);
-char 			**ft_split(char *str, char delim);
-char 			*ft_strstr(char *s1, char *s2);
-bool			ft_isdigit(char c)
+void	init_filling_ft(t_minirt_data * data_pt);
+
+typedef bool	(*t_filling_ft)(void *data_pt, int flag);
+
+bool	call_filling_ft(char **lines)
 {
-	if (c < '0' || c > '9')
-		return (false);
+	const	t_filling_ft	ft_arr[] = {&fill_a, &fill_c, &fill_l, &fill_sp, &fill_pl, &fill_cy};
+	const	char			*id_arr[] = {"A", "C", "L", "sp", "pl", "cy"};
+	size_t	i;
+	char 	**tmp;
+
+	tmp = lines;
+	size_t nb = 0;
+	while (*tmp)
+	{
+		nb++;
+		printf("%ld voila la ligne\n", nb);
+		i = 0;
+		while (ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
+			i++;
+		if (ft_arr[i](*tmp, FILLING) == false)
+			return (ft_free_split(lines), false);
+		tmp++;
+	}
+	ft_free_split(lines);
 	return (true);
 }
 
-size_t 			ft_strlen(char *str)
+bool	fill_lines_in_data(t_minirt_data *data_pt, char **lines)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	init_filling_ft(data_pt);
+	puts("inited fill in data");
+	if (call_filling_ft(lines) == false)
+		return (free_minirt_data_content(data_pt), false);
+	puts("call done");
+	return (true);
 }
-int 			ft_strncmp(const char *s1, const char *s2, size_t len);
 
 
 bool	fill_data(t_minirt_data *data_pt, char *file)
 {
 	char	**lines;
 
-	lines = ft_split(file, '\n');
+	lines = ft_split_no(file, '\n');
 	free(file);
 	if (!lines)
 		return (perror("fill_data"), false);
 	if (_check_lines(data_pt, lines) == false)
 		return (false);
-	//if (_allocate_data(data_pt, lines) == false)
-		//return (false);
-	//fill_lines_in_data(data_pt, lines);
-	return (true);
+	if (allocate_data(data_pt) == false)
+		return (false);
+	puts("pre fill");
+	return (fill_lines_in_data(data_pt, lines));
 }
 
 typedef bool	(*t_parse_ft)(t_minirt_data *data_pt, char *line);
@@ -194,7 +223,7 @@ bool	manage_c(t_minirt_data *data_pt, char *line)
 	size_t i;
 
 	puts("C");
-	data_pt->al_nb++;
+	data_pt->ca_nb++;
 	i = 0;
 	while (parse_ft_arr[i])
 	{
@@ -211,7 +240,7 @@ bool	manage_l(t_minirt_data *data_pt, char *line)
 	const	t_mini_parse_ft parse_ft_arr[] = {&incr_one, &space_incr, &coord_check, &space_incr, &check_float, &space_incr, &rgb_check, &check_empty, NULL};
 	size_t i;
 
-	data_pt->al_nb++;
+	data_pt->lt_nb++;
 	i = 0;
 	while (parse_ft_arr[i])
 	{
@@ -228,7 +257,7 @@ bool	manage_sp(t_minirt_data *data_pt, char *line)
 	const	t_mini_parse_ft parse_ft_arr[] = {&incr_one, &incr_one, &space_incr, &coord_check, &space_incr, &check_float, &space_incr, &rgb_check, &check_empty, NULL};
 	size_t i;
 
-	data_pt->al_nb++;
+	data_pt->sp_nb++;
 	i = 0;
 	while (parse_ft_arr[i])
 	{
@@ -245,7 +274,7 @@ bool	manage_pl(t_minirt_data *data_pt, char *line)
 	const	t_mini_parse_ft parse_ft_arr[] = {&incr_one, &incr_one, &space_incr, &coord_check, &space_incr, &vec_check, &space_incr, &rgb_check, &check_empty, NULL};
 	size_t i;
 
-	data_pt->al_nb++;
+	data_pt->pl_nb++;
 	i = 0;
 	while (parse_ft_arr[i])
 	{
@@ -263,7 +292,7 @@ bool	manage_cy(t_minirt_data *data_pt, char *line)
 											   &check_empty, NULL};
 	size_t i;
 
-	data_pt->al_nb++;
+	data_pt->cy_nb++;
 	i = 0;
 	while (parse_ft_arr[i])
 	{

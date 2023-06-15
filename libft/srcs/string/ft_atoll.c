@@ -40,3 +40,29 @@ long long	ft_atoll(const char *str)
 		return (-result);
 	return (result);
 }
+
+bool	ft_atoll_on(const char *str, long long *dst)
+{
+	long long	result;
+	long long	tmp;
+	char		is_negative;
+
+	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'
+		   || *str == '\r' || *str == ' ')
+		str++;
+	is_negative = *str == '-';
+	if (*str == '+' || *str == '-')
+		str++;
+	result = 0;
+	while (*str >= '0' && *str <= '9')
+	{
+		tmp = result * 10 + *str++ - '0';
+		if (tmp < result)
+			return (false);
+		result = tmp;
+	}
+	if (is_negative)
+		result = -result;
+	*dst = result;
+	return (true);
+}

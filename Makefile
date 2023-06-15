@@ -8,7 +8,6 @@
 HEADERS 	=	miniRT.h
 
 SRCS		=	camera.c \
-				main.c \
 				sphere.c \
 				light.c \
 				utils/vec3_utils.c \
@@ -17,6 +16,14 @@ SRCS		=	camera.c \
 				colors.c \
 				plane.c	\
 				testfiles.c
+		    parsing/parsing.c \
+		    parsing/fill_data/fill_data.c \
+		    parsing/fill_data/filling_ft.c \
+	   	  parsing/fill_data/get_line_data.c \
+	     	main.c \
+		    parsing/lstc_2.c \
+		    parsing/lstc.c \
+		    debug.c \
 
 MLXSRC		=	libmlx.a
 
@@ -87,7 +94,8 @@ MKDIR		=	mkdir -p
 all : lib ${NAME}
 
 ${NAME}: $(UTILSOBJS) $(OBJS)  $(LIBFT)
-	@${CC} ${OBJS} ${LIBFT} ${MLX} $(FLAGS) -o ${NAME}
+	@${CC} ${OBJS} ${LIBFT}  ${MLX} -o ${NAME} $(FLAGS)
+
 	@echo -n "${SUPPR}	${GREEN} ${NAME} : 🆗${DEFAULT}\n\n"
 
 $(OBJSDIR)%.o: %.c ${HEAD}
