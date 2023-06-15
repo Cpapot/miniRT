@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:03:42 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/14 15:44:01 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/15 18:28:37 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 # include "sphere.h"
 # include "plane.h"
 
-double			ft_find_light(t_vec_3 normal, t_light light);
 t_minirt_data	create_struct();
 int32_t			check_ray(t_ray camray, t_minirt_data data);
+double			ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 norm);
 
 
 

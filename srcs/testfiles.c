@@ -1,16 +1,14 @@
 #include "../inc/miniRT.h"
 
-// t_light		init_light()
-// {
-// 	t_light	light;
+t_light		init_light()
+{
+	t_light	light;
 
-// 	light.coordinate.x = 0;
-// 	light.coordinate.y = 10;
-// 	light.coordinate.z = 0;
-// 	light.vector = set_vec(0, 1, 0);
-// 	calculate_norm(&light.vector);
-// 	return (light);
-// }
+	light.coordinate.x = 0;
+	light.coordinate.y = 10;
+	light.coordinate.z = 0;
+	return (light);
+}
 
 t_sphere	init_sphere()
 {
@@ -172,7 +170,8 @@ t_minirt_data	create_struct()
 	test.plane_arr[3] = init_plane4();
 	test.plane_arr[4] = init_plane5();
 
-	// test.lights_arr = malloc(sizeof(t_light));
-	// test.lights_arr[0] = init_light();
+	test.lt_nb = 1;
+	test.lights_arr = malloc(sizeof(t_light));
+	test.lights_arr[0] = init_light();
 	return (test);
 }

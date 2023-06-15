@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:18:24 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/12 21:53:52 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/15 18:29:32 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,15 @@ double	scalar_product(t_vec_3 vec1, t_vec_3 vec2)
 
 	//tmp = calculate_norm(&vec1) * calculate_norm(&vec2);
 	result = vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
+	return (result);
+}
+
+t_point	hit_coord(double dot, t_ray ray)
+{
+	t_point	result;
+
+	result.x = ray.origin.x + ray.direction.x * dot;
+	result.y = ray.origin.y + ray.direction.y * dot;
+	result.z = ray.origin.z + ray.direction.z * dot;
 	return (result);
 }
