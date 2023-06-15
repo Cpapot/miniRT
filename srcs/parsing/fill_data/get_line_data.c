@@ -61,15 +61,11 @@ bool	ft_atod_on(char *line, double *dst)
 	double		decimal;
 
 	tmp = 0;
-	printf("for %s\n", line);
 	if (ft_atoll_on(line, &integer) == false)
 		return (false);
-	printf("i get %lld\n", integer);
 	_go_to_decimal_part(&line);
-	printf("for %s\n", line);
 	if (*line != ' ' && ft_atoll_on(line, &tmp) == false)
 		return (false);
-	printf("i get %lld\n", tmp);
 	if (integer > 0)
 		decimal = to_decimal_ll(tmp) + integer;
 	else
@@ -100,17 +96,17 @@ bool	ft_atorgb_on(char *line, t_color *dst)
 	nb = ft_atoi(line);
 	if (nb < 0 || nb > 255)
 		return (false);
-	dst->r = (char)nb;
+	dst->r = nb;
 	_go_to_next_rgb(&line);
 	nb = ft_atoi(line);
 	if (nb < 0 || nb > 255)
 		return (false);
-	dst->g = (char)nb;
+	dst->g = nb;
 	_go_to_next_rgb(&line);
 	nb = ft_atoi(line);
 	if (nb < 0 || nb > 255)
 		return (false);
-	dst->b = (char)nb;
+	dst->b = nb;
 	return (true);
 }
 
@@ -126,28 +122,20 @@ void	_go_to_next_float(char **line)
 void	print_point(t_point point);
 bool	ft_atocoord_on(char *line, t_point *dst)
 {
-	printf("\n\ncoord\n-%s-\n\n", line);
 	if (ft_atod_on(line, &dst->x) == false)
 		return (false);
-	printf("x:%f\n", dst->x);
 	_go_to_next_float(&line);
-	printf("y %s\n", line);
 	if (ft_atod_on(line, &dst->y) == false)
 		return (false);
-	printf("y:%f\n", dst->y);
 	_go_to_next_float(&line);
-	printf("z: %s\n", line);
 	if (ft_atod_on(line, &dst->z) == false)
 		return (false);
-	printf("z: %f\n", dst->z);
-	print_point(*dst);
 	return (true);
 }
 
 void	print_vector(t_vec_3 vector);
 bool	ft_atovec_on(char *line, t_vec_3 *dst)
 {
-	puts(line);
 	if (ft_atod_on(line, &dst->x) == false)
 		return (false);
 	_go_to_next_float(&line);

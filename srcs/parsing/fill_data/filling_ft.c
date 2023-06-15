@@ -22,7 +22,6 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder);
 
 void	init_filling_ft(t_minirt_data * data_pt)
 {
-	puts("inited");
 	fill_a(data_pt, INIT);
 	fill_c(data_pt, INIT);
 	fill_l(data_pt, INIT);
@@ -39,10 +38,8 @@ bool	fill_a(void *data_pt, int flag)
 	if (flag == INIT)
 	{
 		ambient_light_arr = ((t_minirt_data *)data_pt)->ambient_light;
-		printf("l'addresse de a %p\n", ambient_light_arr);
 		return (true);
 	}
-	printf("%p\n", ambient_light_arr);
 	ambient_light_arr->ratio = 0;
 	if (get_line_data_a((char *)data_pt, ambient_light_arr) == false)
 		return (false);
@@ -57,7 +54,6 @@ bool	fill_c(void *data_pt, int flag)
 	if (flag == INIT)
 	{
 		camera_arr= ((t_minirt_data *)data_pt)->camera;
-		printf("l'addresse de c %p\n", camera_arr);
 		return (true);
 	}
 	if (get_line_data_c((char *)data_pt, camera_arr) == false)
