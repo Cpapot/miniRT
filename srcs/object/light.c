@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/15 18:36:46 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/16 00:49:30 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 	bounce = bounce_vec(hitpoint, light);
 	normalize_vec(&bounce);
 	scalar = scalar_product(bounce, normal);
+	if (scalar < 0)
+		scalar = 0;
 	return (scalar);
 }
 

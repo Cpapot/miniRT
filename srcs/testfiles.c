@@ -4,8 +4,8 @@ t_light		init_light()
 {
 	t_light	light;
 
-	light.coordinate.x = 0;
-	light.coordinate.y = 10;
+	light.coordinate.x = -5.5;
+	light.coordinate.y = 2.5;
 	light.coordinate.z = 0;
 	return (light);
 }
@@ -28,13 +28,13 @@ t_sphere	init_sphere2()
 {
 	t_sphere	sphere;
 
-	sphere.diameter = 3;
-	sphere.origin.x = 3;
+	sphere.diameter = 5;
+	sphere.origin.x = 0;
 	sphere.origin.y = 0;
-	sphere.origin.z = 0;
+	sphere.origin.z = 3;
 	sphere.color.r = 50;
 	sphere.color.g = 0;
-	sphere.color.b = 20;
+	sphere.color.b = 150;
 	return (sphere);
 }
 
@@ -42,13 +42,13 @@ t_sphere	init_sphere3()
 {
 	t_sphere	sphere;
 
-	sphere.diameter = 6;
-	sphere.origin.x = 6;
+	sphere.diameter = 5;
+	sphere.origin.x = 0;
 	sphere.origin.y = 0;
-	sphere.origin.z = 0;
-	sphere.color.r = 43;
+	sphere.origin.z = -3;
+	sphere.color.r = 0;
 	sphere.color.g = 177;
-	sphere.color.b = 34;
+	sphere.color.b = 0;
 	return (sphere);
 }
 
@@ -71,7 +71,7 @@ t_plane		init_plane()
 	t_plane	plane;
 
 	plane.coordinate.x = 0;
-	plane.coordinate.y = -5;
+	plane.coordinate.y = -4;
 	plane.coordinate.z = 0;
 	plane.normal_vector.x = 0;
 	plane.normal_vector.y = 1;
@@ -88,10 +88,10 @@ t_plane		init_plane2()
 	t_plane	plane;
 
 	plane.coordinate.x = 0;
-	plane.coordinate.y = 5;
+	plane.coordinate.y = 4;
 	plane.coordinate.z = 0;
 	plane.normal_vector.x = 0;
-	plane.normal_vector.y = 1;
+	plane.normal_vector.y = -1;
 	plane.normal_vector.z = 0;
 	normalize_vec(&plane.normal_vector);
 	plane.color.r = 235;
@@ -104,10 +104,10 @@ t_plane		init_plane3()
 {
 	t_plane	plane;
 
-	plane.coordinate.x = 5;
+	plane.coordinate.x = 4;
 	plane.coordinate.y = 0;
 	plane.coordinate.z = 0;
-	plane.normal_vector.x = 1;
+	plane.normal_vector.x = -1;
 	plane.normal_vector.y = 0;
 	plane.normal_vector.z = 0;
 	normalize_vec(&plane.normal_vector);
@@ -123,10 +123,10 @@ t_plane		init_plane4()
 
 	plane.coordinate.x = 0;
 	plane.coordinate.y = 0;
-	plane.coordinate.z = 5;
+	plane.coordinate.z = 4;
 	plane.normal_vector.x = 0;
 	plane.normal_vector.y = 0;
-	plane.normal_vector.z = 1;
+	plane.normal_vector.z = -1;
 	normalize_vec(&plane.normal_vector);
 	plane.color.r = 218;
 	plane.color.g = 196;
@@ -140,7 +140,7 @@ t_plane		init_plane5()
 
 	plane.coordinate.x = 0;
 	plane.coordinate.y = 0;
-	plane.coordinate.z = -5;
+	plane.coordinate.z = -4;
 	plane.normal_vector.x = 0;
 	plane.normal_vector.y = 0;
 	plane.normal_vector.z = 1;
@@ -155,7 +155,7 @@ t_minirt_data	create_struct()
 {
 	t_minirt_data	test;
 
-	test.sp_nb = 1;
+	test.sp_nb = 3;
 	test.sphere_arr = malloc(sizeof(t_sphere) * 4);
 	test.sphere_arr[0] = init_sphere();
 	test.sphere_arr[1] = init_sphere2();
