@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/15 14:19:15 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/15 16:16:46 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,13 @@ int main(int ac, char **av)
 {
 	t_mlx_info		win;
 	(void)ac;
+	(void)av;
 	t_minirt_data	data;
 
-	init_minirt_data(&data);
+	/*init_minirt_data(&data);
 	if (parsing(&data, av[1]) == false)
-		return (1);
+		return (1);*/
+	data = create_struct();
 	print_data("main", &data);
 	ft_create_win(&win);
 	screen_loop(&win, &data);

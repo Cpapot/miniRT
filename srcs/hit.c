@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/15 14:12:43 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/16 00:10:36 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,13 @@ int32_t	check_ray(t_ray camray, t_minirt_data data)
 	else if (info.type == SPHERE)
 	{
 		sp = (t_sphere *)info.struct_info;
+		dot = ft_find_light_ratio(hit_coord(info.t, camray), data, sphere_normal(camray, info.t, sp->origin));
 		return (ft_color(sp->color.r * dot, sp->color.g * dot, sp->color.b * dot, 0));
 	}
 	else if (info.type == PLANE)
 	{
 		pl = (t_plane *)info.struct_info;
+		dot = ft_find_light_ratio(hit_coord(info.t, camray), data, pl->normal_vector);
 		return (ft_color(pl->color.r * dot, pl->color.g * dot, pl->color.b * dot, 0));
 	}
 	return (ft_color(0, 0, 0, 0));

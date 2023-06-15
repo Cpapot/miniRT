@@ -6,19 +6,21 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/14 17:01:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/15 18:35:12 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_point	find_sphere_hit_coord(double dot, t_ray ray)
+t_vec_3	sphere_normal(t_ray camray, double t, t_point center)
 {
-	t_point	result;
+	t_point	hitpoint;
+	t_vec_3	result;
 
-	result.x = ray.origin.x + ray.direction.x * dot;
-	result.y = ray.origin.y + ray.direction.y * dot;
-	result.z = ray.origin.z + ray.direction.z * dot;
+	hitpoint = hit_coord(t, camray);
+	result.x = hitpoint.x - center.x;
+	result.y = hitpoint.y - center.y;
+	result.z = hitpoint.z - center.z;
 	return (result);
 }
 
