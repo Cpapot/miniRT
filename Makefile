@@ -7,22 +7,25 @@
 
 HEADERS 	=	miniRT.h
 
-SRCS		=	camera.c \
-				sphere.c \
-				light.c \
-				utils/vec3_utils.c \
-				utils/mlx_utils.c\
-				hit.c \
-				colors.c \
-				testfiles.c
-		    parsing/parsing.c \
-		    parsing/fill_data/fill_data.c \
-		    parsing/fill_data/filling_ft.c \
-	   	  parsing/fill_data/get_line_data.c \
-	     	main.c \
-		    parsing/lstc_2.c \
-		    parsing/lstc.c \
-		    debug.c \
+SRCS		= object/light.c \
+			camera/camera.c \
+			parsing/parsing.c \
+			parsing/list_utils.c \
+			parsing/fill_data/get_line_data.c \
+			parsing/fill_data/fill_data.c \
+			parsing/fill_data/filling_ft.c \
+			parsing/lstc_2.c \
+			parsing/lstc.c \
+			utils/minirt_data.c \
+			utils/vec3_utils.c \
+			utils/mlx_utils.c \
+			object/plane.c \
+			debug.c \
+			testfiles.c \
+			main.c \
+			color.c \
+			hit.c \
+			object/sphere.c \
 
 MLXSRC		=	libmlx.a
 
@@ -123,4 +126,5 @@ lib:
 	@${MAKE} --no-print-directory  --silent -C ${MLXDIR}
 
 .PHONY : re all clean fclean printf lib
+
 

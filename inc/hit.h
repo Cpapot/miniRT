@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   hit.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/13 15:05:51 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/14 16:41:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#ifndef HIT_H
+# define HIT_H
 
-double	ft_find_light(t_vec_3 normal, t_light light)
+enum	e_type
 {
-	double	dot;
+	SPHERE,
+	PLANE,
+	CYLINDER
+};
 
-	dot = scalar_product(normal, light.vector);
-	if (dot <= 0)
-		dot = 0;
-	return (dot);
-}
+typedef struct s_hitinfo
+{
+	double	t;
+	int		type;
+	void	*struct_info;
+}			t_hitinfo;
+
+#endif

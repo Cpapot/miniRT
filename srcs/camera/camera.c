@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:56:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/12 22:09:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/14 17:32:48 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static double	mapping_Xcoord(int pixel_pos, int xsize, int ysize, double fov)
 	scale = tan(fov / 2.0 * M_PI / 180);
 	ratio = (double)xsize / (double)ysize;
 	result = ((double)pixel_pos + 0.5) / ((double)xsize);
-	result = (2 * result - 1) * scale * ratio;
+	result = (2 * result - 1) * ratio * scale;
 	return (result);
 }
 
@@ -34,6 +34,7 @@ static double	mapping_Ycoord(int pixel_pos, int screen_size, double fov)
 	scale = tan(fov / 2.0 * M_PI / 180);
 	result = ((double)pixel_pos + 0.5) / ((double)screen_size);
 	result = (2 * result - 1) * scale;
+	result *= -1;
 	return (result);
 }
 

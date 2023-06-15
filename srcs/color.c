@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.h                                           :+:      :+:    :+:   */
+/*   color.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 15:06:41 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/13 15:07:41 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/13 15:02:22 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/13 15:42:56 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#include "../inc/miniRT.h"
+#include "../inc/color.h"
 
-int32_t	ft_color(int r, int g, int b, int T);
+int32_t	ft_color(int r, int g, int b, int T)
+{
+	return T << 24 | r << 16 | g << 8 | b << 0;
+}
 
-#endif
