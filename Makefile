@@ -8,22 +8,26 @@
 HEADERS 	=	miniRT.h
 
 SRCS		=	camera.c \
-		parsing/parsing.c \
-		parsing/fill_data/fill_data.c \
-		parsing/fill_data/filling_ft.c \
-		parsing/fill_data/get_line_data.c \
-		main.c \
-		parsing/lstc_2.c \
-		parsing/lstc.c \
-		sphere.c \
-		\
-		debug.c \
+				sphere.c \
+				light.c \
+				utils/vec3_utils.c \
+				utils/mlx_utils.c\
+				hit.c \
+				colors.c \
+				plane.c	\
+				testfiles.c
+		    parsing/parsing.c \
+		    parsing/fill_data/fill_data.c \
+		    parsing/fill_data/filling_ft.c \
+	   	  parsing/fill_data/get_line_data.c \
+	     	main.c \
+		    parsing/lstc_2.c \
+		    parsing/lstc.c \
+		    debug.c \
 
 MLXSRC		=	libmlx.a
 
 LIBFTSRC	=	libftprintf.a libft.a printffd.a
-
-UTILSSRC	=	mlx_utils.c vec3_utils.c minirt_data.c
 
 #					Directories
 
@@ -45,8 +49,7 @@ MLX			=	$(addprefix $(MLXDIR),$(MLXSRC))
 
 HEAD		=	$(addprefix $(HEADERSDIR),$(HEADERS))
 
-SRCSPATH	=	$(addprefix $(SRCSDIR),$(SRCS)) \
-				$(addprefix $(UTILSDIR),$(UTILSSRC))
+SRCSPATH	=	$(addprefix $(SRCSDIR),$(SRCS))
 
 LIBFT		=	$(addprefix $(LIBFTDIR),$(LIBFTSRC))
 
@@ -75,7 +78,7 @@ FLAGS		=	-lX11 -lXext -L$(MLXDIR) -lm
 
 CFLAGS		=	-Wall -Wextra -Werror -O3
 
-CC			=	gcc
+CC			=	cc
 
 RM			=	rm -rf
 
