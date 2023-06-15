@@ -16,9 +16,9 @@ void	print_point(t_point point)
 	printf("coordinante\nx %f, y %f, z %f\n", point.x, point.y, point.z);
 }
 
-void	print_vec(t_vec_3 vec3)
+void	print_color(t_color color)
 {
-	printf("vec\n, x %f, y %f, z %f\n", vec3.x, vec3.y, vec3.z);
+	printf("color %d %d %d.\n", color.r, color.g, color.b);
 }
 
 void print_data(char *msg, t_minirt_data *data)
@@ -30,14 +30,14 @@ void print_data(char *msg, t_minirt_data *data)
 		printf("msg : %s\n", msg);
 	size_t	size;
 
-	size = data->ca_nb;
-	t_camera	*tmp_ca;
-	tmp_ca = data->camera;
+	size = data->sp_nb;
+	t_sphere	*tmp_ca;
+	tmp_ca = data->sphere_arr;
 	while (size--)
 	{
-		printf("camera : %f\n", tmp_ca->fov);
-		print_vector(tmp_ca->vector);
+		printf("camera : %f\n", tmp_ca->diameter);
 		print_point(tmp_ca->origin);
+		print_color(tmp_ca->color);
 		tmp_ca++;
 	}
 	//t_sphere 	*sp_ca;

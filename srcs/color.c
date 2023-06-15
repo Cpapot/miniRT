@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.h                                           :+:      :+:    :+:   */
+/*   color.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 13:06:01 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/13 14:50:19 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/13 15:02:22 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/13 15:42:56 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	SPHERE_H
-# define SPHERE_H
+#include "../inc/miniRT.h"
+#include "../inc/color.h"
 
-t_point	find_sphere_hit_coord(double dot, t_ray ray);
-double	sphere_hited(t_ray ray, t_sphere sphere);
-int		find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr);
+int32_t	ft_color(int r, int g, int b, int T)
+{
+	return T << 24 | r << 16 | g << 8 | b << 0;
+}
 
-
-#endif
