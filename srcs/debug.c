@@ -16,6 +16,11 @@ void	print_point(t_point point)
 	printf("coordinante\nx %f, y %f, z %f\n", point.x, point.y, point.z);
 }
 
+void	print_vec(t_vec_3 vec3)
+{
+	printf("vec\n, x %f, y %f, z %f\n", vec3.x, vec3.y, vec3.z);
+}
+
 void print_data(char *msg, t_minirt_data *data)
 {
 	static	int nb = 0;
