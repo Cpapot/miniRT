@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/14 17:01:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/13 16:48:56 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,20 @@ int	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
 {
 	size_t	index;
 	double	tmp;
-	double	t;
 	int		id;
 
 	id = -1;
 	index = 0;
-	tmp = INT_MAX;
 	while (index != count)
 	{
-		t = sphere_hited(camray, sphere_arr[index]);
-		if (tmp > t && t != -1)
+		if (index == 0)
 		{
-			tmp = t;
+			tmp = sphere_hited(camray, sphere_arr[index]);
+			id = index;
+		}
+		if (tmp > sphere_hited(camray, sphere_arr[index]))
+		{
+			tmp = sphere_hited(camray, sphere_arr[index]);
 			id = index;
 		}
 		index++;

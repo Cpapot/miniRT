@@ -14,7 +14,6 @@ SRCS		=	camera.c \
 				utils/mlx_utils.c\
 				hit.c \
 				colors.c \
-				plane.c	\
 				testfiles.c
 		    parsing/parsing.c \
 		    parsing/fill_data/fill_data.c \
