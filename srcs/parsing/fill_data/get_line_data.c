@@ -234,7 +234,7 @@ bool	get_line_data_pl(char *line, t_plane *plane)
 	if (ft_atovec_on(line, &plane->normal_vector) == false)
 		return (false);
 	go_to_next_data(&line);
-	return (ft_atorgb_on(line, &plane->colors));
+	return (ft_atorgb_on(line, &plane->color));
 }
 
 bool	get_line_data_cy(char *line, t_cylinder *cylinder)
@@ -252,5 +252,5 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder)
 	if (ft_atod_on(line, &cylinder->height) == false)
 		return (false);
 	go_to_next_data(&line);
-	return (ft_atorgb_on(line, &cylinder->colors));
+	return (ft_atorgb_on(line, &cylinder->color));
 }

@@ -6,12 +6,12 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/14 17:12:58 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/15 14:12:43 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
-#include "../inc/colors.h"
+#include "../inc/color.h"
 #include "../inc/hit.h"
 
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)

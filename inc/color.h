@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   color.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/13 15:05:51 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/13 15:06:41 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/13 15:07:41 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
+#ifndef color_H
+# define color_H
 
-double	ft_find_light(t_vec_3 normal, t_light light)
-{
-	double	dot;
+int32_t	ft_color(int r, int g, int b, int T);
 
-	dot = scalar_product(normal, light.vector);
-	if (dot <= 0)
-		dot = 0;
-	return (dot);
-}
+#endif
