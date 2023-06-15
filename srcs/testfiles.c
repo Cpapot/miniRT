@@ -173,5 +173,6 @@ t_minirt_data	create_struct()
 	test.lt_nb = 1;
 	test.lights_arr = malloc(sizeof(t_light));
 	test.lights_arr[0] = init_light();
+
 	return (test);
 }
