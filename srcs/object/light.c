@@ -6,11 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/16 00:49:30 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/16 14:46:25 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+#include "hit.h"
+double	check_shadow(t_vec_3 bounce_vec, t_point hitpoint, t_light light, t_minirt_data data);
 
 // double	ft_find_light(t_vec_3 normal, t_light light)
 // {
@@ -31,8 +34,8 @@ t_vec_3	bounce_vec(t_point hitpoint, t_light light)
 	result.z = light.coordinate.z - hitpoint.z;
 	return (result);
 }
-//scalaire entre la norme du cercle et le rayon rebondie
-double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
+
+double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal, t_minirt_data data)
 {
 	t_vec_3	bounce;
 	double	scalar;
@@ -42,6 +45,7 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 	scalar = scalar_product(bounce, normal);
 	if (scalar < 0)
 		scalar = 0;
+	scalar = check_shadow(bounce, hitpoint, light, data);
 	return (scalar);
 }
 
@@ -56,7 +60,7 @@ double	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
 	while (data.lt_nb != index)
 	{
 		light = data.lights_arr[index];
-		result += check_intersection(light, hitpoint, normal);
+		result += check_intersection(light, hitpoint, normal, data);
 		index++;
 	}
 	return (result);

@@ -26,6 +26,7 @@ SRCS		= object/light.c \
 			color.c \
 			hit.c \
 			object/sphere.c \
+			shadow.c
 
 MLXSRC		=	libmlx.a
 
