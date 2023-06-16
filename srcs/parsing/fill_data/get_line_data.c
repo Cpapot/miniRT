@@ -16,41 +16,54 @@ static void	_go_to_decimal_part(char **line)
 		*line = (*line) + 1;
 }
 
-float	to_decimal(int tmp)
+double	to_decimal(int tmp, char *line)
 {
-	float	dst;
+	double	dst;
 
 	dst = tmp;
-	while (dst > 1)
+	while (ft_isdigit(*line))
+	{
+	printf("%.15f     %s\n", dst, line);
 		dst /= 10;
+		line++;
+	}
 	return (dst);
 }
 
-bool	ft_atof_on(char *line, float *dst)
+bool	ft_atof_on(char *line, double *dst)
 {
 	int 	integer;
 	int 	tmp;
-	float	decimal;
+	double	decimal;
 
 	if (ft_atoi_on(line, &integer) == false)
 		return (false);
 	_go_to_decimal_part(&line);
-	if (ft_atoi_on(line, &tmp) == false)
+	tmp = 0;
+	if (ft_isdigit(*line) && ft_atoi_on(line, &tmp) == false)
 		return (false);
-	decimal = to_decimal(tmp);
-	decimal += integer;
+	decimal = to_decimal(tmp, line);
+	printf("tm %d decimal :%f\n", tmp, decimal);
+	if (integer < 0)
+		decimal -= integer;
+	else
+		decimal += integer;
+	printf("atof %.15f\n", decimal);
 	*dst = decimal;
 	return (true);
 
 }
 
-double to_decimal_ll(long long nb)
+double to_decimal_ll(long long nb, char *line)
 {
 	double dst;
 
 	dst = nb;
-	while (dst > 1)
+	while (ft_isdigit(*line))
+	{
+		line++;
 		dst /= 10;
+	}
 	return (dst);
 }
 
@@ -61,19 +74,15 @@ bool	ft_atod_on(char *line, double *dst)
 	double		decimal;
 
 	tmp = 0;
-	printf("for %s\n", line);
 	if (ft_atoll_on(line, &integer) == false)
 		return (false);
-	printf("i get %lld\n", integer);
 	_go_to_decimal_part(&line);
-	printf("for %s\n", line);
 	if (*line != ' ' && ft_atoll_on(line, &tmp) == false)
 		return (false);
-	printf("i get %lld\n", tmp);
 	if (integer > 0)
-		decimal = to_decimal_ll(tmp) + integer;
+		decimal = to_decimal_ll(tmp, line) + integer;
 	else
-		decimal = integer - to_decimal(tmp);
+		decimal = integer - to_decimal_ll(tmp, line);
 	*dst = decimal;
 	return (true);
 }
@@ -100,17 +109,17 @@ bool	ft_atorgb_on(char *line, t_color *dst)
 	nb = ft_atoi(line);
 	if (nb < 0 || nb > 255)
 		return (false);
-	dst->r = (char)nb;
+	dst->r = nb;
 	_go_to_next_rgb(&line);
 	nb = ft_atoi(line);
 	if (nb < 0 || nb > 255)
 		return (false);
-	dst->g = (char)nb;
+	dst->g = nb;
 	_go_to_next_rgb(&line);
 	nb = ft_atoi(line);
 	if (nb < 0 || nb > 255)
 		return (false);
-	dst->b = (char)nb;
+	dst->b = nb;
 	return (true);
 }
 
@@ -126,28 +135,20 @@ void	_go_to_next_float(char **line)
 void	print_point(t_point point);
 bool	ft_atocoord_on(char *line, t_point *dst)
 {
-	printf("\n\ncoord\n-%s-\n\n", line);
 	if (ft_atod_on(line, &dst->x) == false)
 		return (false);
-	printf("x:%f\n", dst->x);
 	_go_to_next_float(&line);
-	printf("y %s\n", line);
 	if (ft_atod_on(line, &dst->y) == false)
 		return (false);
-	printf("y:%f\n", dst->y);
 	_go_to_next_float(&line);
-	printf("z: %s\n", line);
 	if (ft_atod_on(line, &dst->z) == false)
 		return (false);
-	printf("z: %f\n", dst->z);
-	print_point(*dst);
 	return (true);
 }
 
 void	print_vector(t_vec_3 vector);
 bool	ft_atovec_on(char *line, t_vec_3 *dst)
 {
-	puts(line);
 	if (ft_atod_on(line, &dst->x) == false)
 		return (false);
 	_go_to_next_float(&line);
@@ -162,7 +163,7 @@ bool	ft_atovec_on(char *line, t_vec_3 *dst)
 	return (true);
 }
 
-bool	ft_atofov_on(char *line, float *dst)
+bool	ft_atofov_on(char *line, double *dst)
 {
 	if (ft_atof_on(line, dst) == false)
 		return (false);
@@ -171,9 +172,9 @@ bool	ft_atofov_on(char *line, float *dst)
 	return (true);
 }
 
-bool	ft_atoratio_on(char *line, float *dst)
+bool	ft_atoratio_on(char *line, double *dst)
 {
-	if (ft_atof_on(line, dst) == false)
+	if (ft_atod_on(line, dst) == false)
 		return (false);
 	if (*dst > 1 || *dst < 0)
 		return (false);
@@ -184,7 +185,7 @@ bool	get_line_data_a(char *line, t_ambient_light *light_pt)
 {
 	while (ft_isdigit(*line) == false)
 		line++;
-	if (ft_atof_on(line, &(light_pt->ratio)) == false)
+	if (ft_atod_on(line, &(light_pt->ratio)) == false)
 		return (false);
 	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &(light_pt->color)));
@@ -222,6 +223,7 @@ bool	get_line_data_sp(char *line, t_sphere *sphere)
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &sphere->diameter) == false)
 		return (false);
+	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &sphere->color));
 }
 

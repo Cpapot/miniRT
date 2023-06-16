@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/16 14:46:25 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/16 17:14:34 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ double	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
 		result += check_intersection(light, hitpoint, normal, data);
 		index++;
 	}
+	result = 1;
 	return (result);
 }

@@ -36,7 +36,6 @@ bool	call_filling_ft(char **lines)
 	while (*tmp)
 	{
 		nb++;
-		printf("%ld voila la ligne\n", nb);
 		i = 0;
 		while (ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
 			i++;
@@ -51,10 +50,8 @@ bool	call_filling_ft(char **lines)
 bool	fill_lines_in_data(t_minirt_data *data_pt, char **lines)
 {
 	init_filling_ft(data_pt);
-	puts("inited fill in data");
 	if (call_filling_ft(lines) == false)
 		return (free_minirt_data_content(data_pt), false);
-	puts("call done");
 	return (true);
 }
 
@@ -71,7 +68,6 @@ bool	fill_data(t_minirt_data *data_pt, char *file)
 		return (false);
 	if (allocate_data(data_pt) == false)
 		return (false);
-	puts("pre fill");
 	return (fill_lines_in_data(data_pt, lines));
 }
 
@@ -95,7 +91,6 @@ bool	space_incr(char **line_pt)
 
 bool	check_float(char **line_pt)
 {
-	puts("check float");
 	if (!ft_isdigit(**line_pt))
 		return (false);
 	while (ft_isdigit(**line_pt))
@@ -111,7 +106,6 @@ bool	check_float(char **line_pt)
 
 bool	rgb_check(char **line_pt)
 {
-	printf("rgb check\n");
 	if (!ft_isdigit(**line_pt))
 		return (false);
 	while (ft_isdigit(**line_pt))
@@ -135,12 +129,10 @@ bool	rgb_check(char **line_pt)
 
 bool	skip_nb(char **line)
 {
-	puts("i skip");
 	if (**line == '-')
 		*line = *line + 1;
 	if (ft_isdigit(**line) == false)
 		return (false);
-	puts("post digit");
 	while (ft_isdigit(**line))
 		*line = *line + 1;
 	if (**line == '.')
@@ -151,7 +143,6 @@ bool	skip_nb(char **line)
 		while (ft_isdigit(**line))
 			*line = *line + 1;
 	}
-	puts("return true");
 	return (true);
 }
 
@@ -164,7 +155,6 @@ bool	coord_check(char **line)
 	nb = 3;
 	while (--nb)
 	{
-		printf("je test -%s-\n", *line);
 		if (**line != ',')
 			return (false);
 		*line = *line + 1;
@@ -204,13 +194,10 @@ bool	manage_a(t_minirt_data *data_pt, char *line)
 	const	t_mini_parse_ft parse_ft_arr[] = {&incr_one, &space_incr, &check_float, &space_incr, &rgb_check, &check_empty, NULL};
 	size_t i;
 
-	printf("A parser\n");
 	data_pt->al_nb++;
 	i = -1;
 	while (++i < 6)
 	{
-		printf("%ld\n", i);
-		printf("-%s-\n", line);
 		if (parse_ft_arr[i](&line) != true)
 			return (false);
 	}
@@ -222,12 +209,10 @@ bool	manage_c(t_minirt_data *data_pt, char *line)
 	const	t_mini_parse_ft parse_ft_arr[] = {&incr_one, &space_incr, &coord_check, &space_incr, &vec_check, &space_incr, &fov_check, &check_empty, NULL};
 	size_t i;
 
-	puts("C");
 	data_pt->ca_nb++;
 	i = 0;
 	while (parse_ft_arr[i])
 	{
-		printf("%ld -%s-\n", i, line);
 		if (parse_ft_arr[i](&line) != true)
 			return (false);
 		i++;
@@ -244,7 +229,6 @@ bool	manage_l(t_minirt_data *data_pt, char *line)
 	i = 0;
 	while (parse_ft_arr[i])
 	{
-		printf("%ld -%s-\n", i, line);
 		if (parse_ft_arr[i](&line) != true)
 			return (false);
 		i++;
@@ -261,7 +245,6 @@ bool	manage_sp(t_minirt_data *data_pt, char *line)
 	i = 0;
 	while (parse_ft_arr[i])
 	{
-		printf("%ld -%s-\n", i, line);
 		if (parse_ft_arr[i](&line) != true)
 			return (false);
 		i++;
@@ -278,7 +261,6 @@ bool	manage_pl(t_minirt_data *data_pt, char *line)
 	i = 0;
 	while (parse_ft_arr[i])
 	{
-		printf("%ld -%s-\n", i, line);
 		if (parse_ft_arr[i](&line) != true)
 			return (false);
 		i++;
@@ -296,7 +278,6 @@ bool	manage_cy(t_minirt_data *data_pt, char *line)
 	i = 0;
 	while (parse_ft_arr[i])
 	{
-		printf("%ld -%s-\n", i, line);
 		if (parse_ft_arr[i](&line) != true)
 			return (false);
 		i++;

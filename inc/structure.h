@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/15 14:12:43 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/16 16:38:41 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,28 @@ struct	s_ray
 
 struct	s_color
 {
-	int		r;
-	int		g;
-	int		b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 };
 
 struct	s_camera
 {
 	t_vec_3	vector;
 	t_point	origin;
-	float	fov;
+	double	fov;
 };
 
 struct	s_ambient_light
 {
 	t_color color;
-	float	ratio;
+	double	ratio;
 };
 
 struct	s_light
 {
 	t_point	coordinate;
-	float	brightness;
+	double	brightness;
 	t_color color;
 };
 
