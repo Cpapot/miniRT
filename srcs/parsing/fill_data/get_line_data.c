@@ -16,13 +16,16 @@ static void	_go_to_decimal_part(char **line)
 		*line = (*line) + 1;
 }
 
-float	to_decimal(int tmp)
+float	to_decimal(int tmp, char *line)
 {
 	float	dst;
 
 	dst = tmp;
-	while (dst > 1)
+	while (ft_isdigit(*line))
+	{
 		dst /= 10;
+		line++;
+	}
 	return (dst);
 }
 
@@ -37,20 +40,26 @@ bool	ft_atof_on(char *line, float *dst)
 	_go_to_decimal_part(&line);
 	if (ft_atoi_on(line, &tmp) == false)
 		return (false);
-	decimal = to_decimal(tmp);
-	decimal += integer;
+	decimal = to_decimal(tmp, line);
+	if (integer < 0)
+		decimal -= integer;
+	else
+		decimal += integer;
 	*dst = decimal;
 	return (true);
 
 }
 
-double to_decimal_ll(long long nb)
+double to_decimal_ll(long long nb, char *line)
 {
 	double dst;
 
 	dst = nb;
-	while (dst > 1)
+	while (ft_isdigit(*line))
+	{
+		line++;
 		dst /= 10;
+	}
 	return (dst);
 }
 
@@ -67,9 +76,9 @@ bool	ft_atod_on(char *line, double *dst)
 	if (*line != ' ' && ft_atoll_on(line, &tmp) == false)
 		return (false);
 	if (integer > 0)
-		decimal = to_decimal_ll(tmp) + integer;
+		decimal = to_decimal_ll(tmp, line) + integer;
 	else
-		decimal = integer - to_decimal(tmp);
+		decimal = integer - to_decimal_ll(tmp, line);
 	*dst = decimal;
 	return (true);
 }
@@ -210,6 +219,7 @@ bool	get_line_data_sp(char *line, t_sphere *sphere)
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &sphere->diameter) == false)
 		return (false);
+	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &sphere->color));
 }
 

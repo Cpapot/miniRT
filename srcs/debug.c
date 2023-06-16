@@ -134,4 +134,3 @@ void print_data(char *msg, t_minirt_data *data)
 		tmp_lt++;
 	}
 }
-
