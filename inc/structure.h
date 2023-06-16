@@ -70,9 +70,9 @@ struct	s_ray
 
 struct	s_color
 {
-	int		r;
-	int		g;
-	int		b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 };
 
 struct	s_camera
