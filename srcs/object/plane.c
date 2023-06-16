@@ -6,13 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/15 15:18:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 00:51:29 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-double	plane_hited(t_ray ray, t_plane plane)
+double	plane_hited(t_ray ray, t_plane plane, int status)
 {
 	double	d;
 	double	t;
@@ -27,8 +27,15 @@ double	plane_hited(t_ray ray, t_plane plane)
 		/ scalar_product(plane.normal_vector, ray.direction);
 	if (t > 0)
 		return (t);
+	else if (status != 1)
+	{
+		multiplying_vec(&plane.normal_vector, -1.0);
+		t = plane_hited(ray, plane, 1);
+	}
+	if (t > 0)
+		return(t);
 	else
-		return (-1);
+		return(-1);
 }
 
 int	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
@@ -43,7 +50,7 @@ int	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 	tmp = INT_MAX;
 	while (index != count)
 	{
-		t = plane_hited(camray, plane_arr[index]);
+		t = plane_hited(camray, plane_arr[index], 0);
 		if (tmp > t && t != -1)
 		{
 			tmp = t;
