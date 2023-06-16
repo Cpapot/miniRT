@@ -16,35 +16,39 @@ static void	_go_to_decimal_part(char **line)
 		*line = (*line) + 1;
 }
 
-float	to_decimal(int tmp, char *line)
+double	to_decimal(int tmp, char *line)
 {
-	float	dst;
+	double	dst;
 
 	dst = tmp;
 	while (ft_isdigit(*line))
 	{
+	printf("%.15f     %s\n", dst, line);
 		dst /= 10;
 		line++;
 	}
 	return (dst);
 }
 
-bool	ft_atof_on(char *line, float *dst)
+bool	ft_atof_on(char *line, double *dst)
 {
 	int 	integer;
 	int 	tmp;
-	float	decimal;
+	double	decimal;
 
 	if (ft_atoi_on(line, &integer) == false)
 		return (false);
 	_go_to_decimal_part(&line);
-	if (ft_atoi_on(line, &tmp) == false)
+	tmp = 0;
+	if (ft_isdigit(*line) && ft_atoi_on(line, &tmp) == false)
 		return (false);
 	decimal = to_decimal(tmp, line);
+	printf("tm %d decimal :%f\n", tmp, decimal);
 	if (integer < 0)
 		decimal -= integer;
 	else
 		decimal += integer;
+	printf("atof %.15f\n", decimal);
 	*dst = decimal;
 	return (true);
 
@@ -159,7 +163,7 @@ bool	ft_atovec_on(char *line, t_vec_3 *dst)
 	return (true);
 }
 
-bool	ft_atofov_on(char *line, float *dst)
+bool	ft_atofov_on(char *line, double *dst)
 {
 	if (ft_atof_on(line, dst) == false)
 		return (false);
@@ -168,9 +172,9 @@ bool	ft_atofov_on(char *line, float *dst)
 	return (true);
 }
 
-bool	ft_atoratio_on(char *line, float *dst)
+bool	ft_atoratio_on(char *line, double *dst)
 {
-	if (ft_atof_on(line, dst) == false)
+	if (ft_atod_on(line, dst) == false)
 		return (false);
 	if (*dst > 1 || *dst < 0)
 		return (false);
@@ -181,7 +185,7 @@ bool	get_line_data_a(char *line, t_ambient_light *light_pt)
 {
 	while (ft_isdigit(*line) == false)
 		line++;
-	if (ft_atof_on(line, &(light_pt->ratio)) == false)
+	if (ft_atod_on(line, &(light_pt->ratio)) == false)
 		return (false);
 	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &(light_pt->color)));

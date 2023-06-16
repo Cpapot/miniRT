@@ -78,7 +78,7 @@ AR			=	ar rc
 
 FLAGS		=	-lX11 -lXext -L$(MLXDIR) -lm
 
-CFLAGS		=	-Wall -Wextra -Werror -O3
+CFLAGS		=	-Wall -Wextra -Werror -O3 -g3
 
 CC			=	cc
 

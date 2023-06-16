@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/15 16:16:46 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/16 16:19:40 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_camera	init_test_cam(void)
 {
 	t_camera	cam;
 
-	cam.origin.x = -5;
-	cam.origin.y = 0;
+	cam.origin.x = 0;
+	cam.origin.y = 1;
 	cam.origin.z = 0;
 	cam.vector = set_vec(1, 0, 0);
 	normalize_vec(&cam.vector);
@@ -44,7 +44,7 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 		y = 0;
 		while (y != win->ywinsize)
 		{
-			camray = find_camray(init_test_cam(), x, y);
+			camray = find_camray(data->camera[0], x, y);
 			my_mlx_pixel_put(win, x, y, check_ray(camray, *data));
 			y++;
 		}
@@ -74,11 +74,15 @@ int main(int ac, char **av)
 	(void)av;
 	t_minirt_data	data;
 
-	/*init_minirt_data(&data);
-	if (parsing(&data, av[1]) == false)
-		return (1);*/
-	data = create_struct();
-	print_data("main", &data);
+	init_minirt_data(&data);
+	if (ac > 1)
+	{
+		if (parsing(&data, av[1]) == false)
+			return (1);
+		print_data("main", &data);
+	}
+	else
+		data = create_struct();
 	ft_create_win(&win);
 	screen_loop(&win, &data);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.img, 0, 0);
