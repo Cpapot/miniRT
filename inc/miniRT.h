@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:03:42 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 01:16:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 03:35:36 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,13 @@
 t_minirt_data	create_struct();
 int32_t			check_ray(t_ray camray, t_minirt_data data);
 t_color			ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal);
+void		print_info(t_minirt_data *data);
 
-
+typedef struct s_general
+{
+	t_minirt_data	data;
+	t_mlx_info		win;
+} t_general;
 
 /**/
 

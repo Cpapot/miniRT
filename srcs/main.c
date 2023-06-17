@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 02:22:55 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 03:34:52 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /**/
 #include "../inc/camera.h"
 #include "../inc/color.h"
+#include "../inc/key.h"
 
 t_camera	init_test_cam(void)
 {
@@ -66,7 +67,8 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 		}
 		x++;
 	}
-	ft_printf(GREEN"RENDER COMPLETE\n"WHITE);
+	print_info(data);
+	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img, 0, 0);
 }
 
 bool	parsing(t_minirt_data *data_pt, char *file_name);
@@ -85,6 +87,7 @@ void	init_minirt_data(t_minirt_data * data)
 
 int main(int ac, char **av)
 {
+	t_general		info;
 	t_mlx_info		win;
 	(void)ac;
 	(void)av;
@@ -103,6 +106,8 @@ int main(int ac, char **av)
 	data.lights_arr[1].brightness = 0.7;
 	ft_create_win(&win);
 	screen_loop(&win, &data);
-	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.img, 0, 0);
+	info.data = data;
+	info.win = win;
+	mlx_hook(win.win_ptr, 2, 1L << 0, deal_key, &info);
 	mlx_loop(win.mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:56:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 00:17:30 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 03:28:45 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ t_ray	find_camray(t_camera cam_info, int x, int y)
 	calculate_norm(&cam_ray.direction);
 	return (cam_ray);
 }
+
 
