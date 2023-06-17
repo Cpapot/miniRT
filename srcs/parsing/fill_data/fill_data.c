@@ -290,7 +290,7 @@ bool	emmit_err(t_minirt_data *data_pt, char *line)
 	(void)data_pt;
 	if (*line == 0)
 		return (true);
-	write(2, "Invalid identifier\n", 19);
+	ft_printf_fd(2, "Invalid identifier\n");
 	return (false);
 }
 
@@ -316,7 +316,7 @@ static bool	_check_lines(t_minirt_data  *data_pt, char **lines)
 		while (ft_strncmp(id_arr[i], *tmp, ft_strlen((char *)id_arr[i])) != 0 && i != 6)
 			i++;
 		if (parse_ft_arr[i](data_pt, *tmp) == false)
-			return (write(2, "Error parsing\n", 14), false);
+			return (ft_printf_fd(2, "Error parsing\n"), false);
 		tmp++;
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/16 16:19:40 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 02:22:55 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ t_camera	init_test_cam(void)
 
 /**/
 
+//on dois la set pour chaque camera
+void	set_minirt_data(t_minirt_data * data, t_camera cam)
+{
+	int		index;
+	t_plane	plane;
+
+	index = 0;
+	while (data->pl_nb != (size_t)index)
+	{
+		plane = data->plane_arr[index];
+		data->plane_arr[index].normal_vector = plane_normal(cam.vector, plane);
+		index++;
+	}
+}
+
 void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 {
 	t_ray	camray;
@@ -39,6 +54,7 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 	int		y;
 
 	x = 0;
+	set_minirt_data(data, data->camera[0]);
 	while (x != win->xwinsize)
 	{
 		y = 0;
@@ -83,6 +99,8 @@ int main(int ac, char **av)
 	}
 	else
 		data = create_struct();
+	data.lights_arr[0].brightness = 0.3;
+	data.lights_arr[1].brightness = 0.7;
 	ft_create_win(&win);
 	screen_loop(&win, &data);
 	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.img, 0, 0);

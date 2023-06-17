@@ -116,7 +116,9 @@ fclean:
 	@${RM} ${OBJS}
 	@${RM} ${OBJSDIR}
 	@${RM} ${NAME}
+	@echo "${RED}🗑  MLX cleanded"
 	@${MAKE} fclean --no-print-directory -C ${LIBFTDIR}
+	@${MAKE} clean --no-print-directory  --silent -C ${MLXDIR}
 
 re:
 	@${MAKE} --no-print-directory fclean

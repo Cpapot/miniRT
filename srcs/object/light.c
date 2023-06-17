@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 00:48:10 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 02:23:33 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_vec_3	bounce_vec(t_point hitpoint, t_light light)
 	return (result);
 }
 
-double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal, t_minirt_data data)
+double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 {
 	t_vec_3	bounce;
 	double	scalar;
@@ -49,18 +49,24 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal, t_min
 	return (scalar);
 }
 
-double	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
+t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
 {
 	size_t	index;
+	t_color	result;
 	t_light	light;
-	double	result;
+	double	ratio;
 
-	result = 0;
+	result.r = 0;
+	result.g = 0;
+	result.b = 0;
 	index = 0;
 	while (data.lt_nb != index)
 	{
 		light = data.lights_arr[index];
-		result += check_intersection(light, hitpoint, normal, data);
+		ratio = check_intersection(light, hitpoint, normal);
+		result.r += light.color.r * ratio * 0.01 * light.brightness;
+		result.g += light.color.g * ratio * 0.01 * light.brightness;
+		result.b += light.color.b * ratio * 0.01 * light.brightness;
 		index++;
 	}
 	return (result);

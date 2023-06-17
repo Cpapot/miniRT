@@ -18,7 +18,7 @@ void	print_point(t_point point)
 
 void	print_color(t_color color)
 {
-	printf("color %d %d %d.\n", color.r, color.g, color.b);
+	printf("color %f %f %f.\n", color.r, color.g, color.b);
 }
 
 void	print_ray(t_ray ray)

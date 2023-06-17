@@ -6,13 +6,23 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 00:51:29 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 02:20:44 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-double	plane_hited(t_ray ray, t_plane plane, int status)
+t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane)
+{
+	double	scalar;
+
+	scalar = scalar_product(plane.normal_vector, camdir);
+	if (scalar < 0)
+		multiplying_vec(&plane.normal_vector, -1);
+	return(plane.normal_vector);
+}
+
+double	plane_hited(t_ray ray, t_plane plane)
 {
 	double	d;
 	double	t;
@@ -27,13 +37,6 @@ double	plane_hited(t_ray ray, t_plane plane, int status)
 		/ scalar_product(plane.normal_vector, ray.direction);
 	if (t > 0)
 		return (t);
-	else if (status != 1)
-	{
-		multiplying_vec(&plane.normal_vector, -1.0);
-		t = plane_hited(ray, plane, 1);
-	}
-	if (t > 0)
-		return(t);
 	else
 		return(-1);
 }
@@ -50,7 +53,7 @@ int	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 	tmp = INT_MAX;
 	while (index != count)
 	{
-		t = plane_hited(camray, plane_arr[index], 0);
+		t = plane_hited(camray, plane_arr[index]);
 		if (tmp > t && t != -1)
 		{
 			tmp = t;
