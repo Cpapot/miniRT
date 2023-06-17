@@ -28,7 +28,8 @@ SRCS		= object/light.c \
 			object/sphere.c \
 			shadow.c \
 			hook.c \
-			camera/print_info.c
+			camera/print_info.c \
+			object/ambient_light.c
 
 MLXSRC		=	libmlx.a
 

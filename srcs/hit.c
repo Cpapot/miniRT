@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 02:21:45 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 19:01:58 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ int32_t	check_ray(t_ray camray, t_minirt_data data)
 	{
 		sp = (t_sphere *)info.struct_info;
 		color_ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, sphere_normal(camray, info.t, sp->origin));
+		ambient_lightning(&color_ratio, &data);
 		return (ft_color(sp->color.r * color_ratio.r, sp->color.g * color_ratio.g, sp->color.b * color_ratio.b, 0));
 	}
 	else if (info.type == PLANE)
 	{
 		pl = (t_plane *)info.struct_info;
 		color_ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, pl->normal_vector);
+		ambient_lightning(&color_ratio, &data);
 		return (ft_color(pl->color.r * color_ratio.r, pl->color.g * color_ratio.g, pl->color.b * color_ratio.b, 0));
 	}
 	return (ft_color(0, 0, 0, 0));
