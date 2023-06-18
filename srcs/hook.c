@@ -57,6 +57,8 @@ int	deal_key(int key, t_general *info)
 		info->data.camera[0].origin.y -= movement.y * 0.1;
 		info->data.camera[0].origin.z -= movement.z * 0.1;
 	}
+	else if (key == KB_ESC)
+		exit(0);
 	screen_loop(&info->win, &info->data);
 	return (1);
 }
