@@ -72,14 +72,19 @@ bool	ft_atod_on(char *line, double *dst)
 	long long	integer;
 	long long	tmp;
 	double		decimal;
+	bool		is_neg;
 
 	tmp = 0;
+	if (*line == '-')
+		is_neg = true;
+	else
+		is_neg = false;
 	if (ft_atoll_on(line, &integer) == false)
 		return (false);
 	_go_to_decimal_part(&line);
 	if (*line != ' ' && ft_atoll_on(line, &tmp) == false)
 		return (false);
-	if (integer > 0)
+	if (is_neg == false)
 		decimal = to_decimal_ll(tmp, line) + integer;
 	else
 		decimal = integer - to_decimal_ll(tmp, line);
@@ -203,6 +208,7 @@ bool	get_line_data_c(char *line, t_camera *camera)
 	return (ft_atofov_on(line, &camera->fov));
 }
 
+void	print_light(t_light light);
 bool	get_line_data_l(char *line, t_light *light)
 {
 	go_to_next_data(&line);

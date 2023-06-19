@@ -98,7 +98,6 @@ int main(int ac, char **av)
 	{
 		if (parsing(&data, av[1]) == false)
 			return (1);
-		print_data("main", &data);
 	}
 	else
 		data = create_struct();
