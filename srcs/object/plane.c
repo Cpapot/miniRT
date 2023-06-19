@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 16:40:05 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 20:07:26 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane)
 {
-	double	scalar;
+	//double	scalar;
 
-	scalar = scalar_product(plane.normal_vector, camdir);
+	//scalar = scalar_product(plane.normal_vector, camdir);
 	if (plane.normal_vector.x < 0 && camdir.x > 0)
 		multiplying_vec(&plane.normal_vector, -1);
 	else if (plane.normal_vector.x > 0 && camdir.x > 0)

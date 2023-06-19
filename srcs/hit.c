@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 13:37:24 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 20:25:23 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int32_t	check_ray(t_ray camray, t_minirt_data data)
 	t_color		color_ratio;
 
 	info = find_close_object(camray, data);
-	if (info.type == -1)
+	if (info.type == -1 || info.t == -2)
 		return (ft_color(0, 0, 0, 0));
 	else if (info.type == SPHERE)
 	{

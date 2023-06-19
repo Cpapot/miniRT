@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 16:49:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 20:22:20 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ double	sphere_hited(t_ray ray, t_sphere sphere)
 		if (((-B - sqrt(delta)) / (2 * A)) > 0)
 			return ((-B - sqrt(delta)) / (2 * A));
 		else if (((-B + sqrt(delta)) / (2 * A)) > 0)
-			return ((-B + sqrt(delta)) / (2 * A));
+			return (-2);
 		else
 			return (-1);
 	}
@@ -64,7 +64,7 @@ int	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
 	while (index != count)
 	{
 		t = sphere_hited(camray, sphere_arr[index]);
-		if (tmp > t && t != -1)
+		if (tmp > t && (t != -1 || t == -2))
 		{
 			tmp = t;
 			id = index;
