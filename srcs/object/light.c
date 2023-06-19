@@ -6,24 +6,12 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 19:44:43 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 23:24:21 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
 #include "hit.h"
-double	check_shadow(t_vec_3 bounce_vec, t_point hitpoint, t_light light, t_minirt_data data);
-
-// double	ft_find_light(t_vec_3 normal, t_light light)
-// {
-// 	double	dot;
-
-// 	dot = scalar_product(normal, light.vector);
-// 	if (dot <= 0)
-// 		dot = 0;
-// 	return (dot);
-// }
 
 t_vec_3	bounce_vec(t_point hitpoint, t_light light)
 {
@@ -64,9 +52,12 @@ t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal
 	{
 		light = data.lights_arr[index];
 		ratio = check_intersection(light, hitpoint, normal);
-		result.r += light.color.r * ratio * 0.004 * light.brightness;
-		result.g += light.color.g * ratio * 0.004 * light.brightness;
-		result.b += light.color.b * ratio * 0.004 * light.brightness;
+		if (!data.option.shadow || check_shadow(hitpoint, light, &data))
+		{
+			result.r += light.color.r * ratio * 0.004 * light.brightness;
+			result.g += light.color.g * ratio * 0.004 * light.brightness;
+			result.b += light.color.b * ratio * 0.004 * light.brightness;
+		}
 		index++;
 	}
 	return (result);

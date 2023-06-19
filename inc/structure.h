@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 03:29:40 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 23:06:28 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct s_light			t_light;
 typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
 typedef struct s_cylinder		t_cylinder;
+typedef struct s_option			t_option;
+
+struct s_option
+{
+	int		shadow;
+};
 
 struct s_minirt_data
 {
@@ -45,6 +51,7 @@ struct s_minirt_data
 	t_plane			*plane_arr;
 	size_t			cy_nb;
 	t_cylinder		*cylinder_arr;
+	t_option		option;
 };
 
 struct	s_point

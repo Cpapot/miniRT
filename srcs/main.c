@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 13:59:45 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 23:13:59 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,21 @@
 #include "../inc/color.h"
 #include "../inc/key.h"
 
-t_camera	init_test_cam(void)
-{
-	t_camera	cam;
-
-	cam.origin.x = 0;
-	cam.origin.y = 1;
-	cam.origin.z = 0;
-	cam.vector = set_vec(1, 0, 0);
-	normalize_vec(&cam.vector);
-	cam.fov = 90.0;
-	return (cam);
-}
-
-
 /**/
 
 //on dois la set pour chaque camera
-void	set_minirt_data(t_minirt_data * data, t_camera cam)
+void	set_minirt_data(t_minirt_data * data, t_camera *cam)
 {
 	int		index;
 	t_plane	plane;
 
 	index = 0;
+	if (cam->vector.y == 0)
+		cam->vector.y = 0.0000001;
 	while (data->pl_nb != (size_t)index)
 	{
 		plane = data->plane_arr[index];
-		data->plane_arr[index].normal_vector = plane_normal(cam.vector, plane);
+		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
 		index++;
 	}
 }
@@ -55,7 +43,7 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 	int		y;
 
 	x = 0;
-	set_minirt_data(data, data->camera[0]);
+	set_minirt_data(data, &data->camera[0]);
 	while (x != win->xwinsize)
 	{
 		y = 0;
@@ -73,10 +61,9 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 
 bool	parsing(t_minirt_data *data_pt, char *file_name);
 
-void	print_data(char *msg, t_minirt_data *data);
-
 void	init_minirt_data(t_minirt_data * data)
 {
+	data->option.shadow = true;
 	data->sp_nb = 0;
 	data->pl_nb = 0;
 	data->cy_nb = 0;
@@ -98,10 +85,9 @@ int main(int ac, char **av)
 	{
 		if (parsing(&data, av[1]) == false)
 			return (1);
-		print_data("main", &data);
 	}
 	else
-		data = create_struct();
+		return (1);
 	ft_create_win(&win);
 	screen_loop(&win, &data);
 	info.data = data;

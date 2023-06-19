@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:00:33 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 13:56:44 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 23:10:21 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,42 +26,44 @@ int	deal_key(int key, t_general *info)
 
 	if (key == KB_UP)
 	{
-		movement = set_vec(0, 0.07, 0);
+		movement = set_vec(0, 0.10, 0);
 		info->data.camera[0].vector = adding_vec(info->data.camera[0].vector, movement);
 		normalize_vec(&info->data.camera[0].vector);
 	}
 	else if (key == KB_DOWN)
 	{
-		movement = set_vec(0, -0.07, 0);
+		movement = set_vec(0, -0.10, 0);
 		info->data.camera[0].vector = adding_vec(info->data.camera[0].vector, movement);
 		normalize_vec(&info->data.camera[0].vector);
 	}
 	else if (key == KB_LEFT)
 	{
-		movement = set_vec(-0.07, 0, 0);
+		movement = set_vec(-0.10, 0, 0);
 		info->data.camera[0].vector = adding_vec(info->data.camera[0].vector, movement);
 		normalize_vec(&info->data.camera[0].vector);
 	}
 	else if (key == KB_RIGHT)
 	{
-		movement = set_vec(0.07, 0, 0);
+		movement = set_vec(0.10, 0, 0);
 		info->data.camera[0].vector = adding_vec(info->data.camera[0].vector, movement);
 		normalize_vec(&info->data.camera[0].vector);
 	}
 	else if (key == KB_W)
 	{
 		movement = info->data.camera[0].vector;
-		info->data.camera[0].origin.x += movement.x * 0.1;
-		info->data.camera[0].origin.y += movement.y * 0.1;
-		info->data.camera[0].origin.z += movement.z * 0.1;
+		info->data.camera[0].origin.x += movement.x;
+		info->data.camera[0].origin.y += movement.y;
+		info->data.camera[0].origin.z += movement.z;
 	}
 	else if (key == KB_S)
 	{
 		movement = info->data.camera[0].vector;
-		info->data.camera[0].origin.x -= movement.x * 0.1;
-		info->data.camera[0].origin.y -= movement.y * 0.1;
-		info->data.camera[0].origin.z -= movement.z * 0.1;
+		info->data.camera[0].origin.x -= movement.x;
+		info->data.camera[0].origin.y -= movement.y;
+		info->data.camera[0].origin.z -= movement.z;
 	}
+	else if (key == KP_1)
+		info->data.option.shadow = !info->data.option.shadow ;
 	else if (key == KB_ESC || key == 17)
 		exit(0);
 	screen_loop(&info->win, &info->data);

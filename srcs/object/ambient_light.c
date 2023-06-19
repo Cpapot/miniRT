@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:52:51 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 19:26:17 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 18:15:48 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ void	ambient_lightning(t_color *ratio, t_minirt_data *data)
 	while(data->al_nb != index)
 	{
 		a_light = data->ambient_light[index];
-		a_light.ratio = 1;
-		ratio->r += a_light.color.r * 0.00025 * a_light.ratio;
-		ratio->g += a_light.color.g * 0.00025 * a_light.ratio;
-		ratio->b += a_light.color.b * 0.00025 * a_light.ratio;
+		ratio->r += a_light.color.r * 0.0009 * a_light.ratio;
+		ratio->g += a_light.color.g * 0.0009 * a_light.ratio;
+		ratio->b += a_light.color.b * 0.0009 * a_light.ratio;
 		index++;
 	}
 }

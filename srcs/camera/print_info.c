@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:29:07 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 03:35:15 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 23:11:46 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	print_info(t_minirt_data *data)
 	dir = data->camera[0].vector;
 	printf("position : (%f, %f, %f)\n", pos.x, pos.y, pos.z);
 	printf("direction : (%f, %f, %f)\n", dir.x, dir.y, dir.z);
+	printf("shadow : %d\n", data->option.shadow);
 	printf(GREEN"RENDER COMPLETE\n"WHITE);
 }
