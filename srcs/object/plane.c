@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 20:07:26 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 21:32:30 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane)
 {
-	//double	scalar;
+	double	scalar;
+	t_vec_3	tmp;
 
-	//scalar = scalar_product(plane.normal_vector, camdir);
-	if (plane.normal_vector.x < 0 && camdir.x > 0)
+	tmp.x = camdir.x - plane.normal_vector.x;
+	tmp.y = camdir.y - plane.normal_vector.y;
+	tmp.z = camdir.z - plane.normal_vector.z;
+	normalize_vec(&tmp);
+	normalize_vec(&camdir);
+	scalar = scalar_product(tmp, camdir);
+	if (scalar < 0)
 		multiplying_vec(&plane.normal_vector, -1);
-	else if (plane.normal_vector.x > 0 && camdir.x > 0)
-		multiplying_vec(&plane.normal_vector, -1);
-	if (plane.normal_vector.z < 0 && camdir.z > 0)
-		multiplying_vec(&plane.normal_vector, -1);
-	else if (plane.normal_vector.z > 0 && camdir.z > 0)
-		multiplying_vec(&plane.normal_vector, -1);
-	return(plane.normal_vector);
+	return (plane.normal_vector);
 }
+
 
 double	plane_hited(t_ray ray, t_plane plane)
 {
