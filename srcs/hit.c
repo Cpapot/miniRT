@@ -6,13 +6,15 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 19:01:58 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 13:37:24 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
 #include "../inc/color.h"
 #include "../inc/hit.h"
+
+double	check_shadow(t_vec_3 bounce_vec, t_point hitpoint, t_light light, t_minirt_data data);
 
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 {
