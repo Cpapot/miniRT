@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/15 18:35:12 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 16:49:59 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,14 @@ double	sphere_hited(t_ray ray, t_sphere sphere)
 	C = scalar_product(sphere_vect, sphere_vect) - pow((sphere.diameter) / 2.0, 2);
 	delta = pow(B, 2) - 4 * A * C;
 	if (delta >= 0)
-		return ((-B - sqrt(delta)) / (2 * A));
-	else
+	{
+		if (((-B - sqrt(delta)) / (2 * A)) > 0)
+			return ((-B - sqrt(delta)) / (2 * A));
+		else if (((-B + sqrt(delta)) / (2 * A)) > 0)
+			return ((-B + sqrt(delta)) / (2 * A));
+		else
+			return (-1);
+	}
 		return (-1);
 }
 

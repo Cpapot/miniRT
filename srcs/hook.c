@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:00:33 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 13:56:44 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 15:40:43 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ int	deal_key(int key, t_general *info)
 	else if (key == KB_W)
 	{
 		movement = info->data.camera[0].vector;
-		info->data.camera[0].origin.x += movement.x * 0.1;
-		info->data.camera[0].origin.y += movement.y * 0.1;
-		info->data.camera[0].origin.z += movement.z * 0.1;
+		info->data.camera[0].origin.x += movement.x * 0.2;
+		info->data.camera[0].origin.y += movement.y * 0.2;
+		info->data.camera[0].origin.z += movement.z * 0.2;
 	}
 	else if (key == KB_S)
 	{
 		movement = info->data.camera[0].vector;
-		info->data.camera[0].origin.x -= movement.x * 0.1;
-		info->data.camera[0].origin.y -= movement.y * 0.1;
-		info->data.camera[0].origin.z -= movement.z * 0.1;
+		info->data.camera[0].origin.x -= movement.x * 0.2;
+		info->data.camera[0].origin.y -= movement.y * 0.2;
+		info->data.camera[0].origin.z -= movement.z * 0.2;
 	}
 	else if (key == KB_ESC || key == 17)
 		exit(0);

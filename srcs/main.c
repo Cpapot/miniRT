@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 13:59:45 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 14:58:32 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,6 @@
 #include "../inc/camera.h"
 #include "../inc/color.h"
 #include "../inc/key.h"
-
-t_camera	init_test_cam(void)
-{
-	t_camera	cam;
-
-	cam.origin.x = 0;
-	cam.origin.y = 1;
-	cam.origin.z = 0;
-	cam.vector = set_vec(1, 0, 0);
-	normalize_vec(&cam.vector);
-	cam.fov = 90.0;
-	return (cam);
-}
-
 
 /**/
 
@@ -100,7 +86,7 @@ int main(int ac, char **av)
 			return (1);
 	}
 	else
-		data = create_struct();
+		return (1);
 	ft_create_win(&win);
 	screen_loop(&win, &data);
 	info.data = data;
