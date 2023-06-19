@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/14 16:41:22 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 18:56:30 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ typedef struct s_hitinfo
 	int		type;
 	void	*struct_info;
 }			t_hitinfo;
+
+void		ambient_lightning(t_color *ratio, t_minirt_data *data);
 
 #endif

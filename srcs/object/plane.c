@@ -6,11 +6,21 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/15 15:18:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 02:20:44 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane)
+{
+	double	scalar;
+
+	scalar = scalar_product(plane.normal_vector, camdir);
+	if (scalar < 0)
+		multiplying_vec(&plane.normal_vector, -1);
+	return(plane.normal_vector);
+}
 
 double	plane_hited(t_ray ray, t_plane plane)
 {
@@ -28,7 +38,7 @@ double	plane_hited(t_ray ray, t_plane plane)
 	if (t > 0)
 		return (t);
 	else
-		return (-1);
+		return(-1);
 }
 
 int	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)

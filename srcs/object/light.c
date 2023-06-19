@@ -6,11 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/16 15:58:12 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 19:44:43 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+#include "hit.h"
+double	check_shadow(t_vec_3 bounce_vec, t_point hitpoint, t_light light, t_minirt_data data);
 
 // double	ft_find_light(t_vec_3 normal, t_light light)
 // {
@@ -31,7 +34,7 @@ t_vec_3	bounce_vec(t_point hitpoint, t_light light)
 	result.z = light.coordinate.z - hitpoint.z;
 	return (result);
 }
-//scalaire entre la norme du cercle et le rayon rebondie
+
 double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 {
 	t_vec_3	bounce;
@@ -42,23 +45,29 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 	scalar = scalar_product(bounce, normal);
 	if (scalar < 0)
 		scalar = 0;
+	//scalar = check_shadow(bounce, hitpoint, light, data);
 	return (scalar);
 }
 
-double	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
+t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
 {
 	size_t	index;
+	t_color	result;
 	t_light	light;
-	double	result;
+	double	ratio;
 
-	result = 0;
+	result.r = 0;
+	result.g = 0;
+	result.b = 0;
 	index = 0;
 	while (data.lt_nb != index)
 	{
 		light = data.lights_arr[index];
-		result += check_intersection(light, hitpoint, normal);
+		ratio = check_intersection(light, hitpoint, normal);
+		result.r += light.color.r * ratio * 0.004 * light.brightness;
+		result.g += light.color.g * ratio * 0.004 * light.brightness;
+		result.b += light.color.b * ratio * 0.004 * light.brightness;
 		index++;
 	}
-	result = 1;
 	return (result);
 }

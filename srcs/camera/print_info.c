@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.h                                            :+:      :+:    :+:   */
+/*   print_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 15:06:53 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 02:20:59 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/17 03:29:07 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/17 03:35:15 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLANE_H
-# define PLANE_H
+#include "miniRT.h"
 
-double	plane_hited(t_ray ray, t_plane plane);
-int		find_near_plane(t_ray camray, size_t count, t_plane *plane_arr);
-t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane);
+void	print_info(t_minirt_data *data)
+{
+	t_point	pos;
+	t_vec_3	dir;
 
-#endif
+	pos = data->camera[0].origin;
+	dir = data->camera[0].vector;
+	printf("position : (%f, %f, %f)\n", pos.x, pos.y, pos.z);
+	printf("direction : (%f, %f, %f)\n", dir.x, dir.y, dir.z);
+	printf(GREEN"RENDER COMPLETE\n"WHITE);
+}

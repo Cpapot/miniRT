@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/16 16:38:41 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/17 03:29:40 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ struct	s_ray
 
 struct	s_color
 {
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	double	r;
+	double	g;
+	double	b;
 };
 
 struct	s_camera

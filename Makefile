@@ -26,6 +26,10 @@ SRCS		= object/light.c \
 			color.c \
 			hit.c \
 			object/sphere.c \
+			shadow.c \
+			hook.c \
+			camera/print_info.c \
+			object/ambient_light.c
 
 MLXSRC		=	libmlx.a
 
@@ -115,7 +119,9 @@ fclean:
 	@${RM} ${OBJS}
 	@${RM} ${OBJSDIR}
 	@${RM} ${NAME}
+	@echo "${RED}🗑  MLX cleanded"
 	@${MAKE} fclean --no-print-directory -C ${LIBFTDIR}
+	@${MAKE} clean --no-print-directory  --silent -C ${MLXDIR}
 
 re:
 	@${MAKE} --no-print-directory fclean

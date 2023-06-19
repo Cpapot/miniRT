@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/16 16:19:40 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 13:59:45 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /**/
 #include "../inc/camera.h"
 #include "../inc/color.h"
+#include "../inc/key.h"
 
 t_camera	init_test_cam(void)
 {
@@ -32,6 +33,21 @@ t_camera	init_test_cam(void)
 
 /**/
 
+//on dois la set pour chaque camera
+void	set_minirt_data(t_minirt_data * data, t_camera cam)
+{
+	int		index;
+	t_plane	plane;
+
+	index = 0;
+	while (data->pl_nb != (size_t)index)
+	{
+		plane = data->plane_arr[index];
+		data->plane_arr[index].normal_vector = plane_normal(cam.vector, plane);
+		index++;
+	}
+}
+
 void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 {
 	t_ray	camray;
@@ -39,6 +55,7 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 	int		y;
 
 	x = 0;
+	set_minirt_data(data, data->camera[0]);
 	while (x != win->xwinsize)
 	{
 		y = 0;
@@ -50,7 +67,8 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 		}
 		x++;
 	}
-	ft_printf(GREEN"RENDER COMPLETE\n"WHITE);
+	print_info(data);
+	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img, 0, 0);
 }
 
 bool	parsing(t_minirt_data *data_pt, char *file_name);
@@ -69,6 +87,7 @@ void	init_minirt_data(t_minirt_data * data)
 
 int main(int ac, char **av)
 {
+	t_general		info;
 	t_mlx_info		win;
 	(void)ac;
 	(void)av;
@@ -85,6 +104,9 @@ int main(int ac, char **av)
 		data = create_struct();
 	ft_create_win(&win);
 	screen_loop(&win, &data);
-	mlx_put_image_to_window(win.mlx_ptr, win.win_ptr, win.img, 0, 0);
+	info.data = data;
+	info.win = win;
+	mlx_hook(win.win_ptr, 17, 0, close_window, "close");
+	mlx_hook(win.win_ptr, 2, 1L << 0, deal_key, &info);
 	mlx_loop(win.mlx_ptr);
 }
