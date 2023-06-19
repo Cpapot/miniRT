@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 18:56:30 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 22:30:19 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ typedef struct s_hitinfo
 }			t_hitinfo;
 
 void		ambient_lightning(t_color *ratio, t_minirt_data *data);
+int			check_shadow(t_point hitpoint, t_light light, t_minirt_data *data);
+t_hitinfo	find_close_object(t_ray camray, t_minirt_data data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:00:33 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 21:40:50 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 23:10:21 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	deal_key(int key, t_general *info)
 		info->data.camera[0].origin.y -= movement.y;
 		info->data.camera[0].origin.z -= movement.z;
 	}
+	else if (key == KP_1)
+		info->data.option.shadow = !info->data.option.shadow ;
 	else if (key == KB_ESC || key == 17)
 		exit(0);
 	screen_loop(&info->win, &info->data);
