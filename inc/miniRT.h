@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:03:42 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 18:56:20 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 13:59:34 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <stdio.h>
 # include "sphere.h"
 # include "plane.h"
+
+int	close_window(void);
 
 t_minirt_data	create_struct();
 int32_t			check_ray(t_ray camray, t_minirt_data data);

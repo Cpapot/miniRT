@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/17 19:50:19 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/19 13:59:45 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,11 @@ int main(int ac, char **av)
 	}
 	else
 		data = create_struct();
-	data.lights_arr[0].brightness = 1;
-	data.lights_arr[1].brightness = 1;
 	ft_create_win(&win);
 	screen_loop(&win, &data);
 	info.data = data;
 	info.win = win;
+	mlx_hook(win.win_ptr, 17, 0, close_window, "close");
 	mlx_hook(win.win_ptr, 2, 1L << 0, deal_key, &info);
 	mlx_loop(win.mlx_ptr);
 }
