@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 23:13:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/20 22:45:53 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@
 #include "../inc/camera.h"
 #include "../inc/color.h"
 #include "../inc/key.h"
-
+#include "light.h"
 /**/
 
 //on dois la set pour chaque camera
-void	set_minirt_data(t_minirt_data * data, t_camera *cam)
+void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 {
 	int		index;
 	t_plane	plane;
 
 	index = 0;
+	normalize_vec(&cam->vector);
 	if (cam->vector.y == 0)
 		cam->vector.y = 0.0000001;
 	while (data->pl_nb != (size_t)index)
@@ -34,6 +35,7 @@ void	set_minirt_data(t_minirt_data * data, t_camera *cam)
 		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
 		index++;
 	}
+	delete_hidden_light(data, cam->origin);
 }
 
 void	screen_loop(t_mlx_info *win, t_minirt_data *data)
@@ -63,7 +65,7 @@ bool	parsing(t_minirt_data *data_pt, char *file_name);
 
 void	init_minirt_data(t_minirt_data * data)
 {
-	data->option.shadow = true;
+	data->option.shadow = false;
 	data->sp_nb = 0;
 	data->pl_nb = 0;
 	data->cy_nb = 0;
@@ -88,8 +90,6 @@ int main(int ac, char **av)
 		if (parsing(&data, av[1]) == false)
 			return (1);
 		print_data("main", &data);
-		suppress_light(data.lights_arr[0], &data);
-		print_data("\\\n\n\n\n\n\ndeuz", &data);
 	}
 	else
 		return (1);

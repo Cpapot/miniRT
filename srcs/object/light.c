@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 23:24:21 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/20 23:14:11 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,46 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 	scalar = scalar_product(bounce, normal);
 	if (scalar < 0)
 		scalar = 0;
-	//scalar = check_shadow(bounce, hitpoint, light, data);
 	return (scalar);
+}
+
+void	print_vector(t_vec_3 vector);
+
+void	delete_hidden_light(t_minirt_data *data, t_point point)
+{
+	size_t	index;
+	int		id;
+	double	t;
+	double	t_max;
+	t_ray	light_ray;
+
+	index = 0;
+	t = -1;
+	while (data->lt_nb != index)
+	{
+		t_max = 0;
+		light_ray.origin = point;
+		light_ray.direction.x = data->lights_arr[index].coordinate.x - point.x;
+		light_ray.direction.y = data->lights_arr[index].coordinate.y - point.y;
+		light_ray.direction.z = data->lights_arr[index].coordinate.z - point.z;
+		normalize_vec(&light_ray.direction);
+		if (light_ray.direction.x != 0)
+			t_max = (data->lights_arr[index].coordinate.x - point.x) / light_ray.direction.x;
+		else if (light_ray.direction.y != 0)
+			t_max = (data->lights_arr[index].coordinate.y - point.y) / light_ray.direction.y;
+		else if (light_ray.direction.z != 0)
+			t_max = (data->lights_arr[index].coordinate.z - point.z) / light_ray.direction.z;
+		id = find_near_plane(light_ray, data->pl_nb, data->plane_arr);
+		if (id != -1)
+			t = plane_hited(light_ray, data->plane_arr[id]);
+		if (id != -1 && t != -1 && t < t_max)
+		{
+			printf("light deleted :%ld\n", index);
+			index++;
+		}
+		else
+			index++;
+	}
 }
 
 t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
@@ -51,6 +89,9 @@ t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal
 	while (data.lt_nb != index)
 	{
 		light = data.lights_arr[index];
+		hitpoint.x = hitpoint.x + (normal.x * 0.0001);
+		hitpoint.y = hitpoint.y + (normal.y * 0.0001);
+		hitpoint.z = hitpoint.z + (normal.z * 0.0001);
 		ratio = check_intersection(light, hitpoint, normal);
 		if (!data.option.shadow || check_shadow(hitpoint, light, &data))
 		{
