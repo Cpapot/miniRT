@@ -35,6 +35,7 @@ bool	call_filling_ft(char **lines)
 	size_t nb = 0;
 	while (*tmp)
 	{
+		puts("la");
 		nb++;
 		i = 0;
 		while (ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
