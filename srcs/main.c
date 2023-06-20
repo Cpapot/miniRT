@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/20 15:59:13 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/20 22:45:53 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include "../inc/camera.h"
 #include "../inc/color.h"
 #include "../inc/key.h"
-
+#include "light.h"
 /**/
 
 //on dois la set pour chaque camera
-void	set_minirt_data(t_minirt_data * data, t_camera *cam)
+void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 {
 	int		index;
 	t_plane	plane;
@@ -35,6 +35,7 @@ void	set_minirt_data(t_minirt_data * data, t_camera *cam)
 		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
 		index++;
 	}
+	delete_hidden_light(data, cam->origin);
 }
 
 void	screen_loop(t_mlx_info *win, t_minirt_data *data)
@@ -87,7 +88,7 @@ int main(int ac, char **av)
 	{
 		if (parsing(&data, av[1]) == false)
 			return (1);
-		print_data("main", &data);
+		//print_data("main", &data);
 	}
 	else
 		return (1);

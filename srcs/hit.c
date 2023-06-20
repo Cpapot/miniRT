@@ -6,13 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/20 18:23:27 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/20 22:44:00 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "color.h"
 #include "hit.h"
+#include "light.h"
 
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 {
