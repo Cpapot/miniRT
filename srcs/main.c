@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/20 15:44:35 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/20 15:59:13 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	parsing(t_minirt_data *data_pt, char *file_name);
 
 void	init_minirt_data(t_minirt_data * data)
 {
-	data->option.shadow = true;
+	data->option.shadow = false;
 	data->sp_nb = 0;
 	data->pl_nb = 0;
 	data->cy_nb = 0;

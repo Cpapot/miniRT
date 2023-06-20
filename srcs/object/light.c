@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 23:24:21 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/20 18:25:36 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal
 	while (data.lt_nb != index)
 	{
 		light = data.lights_arr[index];
+		hitpoint.x = hitpoint.x + (normal.x * 0.0001);
+		hitpoint.y = hitpoint.y + (normal.y * 0.0001);
+		hitpoint.z = hitpoint.z + (normal.z * 0.0001);
 		ratio = check_intersection(light, hitpoint, normal);
 		if (!data.option.shadow || check_shadow(hitpoint, light, &data))
 		{
