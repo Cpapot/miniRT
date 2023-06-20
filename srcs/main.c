@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 23:13:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/20 15:44:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	set_minirt_data(t_minirt_data * data, t_camera *cam)
 	t_plane	plane;
 
 	index = 0;
+	normalize_vec(&cam->vector);
 	if (cam->vector.y == 0)
 		cam->vector.y = 0.0000001;
 	while (data->pl_nb != (size_t)index)
