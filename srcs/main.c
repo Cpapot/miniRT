@@ -74,7 +74,8 @@ void	init_minirt_data(t_minirt_data * data)
 	data->ca_nb = 0;
 }
 
-void print_data(char *msg, t_minirt_data *data);
+void	*suppress_light(t_light light, t_minirt_data *data_pt);
+void	print_data(char *msg, t_minirt_data *data);
 int main(int ac, char **av)
 {
 	t_general		info;
@@ -88,7 +89,7 @@ int main(int ac, char **av)
 	{
 		if (parsing(&data, av[1]) == false)
 			return (1);
-		//print_data("main", &data);
+		print_data("main", &data);
 	}
 	else
 		return (1);

@@ -19,6 +19,7 @@ SRCS		= object/light.c \
 			utils/minirt_data.c \
 			utils/vec3_utils.c \
 			utils/mlx_utils.c \
+			utils/data_utils.c \
 			object/plane.c \
 			debug.c \
 			testfiles.c \
@@ -29,7 +30,7 @@ SRCS		= object/light.c \
 			shadow.c \
 			hook.c \
 			camera/print_info.c \
-			object/ambient_light.c
+			object/ambient_light.c \
 
 MLXSRC		=	libmlx.a
 
