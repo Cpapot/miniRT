@@ -162,8 +162,8 @@ bool	ft_atovec_on(char *line, t_vec_3 *dst)
 	_go_to_next_float(&line);
 	if (ft_atod_on(line, &dst->z) == false)
 		return (false);
-	if (dst->x > 1 || dst->y > 1 || dst->z > 1)
-		return (false);
+	//if (dst->x > 1 || dst->y > 1 || dst->z > 1)
+		//return (false);
 	print_vector(*dst);
 	return (true);
 }
