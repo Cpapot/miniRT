@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/20 18:25:36 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/20 19:40:26 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,25 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 	scalar = scalar_product(bounce, normal);
 	if (scalar < 0)
 		scalar = 0;
-	//scalar = check_shadow(bounce, hitpoint, light, data);
 	return (scalar);
+}
+
+void	delete_light(t_minirt_data *data, t_point point)
+{
+	size_t	index;
+	double	t;
+	double	t_max;
+	t_vec_3	light_vec;
+
+	index = 0;
+	while (data->lt_nb != index)
+	{
+
+		if ()
+			printf("light deleted :%d\n", index);
+		else
+			index++;
+	}
 }
 
 t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
