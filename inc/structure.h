@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 14:53:09 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/21 15:15:13 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ struct	s_plane
 struct	s_cone
 {
 	t_point	coordinate;
-	t_vec_3	normal_vector;
+	t_vec_3	vector;
 	double	diameter;
 	double	height;
 	t_color	color;

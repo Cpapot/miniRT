@@ -1,178 +1,27 @@
 #include "../inc/miniRT.h"
 
-t_light		init_light()
+t_cone	init_cone()
 {
-	t_light	light;
+	t_cone	result;
 
-	light.coordinate.x = -5.5;
-	light.coordinate.y = 0;
-	light.coordinate.z = 0;
-	return (light);
-}
-
-t_sphere	init_sphere()
-{
-	t_sphere	sphere;
-
-	sphere.diameter = 2;
-	sphere.origin.x = 0;
-	sphere.origin.y = 0;
-	sphere.origin.z = -5;
-	sphere.color.r = 255;
-	sphere.color.g = 0;
-	sphere.color.b = 0;
-	return (sphere);
-}
-
-t_sphere	init_sphere2()
-{
-	t_sphere	sphere;
-
-	sphere.diameter = 5;
-	sphere.origin.x = 0;
-	sphere.origin.y = 0;
-	sphere.origin.z = 3;
-	sphere.color.r = 50;
-	sphere.color.g = 0;
-	sphere.color.b = 150;
-	return (sphere);
-}
-
-t_sphere	init_sphere3()
-{
-	t_sphere	sphere;
-
-	sphere.diameter = 5;
-	sphere.origin.x = 0;
-	sphere.origin.y = 0;
-	sphere.origin.z = -3;
-	sphere.color.r = 0;
-	sphere.color.g = 177;
-	sphere.color.b = 0;
-	return (sphere);
-}
-
-t_sphere	init_sphere4()
-{
-	t_sphere	sphere;
-
-	sphere.diameter = 6;
-	sphere.origin.x = 6;
-	sphere.origin.y = -10;
-	sphere.origin.z = 7;
-	sphere.color.r = 255;
-	sphere.color.g = 0;
-	sphere.color.b = 0;
-	return (sphere);
-}
-
-t_plane		init_plane()
-{
-	t_plane	plane;
-
-	plane.coordinate.x = 0;
-	plane.coordinate.y = 0;
-	plane.coordinate.z = 0;
-	plane.normal_vector.x = 0;
-	plane.normal_vector.y = 0;
-	plane.normal_vector.z = 1;
-	normalize_vec(&plane.normal_vector);
-	plane.color.r = 255;
-	plane.color.g = 0;
-	plane.color.b = 0;
-	return (plane);
-}
-
-t_plane		init_plane2()
-{
-	t_plane	plane;
-
-	plane.coordinate.x = 0;
-	plane.coordinate.y = 4;
-	plane.coordinate.z = 0;
-	plane.normal_vector.x = 0;
-	plane.normal_vector.y = -1;
-	plane.normal_vector.z = 0;
-	normalize_vec(&plane.normal_vector);
-	plane.color.r = 235;
-	plane.color.g = 210;
-	plane.color.b = 180;
-	return (plane);
-}
-
-t_plane		init_plane3()
-{
-	t_plane	plane;
-
-	plane.coordinate.x = 4;
-	plane.coordinate.y = 0;
-	plane.coordinate.z = 0;
-	plane.normal_vector.x = -1;
-	plane.normal_vector.y = 0;
-	plane.normal_vector.z = 0;
-	normalize_vec(&plane.normal_vector);
-	plane.color.r = 244;
-	plane.color.g = 152;
-	plane.color.b = 156;
-	return (plane);
-}
-
-t_plane		init_plane4()
-{
-	t_plane	plane;
-
-	plane.coordinate.x = 0;
-	plane.coordinate.y = 0;
-	plane.coordinate.z = 4;
-	plane.normal_vector.x = 0;
-	plane.normal_vector.y = 0;
-	plane.normal_vector.z = -1;
-	normalize_vec(&plane.normal_vector);
-	plane.color.r = 218;
-	plane.color.g = 196;
-	plane.color.b = 247;
-	return (plane);
-}
-
-t_plane		init_plane5()
-{
-	t_plane	plane;
-
-	plane.coordinate.x = 0;
-	plane.coordinate.y = 0;
-	plane.coordinate.z = -4;
-	plane.normal_vector.x = 0;
-	plane.normal_vector.y = 0;
-	plane.normal_vector.z = 1;
-	normalize_vec(&plane.normal_vector);
-	plane.color.r = 214;
-	plane.color.g = 246;
-	plane.color.b = 221;
-	return (plane);
+	result.diameter = 2;
+	result.color.r = 255;
+	result.color.g = 50;
+	result.color.b = 50;
+	result.coordinate.x = 0;
+	result.coordinate.y = 0;
+	result.coordinate.z = 0;
+	result.vector = set_vec(1,1,0);
+	result.height = 1;
+	return (result);
 }
 
 t_minirt_data	create_struct()
 {
 	t_minirt_data	test;
 
-	test.sp_nb = 0;
-	test.sphere_arr = malloc(sizeof(t_sphere) * 4);
-	test.sphere_arr[0] = init_sphere();
-	test.sphere_arr[1] = init_sphere2();
-	test.sphere_arr[2] = init_sphere3();
-	test.sphere_arr[3] = init_sphere4();
-
-	test.pl_nb = 1;
-	test.plane_arr = malloc(sizeof(t_plane) * 5);
-	test.plane_arr[0] = init_plane();
-	test.plane_arr[1] = init_plane2();
-	test.plane_arr[2] = init_plane3();
-	test.plane_arr[3] = init_plane4();
-	test.plane_arr[4] = init_plane5();
-
-	test.lt_nb = 1;
-	test.lights_arr = malloc(sizeof(t_light));
-	test.lights_arr[0] = init_light();
-
+	test.co_nb = 1;
+	test.cone_arr = malloc(sizeof(t_cone));
+	test.cone_arr[0] = init_cone();
 	return (test);
 }

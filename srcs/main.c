@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 13:26:19 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:20:26 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,13 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 }
 
 bool	parsing(t_minirt_data *data_pt, char *file_name);
+t_minirt_data	create_struct();
 
 void	init_minirt_data(t_minirt_data * data)
 {
+	t_minirt_data tmp;
+
+	tmp = create_struct();
 	data->option.shadow = false;
 	data->sp_nb = 0;
 	data->pl_nb = 0;
@@ -107,10 +111,13 @@ void	init_minirt_data(t_minirt_data * data)
 	data->lt_nb = 0;
 	data->al_nb = 0;
 	data->ca_nb = 0;
+	data->co_nb = tmp.co_nb;
+	data->cone_arr = tmp.cone_arr;
 }
 
 void	*suppress_light(t_light light, t_minirt_data *data_pt);
 void	print_data(char *msg, t_minirt_data *data);
+
 int main(int ac, char **av)
 {
 	t_general		info;
