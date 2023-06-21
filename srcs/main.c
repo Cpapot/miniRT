@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/20 22:45:53 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/21 13:26:19 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,40 @@
 /**/
 
 //on dois la set pour chaque camera
+
+void	reset_light(t_minirt_data *data)
+{
+	static t_light			first_data[LIGHT_BUFF];
+	int						i;
+	static int				index = 0;
+	static int				lt_nb;
+
+	i = 0;
+	if (index == 0)
+	{
+		lt_nb = data->lt_nb;
+		while (i != lt_nb && i != LIGHT_BUFF)
+		{
+			first_data[i] = data->lights_arr[i];
+			i++;
+		}
+	}
+	else
+	{
+		data->lt_nb = lt_nb;
+		while (i != lt_nb && i != LIGHT_BUFF)
+		{
+			data->lights_arr[i] = first_data[i];
+			i++;
+		}
+	}
+	index++;
+}
+
 void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 {
-	int		index;
-	t_plane	plane;
+	int						index;
+	t_plane					plane;
 
 	index = 0;
 	normalize_vec(&cam->vector);
@@ -35,6 +65,7 @@ void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
 		index++;
 	}
+	reset_light(data);
 	delete_hidden_light(data, cam->origin);
 }
 
@@ -46,6 +77,7 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 
 	x = 0;
 	set_minirt_data(data, &data->camera[0]);
+	ft_printf(GREEN"Loading scenes ["YELLOW);
 	while (x != win->xwinsize)
 	{
 		y = 0;
@@ -56,7 +88,10 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 			y++;
 		}
 		x++;
+		if (x % 25 == 0)
+			ft_printf("■");
 	}
+	ft_printf(GREEN" ]\n"WHITE);
 	print_info(data);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img, 0, 0);
 }

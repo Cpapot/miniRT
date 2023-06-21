@@ -6,12 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/20 23:14:11 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/21 12:56:32 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "hit.h"
+
+void	*suppress_light(t_light light, t_minirt_data *data_pt);
 
 t_vec_3	bounce_vec(t_point hitpoint, t_light light)
 {
@@ -35,8 +37,6 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 		scalar = 0;
 	return (scalar);
 }
-
-void	print_vector(t_vec_3 vector);
 
 void	delete_hidden_light(t_minirt_data *data, t_point point)
 {
@@ -66,10 +66,7 @@ void	delete_hidden_light(t_minirt_data *data, t_point point)
 		if (id != -1)
 			t = plane_hited(light_ray, data->plane_arr[id]);
 		if (id != -1 && t != -1 && t < t_max)
-		{
-			printf("light deleted :%ld\n", index);
-			index++;
-		}
+			suppress_light(data->lights_arr[index], data);
 		else
 			index++;
 	}
