@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 13:07:03 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/21 13:26:19 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 
 	x = 0;
 	set_minirt_data(data, &data->camera[0]);
+	ft_printf(GREEN"Loading scenes ["YELLOW);
 	while (x != win->xwinsize)
 	{
 		y = 0;
@@ -87,7 +88,10 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 			y++;
 		}
 		x++;
+		if (x % 25 == 0)
+			ft_printf("■");
 	}
+	ft_printf(GREEN" ]\n"WHITE);
 	print_info(data);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img, 0, 0);
 }
