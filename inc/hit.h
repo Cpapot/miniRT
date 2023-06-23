@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 22:30:19 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/21 16:27:05 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ enum	e_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 };
 
 typedef struct s_hitinfo

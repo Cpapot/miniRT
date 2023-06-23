@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                           :+:      :+:    :+:   */
+/*   cone.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 15:02:22 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/13 15:42:56 by cpapot           ###   ########.fr       */
+/*   Created: 2023/06/21 16:23:07 by cpapot            #+#    #+#             */
+/*   Updated: 2023/06/21 17:14:20 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
-#include "../inc/color.h"
+#ifndef CONE_H
 
-int32_t	ft_color(int r, int g, int b, int T)
-{
-	if (r > 255)
-		r = 255;
-	if (g > 255)
-		g = 255;
-	if (b > 255)
-		b = 255;
-	return (T << 24 | r << 16 | g << 8 | b << 0);
-}
+# define CONE_H
+# include "structure.h"
 
-t_color	int_to_rgb(int32_t color)
-{
-	t_color	result;
+double		cone_hitted(t_ray camray, t_cone cone);
+int			find_near_cone(t_ray camray, size_t count, t_cone *cone_arr);
+t_vec_3		cone_normal(t_ray camray, double t, t_cone cone);
 
-	result.r = (color >> 16) & 0xFF;
-	result.g = (color >> 8) & 0xFF;
-	result.b = color & 0xFF;
-	return(result);
-}
+#endif

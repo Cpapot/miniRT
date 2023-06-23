@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 13:26:19 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/23 16:47:30 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,13 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 		y = 0;
 		while (y != win->ywinsize)
 		{
-			camray = find_camray(data->camera[0], x, y);
-			my_mlx_pixel_put(win, x, y, check_ray(camray, *data));
+			if (data->option.anti_aliasing == false)
+			{
+				camray = find_camray(data->camera[0], x, y);
+				my_mlx_pixel_put(win, x, y, check_ray(camray, *data));
+			}
+			else
+				my_mlx_pixel_put(win, x, y, anti_aliasing(data, x, y, data->camera[0]));
 			y++;
 		}
 		x++;
@@ -97,20 +102,28 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 }
 
 bool	parsing(t_minirt_data *data_pt, char *file_name);
+t_minirt_data	create_struct();
 
 void	init_minirt_data(t_minirt_data * data)
 {
+	t_minirt_data tmp;
+
+	tmp = create_struct();
 	data->option.shadow = false;
+	data->option.anti_aliasing = false;
 	data->sp_nb = 0;
 	data->pl_nb = 0;
 	data->cy_nb = 0;
 	data->lt_nb = 0;
 	data->al_nb = 0;
 	data->ca_nb = 0;
+	data->co_nb = tmp.co_nb;
+	data->cone_arr = tmp.cone_arr;
 }
 
 void	*suppress_light(t_light light, t_minirt_data *data_pt);
 void	print_data(char *msg, t_minirt_data *data);
+
 int main(int ac, char **av)
 {
 	t_general		info;

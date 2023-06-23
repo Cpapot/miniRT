@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/20 22:44:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:15:36 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "color.h"
 #include "hit.h"
 #include "light.h"
+#include "cone.h"
 
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 {
@@ -36,12 +37,20 @@ t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 		info.struct_info = &data.plane_arr[tmp];
 		info.t = plane_hited(camray, data.plane_arr[tmp]);
 	}
+	tmp = find_near_cone(camray, data.co_nb, data.cone_arr);
+	if (tmp != -1 && info.t > cone_hitted(camray, data.cone_arr[tmp]))
+	{
+		info.type = CONE;
+		info.struct_info = &data.cone_arr[tmp];
+		info.t = cone_hitted(camray, data.cone_arr[tmp]);
+	}
 	return (info);
 }
 
 int32_t	check_ray(t_ray camray, t_minirt_data data)
 {
 	t_hitinfo	info;
+	t_cone		*co;
 	t_plane		*pl;
 	t_sphere	*sp;
 	t_color		color_ratio;
@@ -66,6 +75,15 @@ int32_t	check_ray(t_ray camray, t_minirt_data data)
 		ambient_lightning(&color_ratio, &data);
 		return (ft_color(pl->color.r * color_ratio.r, pl->color.g * \
 		color_ratio.g, pl->color.b * color_ratio.b, 0));
+	}
+	else if (info.type == CONE)
+	{
+		co = (t_cone *)info.struct_info;
+		color_ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+		cone_normal(camray, info.t, *(t_cone *)info.struct_info));
+		ambient_lightning(&color_ratio, &data);
+		return (ft_color(co->color.r * color_ratio.r, co->color.g * \
+		color_ratio.g, co->color.b * color_ratio.b, 0));
 	}
 	return (ft_color(0, 0, 0, 0));
 }
