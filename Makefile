@@ -30,6 +30,7 @@ SRCS		= object/light.c \
 			shadow.c \
 			hook.c \
 			camera/print_info.c \
+			camera/anti_aliasing.c \
 			object/ambient_light.c \
 			object/cone.c
 

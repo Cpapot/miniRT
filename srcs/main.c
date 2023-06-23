@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 17:20:26 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/23 16:47:30 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,13 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 		y = 0;
 		while (y != win->ywinsize)
 		{
-			camray = find_camray(data->camera[0], x, y);
-			my_mlx_pixel_put(win, x, y, check_ray(camray, *data));
+			if (data->option.anti_aliasing == false)
+			{
+				camray = find_camray(data->camera[0], x, y);
+				my_mlx_pixel_put(win, x, y, check_ray(camray, *data));
+			}
+			else
+				my_mlx_pixel_put(win, x, y, anti_aliasing(data, x, y, data->camera[0]));
 			y++;
 		}
 		x++;
@@ -105,6 +110,7 @@ void	init_minirt_data(t_minirt_data * data)
 
 	tmp = create_struct();
 	data->option.shadow = false;
+	data->option.anti_aliasing = false;
 	data->sp_nb = 0;
 	data->pl_nb = 0;
 	data->cy_nb = 0;
