@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/23 16:18:20 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/24 17:35:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
 typedef struct s_cylinder		t_cylinder;
 typedef struct s_option			t_option;
-typedef struct	s_cone			t_cone;
+typedef struct s_cone			t_cone;
 
 struct s_option
 {
 	int		shadow;
 	int		anti_aliasing;
+	size_t	cam_id;
 };
 
 struct s_minirt_data
