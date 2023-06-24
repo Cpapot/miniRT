@@ -20,7 +20,7 @@ t_minirt_data	create_struct()
 {
 	t_minirt_data	test;
 
-	test.co_nb = 0;
+	test.co_nb = 1;
 	test.cone_arr = malloc(sizeof(t_cone));
 	test.cone_arr[0] = init_cone();
 	return (test);

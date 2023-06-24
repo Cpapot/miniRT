@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 17:28:33 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/24 17:25:16 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ double	cone_hitted(t_ray camray, t_cone cone)
 	double	delta;
 	t_vec_3	vec;
 
-	cos = catan((cone.diameter/2)/ cone.height);
+	cos = atan((cone.diameter / 2) / cone.height);
+	cos = pow(cos, 2);
 	vec.x = camray.origin.x - cone.coordinate.x;
 	vec.y = camray.origin.y - cone.coordinate.y;
 	vec.z = camray.origin.z - cone.coordinate.z;
@@ -80,4 +81,17 @@ int	find_near_cone(t_ray camray, size_t count, t_cone *cone_arr)
 		index++;
 	}
 	return (id);
+}
+
+int32_t	render_cone(t_hitinfo info, t_ray camray, t_minirt_data data)
+{
+	t_cone		*co;
+	t_color		ratio;
+
+	co = (t_cone *)info.struct_info;
+	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+	cone_normal(camray, info.t, *(t_cone *)info.struct_info));
+	ambient_lightning(&ratio, &data);
+	return (ft_color(co->color.r * ratio.r, co->color.g * \
+	ratio.g, co->color.b * ratio.b, 0));
 }

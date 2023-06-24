@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 23:01:50 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/24 17:20:41 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ double	plane_hited(t_ray ray, t_plane plane)
 	if (t > 0)
 		return (t);
 	else
-		return(-1);
+		return (-1);
 }
 
 int	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
@@ -72,17 +72,15 @@ int	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 	return (id);
 }
 
-/*t_plane	*dupe_plane(size_t *size, t_plane *plane_arr)
+int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
-	t_plane *result;
-	int		index;
+	t_plane	*pl;
+	t_color	ratio;
 
-	*size = *size * 2;
-	result = malloc(sizeof(t_plane) * *size);
-	if (result == NULL)
-		return (NULL);
-	while (index != size)
-	{
-		index++;
-	}
-}*/
+	pl = (t_plane *)info.struct_info;
+	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+	pl->normal_vector);
+	ambient_lightning(&ratio, &data);
+	return (ft_color(pl->color.r * ratio.r, pl->color.g * \
+	ratio.g, pl->color.b * ratio.b, 0));
+}

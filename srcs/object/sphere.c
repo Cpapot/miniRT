@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/19 20:22:20 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/24 16:36:56 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,17 @@ int	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
 		index++;
 	}
 	return (id);
+}
+
+int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data)
+{
+	t_sphere	*sp;
+	t_color		ratio;
+
+	sp = (t_sphere *)info.struct_info;
+	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+	sphere_normal(camray, info.t, sp->origin));
+	ambient_lightning(&ratio, &data);
+	return (ft_color(sp->color.r * ratio.r, sp->color.g * \
+	ratio.g, sp->color.b * ratio.b, 0));
 }
