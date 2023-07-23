@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 17:26:28 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/23 16:23:44 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "hit.h"
 #include "light.h"
 #include "cone.h"
+#include "cylinder.h"
 
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 {
@@ -44,6 +45,13 @@ t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 		info.struct_info = &data.cone_arr[tmp];
 		info.t = cone_hitted(camray, data.cone_arr[tmp]);
 	}
+	tmp = find_near_cylinder(camray, data.cy_nb, data.cylinder_arr);
+	if (tmp != -1 && info.t > cylinder_hitted(camray, data.cylinder_arr[tmp]))
+	{
+		info.type = CYLINDER;
+		info.struct_info = &data.cylinder_arr[tmp];
+		info.t = cylinder_hitted(camray, data.cylinder_arr[tmp]);
+	}
 	return (info);
 }
 
@@ -60,5 +68,7 @@ int32_t	check_ray(t_ray camray, t_minirt_data data)
 		return (render_plane(info, camray, data));
 	else if (info.type == CONE)
 		return (render_cone(info, camray, data));
+	else if (info.type == CYLINDER)
+		return (render_cylinder(info, camray, data));
 	return (ft_color(0, 0, 0, 0));
 }

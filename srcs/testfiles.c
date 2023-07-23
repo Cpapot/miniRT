@@ -4,15 +4,15 @@ t_cone	init_cone()
 {
 	t_cone	result;
 
-	result.diameter = 4;
+	result.diameter = 8;
 	result.color.r = 255;
 	result.color.g = 50;
 	result.color.b = 50;
 	result.coordinate.x = -3;
-	result.coordinate.y = -2;
-	result.coordinate.z = -4;
+	result.coordinate.y = 0;
+	result.coordinate.z = 0;
 	result.vector = set_vec(0,1,0);
-	result.height = 2;
+	result.height = 4;
 	return (result);
 }
 

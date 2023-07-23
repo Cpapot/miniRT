@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.h                                              :+:      :+:    :+:   */
+/*   cylinder.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/23 16:19:44 by cpapot           ###   ########.fr       */
+/*   Created: 2023/07/23 16:18:04 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/23 16:25:33 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HIT_H
-# define HIT_H
+#ifndef CYLINDER_H
 
-enum	e_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	CONE
-};
+# define CYLINDER_H
+# include "structure.h"
 
-void		ambient_lightning(t_color *ratio, t_minirt_data *data);
-int			check_shadow(t_point hitpoint, t_light light, t_minirt_data *data);
-t_hitinfo	find_close_object(t_ray camray, t_minirt_data data);
+t_vec_3		cylinder_normal(t_ray camray);
+double		cylinder_hitted(t_ray camray, t_cylinder cyl);
+int			find_near_cylinder(t_ray camray, size_t count, t_cylinder *cyl_arr);
+int32_t		render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data);
 
 #endif

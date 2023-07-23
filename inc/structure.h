@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 17:35:35 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/23 16:19:55 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,12 @@ struct	s_cylinder
 	double	height;
 	t_color	color;
 };
+
+typedef struct s_hitinfo
+{
+	double	t;
+	int		type;
+	void	*struct_info;
+}			t_hitinfo;
 
 #endif

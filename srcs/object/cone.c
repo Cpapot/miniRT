@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/22 16:09:15 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/23 15:45:01 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ double	cone_hitted(t_ray camray, t_cone cone)
 	double	t;
 	double	cosa;
 	double	delta;
-	t_point	hitpoint;
+	//t_point	hitpoint;
 	t_vec_3	vec;
 
 	cosa = acos((cone.diameter / 2) / sqrtf((cone.diameter / 2) * (cone.diameter / 2) + cone.height * cone.height));
@@ -55,12 +55,10 @@ double	cone_hitted(t_ray camray, t_cone cone)
 		t = (-B + delta) / (2.0f * A);
 	if (t < 0)
 		return (-1);
-	hitpoint = hit_coord(t, camray);
-	vec.x = hitpoint.x;
-	vec.y = hitpoint.y;
-	vec.z = hitpoint.z;
+	/*hitpoint = hit_coord(t, camray);
+	vec = set_vec(hitpoint.x, hitpoint.y, hitpoint.z);
 	if (scalar_product(vec, cone.vector) < 0 || scalar_product(vec, cone.vector) > cone.height)
-		return (-1);
+		return (-1);*/
 	return (t);
 }
 
