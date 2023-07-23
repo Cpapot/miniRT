@@ -32,7 +32,8 @@ SRCS		= object/light.c \
 			camera/print_info.c \
 			camera/anti_aliasing.c \
 			object/ambient_light.c \
-			object/cone.c
+			object/cone.c \
+			object/cylinder.c
 
 MLXSRC		=	libmlx.a
 
@@ -85,7 +86,7 @@ AR			=	ar rc
 
 FLAGS		=	-lX11 -lXext -L$(MLXDIR) -lm
 
-CFLAGS		=	-Wall -Wextra -O3 -g3
+CFLAGS		=	-Wall -Wextra -Werror -O3 -g3
 
 CC			=	cc
 

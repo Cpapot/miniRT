@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/23 16:47:30 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/24 17:50:08 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 	int		y;
 
 	x = 0;
-	set_minirt_data(data, &data->camera[0]);
+	set_minirt_data(data, &data->camera[data->option.cam_id]);
 	ft_printf(GREEN"Loading scenes ["YELLOW);
 	while (x != win->xwinsize)
 	{
@@ -85,11 +85,11 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 		{
 			if (data->option.anti_aliasing == false)
 			{
-				camray = find_camray(data->camera[0], x, y);
+				camray = find_camray(data->camera[data->option.cam_id], x, y);
 				my_mlx_pixel_put(win, x, y, check_ray(camray, *data));
 			}
 			else
-				my_mlx_pixel_put(win, x, y, anti_aliasing(data, x, y, data->camera[0]));
+				my_mlx_pixel_put(win, x, y, anti_aliasing(data, x, y, data->camera[data->option.cam_id]));
 			y++;
 		}
 		x++;
@@ -109,6 +109,7 @@ void	init_minirt_data(t_minirt_data * data)
 	t_minirt_data tmp;
 
 	tmp = create_struct();
+	data->option.cam_id = 0;
 	data->option.shadow = false;
 	data->option.anti_aliasing = false;
 	data->sp_nb = 0;

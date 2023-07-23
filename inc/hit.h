@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 16:27:05 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/23 16:19:44 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ enum	e_type
 	CYLINDER,
 	CONE
 };
-
-typedef struct s_hitinfo
-{
-	double	t;
-	int		type;
-	void	*struct_info;
-}			t_hitinfo;
 
 void		ambient_lightning(t_color *ratio, t_minirt_data *data);
 int			check_shadow(t_point hitpoint, t_light light, t_minirt_data *data);

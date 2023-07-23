@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.h                                           :+:      :+:    :+:   */
+/*   cylinder.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 13:06:01 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 16:50:36 by cpapot           ###   ########.fr       */
+/*   Created: 2023/07/23 16:18:04 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/23 16:25:33 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	SPHERE_H
-# define SPHERE_H
+#ifndef CYLINDER_H
 
-#include "hit.h"
-#include "color.h"
-#include "light.h"
+# define CYLINDER_H
+# include "structure.h"
 
-t_point	find_sphere_hit_coord(double dot, t_ray ray);
-double	sphere_hited(t_ray ray, t_sphere sphere);
-int		find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr);
-t_vec_3	sphere_normal(t_ray camray, double t, t_point center);
-int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data);
+t_vec_3		cylinder_normal(t_ray camray);
+double		cylinder_hitted(t_ray camray, t_cylinder cyl);
+int			find_near_cylinder(t_ray camray, size_t count, t_cylinder *cyl_arr);
+int32_t		render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data);
 
 #endif

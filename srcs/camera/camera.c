@@ -6,13 +6,12 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 14:56:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/23 17:22:12 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/06/24 17:50:51 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/miniRT.h"
 
-//le mapping permet de passer dans une fenetre 16:9 d'une coordonnée (0, 0) (en haut a gauche) a (-1.77, 1)
 static double	mapping_Xcoord(int pixel_pos, double fov, int index)
 {
 	double	result;
