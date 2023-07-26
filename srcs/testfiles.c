@@ -4,11 +4,11 @@ t_cone	init_cone()
 {
 	t_cone	result;
 
-	result.diameter = 8;
+	result.diameter = 4;
 	result.color.r = 255;
 	result.color.g = 50;
 	result.color.b = 50;
-	result.coordinate.x = -3;
+	result.coordinate.x = 0;
 	result.coordinate.y = 0;
 	result.coordinate.z = 0;
 	result.vector = set_vec(0,1,0);

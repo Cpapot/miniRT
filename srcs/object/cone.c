@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/23 15:45:01 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/26 19:56:33 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,28 @@ double	cone_hitted(t_ray camray, t_cone cone)
 	double	B;
 	double	C;
 	double	t;
+	t_vec_3	vec;
+	double	p1;
+	double	p2;
 	double	cosa;
 	double	delta;
-	//t_point	hitpoint;
-	t_vec_3	vec;
+	t_point	hitpoint;
 
-	cosa = acos((cone.diameter / 2) / sqrtf((cone.diameter / 2) * (cone.diameter / 2) + cone.height * cone.height));
-	vec = set_vec(camray.origin.x - cone.coordinate.x, camray.origin.y - cone.coordinate.y, camray.origin.z - cone.coordinate.z);
-	A = scalar_product(camray.direction, cone.vector) * scalar_product(camray.direction, cone.vector) - cosa * cosa;
-	B = 2.0f * (scalar_product(camray.direction, cone.vector) * scalar_product(vec, cone.vector) - scalar_product(camray.direction, vec) * cosa * cosa);
-	C = scalar_product(vec, cone.vector) * scalar_product(vec, cone.vector) - scalar_product(vec, vec) * cosa * cosa;
+	normalize_vec(&cone.vector);
+	cosa = pow(cone.diameter / 2, 2) / pow(cone.height, 2);
+
+	vec.x = camray.origin.x - cone.coordinate.x;
+	vec.y = camray.origin.y - cone.coordinate.y;
+	vec.z = camray.origin.z - cone.coordinate.z;
+
+	p1 = scalar_product(camray.direction, cone.vector);
+	p2 = scalar_product(vec, cone.vector);
+
+
+	A = scalar_product(camray.direction, camray.direction) - cosa * pow(p1, 2) - pow(p1, 2);
+	B = 2 * (scalar_product(camray.direction, vec) - cosa * p1 * p2 - p1 * p2);
+	C = scalar_product(vec, vec) - cosa * pow(p2, 2) - pow(p2, 2);
+
 	delta = B * B - 4 * A * C;
 	if (delta < 0)
 		return (-1);
@@ -55,10 +67,10 @@ double	cone_hitted(t_ray camray, t_cone cone)
 		t = (-B + delta) / (2.0f * A);
 	if (t < 0)
 		return (-1);
-	/*hitpoint = hit_coord(t, camray);
+	hitpoint = hit_coord(t, camray);
 	vec = set_vec(hitpoint.x, hitpoint.y, hitpoint.z);
 	if (scalar_product(vec, cone.vector) < 0 || scalar_product(vec, cone.vector) > cone.height)
-		return (-1);*/
+		return (-1);
 	return (t);
 }
 
