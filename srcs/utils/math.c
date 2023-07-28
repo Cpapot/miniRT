@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.h                                              :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 20:33:05 by cpapot           ###   ########.fr       */
+/*   Created: 2023/07/28 19:59:53 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/28 20:17:02 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HIT_H
-# define HIT_H
+#include "miniRT.h"
 
-enum	e_type
+double	quadratic_equation(double a, double b, double c)
 {
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	CONE,
-	DISK
-};
+	double	delta;
+	double	t1;
+	double	t2;
 
-void		ambient_lightning(t_color *ratio, t_minirt_data *data);
-int			check_shadow(t_point hitpoint, t_light light, t_minirt_data *data);
-t_hitinfo	find_close_object(t_ray camray, t_minirt_data data);
-
-#endif
+	delta = b * b - 4 * a * c;
+	if (delta < 0)
+		return (-1);
+	delta = sqrtf(delta);
+	if (delta >= 0)
+	{
+		t1 = (-b - delta) / (2.0f * a);
+		t2 = (-b + delta) / (2.0f * a);
+		if (t1 > 0)
+			return (t1);
+		else if (t2 > 0)
+			return (-2);
+		else
+			return (-1);
+	}
+		return (-1);
+}

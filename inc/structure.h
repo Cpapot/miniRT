@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/23 16:19:55 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 20:31:59 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_plane			t_plane;
 typedef struct s_cylinder		t_cylinder;
 typedef struct s_option			t_option;
 typedef struct s_cone			t_cone;
+typedef struct s_disk			t_disk;
 
 struct s_option
 {
@@ -56,6 +57,8 @@ struct s_minirt_data
 	t_cylinder		*cylinder_arr;
 	size_t			co_nb;
 	t_cone			*cone_arr;
+	size_t			disk_nb;
+	t_disk			*disk_arr;
 	t_option		option;
 };
 
@@ -119,6 +122,14 @@ struct	s_plane
 	t_point	coordinate;
 	t_vec_3	normal_vector;
 	t_color	color;
+};
+
+struct	s_disk
+{
+	t_point	coordinate;
+	t_vec_3	normal_vector;
+	t_color	color;
+	double	diameter;
 };
 
 struct	s_cone

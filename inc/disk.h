@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.h                                              :+:      :+:    :+:   */
+/*   disk.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 20:33:05 by cpapot           ###   ########.fr       */
+/*   Created: 2023/07/28 20:39:14 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/28 20:49:20 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HIT_H
-# define HIT_H
+#ifndef DISK_H
+# define DISK_H
 
-enum	e_type
-{
-	SPHERE,
-	PLANE,
-	CYLINDER,
-	CONE,
-	DISK
-};
+#include "miniRT.h"
 
-void		ambient_lightning(t_color *ratio, t_minirt_data *data);
-int			check_shadow(t_point hitpoint, t_light light, t_minirt_data *data);
-t_hitinfo	find_close_object(t_ray camray, t_minirt_data data);
+t_plane	disk_to_plane(t_disk disk);
+double	disk_hited(t_ray ray, t_disk disk);
+int		find_near_disk(t_ray camray, size_t count, t_disk *disk_arr);
+int32_t	render_disk(t_hitinfo info, t_ray camray, t_minirt_data data);
 
 #endif

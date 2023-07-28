@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 13:49:10 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 21:02:59 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,10 @@ void	init_minirt_data(t_minirt_data * data)
 	data->lt_nb = 0;
 	data->al_nb = 0;
 	data->ca_nb = 0;
+	data->disk_nb = tmp.disk_nb;
 	data->co_nb = tmp.co_nb;
 	data->cone_arr = tmp.cone_arr;
+	data->disk_arr = tmp.disk_arr;
 }
 
 void	*suppress_light(t_light light, t_minirt_data *data_pt);

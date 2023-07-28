@@ -11,8 +11,23 @@ t_cone	init_cone()
 	result.coordinate.x = 0;
 	result.coordinate.y = 0;
 	result.coordinate.z = 0;
-	result.vector = set_vec(0,-1,0);
+	result.vector = set_vec(0,1,0);
 	result.height = 4;
+	return (result);
+}
+
+t_disk	init_disk()
+{
+	t_disk	result;
+
+	result.diameter = 4;
+	result.color.r = 255;
+	result.color.g = 50;
+	result.color.b = 50;
+	result.coordinate.x = 0;
+	result.coordinate.y = 4;
+	result.coordinate.z = 0;
+	result.normal_vector = set_vec(0,1,0);
 	return (result);
 }
 
@@ -23,5 +38,9 @@ t_minirt_data	create_struct()
 	test.co_nb = 1;
 	test.cone_arr = malloc(sizeof(t_cone));
 	test.cone_arr[0] = init_cone();
+
+	test.disk_nb = 1;
+	test.disk_arr = malloc(sizeof(t_disk));
+	test.disk_arr[0] = init_disk();
 	return (test);
 }

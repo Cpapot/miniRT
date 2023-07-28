@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/23 16:23:44 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 20:59:42 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "light.h"
 #include "cone.h"
 #include "cylinder.h"
+#include "disk.h"
 
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 {
@@ -52,6 +53,13 @@ t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 		info.struct_info = &data.cylinder_arr[tmp];
 		info.t = cylinder_hitted(camray, data.cylinder_arr[tmp]);
 	}
+	tmp = find_near_disk(camray, data.disk_nb, data.disk_arr);
+	if (tmp != -1 && info.t > disk_hited(camray, data.disk_arr[tmp]))
+	{
+		info.type = DISK;
+		info.struct_info = &data.disk_arr[tmp];
+		info.t = disk_hited(camray, data.disk_arr[tmp]);
+	}
 	return (info);
 }
 
@@ -70,5 +78,7 @@ int32_t	check_ray(t_ray camray, t_minirt_data data)
 		return (render_cone(info, camray, data));
 	else if (info.type == CYLINDER)
 		return (render_cylinder(info, camray, data));
+	else if (info.type == DISK)
+		return (render_disk(info, camray, data));
 	return (ft_color(0, 0, 0, 0));
 }

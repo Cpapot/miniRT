@@ -6,11 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 13:47:52 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 20:22:06 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+double	quadratic_equation(double a, double b, double c);
 
 t_vec_3	sphere_normal(t_ray camray, double t, t_point center)
 {
@@ -29,7 +31,6 @@ double	sphere_hited(t_ray ray, t_sphere sphere)
 	double	A;
 	double	B;
 	double	C;
-	double	delta;
 	t_vec_3	sphere_vect;
 
 	sphere_vect.x = ray.origin.x - sphere.origin.x;
@@ -38,17 +39,7 @@ double	sphere_hited(t_ray ray, t_sphere sphere)
 	A = scalar_product(ray.direction, ray.direction);
 	B = 2 * scalar_product(ray.direction, sphere_vect);
 	C = scalar_product(sphere_vect, sphere_vect) - pow((sphere.diameter) / 2.0, 2);
-	delta = pow(B, 2) - 4 * A * C;
-	if (delta >= 0)
-	{
-		if (((-B - sqrt(delta)) / (2 * A)) > 0)
-			return ((-B - sqrt(delta)) / (2 * A));
-		else if (((-B + sqrt(delta)) / (2 * A)) > 0)
-			return (-2);
-		else
-			return (-1);
-	}
-		return (-1);
+	return(quadratic_equation(A, B, C));
 }
 
 int	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)

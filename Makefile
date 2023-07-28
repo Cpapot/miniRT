@@ -33,7 +33,9 @@ SRCS		= object/light.c \
 			camera/anti_aliasing.c \
 			object/ambient_light.c \
 			object/cone.c \
-			object/cylinder.c
+			object/cylinder.c \
+			object/disk.c \
+			utils/math.c
 
 MLXSRC		=	libmlx.a
 
