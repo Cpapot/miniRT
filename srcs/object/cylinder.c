@@ -6,20 +6,22 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/27 18:26:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 04:14:50 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "vec3.h"
 
-t_vec_3 cylinder_normal(t_ray camray, double t)
+t_vec_3 cylinder_normal(t_ray camray, double t, t_cylinder cyl)
 {
 	t_vec_3	result;
 	t_point	dot;
 
 	dot = hit_coord(t, camray);
-	result = set_vec(dot.x, 0, dot.z);
+	result.x = cyl.normal_vector.x - dot.x / sqrtf(pow(cyl.normal_vector.x - dot.x, 2) + pow(cyl.normal_vector.y - dot.y, 2) + pow(cyl.normal_vector.z - dot.z, 2));
+	result.y = cyl.normal_vector.y - dot.y / sqrtf(pow(cyl.normal_vector.x - dot.x, 2) + pow(cyl.normal_vector.y - dot.y, 2) + pow(cyl.normal_vector.z - dot.z, 2));
+	result.z = cyl.normal_vector.z - dot.z / sqrtf(pow(cyl.normal_vector.x - dot.x, 2) + pow(cyl.normal_vector.y - dot.y, 2) + pow(cyl.normal_vector.z - dot.z, 2));
 	normalize_vec(&result);
 	return (result);
 }
@@ -99,7 +101,7 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data)
 
 	cy = (t_cylinder *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
-	cylinder_normal(camray, info.t));
+	cylinder_normal(camray, info.t, *cy));
 	ambient_lightning(&ratio, &data);
 	return (ft_color(cy->color.r * ratio.r, cy->color.g * \
 	ratio.g, cy->color.b * ratio.b, 0));
