@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 04:14:50 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:52:04 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@
 t_vec_3 cylinder_normal(t_ray camray, double t, t_cylinder cyl)
 {
 	t_vec_3	result;
+	double	scalar;
 	t_point	dot;
+	t_vec_3	vec[2];
 
 	dot = hit_coord(t, camray);
-	result.x = cyl.normal_vector.x - dot.x / sqrtf(pow(cyl.normal_vector.x - dot.x, 2) + pow(cyl.normal_vector.y - dot.y, 2) + pow(cyl.normal_vector.z - dot.z, 2));
+	vec[0] = set_vec(dot.x - cyl.coordinate.x, dot.y - cyl.coordinate.y, dot.z - cyl.coordinate.z);
+	scalar = scalar_product(vec[0], cyl.normal_vector);
+	vec[1] = set_vec(cyl.coordinate.x + scalar * cyl.normal_vector.x, cyl.coordinate.y + scalar * cyl.normal_vector.y, cyl.coordinate.z + scalar * cyl.normal_vector.z);
+	result = set_vec(dot.x - vec[1].x, dot.y - vec[1].y, dot.z - vec[1].z);
+	/*result.x = cyl.normal_vector.x - dot.x / sqrtf(pow(cyl.normal_vector.x - dot.x, 2) + pow(cyl.normal_vector.y - dot.y, 2) + pow(cyl.normal_vector.z - dot.z, 2));
 	result.y = cyl.normal_vector.y - dot.y / sqrtf(pow(cyl.normal_vector.x - dot.x, 2) + pow(cyl.normal_vector.y - dot.y, 2) + pow(cyl.normal_vector.z - dot.z, 2));
-	result.z = cyl.normal_vector.z - dot.z / sqrtf(pow(cyl.normal_vector.x - dot.x, 2) + pow(cyl.normal_vector.y - dot.y, 2) + pow(cyl.normal_vector.z - dot.z, 2));
+	result.z = cyl.normal_vector.z - dot.z / sqrtf(pow(cyl.normal_vector.x - dot.x, 2) + pow(cyl.normal_vector.y - dot.y, 2) + pow(cyl.normal_vector.z - dot.z, 2));*/
 	normalize_vec(&result);
 	return (result);
 }
@@ -33,10 +39,10 @@ double	cylinder_hitted(t_ray camray, t_cylinder cyl)
 	double	C;
 	double	delta;
 	double	t;
-	t_point	hitpoint;
+	//t_point	hitpoint;
 	t_vec_3	cyl_vect[3];
 	t_vec_3	tmp;
-	t_vec_3	vec;
+	//t_vec_3	vec;
 
 	normalize_vec(&cyl.normal_vector);
 
@@ -64,10 +70,10 @@ double	cylinder_hitted(t_ray camray, t_cylinder cyl)
 		t = (-B + delta) / (2.0f * A);
 	if (t < 0)
 		return (-1);
-	hitpoint = hit_coord(t, camray);
+	/*hitpoint = hit_coord(t, camray);
 	vec = set_vec(hitpoint.x, hitpoint.y, hitpoint.z);
 	if (scalar_product(vec, cyl.normal_vector) < 0 || scalar_product(vec, cyl.normal_vector) > cyl.height)
-		return (-1);
+		return (-1);*/
 	return (t);
 }
 
@@ -98,10 +104,13 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
 	t_cylinder	*cy;
 	t_color		ratio;
+	double		material[2];
 
+	material[0] = 0.797357;
+	material[1] = 83.2;
 	cy = (t_cylinder *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
-	cylinder_normal(camray, info.t, *cy));
+	cylinder_normal(camray, info.t, *cy), material);
 	ambient_lightning(&ratio, &data);
 	return (ft_color(cy->color.r * ratio.r, cy->color.g * \
 	ratio.g, cy->color.b * ratio.b, 0));

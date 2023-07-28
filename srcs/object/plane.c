@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 17:20:41 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:43:49 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,13 @@ int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
 	t_plane	*pl;
 	t_color	ratio;
+	double		material[2];
 
+	material[0] = 0.4;
+	material[1] = 10;
 	pl = (t_plane *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
-	pl->normal_vector);
+	pl->normal_vector, material);
 	ambient_lightning(&ratio, &data);
 	return (ft_color(pl->color.r * ratio.r, pl->color.g * \
 	ratio.g, pl->color.b * ratio.b, 0));

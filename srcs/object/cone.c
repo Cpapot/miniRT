@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/27 16:05:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:04:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	cone_hitted(t_ray camray, t_cone cone)
 	double	p2;
 	double	cosa;
 	double	delta;
-	t_point	hitpoint;
+	//t_point	hitpoint;
 
 	normalize_vec(&cone.vector);
 	cosa = pow(cone.diameter / 2, 2) / pow(cone.height, 2);
@@ -67,10 +67,10 @@ double	cone_hitted(t_ray camray, t_cone cone)
 		t = (-B + delta) / (2.0f * A);
 	if (t < 0)
 		return (-1);
-	hitpoint = hit_coord(t, camray);
+	/*hitpoint = hit_coord(t, camray);
 	vec = set_vec(hitpoint.x, hitpoint.y, hitpoint.z);
 	if (scalar_product(vec, cone.vector) < 0 || scalar_product(vec, cone.vector) > cone.height)
-		return (-1);
+		return (-1);*/
 	return (t);
 }
 
@@ -101,10 +101,13 @@ int32_t	render_cone(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
 	t_cone		*co;
 	t_color		ratio;
+	double		material[2];
 
+	material[0] = 0.9;
+	material[1] = 30;
 	co = (t_cone *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
-	cone_normal(camray, info.t, *(t_cone *)info.struct_info));
+	cone_normal(camray, info.t, *(t_cone *)info.struct_info), material);
 	ambient_lightning(&ratio, &data);
 	return (ft_color(co->color.r * ratio.r, co->color.g * \
 	ratio.g, co->color.b * ratio.b, 0));

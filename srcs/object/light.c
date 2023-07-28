@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 12:56:32 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:45:54 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,28 @@ void	delete_hidden_light(t_minirt_data *data, t_point point)
 	}
 }
 
-t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal)
+double	specular_light_ratio(t_vec_3 light_dir, t_vec_3 normal, double mat[2])
+{
+	t_vec_3	view_vec;
+	double	result;
+
+	normalize_vec(&light_dir);
+	view_vec = normal;
+	multiplying_vec(&view_vec, 2 * (-scalar_product(normal, light_dir)));
+	view_vec = adding_vec(view_vec, light_dir);
+	normalize_vec(&view_vec);
+	result = -scalar_product(view_vec, light_dir);
+	if (result < 0)
+		result = 0;
+	result = pow(result, mat[1]);
+	return (result);
+}
+t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal, double mat[2])
 {
 	size_t	index;
 	t_color	result;
 	t_light	light;
-	double	ratio;
+	double	ratio[2];
 
 	result.r = 0;
 	result.g = 0;
@@ -89,12 +105,14 @@ t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal
 		hitpoint.x = hitpoint.x + (normal.x * 0.0001);
 		hitpoint.y = hitpoint.y + (normal.y * 0.0001);
 		hitpoint.z = hitpoint.z + (normal.z * 0.0001);
-		ratio = check_intersection(light, hitpoint, normal);
+		ratio[1] = specular_light_ratio(set_vec(hitpoint.x - light.coordinate.x, \
+		hitpoint.y - light.coordinate.y, hitpoint.z - light.coordinate.z), normal, mat);
+		ratio[0] = check_intersection(light, hitpoint, normal);
 		if (!data.option.shadow || check_shadow(hitpoint, light, &data))
 		{
-			result.r += light.color.r * ratio * 0.004 * light.brightness;
-			result.g += light.color.g * ratio * 0.004 * light.brightness;
-			result.b += light.color.b * ratio * 0.004 * light.brightness;
+			result.r += light.color.r * ratio[0] * 0.004 * light.brightness + mat[0] * ratio[1];
+			result.g += light.color.g * ratio[0] * 0.004 * light.brightness + mat[0] * ratio[1];
+			result.b += light.color.b * ratio[0] * 0.004 * light.brightness + mat[0] * ratio[1];
 		}
 		index++;
 	}

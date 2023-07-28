@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 17:50:08 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:49:10 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	init_minirt_data(t_minirt_data * data)
 
 	tmp = create_struct();
 	data->option.cam_id = 0;
-	data->option.shadow = false;
+	data->option.shadow = true;
 	data->option.anti_aliasing = false;
 	data->sp_nb = 0;
 	data->pl_nb = 0;
