@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 13:43:49 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 04:54:45 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ double	plane_hited(t_ray ray, t_plane plane)
 		return (-1);
 }
 
-int	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
+t_hit	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 {
 	size_t	index;
 	double	tmp;
 	double	t;
-	int		id;
+	t_hit	info;
 
-	id = -1;
+	info.id = -1;
 	index = 0;
 	tmp = INT_MAX;
 	while (index != count)
@@ -65,21 +65,23 @@ int	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 		if (tmp > t && t != -1)
 		{
 			tmp = t;
-			id = index;
+			info.id = index;
 		}
 		index++;
 	}
-	return (id);
+	info.t = tmp;
+	return (info);
 }
 
 int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
 	t_plane	*pl;
 	t_color	ratio;
-	double		material[2];
+	double		material[3];
 
 	material[0] = 0.4;
 	material[1] = 10;
+	material[2] = PLANE;
 	pl = (t_plane *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
 	pl->normal_vector, material);

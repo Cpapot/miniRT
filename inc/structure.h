@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 20:31:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 04:51:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 
 /**** --bool-- ****/
 # include <stdlib.h>
+
+enum	e_type
+{
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	CONE,
+	DISK
+};
 
 typedef struct s_minirt_data	t_minirt_data;
 typedef struct s_ray			t_ray;
@@ -149,6 +158,12 @@ struct	s_cylinder
 	double	height;
 	t_color	color;
 };
+
+typedef struct s_hit
+{
+		double	t;
+		int		id;
+}		t_hit;
 
 typedef struct s_hitinfo
 {

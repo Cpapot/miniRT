@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 21:02:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 04:24:08 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,9 @@ void	init_minirt_data(t_minirt_data * data)
 }
 
 void	*suppress_light(t_light light, t_minirt_data *data_pt);
-void	print_data(char *msg, t_minirt_data *data);
+void			print_data(char *msg, t_minirt_data *data);
+void	change_cylinder_coord(t_minirt_data *data_pt);
+bool	add_disk(t_minirt_data *data_pt);
 
 int main(int ac, char **av)
 {
@@ -143,6 +145,9 @@ int main(int ac, char **av)
 		print_data("main", &data);
 	}
 	else
+		return (1);
+	change_cylinder_coord(&data);
+	if (!add_disk(&data))
 		return (1);
 	ft_create_win(&win);
 	screen_loop(&win, &data);

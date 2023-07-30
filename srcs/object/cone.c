@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 21:15:37 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 04:54:54 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ double	cone_hitted(t_ray camray, t_cone cone)
 	double	B;
 	double	C;
 	double	t;
+	t_point	hitpoint;
 	t_vec_3	vec;
 	double	p1;
 	double	p2;
 	double	cosa;
-	t_point	hitpoint;
 
 	normalize_vec(&cone.vector);
 	cosa = pow(cone.diameter / 2, 2) / pow(cone.height, 2);
@@ -60,19 +60,19 @@ double	cone_hitted(t_ray camray, t_cone cone)
 	t = quadratic_equation(A, B, C);
 	hitpoint = hit_coord(t, camray);
 	vec = set_vec(hitpoint.x, hitpoint.y, hitpoint.z);
-	if (scalar_product(vec, cone.vector) < 0 || scalar_product(vec, cone.vector) > cone.height)
+	if (!(scalar_product(cone.vector, vec) >= 0 && scalar_product(cone.vector, vec) <= cone.height))
 		return (-1);
 	return (t);
 }
 
-int	find_near_cone(t_ray camray, size_t count, t_cone *cone_arr)
+t_hit	find_near_cone(t_ray camray, size_t count, t_cone *cone_arr)
 {
 	size_t	index;
 	double	tmp;
 	double	t;
-	int		id;
+	t_hit	info;
 
-	id = -1;
+	info.id = -1;
 	index = 0;
 	tmp = INT_MAX;
 	while (index != count)
@@ -81,21 +81,23 @@ int	find_near_cone(t_ray camray, size_t count, t_cone *cone_arr)
 		if (tmp > t && (t != -1 || t == -2))
 		{
 			tmp = t;
-			id = index;
+			info.id = index;
 		}
 		index++;
 	}
-	return (id);
+	info.t = tmp;
+	return (info);
 }
 
 int32_t	render_cone(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
 	t_cone		*co;
 	t_color		ratio;
-	double		material[2];
+	double		material[3];
 
 	material[0] = 0.9;
 	material[1] = 30;
+	material[2] = CONE;
 	co = (t_cone *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
 	cone_normal(camray, info.t, *(t_cone *)info.struct_info), material);

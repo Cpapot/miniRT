@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:28:39 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 21:12:55 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 05:32:43 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ double	disk_hited(t_ray ray, t_disk disk)
 		return (-1);
 }
 
-int	find_near_disk(t_ray camray, size_t count, t_disk *disk_arr)
+t_hit	find_near_disk(t_ray camray, size_t count, t_disk *disk_arr)
 {
 	size_t	index;
 	double	tmp;
 	double	t;
-	int		id;
+	t_hit	info;
 
-	id = -1;
+	info.id = -1;
 	index = 0;
 	tmp = INT_MAX;
 	while (index != count)
@@ -57,21 +57,23 @@ int	find_near_disk(t_ray camray, size_t count, t_disk *disk_arr)
 		if (tmp > t && t != -1)
 		{
 			tmp = t;
-			id = index;
+			info.id = index;
 		}
 		index++;
 	}
-	return (id);
+	info.t = tmp;
+	return (info);
 }
 
 int32_t	render_disk(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
 	t_disk	*disk;
 	t_color	ratio;
-	double		material[2];
+	double		material[3];
 
 	material[0] = 0.4;
 	material[1] = 10;
+	material[2] = DISK;
 	disk = (t_disk *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
 	disk->normal_vector, material);

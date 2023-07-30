@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 20:22:06 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 04:54:42 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ double	sphere_hited(t_ray ray, t_sphere sphere)
 	return(quadratic_equation(A, B, C));
 }
 
-int	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
+t_hit	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
 {
-	size_t	index;
-	double	tmp;
-	double	t;
-	int		id;
+	size_t		index;
+	double		tmp;
+	double		t;
+	t_hit		info;
 
-	id = -1;
+	info.id = -1;
 	index = 0;
 	tmp = INT_MAX;
 	while (index != count)
@@ -58,11 +58,12 @@ int	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
 		if (tmp > t && (t != -1 || t == -2))
 		{
 			tmp = t;
-			id = index;
+			info.id = index;
 		}
 		index++;
 	}
-	return (id);
+	info.t = tmp;
+	return (info);
 }
 
 int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data)
@@ -70,10 +71,11 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data)
 	t_sphere	*sp;
 	t_color		ratio;
 	t_point		hit;
-	double		material[2];
+	double		material[3];
 
 	material[0] = 0.80;
 	material[1] = 76.8;
+	material[2] = SPHERE;
 	hit = hit_coord(info.t, camray);
 	sp = (t_sphere *)info.struct_info;
 	ratio = ft_find_light_ratio(hit, data, \

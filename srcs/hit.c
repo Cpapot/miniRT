@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 20:59:42 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 02:32:00 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,45 @@
 
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 {
-	int			tmp;
 	t_hitinfo	info;
+	t_hit		hit;
 
 	info.t = INT_MAX;
 	info.type = -1;
-	tmp = find_near_sphere(camray, data.sp_nb, data.sphere_arr);
-	if (tmp != -1)
+	hit = find_near_sphere(camray, data.sp_nb, data.sphere_arr);
+	if (hit.id != -1)
 	{
 		info.type = SPHERE;
-		info.struct_info = &data.sphere_arr[tmp];
-		info.t = sphere_hited(camray, data.sphere_arr[tmp]);
+		info.struct_info = &data.sphere_arr[hit.id];
+		info.t = hit.t;
 	}
-	tmp = find_near_plane(camray, data.pl_nb, data.plane_arr);
-	if (tmp != -1 && info.t > plane_hited(camray, data.plane_arr[tmp]))
+	hit = find_near_plane(camray, data.pl_nb, data.plane_arr);
+	if (hit.id != -1 && info.t > hit.t)
 	{
 		info.type = PLANE;
-		info.struct_info = &data.plane_arr[tmp];
-		info.t = plane_hited(camray, data.plane_arr[tmp]);
+		info.struct_info = &data.plane_arr[hit.id];
+		info.t = hit.t;
 	}
-	tmp = find_near_cone(camray, data.co_nb, data.cone_arr);
-	if (tmp != -1 && info.t > cone_hitted(camray, data.cone_arr[tmp]))
+	hit = find_near_cone(camray, data.co_nb, data.cone_arr);
+	if (hit.id != -1 && info.t > hit.t)
 	{
 		info.type = CONE;
-		info.struct_info = &data.cone_arr[tmp];
-		info.t = cone_hitted(camray, data.cone_arr[tmp]);
+		info.struct_info = &data.cone_arr[hit.id];
+		info.t = hit.t;
 	}
-	tmp = find_near_cylinder(camray, data.cy_nb, data.cylinder_arr);
-	if (tmp != -1 && info.t > cylinder_hitted(camray, data.cylinder_arr[tmp]))
+	hit = find_near_cylinder(camray, data.cy_nb, data.cylinder_arr);
+	if (hit.id != -1 && info.t > hit.t)
 	{
 		info.type = CYLINDER;
-		info.struct_info = &data.cylinder_arr[tmp];
-		info.t = cylinder_hitted(camray, data.cylinder_arr[tmp]);
+		info.struct_info = &data.cylinder_arr[hit.id];
+		info.t = hit.t;
 	}
-	tmp = find_near_disk(camray, data.disk_nb, data.disk_arr);
-	if (tmp != -1 && info.t > disk_hited(camray, data.disk_arr[tmp]))
+	hit = find_near_disk(camray, data.disk_nb, data.disk_arr);
+	if (hit.id != -1 && info.t > hit.t)
 	{
 		info.type = DISK;
-		info.struct_info = &data.disk_arr[tmp];
-		info.t = disk_hited(camray, data.disk_arr[tmp]);
+		info.struct_info = &data.disk_arr[hit.id];
+		info.t = hit.t;
 	}
 	return (info);
 }

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/28 13:45:54 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 05:01:25 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 void	delete_hidden_light(t_minirt_data *data, t_point point)
 {
 	size_t	index;
-	int		id;
+	t_hit	id;
 	double	t;
 	double	t_max;
 	t_ray	light_ray;
@@ -63,9 +63,9 @@ void	delete_hidden_light(t_minirt_data *data, t_point point)
 		else if (light_ray.direction.z != 0)
 			t_max = (data->lights_arr[index].coordinate.z - point.z) / light_ray.direction.z;
 		id = find_near_plane(light_ray, data->pl_nb, data->plane_arr);
-		if (id != -1)
-			t = plane_hited(light_ray, data->plane_arr[id]);
-		if (id != -1 && t != -1 && t < t_max)
+		if (id.id != -1)
+			t = plane_hited(light_ray, data->plane_arr[id.id]);
+		if (id.id != -1 && t != -1 && t < t_max)
 			suppress_light(data->lights_arr[index], data);
 		else
 			index++;
@@ -88,7 +88,7 @@ double	specular_light_ratio(t_vec_3 light_dir, t_vec_3 normal, double mat[2])
 	result = pow(result, mat[1]);
 	return (result);
 }
-t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal, double mat[2])
+t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal, double mat[3])
 {
 	size_t	index;
 	t_color	result;
