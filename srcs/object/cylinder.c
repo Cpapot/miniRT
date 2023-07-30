@@ -6,12 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 04:54:51 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 19:25:48 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "vec3.h"
+#include "checkerboard.h"
 
 double	quadratic_equation(double a, double b, double c);
 
@@ -96,12 +97,16 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data)
 	t_cylinder	*cy;
 	t_color		ratio;
 	double		material[3];
+	t_point		hit;
 
 	material[0] = 0.797357;
 	material[1] = 83.2;
 	material[2] = CYLINDER;
 	cy = (t_cylinder *)info.struct_info;
-	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+	hit = adjust_hitpoint(hit_coord(info.t, camray), cylinder_normal(camray, info.t, *cy));
+	if (is_black_case(hit))
+		return (ft_color(0, 0, 0, 0));
+	ratio = ft_find_light_ratio(hit, data, \
 	cylinder_normal(camray, info.t, *cy), material);
 	ambient_lightning(&ratio, &data);
 	return (ft_color(cy->color.r * ratio.r, cy->color.g * \

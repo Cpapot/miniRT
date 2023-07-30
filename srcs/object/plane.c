@@ -6,11 +6,12 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 04:54:45 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 19:23:30 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "checkerboard.h"
 
 t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane)
 {
@@ -75,17 +76,21 @@ t_hit	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 
 int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
-	t_plane	*pl;
-	t_color	ratio;
+	t_plane		*pl;
+	t_color		ratio;
+	t_point	hit;
 	double		material[3];
 
 	material[0] = 0.4;
 	material[1] = 10;
 	material[2] = PLANE;
 	pl = (t_plane *)info.struct_info;
-	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+	hit = adjust_hitpoint(hit_coord(info.t, camray), pl->normal_vector);
+	if (is_black_case(hit))
+		return (ft_color(0, 0, 0, 0));
+	ratio = ft_find_light_ratio(hit, data, \
 	pl->normal_vector, material);
 	ambient_lightning(&ratio, &data);
 	return (ft_color(pl->color.r * ratio.r, pl->color.g * \
-	ratio.g, pl->color.b * ratio.b, 0));
+		ratio.g, pl->color.b * ratio.b, 0));
 }

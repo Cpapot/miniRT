@@ -6,13 +6,15 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 04:54:42 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 19:40:09 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "checkerboard.h"
 
 double	quadratic_equation(double a, double b, double c);
+t_point	sphere_mapping(t_point point, double radius);
 
 t_vec_3	sphere_normal(t_ray camray, double t, t_point center)
 {
@@ -76,8 +78,10 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data)
 	material[0] = 0.80;
 	material[1] = 76.8;
 	material[2] = SPHERE;
-	hit = hit_coord(info.t, camray);
 	sp = (t_sphere *)info.struct_info;
+	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));
+	if (is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
+		return (ft_color(0, 0, 0, 0));
 	ratio = ft_find_light_ratio(hit, data, \
 	sphere_normal(camray, info.t, sp->origin), material);
 	ambient_lightning(&ratio, &data);

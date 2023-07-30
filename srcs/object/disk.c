@@ -6,12 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:28:39 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 13:09:16 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 19:26:34 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "plane.h"
 #include "miniRT.h"
+#include "checkerboard.h"
 
 t_plane	disk_to_plane(t_disk disk)
 {
@@ -67,15 +68,19 @@ t_hit	find_near_disk(t_ray camray, size_t count, t_disk *disk_arr)
 
 int32_t	render_disk(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
-	t_disk	*disk;
-	t_color	ratio;
+	t_disk		*disk;
+	t_color		ratio;
 	double		material[3];
+	t_point		hitpoint;
 
 	material[0] = 0.797357;
 	material[1] = 83.2;
 	material[2] = DISK;
 	disk = (t_disk *)info.struct_info;
-	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+	hitpoint = adjust_hitpoint(hit_coord(info.t, camray), disk->normal_vector);
+	if (is_black_case(hitpoint))
+		return (ft_color(0, 0, 0, 0));
+	ratio = ft_find_light_ratio(hitpoint, data, \
 	disk->normal_vector, material);
 	ambient_lightning(&ratio, &data);
 	return (ft_color(disk->color.r * ratio.r, disk->color.g * \
