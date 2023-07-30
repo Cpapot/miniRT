@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:18:34 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 16:08:54 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 13:46:09 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_shadow(t_point hitpoint, t_light light, t_minirt_data *data)
 	bounce_ray.origin = hitpoint;
 	t_max = (light.coordinate.x - hitpoint.x) / bounce_ray.direction.x;
 	close_object = find_close_object(bounce_ray, *data);
-	if (close_object.t >= t_max)
+	if (close_object.t >= t_max || close_object.t == -2)
 		return (1);
 	else
 		return (0);

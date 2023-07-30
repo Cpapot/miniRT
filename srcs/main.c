@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 04:24:08 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 13:08:57 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ void	reset_light(t_minirt_data *data)
 	index++;
 }
 
+t_plane	disk_to_plane(t_disk disk);
+
 void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 {
 	int						index;
 	t_plane					plane;
+	t_disk					disk;
 
 	index = 0;
 	normalize_vec(&cam->vector);
@@ -63,6 +66,13 @@ void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 	{
 		plane = data->plane_arr[index];
 		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
+		index++;
+	}
+	index = 0;
+	while (data->disk_nb != (size_t)index)
+	{
+		disk = data->disk_arr[index];
+		data->disk_arr[index].normal_vector = plane_normal(cam->vector, disk_to_plane(disk));
 		index++;
 	}
 	reset_light(data);

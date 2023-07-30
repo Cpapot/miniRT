@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:28:39 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 05:32:43 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 13:09:16 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int32_t	render_disk(t_hitinfo info, t_ray camray, t_minirt_data data)
 	t_color	ratio;
 	double		material[3];
 
-	material[0] = 0.4;
-	material[1] = 10;
+	material[0] = 0.797357;
+	material[1] = 83.2;
 	material[2] = DISK;
 	disk = (t_disk *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \

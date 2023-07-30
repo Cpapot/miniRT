@@ -65,12 +65,12 @@ bool	add_disk(t_minirt_data *data_pt)
 		disk_arr[data_pt->disk_nb + disk_index].normal_vector = data_pt->cylinder_arr[index].normal_vector;
 		disk_arr[data_pt->disk_nb + disk_index].diameter = data_pt->cylinder_arr[index].diameter;
 		cyl_vec = data_pt->cylinder_arr[index].normal_vector;
-		multiplying_vec(&cyl_vec, -data_pt->cylinder_arr[index].height);
+		multiplying_vec(&cyl_vec, -(data_pt->cylinder_arr[index].height));
 		disk_arr[data_pt->disk_nb + disk_index].coordinate.x = cyl_vec.x + disk_arr[data_pt->disk_nb + disk_index - 1].coordinate.x;
 		disk_arr[data_pt->disk_nb + disk_index].coordinate.y = cyl_vec.y + disk_arr[data_pt->disk_nb + disk_index - 1].coordinate.y;
 		disk_arr[data_pt->disk_nb + disk_index].coordinate.z = cyl_vec.z + disk_arr[data_pt->disk_nb + disk_index - 1].coordinate.z;
-		/*multiplying_vec(&cyl_vec, -(1 / -data_pt->cylinder_arr[index].height));*/
-		disk_arr[data_pt->disk_nb + disk_index].normal_vector = cyl_vec;
+		disk_arr[data_pt->disk_nb + disk_index].normal_vector = data_pt->cylinder_arr[index].normal_vector;
+		multiplying_vec(&disk_arr[data_pt->disk_nb + disk_index].normal_vector, -1);
 		disk_index++;
 		index++;
 	}
