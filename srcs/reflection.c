@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 14:37:21 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 14:44:45 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:12:10 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structure.h"
 #include "vec3.h"
 
-t_vec_3	reflect_ray(t_vec_3 normal, t_vec_3 ray)
+t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray)
 {
 	t_vec_3	result;
 
@@ -23,3 +23,5 @@ t_vec_3	reflect_ray(t_vec_3 normal, t_vec_3 ray)
 	normalize_vec(&result);
 	return (result);
 }
+
+

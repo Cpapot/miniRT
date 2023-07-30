@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 13:46:21 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:19:29 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 	return (info);
 }
 
-int32_t	check_ray(t_ray camray, t_minirt_data data)
+int32_t	check_ray(t_ray camray, t_minirt_data data, int level)
 {
 	t_hitinfo	info;
 
@@ -71,7 +71,7 @@ int32_t	check_ray(t_ray camray, t_minirt_data data)
 	if (info.type == -1 || info.t == -2)
 		return (ft_color(0, 0, 0, 0));
 	else if (info.type == SPHERE)
-		return (render_sphere(info, camray, data));
+		return (render_sphere(info, camray, data, level));
 	else if (info.type == PLANE)
 		return (render_plane(info, camray, data));
 	else if (info.type == CONE)

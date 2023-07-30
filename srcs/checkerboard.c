@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 19:42:56 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:38:00 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	is_black_case_sp(t_point hitpoint)
 
 	size = 20;
 	if (sinf(size * hitpoint.x) * sinf(size * hitpoint.y) < 0)
-		return (false);
+		return (true);
 	return (false);
 }
 

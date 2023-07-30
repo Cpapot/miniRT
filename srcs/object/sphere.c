@@ -6,13 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 19:40:09 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:52:12 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "checkerboard.h"
 
+t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray);
 double	quadratic_equation(double a, double b, double c);
 t_point	sphere_mapping(t_point point, double radius);
 
@@ -68,23 +69,36 @@ t_hit	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
 	return (info);
 }
 
-int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data)
+int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
 {
 	t_sphere	*sp;
 	t_color		ratio;
 	t_point		hit;
 	double		material[3];
+	double		reflection;
+	t_color		light_color;
+	t_color		reflect_color;
+	t_ray		camray2;
 
 	material[0] = 0.80;
 	material[1] = 76.8;
-	material[2] = SPHERE;
 	sp = (t_sphere *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));
-	if (is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
-		return (ft_color(0, 0, 0, 0));
+	/*if (is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
+		return (ft_color(0, 0, 0, 0));*/
 	ratio = ft_find_light_ratio(hit, data, \
 	sphere_normal(camray, info.t, sp->origin), material);
 	ambient_lightning(&ratio, &data);
-	return (ft_color(sp->color.r * ratio.r, sp->color.g * \
+	if (level == 1)
+		return (ft_color(sp->color.r * ratio.r, sp->color.g * \
+		ratio.g, sp->color.b * ratio.b, 0));
+	light_color = int_to_rgb(ft_color(sp->color.r * ratio.r, sp->color.g * \
 	ratio.g, sp->color.b * ratio.b, 0));
+	camray2.direction = reflect_vec(sphere_normal(camray, info.t, sp->origin), camray.direction);
+	camray2.origin = hit;
+	reflect_color = int_to_rgb(check_ray(camray2, data, 1));
+	reflection = 0.2;
+	return (ft_color(reflect_color.r * reflection + light_color.r * (1 - reflection), reflect_color.g \
+	 * reflection + light_color.g * (1 - reflection), reflect_color.b * reflection + light_color.b * \
+	 (1 - reflection), 0));
 }

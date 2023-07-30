@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:37:21 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/23 17:31:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:17:14 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int32_t	anti_aliasing(t_minirt_data *data, int x, int y, t_camera cam)
 	while (index != 4)
 	{
 		camray = find_aliasing_ray(cam, x, y, index);
-		color_arr[index] = int_to_rgb(check_ray(camray, *data));
+		color_arr[index] = int_to_rgb(check_ray(camray, *data, 1));
 		index++;
 	}
 	result = get_average_color(color_arr);
