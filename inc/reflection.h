@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.h                                            :+:      :+:    :+:   */
+/*   reflection.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 15:06:53 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/31 23:27:12 by cpapot           ###   ########.fr       */
+/*   Created: 2023/07/31 22:27:15 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/31 22:28:00 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLANE_H
-# define PLANE_H
+#ifndef REFLECTION_H
+# define REFLECTION_H
 
 #include "miniRT.h"
 
-double	plane_hited(t_ray ray, t_plane plane);
-t_hit	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr);
-t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane);
-int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data, int level);
+t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray);
+int32_t	reflection(int32_t light, t_minirt_data data, t_ray camray, int level);
 
 #endif

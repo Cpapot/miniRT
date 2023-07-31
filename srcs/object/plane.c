@@ -6,12 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 19:23:30 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/31 23:26:51 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "checkerboard.h"
+#include "reflection.h"
 
 t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane)
 {
@@ -74,12 +75,13 @@ t_hit	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 	return (info);
 }
 
-int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data)
+int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
 {
 	t_plane		*pl;
 	t_color		ratio;
 	t_point	hit;
 	double		material[3];
+	t_ray		reflect_ray;
 
 	material[0] = 0.4;
 	material[1] = 10;
@@ -91,6 +93,8 @@ int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data)
 	ratio = ft_find_light_ratio(hit, data, \
 	pl->normal_vector, material);
 	ambient_lightning(&ratio, &data);
-	return (ft_color(pl->color.r * ratio.r, pl->color.g * \
-		ratio.g, pl->color.b * ratio.b, 0));
+	reflect_ray.direction = reflect_vec(pl->normal_vector, camray.direction);
+	reflect_ray.origin = hit;
+	return (reflection(ft_color(pl->color.r * ratio.r, pl->color.g * \
+		ratio.g, pl->color.b * ratio.b, 0), data, reflect_ray, level));
 }

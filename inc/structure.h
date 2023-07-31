@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 04:51:35 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/31 22:16:12 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ struct s_minirt_data
 	size_t			disk_nb;
 	t_disk			*disk_arr;
 	t_option		option;
+	int				level;
 };
 
 struct	s_point

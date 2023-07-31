@@ -5,7 +5,26 @@
 #				| |    | | |  __/\__ \.
 #				|_|    |_|_|\___||___/
 
-HEADERS 	=	miniRT.h
+HEADERS 	=	camera.h	\
+				checkerboard.h	\
+				color.h	\
+				cone.h	\
+				cylinder.h	\
+				disk.h	\
+				hit.h	\
+				key.h	\
+				light.h	\
+				miniRT.h	\
+				minirt_data.h	\
+				minirt_manipulation.h	\
+				parsing.h	\
+				plane.h	\
+				reflection.h	\
+				sphere.h	\
+				structure.h	\
+				vec3.h	\
+				window.h
+
 
 SRCS		= object/light.c \
 			camera/camera.c \
