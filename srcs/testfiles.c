@@ -13,6 +13,9 @@ t_cone	init_cone()
 	result.coordinate.z = 0;
 	result.vector = set_vec(0,-1,0);
 	result.height = 4;
+	result.material.alpha = 0;
+	result.material.specular_coef = 0;
+	result.material.reflection = 0;
 	return (result);
 }
 
@@ -28,6 +31,9 @@ t_disk	init_disk()
 	result.coordinate.y = 5;
 	result.coordinate.z = 0;
 	result.normal_vector = set_vec(-1,0,0);
+	result.material.alpha = 0;
+	result.material.specular_coef = 0;
+	result.material.reflection = 0;
 	return (result);
 }
 

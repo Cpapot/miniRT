@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/31 22:16:12 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/01 21:48:52 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ typedef struct s_cylinder		t_cylinder;
 typedef struct s_option			t_option;
 typedef struct s_cone			t_cone;
 typedef struct s_disk			t_disk;
+typedef struct s_material		t_material;
+
+struct s_material
+{
+	double	reflection;
+	double	specular_coef;
+	double	alpha;
+};
 
 struct s_option
 {
@@ -102,9 +110,9 @@ struct	s_color
 
 struct	s_camera
 {
-	t_vec_3	vector;
-	t_point	origin;
-	double	fov;
+	t_vec_3		vector;
+	t_point		origin;
+	double		fov;
 };
 
 struct	s_ambient_light
@@ -125,6 +133,7 @@ struct	s_sphere
 	t_point	origin;
 	double	diameter;
 	t_color	color;
+	t_material	material;
 };
 
 struct	s_plane
@@ -132,6 +141,7 @@ struct	s_plane
 	t_point	coordinate;
 	t_vec_3	normal_vector;
 	t_color	color;
+	t_material	material;
 };
 
 struct	s_disk
@@ -140,6 +150,7 @@ struct	s_disk
 	t_vec_3	normal_vector;
 	t_color	color;
 	double	diameter;
+	t_material	material;
 };
 
 struct	s_cone
@@ -149,6 +160,7 @@ struct	s_cone
 	double	diameter;
 	double	height;
 	t_color	color;
+	t_material	material;
 };
 
 struct	s_cylinder
@@ -158,6 +170,7 @@ struct	s_cylinder
 	double	diameter;
 	double	height;
 	t_color	color;
+	t_material	material;
 };
 
 typedef struct s_hit

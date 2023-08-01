@@ -23,11 +23,13 @@ HEADERS 	=	camera.h	\
 				sphere.h	\
 				structure.h	\
 				vec3.h	\
-				window.h
+				window.h	\
+				material.h
 
 
 SRCS		= object/light.c \
 			camera/camera.c \
+			camera/gamma.c \
 			parsing/parsing.c \
 			parsing/list_utils.c \
 			parsing/fill_data/get_line_data.c \
@@ -56,7 +58,8 @@ SRCS		= object/light.c \
 			object/disk.c \
 			utils/math.c \
 			checkerboard.c \
-			reflection.c
+			reflection.c \
+			material.c
 
 MLXSRC		=	libmlx.a
 

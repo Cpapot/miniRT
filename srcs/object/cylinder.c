@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/31 23:35:47 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/01 22:05:41 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,5 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data, int le
 	reflect_ray.direction = reflect_vec(cylinder_normal(camray, info.t, *cy), camray.direction);
 	reflect_ray.origin = hit;
 	return (reflection(ft_color(cy->color.r * ratio.r, cy->color.g * \
-		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, level));
+		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, level, NULL));
 }

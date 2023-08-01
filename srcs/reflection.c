@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 14:37:21 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/31 23:21:51 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/01 22:05:01 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray)
 	return (result);
 }
 
-int32_t	reflection(int32_t light, t_minirt_data data, t_ray camray, int level)
+int32_t	reflection(int32_t light, t_minirt_data data, t_ray camray, int level, t_material *mat)
 {
 	double		reflection;
 	t_color		light_color;
 	t_color		reflect_color;
 
-	reflection = 0.4;
+	if (!mat)
+		reflection = 0.4;
+	else
+		reflection = mat->reflection;
 	if (level == 10 || reflection == 0)
 		return (light);
 	light_color = int_to_rgb(light);

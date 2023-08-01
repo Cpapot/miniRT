@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reflection.h                                       :+:      :+:    :+:   */
+/*   material.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 22:27:15 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:05:18 by cpapot           ###   ########.fr       */
+/*   Created: 2023/08/01 21:49:36 by cpapot            #+#    #+#             */
+/*   Updated: 2023/08/01 23:06:26 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REFLECTION_H
-# define REFLECTION_H
-
 #include "miniRT.h"
 
-t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray);
-int32_t	reflection(int32_t light, t_minirt_data data, t_ray camray, int level, t_material *mat);
+t_material	metal_material(void)
+{
+	t_material	metal;
 
-#endif
+	metal.specular_coef = 0.64;
+	metal.alpha = 15;
+	metal.reflection = 0.25;
+	return (metal);
+}

@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reflection.h                                       :+:      :+:    :+:   */
+/*   gamma.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 22:27:15 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:05:18 by cpapot           ###   ########.fr       */
+/*   Created: 2023/08/01 22:27:37 by cpapot            #+#    #+#             */
+/*   Updated: 2023/08/01 22:58:59 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REFLECTION_H
-# define REFLECTION_H
-
 #include "miniRT.h"
 
-t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray);
-int32_t	reflection(int32_t light, t_minirt_data data, t_ray camray, int level, t_material *mat);
+int32_t	mod_gamma(int32_t object_color)
+{
+	t_color	gamma;
+	t_color	color;
+	double	scale;
 
-#endif
+	scale = 155;
+	color = int_to_rgb(object_color);
+	gamma.r = sqrt(scale * color.r);
+	gamma.g = sqrt(scale * color.g);
+	gamma.b = sqrt(scale * color.b);
+	return (ft_color(gamma.r, gamma.g, gamma.b, 0));
+}

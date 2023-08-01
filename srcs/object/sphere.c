@@ -6,13 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/31 23:04:07 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/01 22:12:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "checkerboard.h"
 #include "reflection.h"
+#include "material.h"
 
 double	quadratic_equation(double a, double b, double c);
 t_point	sphere_mapping(t_point point, double radius);
@@ -76,10 +77,12 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int leve
 	t_color		ratio;
 	t_point		hit;
 	double		material[3];
+	t_material	mat;
 	t_ray		reflect_ray;
 
-	material[0] = 0.80;
-	material[1] = 76.8;
+	mat = metal_material();
+	material[0] = mat.specular_coef;
+	material[1] = mat.alpha;
 	sp = (t_sphere *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));
 	//if (is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
@@ -90,5 +93,5 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int leve
 	reflect_ray.direction = reflect_vec(sphere_normal(camray, info.t, sp->origin), camray.direction);
 	reflect_ray.origin = hit;
 	return (reflection(ft_color(sp->color.r * ratio.r, sp->color.g * \
-		ratio.g, sp->color.b * ratio.b, 0), data, reflect_ray, level));
+		ratio.g, sp->color.b * ratio.b, 0), data, reflect_ray, level, &mat));
 }
