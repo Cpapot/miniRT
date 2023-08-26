@@ -40,7 +40,7 @@ bool	allocate_data(t_minirt_data *data_pt)
 	data_pt->camera = malloc(sizeof (t_camera) * data_pt->ca_nb);
 	puts("allocated");
 	if (errno)
-		return (perror("here"), free_minirt_data_content(data_pt), false);
+		return (perror("allocate_data"), free_minirt_data_content(data_pt), false);
 	puts("damned");
 	return (true);
 }

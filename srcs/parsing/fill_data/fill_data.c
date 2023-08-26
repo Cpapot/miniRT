@@ -321,6 +321,8 @@ static bool	_check_lines(t_minirt_data  *data_pt, char **lines)
 			return (ft_printf_fd(2, "Error parsing\n"), false);
 		tmp++;
 	}
+    if (data_pt->ca_nb == 0)
+            return (false);
 	return (true);
 }
 

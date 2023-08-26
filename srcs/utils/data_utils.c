@@ -1,9 +1,9 @@
 //
 // Created by bpoumeau on 6/20/23.
 //
-#include "structure.h"
-#include "libft.h"
-#include "vec3.h"
+#include "../../inc/structure.h"
+#include "../../libft/includes/libft.h"
+#include "../../inc/vec3.h"
 #include "minirt_data.h"
 
 void	change_cylinder_coord(t_minirt_data *data_pt)
