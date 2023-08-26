@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:03:42 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/20 22:33:04 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/07/30 21:16:47 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 int	close_window(void);
 
 t_minirt_data	create_struct();
-int32_t			check_ray(t_ray camray, t_minirt_data data);
-void		print_info(t_minirt_data *data);
+int32_t			check_ray(t_ray camray, t_minirt_data data, int level);
+void			print_info(t_minirt_data *data);
 
 typedef struct s_general
 {
