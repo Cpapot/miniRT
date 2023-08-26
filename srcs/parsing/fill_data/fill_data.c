@@ -37,12 +37,13 @@ bool	call_filling_ft(char **lines)
 	{
 		nb++;
 		i = 0;
-		while (ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
+		while (i < 6 && ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
 			i++;
-		if (ft_arr[i](*tmp, FILLING) == false)
+		if (i < 6 && ft_arr[i](*tmp, FILLING) == false)
 			return (ft_free_split(lines), false);
 		tmp++;
 	}
+    puts("here");
 	ft_free_split(lines);
 	return (true);
 }
@@ -306,16 +307,17 @@ static bool	_check_lines(t_minirt_data  *data_pt, char **lines)
 {
 	char		**tmp;
 	int 		i;
-	const char	*id_arr[] = {"A", "C", "L", "sp", "pl","cy"};
+	const char	*id_arr[] = {"A", "C", "L", "sp", "pl","cy", "#", "\n"};
 	const t_parse_ft parse_ft_arr[] = {&manage_a, &manage_c, &manage_l, &manage_sp, &manage_pl, &manage_cy, &emmit_err};
 
+    i = 0;
 	tmp = lines;
 	while (*tmp)
 	{
 		i = 0;
-		while (ft_strncmp(id_arr[i], *tmp, ft_strlen((char *)id_arr[i])) != 0 && i != 6)
+		while (i != 7 && ft_strncmp(id_arr[i], *tmp, ft_strlen((char *)id_arr[i])) != 0)
 			i++;
-		if (parse_ft_arr[i](data_pt, *tmp) == false)
+		if (i < 6 && parse_ft_arr[i](data_pt, *tmp) == false)
 			return (ft_printf_fd(2, "Error parsing\n"), false);
 		tmp++;
 	}
