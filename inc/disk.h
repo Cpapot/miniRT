@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cone.h                                             :+:      :+:    :+:   */
+/*   disk.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 16:23:07 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 02:29:30 by cpapot           ###   ########.fr       */
+/*   Created: 2023/07/28 20:39:14 by cpapot            #+#    #+#             */
+/*   Updated: 2023/08/01 22:08:43 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONE_H
+#ifndef DISK_H
+# define DISK_H
 
-# define CONE_H
-# include "structure.h"
+#include "miniRT.h"
 
-double		cone_hitted(t_ray camray, t_cone cone);
-t_hit		find_near_cone(t_ray camray, size_t count, t_cone *cone_arr);
-t_vec_3		cone_normal(t_ray camray, double t, t_cone cone);
-int32_t		render_cone(t_hitinfo info, t_ray camray, t_minirt_data data);
+t_plane	disk_to_plane(t_disk disk);
+double	disk_hited(t_ray ray, t_disk disk);
+t_hit	find_near_disk(t_ray camray, size_t count, t_disk *disk_arr);
+int32_t	render_disk(t_hitinfo info, t_ray camray, t_minirt_data data, int level);
 
 #endif

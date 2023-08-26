@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cone.h                                             :+:      :+:    :+:   */
+/*   checkerboard.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 16:23:07 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 02:29:30 by cpapot           ###   ########.fr       */
+/*   Created: 2023/07/30 18:39:52 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/30 19:39:52 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONE_H
+#ifndef CHECKERBOARD_H
+# define CHECKERBOARD_H
 
-# define CONE_H
-# include "structure.h"
+#include "structure.h"
 
-double		cone_hitted(t_ray camray, t_cone cone);
-t_hit		find_near_cone(t_ray camray, size_t count, t_cone *cone_arr);
-t_vec_3		cone_normal(t_ray camray, double t, t_cone cone);
-int32_t		render_cone(t_hitinfo info, t_ray camray, t_minirt_data data);
+bool	is_black_case(t_point hitpoint);
+bool	is_black_case_sp(t_point hitpoint);
 
 #endif

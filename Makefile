@@ -5,10 +5,31 @@
 #				| |    | | |  __/\__ \.
 #				|_|    |_|_|\___||___/
 
-HEADERS 	=	miniRT.h
+HEADERS 	=	camera.h	\
+				checkerboard.h	\
+				color.h	\
+				cone.h	\
+				cylinder.h	\
+				disk.h	\
+				hit.h	\
+				key.h	\
+				light.h	\
+				miniRT.h	\
+				minirt_data.h	\
+				minirt_manipulation.h	\
+				parsing.h	\
+				plane.h	\
+				reflection.h	\
+				sphere.h	\
+				structure.h	\
+				vec3.h	\
+				window.h	\
+				material.h
+
 
 SRCS		= object/light.c \
 			camera/camera.c \
+			camera/gamma.c \
 			parsing/parsing.c \
 			parsing/list_utils.c \
 			parsing/fill_data/get_line_data.c \
@@ -33,7 +54,12 @@ SRCS		= object/light.c \
 			camera/anti_aliasing.c \
 			object/ambient_light.c \
 			object/cone.c \
-			object/cylinder.c
+			object/cylinder.c \
+			object/disk.c \
+			utils/math.c \
+			checkerboard.c \
+			reflection.c \
+			material.c
 
 MLXSRC		=	libmlx.a
 

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 17:50:08 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/01 22:34:07 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ void	reset_light(t_minirt_data *data)
 	index++;
 }
 
+t_plane	disk_to_plane(t_disk disk);
+
 void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 {
 	int						index;
 	t_plane					plane;
+	t_disk					disk;
 
 	index = 0;
 	normalize_vec(&cam->vector);
@@ -65,9 +68,18 @@ void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
 		index++;
 	}
+	index = 0;
+	while (data->disk_nb != (size_t)index)
+	{
+		disk = data->disk_arr[index];
+		data->disk_arr[index].normal_vector = plane_normal(cam->vector, disk_to_plane(disk));
+		index++;
+	}
 	reset_light(data);
 	delete_hidden_light(data, cam->origin);
 }
+
+int32_t	mod_gamma(int32_t object_color);
 
 void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 {
@@ -86,10 +98,10 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 			if (data->option.anti_aliasing == false)
 			{
 				camray = find_camray(data->camera[data->option.cam_id], x, y);
-				my_mlx_pixel_put(win, x, y, check_ray(camray, *data));
+				my_mlx_pixel_put(win, x, y, mod_gamma(check_ray(camray, *data, 0)));
 			}
 			else
-				my_mlx_pixel_put(win, x, y, anti_aliasing(data, x, y, data->camera[data->option.cam_id]));
+				my_mlx_pixel_put(win, x, y, mod_gamma(anti_aliasing(data, x, y, data->camera[data->option.cam_id])));
 			y++;
 		}
 		x++;
@@ -110,7 +122,7 @@ void	init_minirt_data(t_minirt_data * data)
 
 	tmp = create_struct();
 	data->option.cam_id = 0;
-	data->option.shadow = false;
+	data->option.shadow = true;
 	data->option.anti_aliasing = false;
 	data->sp_nb = 0;
 	data->pl_nb = 0;
@@ -118,12 +130,16 @@ void	init_minirt_data(t_minirt_data * data)
 	data->lt_nb = 0;
 	data->al_nb = 0;
 	data->ca_nb = 0;
+	data->disk_nb = tmp.disk_nb;
 	data->co_nb = tmp.co_nb;
 	data->cone_arr = tmp.cone_arr;
+	data->disk_arr = tmp.disk_arr;
 }
 
 void	*suppress_light(t_light light, t_minirt_data *data_pt);
-void	print_data(char *msg, t_minirt_data *data);
+void			print_data(char *msg, t_minirt_data *data);
+void	change_cylinder_coord(t_minirt_data *data_pt);
+bool	add_disk(t_minirt_data *data_pt);
 
 int main(int ac, char **av)
 {
@@ -141,6 +157,9 @@ int main(int ac, char **av)
 		print_data("main", &data);
 	}
 	else
+		return (1);
+	change_cylinder_coord(&data);
+	if (!add_disk(&data))
 		return (1);
 	ft_create_win(&win);
 	screen_loop(&win, &data);

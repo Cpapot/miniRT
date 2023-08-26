@@ -6,11 +6,17 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 16:36:56 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/01 22:12:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "checkerboard.h"
+#include "reflection.h"
+#include "material.h"
+
+double	quadratic_equation(double a, double b, double c);
+t_point	sphere_mapping(t_point point, double radius);
 
 t_vec_3	sphere_normal(t_ray camray, double t, t_point center)
 {
@@ -29,7 +35,6 @@ double	sphere_hited(t_ray ray, t_sphere sphere)
 	double	A;
 	double	B;
 	double	C;
-	double	delta;
 	t_vec_3	sphere_vect;
 
 	sphere_vect.x = ray.origin.x - sphere.origin.x;
@@ -38,27 +43,17 @@ double	sphere_hited(t_ray ray, t_sphere sphere)
 	A = scalar_product(ray.direction, ray.direction);
 	B = 2 * scalar_product(ray.direction, sphere_vect);
 	C = scalar_product(sphere_vect, sphere_vect) - pow((sphere.diameter) / 2.0, 2);
-	delta = pow(B, 2) - 4 * A * C;
-	if (delta >= 0)
-	{
-		if (((-B - sqrt(delta)) / (2 * A)) > 0)
-			return ((-B - sqrt(delta)) / (2 * A));
-		else if (((-B + sqrt(delta)) / (2 * A)) > 0)
-			return (-2);
-		else
-			return (-1);
-	}
-		return (-1);
+	return(quadratic_equation(A, B, C));
 }
 
-int	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
+t_hit	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
 {
-	size_t	index;
-	double	tmp;
-	double	t;
-	int		id;
+	size_t		index;
+	double		tmp;
+	double		t;
+	t_hit		info;
 
-	id = -1;
+	info.id = -1;
 	index = 0;
 	tmp = INT_MAX;
 	while (index != count)
@@ -67,22 +62,36 @@ int	find_near_sphere(t_ray camray, size_t count, t_sphere *sphere_arr)
 		if (tmp > t && (t != -1 || t == -2))
 		{
 			tmp = t;
-			id = index;
+			info.id = index;
 		}
 		index++;
 	}
-	return (id);
+	info.t = tmp;
+	return (info);
 }
 
-int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data)
+
+int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
 {
 	t_sphere	*sp;
 	t_color		ratio;
+	t_point		hit;
+	double		material[3];
+	t_material	mat;
+	t_ray		reflect_ray;
 
+	mat = metal_material();
+	material[0] = mat.specular_coef;
+	material[1] = mat.alpha;
 	sp = (t_sphere *)info.struct_info;
-	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
-	sphere_normal(camray, info.t, sp->origin));
+	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));
+	//if (is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
+	//	return (ft_color(0, 0, 0, 0));
+	ratio = ft_find_light_ratio(hit, data, \
+	sphere_normal(camray, info.t, sp->origin), material);
 	ambient_lightning(&ratio, &data);
-	return (ft_color(sp->color.r * ratio.r, sp->color.g * \
-	ratio.g, sp->color.b * ratio.b, 0));
+	reflect_ray.direction = reflect_vec(sphere_normal(camray, info.t, sp->origin), camray.direction);
+	reflect_ray.origin = hit;
+	return (reflection(ft_color(sp->color.r * ratio.r, sp->color.g * \
+		ratio.g, sp->color.b * ratio.b, 0), data, reflect_ray, level, &mat));
 }

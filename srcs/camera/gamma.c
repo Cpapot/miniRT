@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cone.h                                             :+:      :+:    :+:   */
+/*   gamma.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 16:23:07 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 02:29:30 by cpapot           ###   ########.fr       */
+/*   Created: 2023/08/01 22:27:37 by cpapot            #+#    #+#             */
+/*   Updated: 2023/08/01 22:58:59 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONE_H
+#include "miniRT.h"
 
-# define CONE_H
-# include "structure.h"
+int32_t	mod_gamma(int32_t object_color)
+{
+	t_color	gamma;
+	t_color	color;
+	double	scale;
 
-double		cone_hitted(t_ray camray, t_cone cone);
-t_hit		find_near_cone(t_ray camray, size_t count, t_cone *cone_arr);
-t_vec_3		cone_normal(t_ray camray, double t, t_cone cone);
-int32_t		render_cone(t_hitinfo info, t_ray camray, t_minirt_data data);
-
-#endif
+	scale = 155;
+	color = int_to_rgb(object_color);
+	gamma.r = sqrt(scale * color.r);
+	gamma.g = sqrt(scale * color.g);
+	gamma.b = sqrt(scale * color.b);
+	return (ft_color(gamma.r, gamma.g, gamma.b, 0));
+}
