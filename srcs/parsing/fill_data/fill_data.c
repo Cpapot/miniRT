@@ -2,12 +2,12 @@
 // Created by bpoumeau on 6/9/23.
 //
 
-#include "structure.h"
+#include "../../../inc/structure.h"
 #include "stdlib.h"
 #include "stdio.h"
 #include "unistd.h"
-#include "libft.h"
-#include "minirt_data.h"
+#include "../../../libft/includes/libft.h"
+#include "../../../inc/minirt_data.h"
 
 #define INIT 0
 #define FILLING 1
@@ -35,7 +35,6 @@ bool	call_filling_ft(char **lines)
 	size_t nb = 0;
 	while (*tmp)
 	{
-		puts("la");
 		nb++;
 		i = 0;
 		while (ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
