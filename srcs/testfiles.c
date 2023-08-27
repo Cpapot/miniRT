@@ -45,7 +45,7 @@ t_minirt_data	create_struct()
 	test.cone_arr = malloc(sizeof(t_cone));
 	test.cone_arr[0] = init_cone();
 
-	test.disk_nb = 0;
+	test.di_nb = 0;
 	test.disk_arr = malloc(sizeof(t_disk));
 	test.disk_arr[0] = init_disk();
 	return (test);

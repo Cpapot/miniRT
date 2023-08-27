@@ -69,7 +69,7 @@ void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 		index++;
 	}
 	index = 0;
-	while (data->disk_nb != (size_t)index)
+	while (data->di_nb != (size_t)index)
 	{
 		disk = data->disk_arr[index];
 		data->disk_arr[index].normal_vector = plane_normal(cam->vector, disk_to_plane(disk));
@@ -118,28 +118,44 @@ t_minirt_data	create_struct();
 
 void	init_minirt_data(t_minirt_data * data)
 {
-	t_minirt_data tmp;
-
-	tmp = create_struct();
+    ft_bzero(data, sizeof(t_minirt_data));
 	data->option.cam_id = 0;
 	data->option.shadow = true;
 	data->option.anti_aliasing = false;
-	data->sp_nb = 0;
-	data->pl_nb = 0;
-	data->cy_nb = 0;
-	data->lt_nb = 0;
-	data->al_nb = 0;
-	data->ca_nb = 0;
-	data->disk_nb = tmp.disk_nb;
-	data->co_nb = tmp.co_nb;
-	data->cone_arr = tmp.cone_arr;
-	data->disk_arr = tmp.disk_arr;
 }
 
 void	*suppress_light(t_light light, t_minirt_data *data_pt);
-void			print_data(char *msg, t_minirt_data *data);
+void	print_data(char *msg, t_minirt_data *data);
 void	change_cylinder_coord(t_minirt_data *data_pt);
 bool	add_disk(t_minirt_data *data_pt);
+
+int    clean_minirt_data(t_minirt_data *data_pt)
+{
+    if (data_pt->ambient_light != NULL)
+        free(data_pt->ambient_light);
+    if (data_pt->camera != NULL)
+        free(data_pt->camera);
+    if (data_pt->lights_arr != NULL)
+        free(data_pt->lights_arr);
+    if (data_pt->sphere_arr != NULL)
+        free(data_pt->sphere_arr);
+    if (data_pt->plane_arr != NULL)
+        free(data_pt->plane_arr);
+    if (data_pt->cylinder_arr != NULL)
+        free(data_pt->cylinder_arr);
+    if (data_pt->cone_arr != NULL)
+        free(data_pt->cone_arr);
+    if (data_pt->disk_arr != NULL)
+        free(data_pt->disk_arr);
+  return (1);  
+}
+#include <stdio.h>
+
+void    usage_display(void)
+{
+    dprintf(2, "Usage is : ./MiniRT [ARGUMENTS]\n%s",
+        "ARGUMENTS must be a .rt file with at least one camera\n");
+}
 
 int main(int ac, char **av)
 {
@@ -150,14 +166,9 @@ int main(int ac, char **av)
 	t_minirt_data	data;
 
 	init_minirt_data(&data);
-	if (ac > 1)
-	{
-		if (parsing(&data, av[1]) == false)
-			return (1);
-		print_data("main", &data);
-	}
-	else
-		return (1);
+	if (ac == 1  || parsing(&data, av[1]) == false)
+        return (usage_display(), clean_minirt_data(&data));
+    print_data("main", &data);
 	change_cylinder_coord(&data);
 	if (!add_disk(&data))
 		return (1);

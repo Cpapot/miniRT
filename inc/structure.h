@@ -74,7 +74,7 @@ struct s_minirt_data
 	t_cylinder		*cylinder_arr;
 	size_t			co_nb;
 	t_cone			*cone_arr;
-	size_t			disk_nb;
+	size_t			di_nb;
 	t_disk			*disk_arr;
 	t_option		option;
 	int				level;
