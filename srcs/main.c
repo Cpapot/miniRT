@@ -16,7 +16,7 @@
 #include "../inc/camera.h"
 #include "../inc/color.h"
 #include "../inc/key.h"
-#include "light.h"
+#include "../inc/light.h"
 /**/
 
 //on dois la set pour chaque camera

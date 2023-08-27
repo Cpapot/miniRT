@@ -285,7 +285,7 @@ bool manage_di(t_minirt_data *data_pt, char *line)
     int i;
 
     puts("manage di");
-    data_pt->cy_nb++;
+    data_pt->di_nb++;
     i = 0;
     while (parse_ft_arr[i]) 
     {
@@ -305,7 +305,7 @@ bool manage_co(t_minirt_data *data_pt, char *line)
         &space_incr, &rgb_check, &check_empty, NULL};
     size_t i;
 
-    data_pt->cy_nb++;
+    data_pt->co_nb++;
     i = 0;
     while (parse_ft_arr[i]) 
     {
@@ -336,7 +336,7 @@ static bool _check_lines(t_minirt_data *data_pt, char **lines) {
   const char *id_arr[] = {"A", "C", "L", "sp", "pl", "cy", "di", "co", "#", "\n"};
   const t_parse_ft parse_ft_arr[] = {&manage_a,  &manage_c,  &manage_l,
                                      &manage_sp, &manage_pl, &manage_cy,
-                                     &manage_di, &manage_co, &emmit_err};
+                                     &manage_di, &manage_co, &do_nothing};
 
   i = 0;
   tmp = lines;
