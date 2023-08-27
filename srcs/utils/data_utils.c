@@ -32,7 +32,7 @@ t_disk	*copy_old_diskdata(t_minirt_data *data_pt)
 	index = 0;
 	disk_arr = malloc((data_pt->di_nb + data_pt->cy_nb * 2 + data_pt->co_nb) * sizeof(t_disk));
 	if (errno)
-		return (perror("here"), free_minirt_data_content(data_pt), NULL);
+		return (perror("here"), clean_minirt_data(data_pt), NULL);
 	while (index != data_pt->di_nb)
 	{
 		disk_arr[index] = data_pt->disk_arr[index];

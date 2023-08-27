@@ -262,3 +262,34 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder)
 	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &cylinder->color));
 }
+
+bool    get_line_data_di(char *line, t_disk *disk)
+{
+    go_to_next_data(&line);
+    if (ft_atocoord_on(line, &disk->coordinate) == false)
+        return (false);
+    go_to_next_data(&line);
+	if (ft_atovec_on(line, &disk->normal_vector) == false)
+		return (false);
+	if (ft_atod_on(line, &disk->diameter) == false)
+		return (false);
+    go_to_next_data(&line);
+	return (ft_atorgb_on(line, &disk->color));
+}
+
+bool    get_line_data_co(char *line, t_cone *cone)
+{
+    go_to_next_data(&line);
+    if (ft_atocoord_on(line, &cone->coordinate) == false)
+        return (false);
+    go_to_next_data(&line);
+	if (ft_atovec_on(line, &cone->vector) == false)
+		return (false);
+	if (ft_atod_on(line, &cone->diameter) == false)
+		return (false);
+	go_to_next_data(&line);
+	if (ft_atod_on(line, &cone->height) == false)
+		return (false);
+    go_to_next_data(&line);
+	return (ft_atorgb_on(line, &cone->color));
+}
