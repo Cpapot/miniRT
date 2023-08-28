@@ -212,10 +212,28 @@ bool manage_c(t_minirt_data *data_pt, char *line) {
   return (true);
 }
 
+bool check_for_material(char **line)
+{
+    char    *str_arr[] = {"Plastic", "Metal", "Mirror", "Checkerboard"};
+    int     i;
+
+    space_incr(line);
+    if (**line == '\0')
+        return (true);
+    i = 0;
+    while (i < 4)
+    {
+        if (ft_strncmp(str_arr[i], *line, ft_strlen(str_arr[i])) == 0)
+            return (true);
+        i++;
+    }
+    return (false);
+}
+
 bool manage_l(t_minirt_data *data_pt, char *line) {
   const t_mini_parse_ft parse_ft_arr[] = {
       &incr_one,   &space_incr, &coord_check, &space_incr, &check_float,
-      &space_incr, &rgb_check,  &check_empty, NULL};
+      &space_incr, &rgb_check, &check_for_material, &check_empty, NULL};
   size_t i;
 
   data_pt->lt_nb++;
@@ -231,7 +249,7 @@ bool manage_l(t_minirt_data *data_pt, char *line) {
 bool manage_sp(t_minirt_data *data_pt, char *line) {
   const t_mini_parse_ft parse_ft_arr[] = {
       &incr_one,    &incr_one,   &space_incr, &coord_check, &space_incr,
-      &check_float, &space_incr, &rgb_check,  &check_empty, NULL};
+      &check_float, &space_incr, &rgb_check, &check_for_material,  &check_empty, NULL};
   size_t i;
 
   data_pt->sp_nb++;
@@ -247,7 +265,7 @@ bool manage_sp(t_minirt_data *data_pt, char *line) {
 bool manage_pl(t_minirt_data *data_pt, char *line) {
   const t_mini_parse_ft parse_ft_arr[] = {
       &incr_one,  &incr_one,   &space_incr, &coord_check, &space_incr,
-      &vec_check, &space_incr, &rgb_check,  &check_empty, NULL};
+      &vec_check, &space_incr, &rgb_check, &check_for_material,  &check_empty, NULL};
   size_t i;
 
   data_pt->pl_nb++;
@@ -264,7 +282,7 @@ bool manage_cy(t_minirt_data *data_pt, char *line) {
   const t_mini_parse_ft parse_ft_arr[] = {
       &incr_one,   &incr_one,   &space_incr,  &coord_check, &space_incr,
       &vec_check,  &space_incr, &check_float, &space_incr,  &check_float,
-      &space_incr, &rgb_check,  &check_empty, NULL};
+      &space_incr, &rgb_check,  &check_for_material, &check_empty, NULL};
   size_t i;
 
   data_pt->cy_nb++;
@@ -281,7 +299,8 @@ bool manage_di(t_minirt_data *data_pt, char *line)
 {
     const t_mini_parse_ft parse_ft_arr[] = {
         &incr_one, &incr_one, &space_incr, &coord_check, &space_incr,
-        &vec_check, &space_incr, &check_float, &space_incr, &rgb_check, &check_empty, NULL};
+        &vec_check, &space_incr, &check_float, &space_incr, &rgb_check,
+        &check_for_material, &check_empty, NULL};
     int i;
 
     puts("manage di");
@@ -302,7 +321,7 @@ bool manage_co(t_minirt_data *data_pt, char *line)
     const t_mini_parse_ft parse_ft_arr[] = {
         &incr_one, &incr_one, &space_incr, &coord_check, &space_incr,
         &vec_check, &space_incr, &check_float, &space_incr, &check_float,
-        &space_incr, &rgb_check, &check_empty, NULL};
+        &space_incr, &rgb_check, &check_for_material, &check_empty, NULL};
     size_t i;
 
     data_pt->co_nb++;

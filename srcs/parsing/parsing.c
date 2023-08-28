@@ -1,9 +1,9 @@
 
-#include "structure.h"
-#include "fcntl.h"
-#include "stdbool.h"
-#include "stdio.h"
-#include "unistd.h"
+#include "../../inc/structure.h"
+#include <fcntl.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <unistd.h>
 
 bool	fill_data(t_minirt_data *data_pt, char *file);
 bool	read_fd_in_str(int fd, char **dst);
