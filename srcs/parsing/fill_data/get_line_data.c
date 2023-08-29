@@ -249,6 +249,7 @@ bool	get_line_data_sp(char *line, t_sphere *sphere)
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &sphere->diameter) == false)
 		return (false);
+    go_to_next_data(&line);
     if (ft_atorgb_on(line, &sphere->color) == false)
         return (false);
     go_to_next_data(&line);

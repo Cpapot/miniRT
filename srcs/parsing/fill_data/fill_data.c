@@ -2,9 +2,11 @@
 #include "../../../libft/includes/libft.h"
 #include "../../../inc/filling_ft.h"
 #include "../../../inc/check_lines_ft.h"
+#include "stdio.h"
 
 static bool _check_lines(t_minirt_data *data_pt, char **lines);
 static bool _fill_lines_in_data(t_minirt_data *data_pt, char **lines);
+static bool _call_filling_ft(char **lines);
 
 
 bool fill_data(t_minirt_data *data_pt, char *file)
@@ -17,10 +19,19 @@ bool fill_data(t_minirt_data *data_pt, char *file)
     return (perror("fill_data"), false);
   if (_check_lines(data_pt, lines) == false || allocate_data(data_pt) == false)
     return (ft_free_split(lines), false);
+  puts("maps checked");
   return (_fill_lines_in_data(data_pt, lines));
 }
 
-bool call_filling_ft(char **lines)
+bool _fill_lines_in_data(t_minirt_data *data_pt, char **lines)
+{
+  init_filling_ft(data_pt);
+  if (_call_filling_ft(lines) == false)
+    return (false);
+  return (true);
+}
+
+static bool _call_filling_ft(char **lines)
 {
   const t_filling_ft ft_arr[] = {&fill_a,  &fill_c,  &fill_l,
                                  &fill_sp, &fill_pl, &fill_cy,
@@ -37,6 +48,7 @@ bool call_filling_ft(char **lines)
     i = 0;
     while (i < 8 && ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
       i++;
+    puts(*tmp);
     if (i < 8 && ft_arr[i](*tmp, FILLING) == false)
       return (ft_free_split(lines), false);
     tmp++;
@@ -45,13 +57,6 @@ bool call_filling_ft(char **lines)
   return (true);
 }
 
-bool _fill_lines_in_data(t_minirt_data *data_pt, char **lines)
-{
-  init_filling_ft(data_pt);
-  if (call_filling_ft(lines) == false)
-    return (false);
-  return (true);
-}
 
 static bool _check_lines(t_minirt_data *data_pt, char **lines)
 {

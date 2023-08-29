@@ -1,5 +1,6 @@
 #include "../../../inc/structure.h"
 #include "../../../inc/mini_parse_ft.h"
+#include "unistd.h"
 
 
 bool manage_a(t_minirt_data *data_pt, char *line)
@@ -112,7 +113,6 @@ bool manage_di(t_minirt_data *data_pt, char *line)
         &check_for_material, &check_empty, NULL};
     int i;
 
-    puts("manage di");
     data_pt->di_nb++;
     i = 0;
     while (parse_ft_arr[i]) 
@@ -121,7 +121,6 @@ bool manage_di(t_minirt_data *data_pt, char *line)
             return (false);
         i++;
     }
-    puts("manage di");
     return (true);
 }
 
@@ -149,6 +148,7 @@ bool emmit_err(t_minirt_data *data_pt, char *line)
   (void)data_pt;
   if (*line == 0 || *line == '#')
     return (true);
-  ft_printf_fd(2, "Invalid identifier\n");
+  if (write(2, "Invalid identifier\n", 19) == 0)
+      return (false);
   return (false);
 }

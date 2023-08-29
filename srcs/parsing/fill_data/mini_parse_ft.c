@@ -133,7 +133,6 @@ bool check_for_material(char **line)
         }
         i++;
     }
-    puts("bigre");
     return (false);
 }
 

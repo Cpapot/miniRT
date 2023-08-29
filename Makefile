@@ -35,6 +35,8 @@ SRCS		= object/light.c \
 			parsing/fill_data/get_line_data.c \
 			parsing/fill_data/fill_data.c \
 			parsing/fill_data/filling_ft.c \
+			parsing/fill_data/mini_parse_ft.c \
+			parsing/fill_data/manage_ft.c \
 			parsing/lstc_2.c \
 			parsing/lstc.c \
 			utils/minirt_data.c \
