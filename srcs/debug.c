@@ -2,7 +2,7 @@
 // Created by bpoumeau on 6/14/23.
 //
 
-#include "structure.h"
+#include "../inc/structure.h"
 
 #include "stdio.h"
 
@@ -51,12 +51,18 @@ void	print_light(t_light light)
 	printf("brightness %f\n", light.brightness);
 }
 
+void    print_material(t_material material)
+{
+    printf("material %f %f %f", material.alpha, material.reflection, material.specular_coef);
+}
+
 void	print_sphere(t_sphere sphere)
 {
 	printf("\n\nsphere\n");
 	print_point(sphere.origin);
 	printf("diameter %f\n", sphere.diameter);
 	print_color(sphere.color);
+    print_material(sphere.material);
 }
 
 void	print_plane(t_plane plane)
@@ -65,6 +71,7 @@ void	print_plane(t_plane plane)
 	print_point(plane.coordinate);
 	print_vector(plane.normal_vector);
 	print_color(plane.color);
+    print_material(plane.material);
 }
 
 void	print_cylinder(t_cylinder cylinder)
@@ -74,7 +81,28 @@ void	print_cylinder(t_cylinder cylinder)
 	print_vector(cylinder.normal_vector);
 	printf("diameter %f, height %f\n", cylinder.diameter, cylinder.height);
 	print_color(cylinder.color);
+    print_material(cylinder.material);
 }
+
+void	print_cone(t_cone cylinder)
+{
+	printf("\n\ncone\n");
+	print_point(cylinder.coordinate);
+	print_vector(cylinder.vector);
+	printf("diameter %f, height %f\n", cylinder.diameter, cylinder.height);
+	print_color(cylinder.color);
+    print_material(cylinder.material);
+}
+void	print_disk(t_disk cylinder)
+{
+	printf("\n\ndisk\n");
+	print_point(cylinder.coordinate);
+	print_vector(cylinder.normal_vector);
+	printf("diameter %f\n", cylinder.diameter);
+	print_color(cylinder.color);
+    print_material(cylinder.material);
+}
+
 
 void print_data(char *msg, t_minirt_data *data)
 {
@@ -133,4 +161,22 @@ void print_data(char *msg, t_minirt_data *data)
 		print_light(*tmp_lt);
 		tmp_lt++;
 	}
+    size = data->co_nb;
+    t_cone  *tmp_co;
+    tmp_co = data->cone_arr;
+    while (size--)
+    {
+        print_cone(*tmp_co);
+        tmp_co++;
+    }
+    size = data->di_nb;
+    t_disk  *tmp_di;
+    tmp_di = data->disk_arr;
+    while (size--)
+   {
+    
+        print_disk(*tmp_di);
+        tmp_di++;
+    }
+    puts("debug done");
 }

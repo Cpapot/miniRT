@@ -53,7 +53,7 @@ t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 		info.struct_info = &data.cylinder_arr[hit.id];
 		info.t = hit.t;
 	}
-	hit = find_near_disk(camray, data.disk_nb, data.disk_arr);
+	hit = find_near_disk(camray, data.di_nb, data.disk_arr);
 	if (hit.id != -1 && info.t > hit.t)
 	{
 		info.type = DISK;

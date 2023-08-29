@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../libft/includes/libft.h"
 
 t_lstc	*read_lstc_from_fd(int fd);
 void	ft_lstclean(t_lstc *head, void (*del)(void *));
@@ -61,7 +61,6 @@ bool	read_fd_in_str(int fd, char **dst)
 
 	lst = read_lstc_from_fd(fd);
 	read_lst(lst);
-	puts("read fd in str");
 	if (lst == NULL)
 	{
 		puts("in NULL");

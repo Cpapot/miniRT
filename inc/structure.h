@@ -39,9 +39,9 @@ typedef struct s_light			t_light;
 typedef struct s_sphere			t_sphere;
 typedef struct s_plane			t_plane;
 typedef struct s_cylinder		t_cylinder;
-typedef struct s_option			t_option;
 typedef struct s_cone			t_cone;
 typedef struct s_disk			t_disk;
+typedef struct s_option			t_option;
 typedef struct s_material		t_material;
 
 struct s_material
@@ -49,6 +49,7 @@ struct s_material
 	double	reflection;
 	double	specular_coef;
 	double	alpha;
+    bool    is_board;
 };
 
 struct s_option
@@ -74,7 +75,7 @@ struct s_minirt_data
 	t_cylinder		*cylinder_arr;
 	size_t			co_nb;
 	t_cone			*cone_arr;
-	size_t			disk_nb;
+	size_t			di_nb;
 	t_disk			*disk_arr;
 	t_option		option;
 	int				level;
@@ -148,8 +149,8 @@ struct	s_disk
 {
 	t_point	coordinate;
 	t_vec_3	normal_vector;
-	t_color	color;
 	double	diameter;
+	t_color	color;
 	t_material	material;
 };
 

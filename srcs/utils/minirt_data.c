@@ -3,20 +3,10 @@
 //
 
 #include <stdlib.h>
-#include "structure.h"
+#include "../../inc/structure.h"
 #include <stdbool.h>
 #include "errno.h"
 #include <stdio.h>
-
-void	free_minirt_data_content(t_minirt_data *data_pt)
-{
-	free(data_pt->cylinder_arr);
-	free(data_pt->sphere_arr);
-	free(data_pt->plane_arr);
-	free(data_pt->lights_arr);
-	free(data_pt->ambient_light);
-	free(data_pt->camera);
-}
 
 ////void	print_data(char *msg, t_minirt_data *data)
 //{
@@ -38,9 +28,9 @@ bool	allocate_data(t_minirt_data *data_pt)
 	data_pt->lights_arr = malloc(sizeof(t_light) * data_pt->lt_nb);
 	data_pt->ambient_light = malloc(sizeof(t_ambient_light) * data_pt->al_nb);
 	data_pt->camera = malloc(sizeof (t_camera) * data_pt->ca_nb);
-	puts("allocated");
+    data_pt->cone_arr = malloc(sizeof(t_cone) * data_pt->co_nb);
+    data_pt->disk_arr = malloc(sizeof(t_disk) * data_pt->di_nb);
 	if (errno)
-		return (perror("here"), free_minirt_data_content(data_pt), false);
-	puts("damned");
+		return (perror("allocate_data"), false);
 	return (true);
 }
