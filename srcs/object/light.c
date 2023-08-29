@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 19:10:43 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:24:10 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	delete_hidden_light(t_minirt_data *data, t_point point)
 	}
 }
 
-double	specular_light_ratio(t_vec_3 light_dir, t_vec_3 normal, double mat[2])
+double	specular_light_ratio(t_vec_3 light_dir, t_vec_3 normal, t_material *mat)
 {
 	t_vec_3	view_vec;
 	double	result;
@@ -85,10 +85,10 @@ double	specular_light_ratio(t_vec_3 light_dir, t_vec_3 normal, double mat[2])
 	result = -scalar_product(view_vec, light_dir);
 	if (result < 0)
 		result = 0;
-	result = pow(result, mat[1]);
+	result = pow(result, mat->alpha);
 	return (result);
 }
-t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal, double mat[3])
+t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal, t_material *mat)
 {
 	size_t	index;
 	t_color	result;
@@ -110,9 +110,9 @@ t_color	ft_find_light_ratio(t_point hitpoint, t_minirt_data data, t_vec_3 normal
 		ratio[0] = check_intersection(light, hitpoint, normal);
 		if (!data.option.shadow || check_shadow(hitpoint, light, &data))
 		{
-			result.r += light.color.r * ratio[0] * 0.004 * light.brightness + mat[0] * ratio[1];
-			result.g += light.color.g * ratio[0] * 0.004 * light.brightness + mat[0] * ratio[1];
-			result.b += light.color.b * ratio[0] * 0.004 * light.brightness + mat[0] * ratio[1];
+			result.r += light.color.r * ratio[0] * 0.004 * light.brightness + mat->specular_coef * ratio[1];
+			result.g += light.color.g * ratio[0] * 0.004 * light.brightness + mat->specular_coef * ratio[1];
+			result.b += light.color.b * ratio[0] * 0.004 * light.brightness + mat->specular_coef * ratio[1];
 		}
 		index++;
 	}

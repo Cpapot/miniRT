@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:12:22 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:30:54 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,18 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int leve
 	t_sphere	*sp;
 	t_color		ratio;
 	t_point		hit;
-	double		material[3];
-	t_material	mat;
 	t_ray		reflect_ray;
 
-	mat = metal_material();
-	material[0] = mat.specular_coef;
-	material[1] = mat.alpha;
+
 	sp = (t_sphere *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));
 	//if (is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
 	//	return (ft_color(0, 0, 0, 0));
 	ratio = ft_find_light_ratio(hit, data, \
-	sphere_normal(camray, info.t, sp->origin), material);
+	sphere_normal(camray, info.t, sp->origin), &sp->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(sphere_normal(camray, info.t, sp->origin), camray.direction);
 	reflect_ray.origin = hit;
 	return (reflection(ft_color(sp->color.r * ratio.r, sp->color.g * \
-		ratio.g, sp->color.b * ratio.b, 0), data, reflect_ray, level, &mat));
+		ratio.g, sp->color.b * ratio.b, 0), data, reflect_ray, level, &sp->material));
 }

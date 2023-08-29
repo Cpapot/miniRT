@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:05:41 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:29:47 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,22 +100,18 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data, int le
 {
 	t_cylinder	*cy;
 	t_color		ratio;
-	double		material[3];
 	t_point		hit;
 	t_ray		reflect_ray;
 
-	material[0] = 0.797357;
-	material[1] = 83.2;
-	material[2] = CYLINDER;
 	cy = (t_cylinder *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), cylinder_normal(camray, info.t, *cy));
 	//if (is_black_case(hit))
 	//	return (ft_color(0, 0, 0, 0));
 	ratio = ft_find_light_ratio(hit, data, \
-	cylinder_normal(camray, info.t, *cy), material);
+	cylinder_normal(camray, info.t, *cy), &cy->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(cylinder_normal(camray, info.t, *cy), camray.direction);
 	reflect_ray.origin = hit;
 	return (reflection(ft_color(cy->color.r * ratio.r, cy->color.g * \
-		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, level, NULL));
+		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, level, &cy->material));
 }

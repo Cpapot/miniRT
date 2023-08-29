@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 04:54:54 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/29 17:30:19 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,10 @@ int32_t	render_cone(t_hitinfo info, t_ray camray, t_minirt_data data)
 {
 	t_cone		*co;
 	t_color		ratio;
-	double		material[3];
 
-	material[0] = 0.9;
-	material[1] = 30;
-	material[2] = CONE;
 	co = (t_cone *)info.struct_info;
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
-	cone_normal(camray, info.t, *(t_cone *)info.struct_info), material);
+	cone_normal(camray, info.t, *(t_cone *)info.struct_info), &co->material);
 	ambient_lightning(&ratio, &data);
 	return (ft_color(co->color.r * ratio.r, co->color.g * \
 	ratio.g, co->color.b * ratio.b, 0));
