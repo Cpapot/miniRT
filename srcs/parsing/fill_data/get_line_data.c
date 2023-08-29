@@ -65,10 +65,6 @@ bool    ft_material_on(char *line, t_material *dst)
     t_material material_arr[] = {METAL, MIRROR, CHECKERBOARD, PLASTIC, BASIC};
     int i;
 
-    while (*line != ' ' && *line != '\t' && *line != 0)
-        line++;
-    while (*line == ' ' || *line == '\t')
-        line++;
     i = 0;
     while (i < 4 && ft_strncmp(str_arr[i], line, 2) != 0)
         i++;
