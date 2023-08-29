@@ -49,6 +49,7 @@ struct s_material
 	double	reflection;
 	double	specular_coef;
 	double	alpha;
+    bool    is_board;
 };
 
 struct s_option

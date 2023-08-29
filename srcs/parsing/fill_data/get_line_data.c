@@ -2,9 +2,9 @@
 // Created by bpoumeau on 6/13/23.
 //
 
-#include <structure.h>
-#include <libft.h>
-#include "stdio.h"
+#include "../../../inc/structure.h"
+#include "../../../libft/includes/libft.h"
+#include <stdio.h>
 
 static void	_go_to_decimal_part(char **line)
 {
@@ -43,15 +43,37 @@ bool	ft_atof_on(char *line, double *dst)
 	if (ft_isdigit(*line) && ft_atoi_on(line, &tmp) == false)
 		return (false);
 	decimal = to_decimal(tmp, line);
-	printf("tm %d decimal :%f\n", tmp, decimal);
 	if (integer < 0)
 		decimal -= integer;
 	else
 		decimal += integer;
-	printf("atof %.15f\n", decimal);
 	*dst = decimal;
 	return (true);
+}
 
+#define METAL {.reflection = 0.25, .specular_coef = 0.64, .alpha = 15, .is_board = false}
+#define MIRROR {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = false}
+#define CHECKERBOARD {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = true}
+#define PLASTIC {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = false}
+#define BASIC {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = false}
+
+void    print_material(t_material material);
+
+bool    ft_material_on(char *line, t_material *dst)
+{
+    char *str_arr[] = {"Me", "Mi", "Ch", "Pl", ""};
+    t_material material_arr[] = {METAL, MIRROR, CHECKERBOARD, PLASTIC, BASIC};
+    int i;
+
+    while (*line != ' ' && *line != '\t' && *line != 0)
+        line++;
+    while (*line == ' ' || *line == '\t')
+        line++;
+    i = 0;
+    while (i < 4 && ft_strncmp(str_arr[i], line, 2) != 0)
+        i++;
+    *dst = material_arr[i];
+    return (true);
 }
 
 double to_decimal_ll(long long nb, char *line)
@@ -94,9 +116,9 @@ bool	ft_atod_on(char *line, double *dst)
 
 void	go_to_next_data(char **line_pt)
 {
-	while (**line_pt != ' ')
+	while (**line_pt != ' ' && **line_pt != '\t')
 		*line_pt = (*line_pt) + 1;
-	while (**line_pt == ' ')
+	while (**line_pt == ' ' || **line_pt == '\t')
 		*line_pt = (*line_pt) + 1;
 }
 
@@ -162,8 +184,6 @@ bool	ft_atovec_on(char *line, t_vec_3 *dst)
 	_go_to_next_float(&line);
 	if (ft_atod_on(line, &dst->z) == false)
 		return (false);
-	//if (dst->x > 1 || dst->y > 1 || dst->z > 1)
-		//return (false);
 	print_vector(*dst);
 	return (true);
 }
@@ -229,8 +249,10 @@ bool	get_line_data_sp(char *line, t_sphere *sphere)
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &sphere->diameter) == false)
 		return (false);
-	go_to_next_data(&line);
-	return (ft_atorgb_on(line, &sphere->color));
+    if (ft_atorgb_on(line, &sphere->color) == false)
+        return (false);
+    go_to_next_data(&line);
+    return (ft_material_on(line, &sphere->material));
 }
 
 bool	get_line_data_pl(char *line, t_plane *plane)
@@ -241,8 +263,10 @@ bool	get_line_data_pl(char *line, t_plane *plane)
 	go_to_next_data(&line);
 	if (ft_atovec_on(line, &plane->normal_vector) == false)
 		return (false);
-	go_to_next_data(&line);
-	return (ft_atorgb_on(line, &plane->color));
+    if (ft_atorgb_on(line, &plane->color) == false)
+        return (false);
+    go_to_next_data(&line);
+    return (ft_material_on(line, &plane->material));
 }
 
 bool	get_line_data_cy(char *line, t_cylinder *cylinder)
@@ -259,8 +283,11 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder)
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &cylinder->height) == false)
 		return (false);
-	go_to_next_data(&line);
-	return (ft_atorgb_on(line, &cylinder->color));
+    go_to_next_data(&line);
+    if (ft_atorgb_on(line, &cylinder->color) == false)
+        return (false);
+    go_to_next_data(&line);
+    return (ft_material_on(line, &cylinder->material));
 }
 
 bool    get_line_data_di(char *line, t_disk *disk)
@@ -275,7 +302,10 @@ bool    get_line_data_di(char *line, t_disk *disk)
 	if (ft_atod_on(line, &disk->diameter) == false)
 		return (false);
     go_to_next_data(&line);
-	return (ft_atorgb_on(line, &disk->color));
+    if (ft_atorgb_on(line, &disk->color) == false)
+        return (false);
+    go_to_next_data(&line);
+    return (ft_material_on(line, &disk->material));
 }
 
 bool    get_line_data_co(char *line, t_cone *cone)
@@ -293,5 +323,8 @@ bool    get_line_data_co(char *line, t_cone *cone)
 	if (ft_atod_on(line, &cone->height) == false)
 		return (false);
     go_to_next_data(&line);
-	return (ft_atorgb_on(line, &cone->color));
+    if (ft_atorgb_on(line, &cone->color) == false)
+        return (false);
+    go_to_next_data(&line);
+    return (ft_material_on(line, &cone->material));
 }
