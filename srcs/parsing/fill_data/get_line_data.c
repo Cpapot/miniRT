@@ -264,6 +264,7 @@ bool	get_line_data_pl(char *line, t_plane *plane)
 	go_to_next_data(&line);
 	if (ft_atovec_on(line, &plane->normal_vector) == false)
 		return (false);
+	go_to_next_data(&line);
     if (ft_atorgb_on(line, &plane->color) == false)
         return (false);
     go_to_next_data(&line);
