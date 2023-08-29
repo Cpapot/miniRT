@@ -249,6 +249,7 @@ bool	get_line_data_sp(char *line, t_sphere *sphere)
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &sphere->diameter) == false)
 		return (false);
+	go_to_next_data(&line);
     if (ft_atorgb_on(line, &sphere->color) == false)
         return (false);
     go_to_next_data(&line);
@@ -263,6 +264,7 @@ bool	get_line_data_pl(char *line, t_plane *plane)
 	go_to_next_data(&line);
 	if (ft_atovec_on(line, &plane->normal_vector) == false)
 		return (false);
+	go_to_next_data(&line);
     if (ft_atorgb_on(line, &plane->color) == false)
         return (false);
     go_to_next_data(&line);
