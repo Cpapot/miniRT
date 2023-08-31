@@ -79,10 +79,20 @@ bool	add_disk(t_minirt_data *data_pt)
 	index = 0;
 	while (data_pt->co_nb != index)
 	{
-
+		disk_arr[data_pt->di_nb + disk_index].color = data_pt->cone_arr[index].color;
+		normalize_vec(&data_pt->cone_arr[index].vector);
+		cyl_vec = data_pt->cone_arr[index].vector;
+		multiplying_vec(&cyl_vec, (data_pt->cone_arr[index].height));
+		disk_arr[data_pt->di_nb + disk_index].coordinate.x = cyl_vec.x + data_pt->cone_arr[index].coordinate.x;
+		disk_arr[data_pt->di_nb + disk_index].coordinate.y = cyl_vec.y + data_pt->cone_arr[index].coordinate.y;
+		disk_arr[data_pt->di_nb + disk_index].coordinate.z = cyl_vec.z + data_pt->cone_arr[index].coordinate.z;
+		disk_arr[data_pt->di_nb + disk_index].material = data_pt->cone_arr[index].material;
+		disk_arr[data_pt->di_nb + disk_index].diameter = data_pt->cone_arr[index].diameter;
+		disk_arr[data_pt->di_nb + disk_index].normal_vector = data_pt->cone_arr[index].vector;
+		disk_index++;
 		index++;
 	}
-	data_pt->di_nb = data_pt->di_nb + data_pt->cy_nb * 2;
+	data_pt->di_nb = data_pt->di_nb + data_pt->cy_nb * 2 + data_pt->co_nb;
 	data_pt->disk_arr = disk_arr;
 	return (true);
 }
