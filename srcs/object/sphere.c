@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/31 15:29:52 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/31 17:28:02 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_vec_3	sphere_normal(t_ray camray, double t, t_point center)
 	result.x = hitpoint.x - center.x;
 	result.y = hitpoint.y - center.y;
 	result.z = hitpoint.z - center.z;
+	normalize_vec(&result);
 	return (result);
 }
 

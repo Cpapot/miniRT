@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/31 16:07:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/31 18:41:02 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,22 @@ double	quadratic_equation(double a, double b, double c);
 t_vec_3 cylinder_normal(t_ray camray, double t, t_cylinder cyl)
 {
 	t_vec_3	result;
-	double	scalar;
+	//double	scalar;
 	t_point	hit;
 	t_vec_3	dot;
-	t_vec_3	vec[2];
+	//t_vec_3	vec[2];
 
 	hit = hit_coord(t, camray);
 	dot = set_vec(hit.x, hit.y, hit.z);
-	normalize_vec(&dot);
-	vec[0] = set_vec(dot.x - cyl.coordinate.x, dot.y - cyl.coordinate.y, dot.z - cyl.coordinate.z);
-	scalar = scalar_product(vec[0], cyl.normal_vector);
-	vec[1] = set_vec(cyl.coordinate.x + scalar * cyl.normal_vector.x, cyl.coordinate.y + scalar * cyl.normal_vector.y, cyl.coordinate.z + scalar * cyl.normal_vector.z);
-	result = set_vec(dot.x - vec[1].x, dot.y - vec[1].y, dot.z - vec[1].z);
+	/*normalize_vec(&dot);
+		normalize_vec(&dot);
+		vec[0] = set_vec(dot.x - cyl.coordinate.x, dot.y - cyl.coordinate.y, dot.z - cyl.coordinate.z);
+		scalar = scalar_product(vec[0], cyl.normal_vector);
+		vec[1] = set_vec(cyl.coordinate.x + scalar * cyl.normal_vector.x, cyl.coordinate.y + scalar * cyl.normal_vector.y, cyl.coordinate.z + scalar * cyl.normal_vector.z);
+		result = set_vec(dot.x - vec[1].x, dot.y - vec[1].y, dot.z - vec[1].z);*/
+	result = minus_vec(adding_vec(set_vec(cyl.coordinate.x, cyl.coordinate.y, cyl.coordinate.z), multip_vec(cyl.normal_vector, scalar_product( \
+	minus_vec(dot, set_vec(cyl.coordinate.x, cyl.coordinate.y, cyl.coordinate.z)), cyl.normal_vector))), dot);
+	multiplying_vec(&result, -1);
 	normalize_vec(&result);
 	return (result);
 }

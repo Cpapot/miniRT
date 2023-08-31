@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:18:24 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 19:16:52 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/31 18:34:19 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ t_vec_3	vect_product(t_vec_3 vec1, t_vec_3 vec2)
 	return (result);
 }
 
+t_vec_3	minus_vec(t_vec_3 vec1, t_vec_3 vec2)
+{
+	t_vec_3	vec;
+
+	vec.x = vec1.x - vec2.x;
+	vec.y = vec1.y - vec2.y;
+	vec.z = vec1.z - vec2.z;
+	return (vec);
+}
+
 t_vec_3	adding_vec(t_vec_3 vec1, t_vec_3 vec2)
 {
 	t_vec_3	vec;
@@ -47,6 +57,14 @@ t_vec_3	*multiplying_vec(t_vec_3 *vec, double factor)
 	vec->x = vec->x * factor;
 	vec->y = vec->y * factor;
 	vec->z = vec->z * factor;
+	return (vec);
+}
+
+t_vec_3	multip_vec(t_vec_3 vec, double factor)
+{
+	vec.x = vec.x * factor;
+	vec.y = vec.y * factor;
+	vec.z = vec.z * factor;
 	return (vec);
 }
 

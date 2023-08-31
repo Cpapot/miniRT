@@ -76,6 +76,12 @@ bool	add_disk(t_minirt_data *data_pt)
 		disk_index++;
 		index++;
 	}
+	index = 0;
+	while (data_pt->co_nb != index)
+	{
+
+		index++;
+	}
 	data_pt->di_nb = data_pt->di_nb + data_pt->cy_nb * 2;
 	data_pt->disk_arr = disk_arr;
 	return (true);
