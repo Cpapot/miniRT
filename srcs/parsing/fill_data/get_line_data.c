@@ -51,11 +51,11 @@ bool	ft_atof_on(char *line, double *dst)
 	return (true);
 }
 
-#define METAL {.reflection = 0.2, .specular_coef = 15, .alpha = 0.64, .is_board = false}
+#define METAL {.reflection = 0.25, .specular_coef = 0.64, .alpha = 20, .is_board = false}
 #define MIRROR {.reflection = 1, .specular_coef = 0, .alpha = 0, .is_board = false}
 #define CHECKERBOARD {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = true}
-#define PLASTIC {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = false}
-#define BASIC {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = false}
+#define PLASTIC {.reflection = 0.15, .specular_coef = 0.66, .alpha = 5, .is_board = false}
+#define BASIC {.reflection = 0, .specular_coef = 0.4, .alpha = 10, .is_board = false}
 
 void    print_material(t_material material);
 

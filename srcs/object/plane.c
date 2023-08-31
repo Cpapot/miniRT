@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/29 17:28:43 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:31:30 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data, int level
 
 	pl = (t_plane *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), pl->normal_vector);
-	if (is_black_case(hit))
+	if (pl->material.is_board && is_black_case(hit))
 		return (ft_color(0, 0, 0, 0));
 	ratio = ft_find_light_ratio(hit, data, \
 	pl->normal_vector, &pl->material);

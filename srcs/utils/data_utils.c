@@ -60,10 +60,12 @@ bool	add_disk(t_minirt_data *data_pt)
 		disk_arr[data_pt->di_nb + disk_index].normal_vector = data_pt->cylinder_arr[index].normal_vector;
 		disk_arr[data_pt->di_nb + disk_index].diameter = data_pt->cylinder_arr[index].diameter;
 		disk_arr[data_pt->di_nb + disk_index].coordinate = data_pt->cylinder_arr[index].coordinate;
+		disk_arr[data_pt->di_nb + disk_index].material = data_pt->cylinder_arr[index].material;
 		disk_index++;
 		disk_arr[data_pt->di_nb + disk_index].color = data_pt->cylinder_arr[index].color;
 		disk_arr[data_pt->di_nb + disk_index].normal_vector = data_pt->cylinder_arr[index].normal_vector;
 		disk_arr[data_pt->di_nb + disk_index].diameter = data_pt->cylinder_arr[index].diameter;
+		disk_arr[data_pt->di_nb + disk_index].material = data_pt->cylinder_arr[index].material;
 		cyl_vec = data_pt->cylinder_arr[index].normal_vector;
 		multiplying_vec(&cyl_vec, -(data_pt->cylinder_arr[index].height));
 		disk_arr[data_pt->di_nb + disk_index].coordinate.x = cyl_vec.x + disk_arr[data_pt->di_nb + disk_index - 1].coordinate.x;

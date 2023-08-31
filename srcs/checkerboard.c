@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 18:35:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 21:38:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/31 16:14:46 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ bool	is_black_case_sp(t_point hitpoint)
 	return (false);
 }
 
-//remplacer false par true
 bool	is_black_case(t_point hitpoint)
 {
 	double	size;
@@ -40,7 +39,7 @@ bool	is_black_case(t_point hitpoint)
 	size = 10;
 	if (sinf(size * hitpoint.x) * sinf(size * hitpoint.y) * sinf(size * hitpoint.z) < 0)
 		return (false);
-	return (false);
+	return (true);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/29 17:30:54 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/31 15:29:52 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int leve
 
 	sp = (t_sphere *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));
-	//if (is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
-	//	return (ft_color(0, 0, 0, 0));
+	if (sp->material.is_board && is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
+		return (ft_color(0, 0, 0, 0));
 	ratio = ft_find_light_ratio(hit, data, \
 	sphere_normal(camray, info.t, sp->origin), &sp->material);
 	ambient_lightning(&ratio, &data);
