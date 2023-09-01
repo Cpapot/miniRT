@@ -82,7 +82,7 @@ bool	add_disk(t_minirt_data *data_pt)
 		disk_arr[data_pt->di_nb + disk_index].color = data_pt->cone_arr[index].color;
 		normalize_vec(&data_pt->cone_arr[index].vector);
 		cyl_vec = data_pt->cone_arr[index].vector;
-		multiplying_vec(&cyl_vec, (data_pt->cone_arr[index].height));
+		multiplying_vec(&cyl_vec, -(data_pt->cone_arr[index].height));
 		disk_arr[data_pt->di_nb + disk_index].coordinate.x = cyl_vec.x + data_pt->cone_arr[index].coordinate.x;
 		disk_arr[data_pt->di_nb + disk_index].coordinate.y = cyl_vec.y + data_pt->cone_arr[index].coordinate.y;
 		disk_arr[data_pt->di_nb + disk_index].coordinate.z = cyl_vec.z + data_pt->cone_arr[index].coordinate.z;

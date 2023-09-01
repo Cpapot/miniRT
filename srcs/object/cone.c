@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/29 17:30:19 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:25:43 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ double	cone_hitted(t_ray camray, t_cone cone)
 	B = 2 * (scalar_product(camray.direction, vec) - cosa * p1 * p2 - p1 * p2);
 	C = scalar_product(vec, vec) - cosa * pow(p2, 2) - pow(p2, 2);
 	t = quadratic_equation(A, B, C);
+	p1 = camray.origin.y + t * camray.direction.y;
 	hitpoint = hit_coord(t, camray);
-	vec = set_vec(hitpoint.x, hitpoint.y, hitpoint.z);
+	vec = set_vec(cone.coordinate.x - hitpoint.x,cone.coordinate.y - hitpoint.y, cone.coordinate.z - hitpoint.z);
 	if (!(scalar_product(cone.vector, vec) >= 0 && scalar_product(cone.vector, vec) <= cone.height))
 		return (-1);
 	return (t);
