@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:08:10 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:46:04 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int32_t	check_ray(t_ray camray, t_minirt_data data, int level)
 	else if (info.type == PLANE)
 		return (render_plane(info, camray, data, level));
 	else if (info.type == CONE)
-		return (render_cone(info, camray, data));
+		return (render_cone(info, camray, data, level));
 	else if (info.type == CYLINDER)
 		return (render_cylinder(info, camray, data, level));
 	else if (info.type == DISK)
