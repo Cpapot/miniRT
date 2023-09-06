@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/31 17:28:02 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/06 22:18:29 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int leve
 	t_color		ratio;
 	t_point		hit;
 	t_ray		reflect_ray;
-
 
 	sp = (t_sphere *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));

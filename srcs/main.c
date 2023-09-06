@@ -170,8 +170,6 @@ int main(int ac, char **av)
         return (usage_display(), clean_minirt_data(&data));
     print_data("main", &data);
 	change_cylinder_coord(&data);
-	if (!add_disk(&data))
-		return (1);
 	ft_create_win(&win);
 	screen_loop(&win, &data);
 	info.data = data;

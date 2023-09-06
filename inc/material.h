@@ -13,6 +13,10 @@
 #ifndef MATERIAL_H
 # define MATERIAL_H
 
-t_material	metal_material(void);
+# define METAL {.reflection = 0.25, .specular_coef = 0.64, .alpha = 15, .is_board = false}
+# define MIRROR {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = false}
+# define CHECKERBOARD {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = true}
+# define PLASTIC {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = false}
+# define BASIC {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = false}
 
 #endif

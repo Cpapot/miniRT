@@ -33,5 +33,5 @@ double	quadratic_equation(double a, double b, double c)
 		else
 			return (-1);
 	}
-		return (-1);
+	return (-1);
 }
