@@ -1,11 +1,10 @@
 #include "../../../../inc/structure.h"
 #include "../../../../libft/includes/libft.h"
-#include "../../../../inc/material.h"
 #include "../../../../inc/go_to.h"
 
-double to_decimal_ll(long long nb, char *line)
+double	to_decimal_ll(long long nb, char *line)
 {
-	double dst;
+	double	dst;
 
 	dst = nb;
 	while (ft_isdigit(*line))

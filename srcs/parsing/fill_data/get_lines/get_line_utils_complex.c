@@ -5,17 +5,18 @@
 
 bool	ft_atod_on(char *line, double *dst);
 
-bool    ft_material_on(char *line, t_material *dst)
+bool	ft_material_on(char *line, t_material *dst)
 {
-    char *str_arr[] = {"Me", "Mi", "Ch", "Pl", ""};
-    t_material material_arr[] = {METAL, MIRROR, CHECKERBOARD, PLASTIC, BASIC};
-    int i;
+	const char			*str_arr[] = {"Me", "Mi", "Ch", "Pl", ""};
+	const t_material	material_arr[] = {METAL, MIRROR, \
+					CHECKERBOARD, PLASTIC, BASIC};
+	int					i;
 
-    i = 0;
-    while (i < 4 && ft_strncmp(str_arr[i], line, 2) != 0)
-        i++;
-    *dst = material_arr[i];
-    return (true);
+	i = 0;
+	while (i < 4 && ft_strncmp(str_arr[i], line, 2) != 0)
+		i++;
+	*dst = material_arr[i];
+	return (true);
 }
 
 bool	ft_atorgb_on(char *line, t_color *dst)

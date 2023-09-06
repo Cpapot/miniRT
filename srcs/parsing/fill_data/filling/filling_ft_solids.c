@@ -3,7 +3,7 @@
 
 bool	fill_sp(void *data_pt, int flag)
 {
-	static t_sphere *sphere_arr;
+	static t_sphere	*sphere_arr;
 
 	if (flag == INIT)
 	{
@@ -18,7 +18,7 @@ bool	fill_sp(void *data_pt, int flag)
 
 bool	fill_pl(void *data_pt, int flag)
 {
-	static t_plane *plane_arr;
+	static t_plane	*plane_arr;
 
 	if (flag == INIT)
 	{
@@ -33,7 +33,7 @@ bool	fill_pl(void *data_pt, int flag)
 
 bool	fill_cy(void *data_pt, int flag)
 {
-	static t_cylinder *cylinder_arr;
+	static t_cylinder	*cylinder_arr;
 
 	if (flag == INIT)
 	{
@@ -48,7 +48,7 @@ bool	fill_cy(void *data_pt, int flag)
 
 bool	fill_di(void *data_pt, int flag)
 {
-	static t_disk *disk_arr;
+	static t_disk	*disk_arr;
 
 	if (flag == INIT)
 	{
@@ -63,7 +63,7 @@ bool	fill_di(void *data_pt, int flag)
 
 bool	fill_co(void *data_pt, int flag)
 {
-	static t_cone *cone_arr;
+	static t_cone	*cone_arr;
 
 	if (flag == INIT)
 	{

@@ -1,7 +1,6 @@
 #include "../../../../inc/structure.h"
 #include "../../../../libft/includes/libft.h"
 #include "../../../../inc/get_lines_ft.h"
-#include <stdio.h>
 
 bool	get_line_data_a(char *line, t_ambient_light *light_pt)
 {
@@ -36,4 +35,3 @@ bool	get_line_data_l(char *line, t_light *light)
 	go_to_next_data(&line);
 	return (ft_atorgb_on(line, &light->color));
 }
-
