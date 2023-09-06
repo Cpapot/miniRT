@@ -50,7 +50,7 @@ int	ft_atoi(const char *str)
 bool	ft_atoi_on(const char *str, int *dst)
 {
 	long long int	result;
-	int 			minus;
+	int				minus;
 
 	result = 0;
 	minus = 0;

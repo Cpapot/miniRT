@@ -48,7 +48,7 @@ bool	ft_atoll_on(const char *str, long long *dst)
 	char		is_negative;
 
 	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f'
-		   || *str == '\r' || *str == ' ')
+		|| *str == '\r' || *str == ' ')
 		str++;
 	is_negative = *str == '-';
 	if (*str == '+' || *str == '-')
