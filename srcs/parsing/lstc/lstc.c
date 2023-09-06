@@ -46,34 +46,22 @@ size_t	lstc_size(t_lstc *lst)
 	return (ret_val);
 }
 
-void	read_lst(t_lstc *lst)
-{
-	while (lst)
-	{
-		lst = lst->next;
-	}
-}
-
-#include "stdio.h"
 bool	read_fd_in_str(int fd, char **dst)
 {
 	t_lstc	*lst;
 
 	lst = read_lstc_from_fd(fd);
-	read_lst(lst);
 	if (lst == NULL)
 	{
-		puts("in NULL");
 		*dst = ft_strdup_no("");
 		if (errno)
 			return (false);
 		return (true);
 	}
 	*dst = malloc(lstc_size(lst) + 1);
-	if (*dst)
-		lstc_cpy_in_str(lst, dst);
-	else
-		return (puts("la"), lstc_clear(lst), 1);
+	if ((*dst) == NULL)
+		return (lstc_clear(lst), false);
+    lstc_cpy_in_str(lst, dst);
 	lstc_clear(lst);
 	return (true);
 }

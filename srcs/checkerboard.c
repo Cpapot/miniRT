@@ -43,4 +43,3 @@ bool	is_black_case(t_point hitpoint)
 	return (false);
 }
 
-

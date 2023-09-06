@@ -31,14 +31,20 @@ SRCS		= object/light.c \
 			camera/camera.c \
 			camera/gamma.c \
 			parsing/parsing.c \
-			parsing/list_utils.c \
-			parsing/fill_data/get_line_data.c \
+			parsing/fill_data/get_lines/get_line_data.c \
+			parsing/fill_data/get_lines/get_line_data_solids.c \
+			parsing/fill_data/get_lines/get_line_utils.c \
+			parsing/fill_data/get_lines/get_line_utils_complex.c \
 			parsing/fill_data/fill_data.c \
-			parsing/fill_data/filling_ft.c \
-			parsing/fill_data/mini_parse_ft.c \
-			parsing/fill_data/manage_ft.c \
-			parsing/lstc_2.c \
-			parsing/lstc.c \
+			parsing/fill_data/filling/filling_ft.c \
+			parsing/fill_data/filling/filling_ft_solids.c \
+			parsing/fill_data/filling/filling_go_to.c \
+			parsing/fill_data/checking/mini_parse_ft.c \
+			parsing/fill_data/checking/mini_parse_ft_complex.c \
+			parsing/fill_data/checking/manage_ft.c \
+			parsing/fill_data/checking/manage_ft_solids.c \
+			parsing/lstc/lstc_2.c \
+			parsing/lstc/lstc.c \
 			utils/minirt_data.c \
 			utils/vec3_utils.c \
 			utils/mlx_utils.c \

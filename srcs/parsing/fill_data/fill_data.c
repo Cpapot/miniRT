@@ -2,7 +2,6 @@
 #include "../../../libft/includes/libft.h"
 #include "../../../inc/filling_ft.h"
 #include "../../../inc/check_lines_ft.h"
-#include "stdio.h"
 
 static bool _check_lines(t_minirt_data *data_pt, char **lines);
 static bool _fill_lines_in_data(t_minirt_data *data_pt, char **lines);
@@ -16,47 +15,11 @@ bool fill_data(t_minirt_data *data_pt, char *file)
   lines = ft_split_no(file, '\n');
   free(file);
   if (!lines)
-    return (perror("fill_data"), false);
+    return (ft_printf_fd(2, "fill_data : error allocation\n"), false);
   if (_check_lines(data_pt, lines) == false || allocate_data(data_pt) == false)
     return (ft_free_split(lines), false);
-  puts("maps checked");
   return (_fill_lines_in_data(data_pt, lines));
 }
-
-bool _fill_lines_in_data(t_minirt_data *data_pt, char **lines)
-{
-  init_filling_ft(data_pt);
-  if (_call_filling_ft(lines) == false)
-    return (false);
-  return (true);
-}
-
-static bool _call_filling_ft(char **lines)
-{
-  const t_filling_ft ft_arr[] = {&fill_a,  &fill_c,  &fill_l,
-                                 &fill_sp, &fill_pl, &fill_cy,
-                                 &fill_co, &fill_di};
-  const char         *id_arr[] = {"A", "C", "L", "sp", "pl", "cy", "co", "di"};
-  size_t             i;
-  char               **tmp;
-
-  tmp = lines;
-  size_t nb = 0;
-  while (*tmp)
-  {
-    nb++;
-    i = 0;
-    while (i < 8 && ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
-      i++;
-    puts(*tmp);
-    if (i < 8 && ft_arr[i](*tmp, FILLING) == false)
-      return (ft_free_split(lines), false);
-    tmp++;
-  }
-  ft_free_split(lines);
-  return (true);
-}
-
 
 static bool _check_lines(t_minirt_data *data_pt, char **lines)
 {
@@ -82,3 +45,37 @@ static bool _check_lines(t_minirt_data *data_pt, char **lines)
     return (false);
   return (true);
 }
+
+bool _fill_lines_in_data(t_minirt_data *data_pt, char **lines)
+{
+  init_filling_ft(data_pt);
+  if (_call_filling_ft(lines) == false)
+    return (false);
+  return (true);
+}
+
+static bool _call_filling_ft(char **lines)
+{
+  const char         *id_arr[] = {"A", "C", "L", "sp", "pl", "cy", "co", "di"};
+  size_t             i;
+  char               **tmp;
+  const t_filling_ft ft_arr[] = {&fill_a,  &fill_c,  &fill_l,
+                                 &fill_sp, &fill_pl, &fill_cy,
+                                 &fill_co, &fill_di};
+
+  tmp = lines;
+  size_t nb = 0;
+  while (*tmp)
+  {
+    nb++;
+    i = 0;
+    while (i < 8 && ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
+      i++;
+    if (i < 8 && ft_arr[i](*tmp, FILLING) == false)
+      return (ft_free_split(lines), false);
+    tmp++;
+  }
+  ft_free_split(lines);
+  return (true);
+}
+
