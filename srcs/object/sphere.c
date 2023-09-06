@@ -80,10 +80,10 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int leve
 	t_material	mat;
 	t_ray		reflect_ray;
 
-	mat = metal_material();
+	sp = (t_sphere *)info.struct_info;
+	mat = sp->material;
 	material[0] = mat.specular_coef;
 	material[1] = mat.alpha;
-	sp = (t_sphere *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));
 	//if (is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))
 	//	return (ft_color(0, 0, 0, 0));
