@@ -12,7 +12,7 @@
 
 #include "../inc/miniRT.h"
 
-static double	mapping_Xcoord(int pixel_pos, double fov, int index)
+static double	mapping_xcoord(int pixel_pos, double fov, int index)
 {
 	double	result;
 	double	ratio;
@@ -28,7 +28,7 @@ static double	mapping_Xcoord(int pixel_pos, double fov, int index)
 	return (result);
 }
 
-static double	mapping_Ycoord(int pixel_pos, double fov, int index)
+static double	mapping_ycoord(int pixel_pos, double fov, int index)
 {
 	double	result;
 	double	scale;
@@ -66,8 +66,8 @@ t_ray	find_camray(t_camera cam_info, int x, int y)
 	t_ray	cam_ray;
 
 	cam_ray.origin = cam_info.origin;
-	ray_dir.x = mapping_Xcoord(x, cam_info.fov, 0);
-	ray_dir.y = mapping_Ycoord(y, cam_info.fov, 0);
+	ray_dir.x = mapping_xcoord(x, cam_info.fov, 0);
+	ray_dir.y = mapping_ycoord(y, cam_info.fov, 0);
 	ray_dir.z = 1;
 	normalize_vec(&ray_dir);
 	cam_ray.direction = compute_direction(cam_info.vector, ray_dir);
@@ -81,8 +81,8 @@ t_ray	find_aliasing_ray(t_camera cam_info, int x, int y, int index)
 	t_ray	cam_ray;
 
 	cam_ray.origin = cam_info.origin;
-	ray_dir.x = mapping_Xcoord(x, cam_info.fov, index);
-	ray_dir.y = mapping_Ycoord(y, cam_info.fov, index);
+	ray_dir.x = mapping_xcoord(x, cam_info.fov, index);
+	ray_dir.y = mapping_ycoord(y, cam_info.fov, index);
 	ray_dir.z = 1;
 	normalize_vec(&ray_dir);
 	cam_ray.direction = compute_direction(cam_info.vector, ray_dir);
