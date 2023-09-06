@@ -31,7 +31,6 @@ SRCS		= object/light.c \
 			camera/camera.c \
 			camera/gamma.c \
 			parsing/parsing.c \
-			parsing/list_utils.c \
 			parsing/fill_data/get_line_data.c \
 			parsing/fill_data/fill_data.c \
 			parsing/fill_data/filling_ft.c \
