@@ -1,6 +1,15 @@
-//
-// Created by bpoumeau on 6/20/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/28 19:59:53 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/28 20:17:02 by cpapot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/structure.h"
 #include "../../libft/includes/libft.h"
 #include "../../inc/vec3.h"
@@ -27,13 +36,20 @@ void	change_cylinder_coord(t_minirt_data *data_pt)
 void	*suppress_light(t_light light, t_minirt_data *data_pt)
 {
 	size_t	lt_nb;
+	void	*ret_val;
 
 	lt_nb = data_pt->lt_nb;
 	while (lt_nb--)
-		if (ft_memcmp(&light, &(data_pt->lights_arr[lt_nb]), sizeof(t_light)) == 0)
+	{
+		if (ft_memcmp(&light, \
+		&(data_pt->lights_arr[lt_nb]), sizeof(t_light)) == 0)
 		{
 			data_pt->lt_nb--;
-			return (ft_memmove((void *)&(data_pt->lights_arr[lt_nb]), (void *)&(data_pt->lights_arr[lt_nb + 1]),sizeof(t_light) * (data_pt->lt_nb - lt_nb)));
+			ret_val = ft_memmove((void *) &(data_pt->lights_arr[lt_nb]), \
+							(void *) &(data_pt->lights_arr[lt_nb + 1]), \
+							sizeof(t_light) * (data_pt->lt_nb - lt_nb));
+			return (ret_val);
 		}
-	return (0);
+	}
+	return (NULL);
 }

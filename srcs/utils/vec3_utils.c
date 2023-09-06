@@ -24,7 +24,7 @@ t_vec_3	set_vec(double x, double y, double z)
 
 t_vec_3	vect_product(t_vec_3 vec1, t_vec_3 vec2)
 {
-	t_vec_3 result;
+	t_vec_3	result;
 
 	result.x = vec1.y * vec2.z - vec1.z * vec2.y;
 	result.y = vec1.z * vec2.x - vec1.x * vec2.z;

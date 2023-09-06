@@ -1,6 +1,14 @@
-//
-// Created by bpoumeau on 6/13/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt_data.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/09 14:18:24 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/30 19:16:52 by cpapot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../../inc/structure.h"
@@ -17,8 +25,8 @@ bool	allocate_data(t_minirt_data *data_pt)
 	data_pt->lights_arr = malloc(sizeof(t_light) * data_pt->lt_nb);
 	data_pt->ambient_light = malloc(sizeof(t_ambient_light) * data_pt->al_nb);
 	data_pt->camera = malloc(sizeof (t_camera) * data_pt->ca_nb);
-    data_pt->cone_arr = malloc(sizeof(t_cone) * data_pt->co_nb);
-    data_pt->disk_arr = malloc(sizeof(t_disk) * data_pt->di_nb);
+	data_pt->cone_arr = malloc(sizeof(t_cone) * data_pt->co_nb);
+	data_pt->disk_arr = malloc(sizeof(t_disk) * data_pt->di_nb);
 	if (errno)
 		return (perror("allocate_data"), false);
 	return (true);

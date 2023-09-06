@@ -1,6 +1,14 @@
-//
-// Created by bpoumeau on 9/6/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vec3_calculation.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/09 14:18:24 by cpapot            #+#    #+#             */
+/*   Updated: 2023/07/30 19:16:52 by cpapot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "miniRT.h"
 
@@ -8,7 +16,7 @@ double	calculate_norm(t_vec_3 *vec)
 {
 	double	norm;
 
-	norm = sqrt(pow(vec->x, 2) + pow(vec->y, 2) +  pow(vec->z, 2));
+	norm = sqrt(pow(vec->x, 2) + pow(vec->y, 2) + pow(vec->z, 2));
 	vec->norme = norm;
 	return (norm);
 }
