@@ -8,17 +8,6 @@
 #include "errno.h"
 #include <stdio.h>
 
-////void	print_data(char *msg, t_minirt_data *data)
-//{
-//	puts(msg);
-//	printf("A %ld : %p\n", data->al_nb, data->ambient_light);
-//	printf("c %ld : %p\n", data->ca_nb, data->camera);
-//	printf("l %ld : %p\n", data->lt_nb, data->lights_arr);
-//	printf("s %ld : %p\n", data->sp_nb, data->sphere_arr);
-//	printf("p %ld : %p\n", data->pl_nb, data->plane_arr);
-//	printf("n %ld : %p\n", data->cy_nb, data->cylinder_arr);
-//}
-
 bool	allocate_data(t_minirt_data *data_pt)
 {
 	errno = 0;

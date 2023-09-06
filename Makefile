@@ -42,6 +42,7 @@ SRCS		= object/light.c \
 			utils/vec3_utils.c \
 			utils/mlx_utils.c \
 			utils/data_utils.c \
+			utils/vec3_calculation.c \
 			object/plane.c \
 			debug.c \
 			testfiles.c \
