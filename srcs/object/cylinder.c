@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:05:41 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/08/31 18:41:02 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,22 @@ double	quadratic_equation(double a, double b, double c);
 t_vec_3 cylinder_normal(t_ray camray, double t, t_cylinder cyl)
 {
 	t_vec_3	result;
-	double	scalar;
+	//double	scalar;
 	t_point	hit;
 	t_vec_3	dot;
-	t_vec_3	vec[2];
+	//t_vec_3	vec[2];
 
 	hit = hit_coord(t, camray);
 	dot = set_vec(hit.x, hit.y, hit.z);
-	normalize_vec(&dot);
-	vec[0] = set_vec(dot.x - cyl.coordinate.x, dot.y - cyl.coordinate.y, dot.z - cyl.coordinate.z);
-	scalar = scalar_product(vec[0], cyl.normal_vector);
-	vec[1] = set_vec(cyl.coordinate.x + scalar * cyl.normal_vector.x, cyl.coordinate.y + scalar * cyl.normal_vector.y, cyl.coordinate.z + scalar * cyl.normal_vector.z);
-	result = set_vec(dot.x - vec[1].x, dot.y - vec[1].y, dot.z - vec[1].z);
+	/*normalize_vec(&dot);
+		normalize_vec(&dot);
+		vec[0] = set_vec(dot.x - cyl.coordinate.x, dot.y - cyl.coordinate.y, dot.z - cyl.coordinate.z);
+		scalar = scalar_product(vec[0], cyl.normal_vector);
+		vec[1] = set_vec(cyl.coordinate.x + scalar * cyl.normal_vector.x, cyl.coordinate.y + scalar * cyl.normal_vector.y, cyl.coordinate.z + scalar * cyl.normal_vector.z);
+		result = set_vec(dot.x - vec[1].x, dot.y - vec[1].y, dot.z - vec[1].z);*/
+	result = minus_vec(adding_vec(set_vec(cyl.coordinate.x, cyl.coordinate.y, cyl.coordinate.z), multip_vec(cyl.normal_vector, scalar_product( \
+	minus_vec(dot, set_vec(cyl.coordinate.x, cyl.coordinate.y, cyl.coordinate.z)), cyl.normal_vector))), dot);
+	multiplying_vec(&result, -1);
 	normalize_vec(&result);
 	return (result);
 }
@@ -100,22 +104,18 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data, int le
 {
 	t_cylinder	*cy;
 	t_color		ratio;
-	double		material[3];
 	t_point		hit;
 	t_ray		reflect_ray;
 
-	material[0] = 0.797357;
-	material[1] = 83.2;
-	material[2] = CYLINDER;
 	cy = (t_cylinder *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), cylinder_normal(camray, info.t, *cy));
-	//if (is_black_case(hit))
-	//	return (ft_color(0, 0, 0, 0));
+	if (cy->material.is_board && is_black_case(hit))
+		return (ft_color(0, 0, 0, 0));
 	ratio = ft_find_light_ratio(hit, data, \
-	cylinder_normal(camray, info.t, *cy), material);
+	cylinder_normal(camray, info.t, *cy), &cy->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(cylinder_normal(camray, info.t, *cy), camray.direction);
 	reflect_ray.origin = hit;
 	return (reflection(ft_color(cy->color.r * ratio.r, cy->color.g * \
-		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, level, NULL));
+		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, level, &cy->material));
 }

@@ -6,12 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 04:54:54 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:47:06 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "vec3.h"
+#include "reflection.h"
 
 double	quadratic_equation(double a, double b, double c);
 
@@ -58,8 +59,9 @@ double	cone_hitted(t_ray camray, t_cone cone)
 	B = 2 * (scalar_product(camray.direction, vec) - cosa * p1 * p2 - p1 * p2);
 	C = scalar_product(vec, vec) - cosa * pow(p2, 2) - pow(p2, 2);
 	t = quadratic_equation(A, B, C);
+	p1 = camray.origin.y + t * camray.direction.y;
 	hitpoint = hit_coord(t, camray);
-	vec = set_vec(hitpoint.x, hitpoint.y, hitpoint.z);
+	vec = set_vec(cone.coordinate.x - hitpoint.x,cone.coordinate.y - hitpoint.y, cone.coordinate.z - hitpoint.z);
 	if (!(scalar_product(cone.vector, vec) >= 0 && scalar_product(cone.vector, vec) <= cone.height))
 		return (-1);
 	return (t);
@@ -89,19 +91,20 @@ t_hit	find_near_cone(t_ray camray, size_t count, t_cone *cone_arr)
 	return (info);
 }
 
-int32_t	render_cone(t_hitinfo info, t_ray camray, t_minirt_data data)
+int32_t	render_cone(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
 {
 	t_cone		*co;
 	t_color		ratio;
-	double		material[3];
+	t_point		hit;
+	t_ray		reflect_ray;
 
-	material[0] = 0.9;
-	material[1] = 30;
-	material[2] = CONE;
 	co = (t_cone *)info.struct_info;
+	hit = adjust_hitpoint(hit_coord(info.t, camray), cone_normal(camray, info.t, *co));
 	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
-	cone_normal(camray, info.t, *(t_cone *)info.struct_info), material);
+	cone_normal(camray, info.t, *(t_cone *)info.struct_info), &co->material);
 	ambient_lightning(&ratio, &data);
-	return (ft_color(co->color.r * ratio.r, co->color.g * \
-	ratio.g, co->color.b * ratio.b, 0));
+	reflect_ray.direction = reflect_vec(cone_normal(camray, info.t, *co), camray.direction);
+	reflect_ray.origin = hit;
+	return (reflection(ft_color(co->color.r * ratio.r, co->color.g * \
+	ratio.g, co->color.b * ratio.b, 0), data, reflect_ray, level, &co->material));
 }
