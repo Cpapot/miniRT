@@ -46,7 +46,7 @@ void	find_close_plane(t_ray camray, t_minirt_data data, t_hitinfo *info)
 
 void	find_close_cone(t_ray camray, t_minirt_data data, t_hitinfo *info)
 {
-	t_hit hit;
+	t_hit	hit;
 
 	hit = find_near_cone(camray, data.co_nb, data.cone_arr);
 	if (hit.id != -1 && info->t > hit.t)
@@ -59,7 +59,7 @@ void	find_close_cone(t_ray camray, t_minirt_data data, t_hitinfo *info)
 
 void	find_close_cylinder(t_ray camray, t_minirt_data data, t_hitinfo *info)
 {
-	t_hit hit;
+	t_hit	hit;
 
 	hit = find_near_cylinder(camray, data.co_nb, data.cylinder_arr);
 	if (hit.id != -1 && info->t > hit.t)
@@ -72,7 +72,7 @@ void	find_close_cylinder(t_ray camray, t_minirt_data data, t_hitinfo *info)
 
 void	find_close_disk(t_ray camray, t_minirt_data data, t_hitinfo *info)
 {
-	t_hit hit;
+	t_hit	hit;
 
 	hit = find_near_disk(camray, data.di_nb, data.disk_arr);
 	if (hit.id != -1 && info->t > hit.t)
@@ -86,7 +86,6 @@ void	find_close_disk(t_ray camray, t_minirt_data data, t_hitinfo *info)
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 {
 	t_hitinfo	info;
-	t_hit		hit;
 
 	info.t = INT_MAX;
 	info.type = -1;
