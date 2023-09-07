@@ -75,6 +75,8 @@ t_hit	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 	return (info);
 }
 
+bool	is_black_case_pl(t_point hit, t_plane *plane);
+
 int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
 {
 	t_plane		*pl;

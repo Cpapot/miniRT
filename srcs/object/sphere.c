@@ -79,7 +79,6 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_minirt_data data, int leve
 	t_point		hit;
 	t_ray		reflect_ray;
 
-
 	sp = (t_sphere *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), sphere_normal(camray, info.t, sp->origin));
 	if (sp->material.is_board && is_black_case_sp(sphere_mapping(hit, sp->diameter / 2)))

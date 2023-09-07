@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:34:07 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/07 13:15:58 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 }
 
 int32_t	mod_gamma(int32_t object_color);
+void	print_loading(int cam_id);
 
 void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 {
@@ -89,7 +90,6 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 
 	x = 0;
 	set_minirt_data(data, &data->camera[data->option.cam_id]);
-	ft_printf(GREEN"Loading scenes ["YELLOW);
 	while (x != win->xwinsize)
 	{
 		y = 0;
@@ -102,13 +102,11 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 			}
 			else
 				my_mlx_pixel_put(win, x, y, mod_gamma(anti_aliasing(data, x, y, data->camera[data->option.cam_id])));
+			print_loading(data->option.cam_id);
 			y++;
 		}
 		x++;
-		if (x % 25 == 0)
-			ft_printf("■");
 	}
-	ft_printf(GREEN" ]\n"WHITE);
 	print_info(data);
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img, 0, 0);
 }
@@ -147,7 +145,7 @@ int    clean_minirt_data(t_minirt_data *data_pt)
         free(data_pt->cone_arr);
     if (data_pt->disk_arr != NULL)
         free(data_pt->disk_arr);
-  return (1);  
+  return (1);
 }
 #include <stdio.h>
 
