@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/07 13:15:58 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/10 14:41:04 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 }
 
 int32_t	mod_gamma(int32_t object_color);
-void	print_loading(int cam_id);
+void	print_loading(void);
 
 void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 {
@@ -102,7 +102,7 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 			}
 			else
 				my_mlx_pixel_put(win, x, y, mod_gamma(anti_aliasing(data, x, y, data->camera[data->option.cam_id])));
-			print_loading(data->option.cam_id);
+			print_loading();
 			y++;
 		}
 		x++;
