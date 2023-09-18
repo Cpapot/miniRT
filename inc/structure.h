@@ -185,6 +185,7 @@ typedef struct s_hitinfo
 	double	t;
 	int		type;
 	void	*struct_info;
+	bool 	in_object;
 }			t_hitinfo;
 
 #endif

@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
-#include "checkerboard.h"
-#include "reflection.h"
-#include "material.h"
+#include "../../inc/miniRT.h"
+#include "../../inc/checkerboard.h"
+#include "../../inc/reflection.h"
+#include "../../inc/material.h"
 
 double	quadratic_equation(double a, double b, double c);
 t_point	sphere_mapping(t_point point, double radius);

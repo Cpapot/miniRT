@@ -13,7 +13,7 @@
 #ifndef	VEC3_H
 # define VEC3_H
 
-#include "miniRT.h"
+# include "miniRT.h"
 
 t_vec_3		adding_vec(t_vec_3 vec1, t_vec_3 vec2);
 t_vec_3		set_vec(double x, double y, double z);

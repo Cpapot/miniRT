@@ -10,13 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
-#include "color.h"
-#include "hit.h"
-#include "light.h"
-#include "cone.h"
-#include "cylinder.h"
-#include "disk.h"
+#include "../inc/miniRT.h"
+//#include "miniRT.h"
+#include "../inc/color.h"
+#include "../inc/hit.h"
+#include "../inc/light.h"
+#include "../inc/cone.h"
+#include "../inc/cylinder.h"
+#include "../inc/disk.h"
 
 t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 {

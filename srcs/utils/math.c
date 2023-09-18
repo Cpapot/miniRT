@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../inc/miniRT.h"
 
 double	quadratic_equation(double a, double b, double c)
 {
@@ -29,9 +29,9 @@ double	quadratic_equation(double a, double b, double c)
 		if (t1 > 0)
 			return (t1);
 		else if (t2 > 0)
-			return (-2);
+			return (t2);
 		else
 			return (-1);
 	}
-		return (-1);
+	return (-1);
 }
