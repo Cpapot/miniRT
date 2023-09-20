@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math.c                                             :+:      :+:    :+:   */
+/*   object_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 19:59:53 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 16:20:10 by cpapot           ###   ########.fr       */
+/*   Created: 2023/09/20 15:25:47 by cpapot            #+#    #+#             */
+/*   Updated: 2023/09/20 15:49:00 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "vec3.h"
 
-double	quadratic_equation(double a, double b, double c)
+int	cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h)
 {
-	double	delta;
-	double	t1;
-	double	t2;
+	t_vec_3	vec;
 
-	delta = b * b - 4 * a * c;
-	if (delta < 0)
-		return (-1);
-	delta = sqrtf(delta);
-	if (delta >= 0)
-	{
-		t1 = (-b - delta) / (2.0f * a);
-		t2 = (-b + delta) / (2.0f * a);
-		if (t1 > 0)
-			return (t1);
-		else if (t2 > 0)
-			return (-2);
-		else
-			return (-1);
-	}
-	return (-1);
+	vec = set_vec(coord.x - p.x, coord.y - p.y, coord.z - p.z);
+	if (!(scalar_product(norm, vec) >= 0 && scalar_product(norm, vec) <= h))
+		return (1);
+	return (0);
 }

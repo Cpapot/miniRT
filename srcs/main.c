@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/10 14:41:04 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/20 17:43:32 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,10 @@ int    clean_minirt_data(t_minirt_data *data_pt)
 }
 #include <stdio.h>
 
-void    usage_display(void)
+void	usage_display(void)
 {
-    dprintf(2, "Usage is : ./MiniRT [ARGUMENTS]\n%s",
-        "ARGUMENTS must be a .rt file with at least one camera\n");
+	dprintf(2, "Usage is : ./MiniRT [ARGUMENTS]\n%s",
+		"ARGUMENTS must be a .rt file with at least one camera\n");
 }
 
 int main(int ac, char **av)
@@ -165,8 +165,9 @@ int main(int ac, char **av)
 
 	init_minirt_data(&data);
 	if (ac == 1  || parsing(&data, av[1]) == false)
-        return (usage_display(), clean_minirt_data(&data));
-    print_data("main", &data);
+		return (usage_display(), clean_minirt_data(&data));
+	ft_printf("\e[2J\e[H");
+	//print_data("main", &data);
 	change_cylinder_coord(&data);
 	if (!add_disk(&data))
 		return (1);

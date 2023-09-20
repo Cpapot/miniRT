@@ -39,10 +39,14 @@ SRCS		= object/light.c \
 			parsing/fill_data/manage_ft.c \
 			parsing/lstc_2.c \
 			parsing/lstc.c \
+			utils/object_utils.c \
+			utils/light_utils.c	\
 			utils/minirt_data.c \
 			utils/vec3_utils.c \
+			utils/vec3_utils2.c \
 			utils/mlx_utils.c \
 			utils/data_utils.c \
+			utils/vec3_math.c \
 			object/plane.c \
 			debug.c \
 			testfiles.c \
