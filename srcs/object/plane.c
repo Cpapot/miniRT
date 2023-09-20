@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/31 15:31:30 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/20 15:13:00 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data, int level
 {
 	t_plane		*pl;
 	t_color		ratio;
-	t_point	hit;
+	t_point		hit;
 	t_ray		reflect_ray;
 
 	pl = (t_plane *)info.struct_info;
@@ -94,5 +94,6 @@ int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data, int level
 	reflect_ray.direction = reflect_vec(pl->normal_vector, camray.direction);
 	reflect_ray.origin = hit;
 	return (reflection(ft_color(pl->color.r * ratio.r, pl->color.g * \
-		ratio.g, pl->color.b * ratio.b, 0), data, reflect_ray, level, &pl->material));
+		ratio.g, pl->color.b * ratio.b, 0), data, reflect_ray, level, \
+		&pl->material));
 }
