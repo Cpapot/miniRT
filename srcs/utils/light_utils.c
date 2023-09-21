@@ -15,7 +15,11 @@
 
 void	*suppress_light(t_light light, t_minirt_data *data_pt);
 
-void	compute_light_ratio(t_color *color, t_light light, double r[2], t_material *mat)
+void	compute_light_ratio(
+		t_color *color,
+		t_light light,
+		double r[2],
+		t_material *mat)
 {
 	color->r += light.color.r * r[0] * 0.004 * light.brightness + \
 		mat->specular_coef * r[1];

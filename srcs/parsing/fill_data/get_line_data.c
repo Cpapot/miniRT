@@ -1,10 +1,12 @@
-//
-// Created by bpoumeau on 6/13/23.
-//
-
 #include "../../../inc/structure.h"
 #include "../../../libft/includes/libft.h"
 #include <stdio.h>
+#define POLISH {.reflection = 0.25, .specular_coef = 0.64, .alpha = 20, .is_board = false}
+#define METAL {.reflection = 0.15, .specular_coef = 0.64, .alpha = 20, .is_board = false}
+#define MIRROR {.reflection = 1, .specular_coef = 0, .alpha = 0, .is_board = false}
+#define CHECKERBOARD {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = true}
+#define PLASTIC {.reflection = 0.15, .specular_coef = 0.66, .alpha = 5, .is_board = false}
+#define BASIC {.reflection = 0, .specular_coef = 0.4, .alpha = 10, .is_board = false}
 
 static void	_go_to_decimal_part(char **line)
 {
@@ -23,7 +25,7 @@ double	to_decimal(int tmp, char *line)
 	dst = tmp;
 	while (ft_isdigit(*line))
 	{
-	printf("%.15f     %s\n", dst, line);
+		printf("%.15f     %s\n", dst, line);
 		dst /= 10;
 		line++;
 	}
@@ -32,8 +34,8 @@ double	to_decimal(int tmp, char *line)
 
 bool	ft_atof_on(char *line, double *dst)
 {
-	int 	integer;
-	int 	tmp;
+	int		integer;
+	int		tmp;
 	double	decimal;
 
 	if (ft_atoi_on(line, &integer) == false)
@@ -51,31 +53,24 @@ bool	ft_atof_on(char *line, double *dst)
 	return (true);
 }
 
-#define POLISH {.reflection = 0.25, .specular_coef = 0.64, .alpha = 20, .is_board = false}
-#define METAL {.reflection = 0.15, .specular_coef = 0.64, .alpha = 20, .is_board = false}
-#define MIRROR {.reflection = 1, .specular_coef = 0, .alpha = 0, .is_board = false}
-#define CHECKERBOARD {.reflection = 0, .specular_coef = 0, .alpha = 0, .is_board = true}
-#define PLASTIC {.reflection = 0.15, .specular_coef = 0.66, .alpha = 5, .is_board = false}
-#define BASIC {.reflection = 0, .specular_coef = 0.4, .alpha = 10, .is_board = false}
-
-void    print_material(t_material material);
-
-bool    ft_material_on(char *line, t_material *dst)
+bool	ft_material_on(char *line, t_material *dst)
 {
-    char *str_arr[] = {"Me", "Mi", "Ch", "Pl", ""};
-    t_material material_arr[] = {METAL, MIRROR, CHECKERBOARD, PLASTIC, BASIC};
-    int i;
+	int					i;
+	static char			*str_arr[] = {"Me", "Mi", "Ch", "Pl", ""};
+	static t_material	material_arr[] = {
+		METAL, MIRROR, CHECKERBOARD, PLASTIC, BASIC
+	};
 
-    i = 0;
-    while (i < 4 && ft_strncmp(str_arr[i], line, 2) != 0)
-        i++;
-    *dst = material_arr[i];
-    return (true);
+	i = 0;
+	while (i < 4 && ft_strncmp(str_arr[i], line, 2) != 0)
+		i++;
+	*dst = material_arr[i];
+	return (true);
 }
 
-double to_decimal_ll(long long nb, char *line)
+double	to_decimal_ll(long long nb, char *line)
 {
-	double dst;
+	double	dst;
 
 	dst = nb;
 	while (ft_isdigit(*line))
@@ -156,7 +151,6 @@ void	_go_to_next_float(char **line)
 	*line = (*line) + 1;
 }
 
-void	print_point(t_point point);
 bool	ft_atocoord_on(char *line, t_point *dst)
 {
 	if (ft_atod_on(line, &dst->x) == false)
@@ -170,7 +164,6 @@ bool	ft_atocoord_on(char *line, t_point *dst)
 	return (true);
 }
 
-void	print_vector(t_vec_3 vector);
 bool	ft_atovec_on(char *line, t_vec_3 *dst)
 {
 	if (ft_atod_on(line, &dst->x) == false)
@@ -181,7 +174,6 @@ bool	ft_atovec_on(char *line, t_vec_3 *dst)
 	_go_to_next_float(&line);
 	if (ft_atod_on(line, &dst->z) == false)
 		return (false);
-	print_vector(*dst);
 	return (true);
 }
 
@@ -225,7 +217,6 @@ bool	get_line_data_c(char *line, t_camera *camera)
 	return (ft_atofov_on(line, &camera->fov));
 }
 
-void	print_light(t_light light);
 bool	get_line_data_l(char *line, t_light *light)
 {
 	go_to_next_data(&line);
@@ -246,11 +237,11 @@ bool	get_line_data_sp(char *line, t_sphere *sphere)
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &sphere->diameter) == false)
 		return (false);
-    go_to_next_data(&line);
-    if (ft_atorgb_on(line, &sphere->color) == false)
-        return (false);
-    go_to_next_data(&line);
-    return (ft_material_on(line, &sphere->material));
+	go_to_next_data(&line);
+	if (ft_atorgb_on(line, &sphere->color) == false)
+		return (false);
+	go_to_next_data(&line);
+	return (ft_material_on(line, &sphere->material));
 }
 
 bool	get_line_data_pl(char *line, t_plane *plane)
@@ -262,10 +253,10 @@ bool	get_line_data_pl(char *line, t_plane *plane)
 	if (ft_atovec_on(line, &plane->normal_vector) == false)
 		return (false);
 	go_to_next_data(&line);
-    if (ft_atorgb_on(line, &plane->color) == false)
-        return (false);
-    go_to_next_data(&line);
-    return (ft_material_on(line, &plane->material));
+	if (ft_atorgb_on(line, &plane->color) == false)
+		return (false);
+	go_to_next_data(&line);
+	return (ft_material_on(line, &plane->material));
 }
 
 bool	get_line_data_cy(char *line, t_cylinder *cylinder)
@@ -282,48 +273,48 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder)
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &cylinder->height) == false)
 		return (false);
-    go_to_next_data(&line);
-    if (ft_atorgb_on(line, &cylinder->color) == false)
-        return (false);
-    go_to_next_data(&line);
-    return (ft_material_on(line, &cylinder->material));
+	go_to_next_data(&line);
+	if (ft_atorgb_on(line, &cylinder->color) == false)
+		return (false);
+	go_to_next_data(&line);
+	return (ft_material_on(line, &cylinder->material));
 }
 
 bool    get_line_data_di(char *line, t_disk *disk)
 {
-    go_to_next_data(&line);
-    if (ft_atocoord_on(line, &disk->coordinate) == false)
-        return (false);
-    go_to_next_data(&line);
+	go_to_next_data(&line);
+	if (ft_atocoord_on(line, &disk->coordinate) == false)
+		return (false);
+	go_to_next_data(&line);
 	if (ft_atovec_on(line, &disk->normal_vector) == false)
 		return (false);
-    go_to_next_data(&line);
+	go_to_next_data(&line);
 	if (ft_atod_on(line, &disk->diameter) == false)
 		return (false);
-    go_to_next_data(&line);
-    if (ft_atorgb_on(line, &disk->color) == false)
-        return (false);
-    go_to_next_data(&line);
-    return (ft_material_on(line, &disk->material));
+	go_to_next_data(&line);
+	if (ft_atorgb_on(line, &disk->color) == false)
+		return (false);
+	go_to_next_data(&line);
+	return (ft_material_on(line, &disk->material));
 }
 
 bool    get_line_data_co(char *line, t_cone *cone)
 {
-    go_to_next_data(&line);
-    if (ft_atocoord_on(line, &cone->coordinate) == false)
-        return (false);
-    go_to_next_data(&line);
+	go_to_next_data(&line);
+	if (ft_atocoord_on(line, &cone->coordinate) == false)
+		return (false);
+	go_to_next_data(&line);
 	if (ft_atovec_on(line, &cone->vector) == false)
 		return (false);
-    go_to_next_data(&line);
+	go_to_next_data(&line);
 	if (ft_atod_on(line, &cone->diameter) == false)
 		return (false);
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &cone->height) == false)
 		return (false);
-    go_to_next_data(&line);
-    if (ft_atorgb_on(line, &cone->color) == false)
-        return (false);
-    go_to_next_data(&line);
-    return (ft_material_on(line, &cone->material));
+	go_to_next_data(&line);
+	if (ft_atorgb_on(line, &cone->color) == false)
+		return (false);
+	go_to_next_data(&line);
+	return (ft_material_on(line, &cone->material));
 }

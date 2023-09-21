@@ -10,8 +10,8 @@ bool	fill_l(void *data_pt, int flag);
 bool	fill_pl(void *data_pt, int flag);
 bool	fill_sp(void *data_pt, int flag);
 bool	fill_cy(void *data_pt, int flag);
-bool    fill_co(void *data_pt, int flag);
-bool    fill_di(void *data_pt, int flag);
+bool	fill_co(void *data_pt, int flag);
+bool	fill_di(void *data_pt, int flag);
 
 bool	get_line_data_a(char *line, t_ambient_light *light_pt);
 bool	get_line_data_c(char *line, t_camera *camera);
@@ -22,9 +22,7 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder);
 bool	get_line_data_co(char *line, t_cone *cone);
 bool	get_line_data_di(char *line, t_disk *disk);
 
-#include "stdio.h"
-
-void	init_filling_ft(t_minirt_data * data_pt)
+void	init_filling_ft(t_minirt_data *data_pt)
 {
 	fill_a(data_pt, INIT);
 	fill_c(data_pt, INIT);
@@ -32,13 +30,13 @@ void	init_filling_ft(t_minirt_data * data_pt)
 	fill_sp(data_pt, INIT);
 	fill_pl(data_pt, INIT);
 	fill_cy(data_pt, INIT);
-    fill_co(data_pt, INIT);
-    fill_di(data_pt, INIT);
+	fill_co(data_pt, INIT);
+	fill_di(data_pt, INIT);
 }
 
 bool	fill_di(void *data_pt, int flag)
 {
-	static t_disk *disk_arr;
+	static t_disk	*disk_arr;
 
 	if (flag == INIT)
 	{
@@ -53,7 +51,7 @@ bool	fill_di(void *data_pt, int flag)
 
 bool	fill_co(void *data_pt, int flag)
 {
-	static t_cone *cone_arr;
+	static t_cone	*cone_arr;
 
 	if (flag == INIT)
 	{
@@ -68,7 +66,7 @@ bool	fill_co(void *data_pt, int flag)
 
 bool	fill_a(void *data_pt, int flag)
 {
-	static t_ambient_light *ambient_light_arr;
+	static t_ambient_light	*ambient_light_arr;
 
 	if (flag == INIT)
 	{
@@ -84,11 +82,11 @@ bool	fill_a(void *data_pt, int flag)
 
 bool	fill_c(void *data_pt, int flag)
 {
-	static t_camera *camera_arr;
+	static t_camera	*camera_arr;
 
 	if (flag == INIT)
 	{
-		camera_arr= ((t_minirt_data *)data_pt)->camera;
+		camera_arr = ((t_minirt_data *)data_pt)->camera;
 		return (true);
 	}
 	if (get_line_data_c((char *)data_pt, camera_arr) == false)
@@ -99,7 +97,7 @@ bool	fill_c(void *data_pt, int flag)
 
 bool	fill_l(void *data_pt, int flag)
 {
-	static t_light *light_arr;
+	static t_light	*light_arr;
 
 	if (flag == INIT)
 	{
@@ -114,7 +112,7 @@ bool	fill_l(void *data_pt, int flag)
 
 bool	fill_sp(void *data_pt, int flag)
 {
-	static t_sphere *sphere_arr;
+	static t_sphere	*sphere_arr;
 
 	if (flag == INIT)
 	{
@@ -129,7 +127,7 @@ bool	fill_sp(void *data_pt, int flag)
 
 bool	fill_pl(void *data_pt, int flag)
 {
-	static t_plane *plane_arr;
+	static t_plane	*plane_arr;
 
 	if (flag == INIT)
 	{
@@ -144,7 +142,7 @@ bool	fill_pl(void *data_pt, int flag)
 
 bool	fill_cy(void *data_pt, int flag)
 {
-	static t_cylinder *cylinder_arr;
+	static t_cylinder	*cylinder_arr;
 
 	if (flag == INIT)
 	{
