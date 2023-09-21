@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 16:12:12 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_hit	find_near_cylinder(t_ray camray, size_t count, t_cylinder *cyl_arr)
 	return (info);
 }
 
-int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
+int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_data data, int level)
 {
 	t_cylinder	*cy;
 	t_color		ratio;

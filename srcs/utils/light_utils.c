@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:07:55 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 15:09:37 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "hit.h"
 
-void	*suppress_light(t_light light, t_minirt_data *data_pt);
+void	*suppress_light(t_light light, t_data *data_pt);
 
 void	compute_light_ratio(
 		t_color *color,
@@ -39,7 +39,7 @@ t_vec_3	bounce_vec(t_point hitpoint, t_light light)
 	return (result);
 }
 
-void	find_light(t_minirt_data *data, double *t, t_ray ray, size_t *index)
+void	find_light(t_data *data, double *t, t_ray ray, size_t *index)
 {
 	double	t_max;
 	t_hit	id;

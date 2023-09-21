@@ -6,13 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:52:51 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 15:16:18 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	ambient_lightning(t_color *ratio, t_minirt_data *data)
+void	ambient_lightning(t_color *ratio, t_data *data)
 {
 	size_t				index;
 	t_ambient_light		a_light;

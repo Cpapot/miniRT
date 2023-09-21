@@ -4,11 +4,11 @@
 #include "../../../inc/check_lines_ft.h"
 #include "stdio.h"
 
-static bool	_check_lines(t_minirt_data *data_pt, char **lines);
-static bool	_fill_lines_in_data(t_minirt_data *data_pt, char **lines);
+static bool	_check_lines(t_data *data_pt, char **lines);
+static bool	_fill_lines_in_data(t_data *data_pt, char **lines);
 static bool	_call_filling_ft(char **lines);
 
-bool	fill_data(t_minirt_data *data_pt, char *file)
+bool	fill_data(t_data *data_pt, char *file)
 {
 	char	**lines;
 
@@ -23,7 +23,7 @@ bool	fill_data(t_minirt_data *data_pt, char *file)
 	return (_fill_lines_in_data(data_pt, lines));
 }
 
-static bool	_fill_lines_in_data(t_minirt_data *data_pt, char **lines)
+static bool	_fill_lines_in_data(t_data *data_pt, char **lines)
 {
 	init_filling_ft(data_pt);
 	if (_call_filling_ft(lines) == false)
@@ -55,7 +55,7 @@ static bool	_call_filling_ft(char **lines)
 	return (true);
 }
 
-static bool	_check_lines(t_minirt_data *data_pt, char **lines)
+static bool	_check_lines(t_data *data_pt, char **lines)
 {
 	char				**tmp;
 	int					i;

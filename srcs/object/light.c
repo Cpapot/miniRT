@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 15:11:51 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "hit.h"
 
-void	find_light(t_minirt_data *data, double *t, t_ray ray, size_t *index);
+void	find_light(t_data *data, double *t, t_ray ray, size_t *index);
 void	compute_light_ratio(t_color *color, t_light light, double r[2], t_material *mat);
 t_vec_3	bounce_vec(t_point hitpoint, t_light light);
 
@@ -30,7 +30,7 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 	return (scalar);
 }
 
-void	delete_hidden_light(t_minirt_data *data, t_point point)
+void	delete_hidden_light(t_data *data, t_point point)
 {
 	size_t	index;
 	double	t;
@@ -66,7 +66,7 @@ double	specular_light(t_vec_3 light_dir, t_vec_3 normal, t_material *mat)
 	return (result);
 }
 
-t_color	ft_find_light_ratio(t_point point, t_minirt_data data, t_vec_3 normal, t_material *mat)
+t_color	ft_find_light_ratio(t_point point, t_data data, t_vec_3 normal, t_material *mat)
 {
 	size_t	index;
 	t_color	result;

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/01 15:46:04 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "cylinder.h"
 #include "disk.h"
 
-t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
+t_hitinfo	find_close_object(t_ray camray, t_data data)
 {
 	t_hitinfo	info;
 	t_hit		hit;
@@ -63,7 +63,7 @@ t_hitinfo	find_close_object(t_ray camray, t_minirt_data data)
 	return (info);
 }
 
-int32_t	check_ray(t_ray camray, t_minirt_data data, int level)
+int32_t	check_ray(t_ray camray, t_data data, int level)
 {
 	t_hitinfo	info;
 

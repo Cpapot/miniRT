@@ -2,7 +2,7 @@
 #include "../../../inc/mini_parse_ft.h"
 #include "unistd.h"
 
-bool	manage_a(t_minirt_data *data_pt, char *line)
+bool	manage_a(t_data *data_pt, char *line)
 {
 	const t_mini_parse_ft parse_ft_arr[] = {
 		&incr_one,  &space_incr,  &check_float, &space_incr,
@@ -18,7 +18,7 @@ bool	manage_a(t_minirt_data *data_pt, char *line)
 	return (true);
 }
 
-bool	manage_c(t_minirt_data *data_pt, char *line) {
+bool	manage_c(t_data *data_pt, char *line) {
 	const t_mini_parse_ft parse_ft_arr[] = {
 		&incr_one,   &space_incr, &coord_check, &space_incr, &vec_check,
 		&space_incr, &fov_check,  &check_empty, NULL};
@@ -34,7 +34,7 @@ bool	manage_c(t_minirt_data *data_pt, char *line) {
 	return (true);
 }
 
-bool	manage_l(t_minirt_data *data_pt, char *line)
+bool	manage_l(t_data *data_pt, char *line)
 {
 	const t_mini_parse_ft parse_ft_arr[] = {
 		&incr_one,   &space_incr, &coord_check, &space_incr, &check_float,
@@ -51,7 +51,7 @@ bool	manage_l(t_minirt_data *data_pt, char *line)
 	return (true);
 }
 
-bool	manage_sp(t_minirt_data *data_pt, char *line)
+bool	manage_sp(t_data *data_pt, char *line)
 {
 	const t_mini_parse_ft parse_ft_arr[] = {
 		&incr_one,    &incr_one,   &space_incr, &coord_check, &space_incr,
@@ -68,7 +68,7 @@ bool	manage_sp(t_minirt_data *data_pt, char *line)
 	return (true);
 }
 
-bool	manage_pl(t_minirt_data *data_pt, char *line)
+bool	manage_pl(t_data *data_pt, char *line)
 {
 	const t_mini_parse_ft	parse_ft_arr[] = {
 		&incr_one,  &incr_one,   &space_incr, &coord_check, &space_incr,
@@ -86,7 +86,7 @@ bool	manage_pl(t_minirt_data *data_pt, char *line)
 	return (true);
 }
 
-bool	manage_cy(t_minirt_data *data_pt, char *line)
+bool	manage_cy(t_data *data_pt, char *line)
 {
 	const t_mini_parse_ft	parse_ft_arr[] = {
 		&incr_one,   &incr_one,   &space_incr,  &coord_check, &space_incr,
@@ -104,7 +104,7 @@ bool	manage_cy(t_minirt_data *data_pt, char *line)
 	return (true);
 }
 
-bool	manage_di(t_minirt_data *data_pt, char *line) 
+bool	manage_di(t_data *data_pt, char *line)
 {
 	const t_mini_parse_ft	parse_ft_arr[] = {
 		&incr_one, &incr_one, &space_incr, &coord_check, &space_incr,
@@ -114,7 +114,7 @@ bool	manage_di(t_minirt_data *data_pt, char *line)
 
 	data_pt->di_nb++;
 	i = 0;
-	while (parse_ft_arr[i]) 
+	while (parse_ft_arr[i])
 	{
 		if (parse_ft_arr[i](&line) != true)
 			return (false);
@@ -123,7 +123,7 @@ bool	manage_di(t_minirt_data *data_pt, char *line)
 	return (true);
 }
 
-bool	manage_co(t_minirt_data *data_pt, char *line) 
+bool	manage_co(t_data *data_pt, char *line)
 {
 	const t_mini_parse_ft	parse_ft_arr[] = {
 		&incr_one, &incr_one, &space_incr, &coord_check, &space_incr,
@@ -133,7 +133,7 @@ bool	manage_co(t_minirt_data *data_pt, char *line)
 
 	data_pt->co_nb++;
 	i = 0;
-	while (parse_ft_arr[i]) 
+	while (parse_ft_arr[i])
 	{
 		if (parse_ft_arr[i](&line) != true)
 			return (false);
@@ -142,7 +142,7 @@ bool	manage_co(t_minirt_data *data_pt, char *line)
 	return (true);
 }
 
-bool	emmit_err(t_minirt_data *data_pt, char *line)
+bool	emmit_err(t_data *data_pt, char *line)
 {
 	(void)data_pt;
 	if (*line == 0 || *line == '#')

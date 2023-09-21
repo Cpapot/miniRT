@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:00:33 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 17:52:40 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "../inc/key.h"
 
-void	screen_loop(t_mlx_info *win, t_minirt_data *data);
+void	screen_loop(t_mlx_info *win, t_data *data);
 
 int	close_window(void)
 {

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 15:13:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_hit	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 
 bool	is_black_case_pl(t_point hit, t_plane *plane);
 
-int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
+int32_t	render_plane(t_hitinfo info, t_ray camray, t_data data, int level)
 {
 	t_plane		*pl;
 	t_color		ratio;

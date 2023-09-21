@@ -8,7 +8,7 @@
 # include "structure.h"
 # include "stdbool.h"
 
-int     clean_minirt_data(t_minirt_data *data_pt);
-bool	allocate_data(t_minirt_data *data_pt);
+int     clean_minirt_data(t_data *data_pt);
+bool	allocate_data(t_data *data_pt);
 
 #endif

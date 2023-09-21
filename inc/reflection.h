@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 22:27:15 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:05:18 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 #include "miniRT.h"
 
 t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray);
-int32_t	reflection(int32_t light, t_minirt_data data, t_ray camray, int level, t_material *mat);
+int32_t	reflection(int32_t light, t_data data, t_ray camray, int level, t_material *mat);
 
 #endif

@@ -32,6 +32,39 @@ bool	is_black_case_sp(t_point hitpoint)
 	return (false);
 }
 
+t_vec_3	create_vec(t_point a, t_point b)
+{
+	t_vec_3 vec;
+
+	vec.x = b.x - a.x;
+	vec.y = b.y - a.y;
+	vec.z = b.z - a.z;
+	return (vec);
+}
+void	print_vector(t_vec_3 vector);
+
+bool	same_dir(t_vec_3 a, t_vec_3 b)
+{
+	if (a.x * b.x > 0 && b.x != 0 && a.x != 0)
+		return (true);
+	if (a.z * b.z > 0 && b.z != 0 && a.z != 0)
+		return (true);
+	if (a.y * b.y > 0 && a.y != 0 && b.y != 0)
+		return (true);
+	return (false);
+}
+
+t_vec_3 vectoriel_product(t_vec_3 a, t_vec_3 b)
+{
+	t_vec_3 ret;
+
+	ret.x = a.y * b.z - a.z * b.y;
+	ret.y = a.z * b.x - a.x * b.z;
+	ret.z = a.x * b.y - a.y * b.x;
+
+	return (ret);
+}
+
 bool	is_black_case(t_point hitpoint)
 {
 	double	size;

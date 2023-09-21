@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 17:43:32 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 //on dois la set pour chaque camera
 
-void	reset_light(t_minirt_data *data)
+void	reset_light(t_data *data)
 {
 	static t_light			first_data[LIGHT_BUFF];
 	int						i;
@@ -52,7 +52,7 @@ void	reset_light(t_minirt_data *data)
 
 t_plane	disk_to_plane(t_disk disk);
 
-void	set_minirt_data(t_minirt_data *data, t_camera *cam)
+void	set_data(t_data *data, t_camera *cam)
 {
 	int						index;
 	t_plane					plane;
@@ -82,14 +82,14 @@ void	set_minirt_data(t_minirt_data *data, t_camera *cam)
 int32_t	mod_gamma(int32_t object_color);
 void	print_loading(void);
 
-void	screen_loop(t_mlx_info *win, t_minirt_data *data)
+void	screen_loop(t_mlx_info *win, t_data *data)
 {
 	t_ray	camray;
 	int		x;
 	int		y;
 
 	x = 0;
-	set_minirt_data(data, &data->camera[data->option.cam_id]);
+	set_data(data, &data->camera[data->option.cam_id]);
 	while (x != win->xwinsize)
 	{
 		y = 0;
@@ -111,23 +111,23 @@ void	screen_loop(t_mlx_info *win, t_minirt_data *data)
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, win->img, 0, 0);
 }
 
-bool	parsing(t_minirt_data *data_pt, char *file_name);
-t_minirt_data	create_struct();
+bool	parsing(t_data *data_pt, char *file_name);
+t_data	create_struct();
 
-void	init_minirt_data(t_minirt_data * data)
+void	init_data(t_data * data)
 {
-    ft_bzero(data, sizeof(t_minirt_data));
+    ft_bzero(data, sizeof(t_data));
 	data->option.cam_id = 0;
 	data->option.shadow = true;
 	data->option.anti_aliasing = false;
 }
 
-void	*suppress_light(t_light light, t_minirt_data *data_pt);
-void	print_data(char *msg, t_minirt_data *data);
-void	change_cylinder_coord(t_minirt_data *data_pt);
-bool	add_disk(t_minirt_data *data_pt);
+void	*suppress_light(t_light light, t_data *data_pt);
+void	print_data(char *msg, t_data *data);
+void	change_cylinder_coord(t_data *data_pt);
+bool	add_disk(t_data *data_pt);
 
-int    clean_minirt_data(t_minirt_data *data_pt)
+int    clean_minirt_data(t_data *data_pt)
 {
     if (data_pt->ambient_light != NULL)
         free(data_pt->ambient_light);
@@ -161,9 +161,9 @@ int main(int ac, char **av)
 	t_mlx_info		win;
 	(void)ac;
 	(void)av;
-	t_minirt_data	data;
+	t_data	data;
 
-	init_minirt_data(&data);
+	init_data(&data);
 	if (ac == 1  || parsing(&data, av[1]) == false)
 		return (usage_display(), clean_minirt_data(&data));
 	ft_printf("\e[2J\e[H");

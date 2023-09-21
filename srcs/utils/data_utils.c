@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:26:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 17:43:01 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "minirt_data.h"
 
-void	change_cylinder_coord(t_minirt_data *data_pt)
+void	change_cylinder_coord(t_data *data_pt)
 {
 	size_t	index;
 	t_vec_3	cyl_vec;
@@ -31,7 +31,7 @@ void	change_cylinder_coord(t_minirt_data *data_pt)
 	}
 }
 
-t_disk	*copy_old_diskdata(t_minirt_data *data_pt)
+t_disk	*copy_old_diskdata(t_data *data_pt)
 {
 	t_disk	*disk_arr;
 	size_t	index;
@@ -52,7 +52,7 @@ t_disk	*copy_old_diskdata(t_minirt_data *data_pt)
 
 void	add_cone_disk(
 		t_disk **disk_arr,
-		t_minirt_data *data_pt,
+		t_data *data_pt,
 		size_t disk_index)
 {
 	t_cone	cone;
@@ -81,7 +81,7 @@ void	add_cone_disk(
 	}
 }
 
-bool	add_disk(t_minirt_data *data_pt)
+bool	add_disk(t_data *data_pt)
 {
 	size_t	index;
 	size_t	disk_index;
@@ -136,7 +136,7 @@ bool	add_disk(t_minirt_data *data_pt)
 	return (true);
 }
 
-void	*suppress_light(t_light light, t_minirt_data *data_pt)
+void	*suppress_light(t_light light, t_data *data_pt)
 {
 	size_t	lt_nb;
 

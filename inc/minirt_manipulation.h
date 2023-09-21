@@ -7,6 +7,6 @@
 
 #include "structure.h"
 
-void	*suppress_light(t_light light, t_minirt_data *data_pt);
+void	*suppress_light(t_light light, t_data *data_pt);
 
 #endif //RAYTRACER_MINIRT_MANIPULATION_H
