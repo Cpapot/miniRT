@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:25:47 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 15:49:00 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 14:12:05 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,13 @@ int	cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h)
 	if (!(scalar_product(norm, vec) >= 0 && scalar_product(norm, vec) <= h))
 		return (1);
 	return (0);
+}
+
+t_hit	set_hit(bool inside, double t)
+{
+	t_hit	result;
+
+	result.t = t;
+	result.inside = inside;
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:25:04 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/20 16:25:37 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 14:59:56 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_point	hit_coord(double dot, t_ray ray)
 
 t_point	adjust_hitpoint(t_point hit, t_vec_3 normal)
 {
-	hit.x = hit.x + (normal.x * 0.0001);
-	hit.y = hit.y + (normal.y * 0.0001);
-	hit.z = hit.z + (normal.z * 0.0001);
+	hit.x = hit.x + (normal.x * 0.0005);
+	hit.y = hit.y + (normal.y * 0.0005);
+	hit.z = hit.z + (normal.z * 0.0005);
 	return (hit);
 }

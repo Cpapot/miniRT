@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 14:45:34 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_hitinfo	find_close_object(t_ray camray, t_data data)
 		info.type = SPHERE;
 		info.struct_info = &data.sphere_arr[hit.id];
 		info.t = hit.t;
+		info.inside = hit.inside;
 	}
 	hit = find_near_plane(camray, data.pl_nb, data.plane_arr);
 	if (hit.id != -1 && info.t > hit.t)
