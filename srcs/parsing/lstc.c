@@ -17,10 +17,10 @@ void	ft_lstclean(t_lstc *head, void (*del)(void *));
 void	lstc_cpy_in_str(t_lstc	*lst, char **str);
 t_lstc	*lstc_clear(t_lstc *trash);
 
-char *ft_strdup_no(char *str)
+char	*ft_strdup_no(char *str)
 {
-	char *dst;
-	char *tmp;
+	char	*dst;
+	char	*tmp;
 
 	dst = malloc(ft_strlen(str) + 1);
 	tmp = dst;
@@ -54,7 +54,6 @@ void	read_lst(t_lstc *lst)
 	}
 }
 
-#include "stdio.h"
 bool	read_fd_in_str(int fd, char **dst)
 {
 	t_lstc	*lst;
