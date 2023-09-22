@@ -1,12 +1,19 @@
-//
-// Created by bpoumeau on 6/20/23.
-//
-#include "../../inc/structure.h"
-#include "../../libft/includes/libft.h"
-#include "../../inc/vec3.h"
-#include "../../inc/minirt_data.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/20 16:26:10 by cpapot            #+#    #+#             */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	change_cylinder_coord(t_minirt_data *data_pt)
+#include "miniRT.h"
+#include "minirt_data.h"
+
+void	change_cylinder_coord(t_data *data_pt)
 {
 	size_t	index;
 	t_vec_3	cyl_vec;
@@ -24,13 +31,14 @@ void	change_cylinder_coord(t_minirt_data *data_pt)
 	}
 }
 
-t_disk	*copy_old_diskdata(t_minirt_data *data_pt)
+t_disk	*copy_old_diskdata(t_data *data_pt)
 {
 	t_disk	*disk_arr;
 	size_t	index;
 
 	index = 0;
-	disk_arr = malloc((data_pt->di_nb + data_pt->cy_nb * 2 + data_pt->co_nb) * sizeof(t_disk));
+	disk_arr = malloc((data_pt->di_nb + data_pt->cy_nb * \
+		2 + data_pt->co_nb) * sizeof(t_disk));
 	if (errno)
 		return (perror("here"), clean_minirt_data(data_pt), NULL);
 	while (index != data_pt->di_nb)
@@ -42,7 +50,38 @@ t_disk	*copy_old_diskdata(t_minirt_data *data_pt)
 	return (disk_arr);
 }
 
-bool	add_disk(t_minirt_data *data_pt)
+void	add_cone_disk(
+		t_disk **disk_arr,
+		t_data *data_pt,
+		size_t disk_index)
+{
+	t_cone	cone;
+	size_t	index;
+	t_vec_3	normal;
+
+	index = 0;
+	while (data_pt->co_nb != index)
+	{
+		cone = data_pt->cone_arr[index];
+		disk_arr[data_pt->di_nb + disk_index]->color = cone.color;
+		normalize_vec(&data_pt->cone_arr[index].vector);
+		normal = data_pt->cone_arr[index].vector;
+		multiplying_vec(&normal, -(cone.height));
+		disk_arr[data_pt->di_nb + disk_index]->coordinate.x = normal.x + \
+			cone.coordinate.x;
+		disk_arr[data_pt->di_nb + disk_index]->coordinate.y = normal.y + \
+			cone.coordinate.y;
+		disk_arr[data_pt->di_nb + disk_index]->coordinate.z = normal.z + \
+			cone.coordinate.z;
+		disk_arr[data_pt->di_nb + disk_index]->material = cone.material;
+		disk_arr[data_pt->di_nb + disk_index]->diameter = cone.diameter;
+		disk_arr[data_pt->di_nb + disk_index]->normal_vector = cone.vector;
+		disk_index++;
+		index++;
+	}
+}
+
+bool	add_disk(t_data *data_pt)
 {
 	size_t	index;
 	size_t	disk_index;
@@ -97,16 +136,20 @@ bool	add_disk(t_minirt_data *data_pt)
 	return (true);
 }
 
-void	*suppress_light(t_light light, t_minirt_data *data_pt)
+void	*suppress_light(t_light light, t_data *data_pt)
 {
 	size_t	lt_nb;
 
 	lt_nb = data_pt->lt_nb;
 	while (lt_nb--)
-		if (ft_memcmp(&light, &(data_pt->lights_arr[lt_nb]), sizeof(t_light)) == 0)
+	{
+		if (ft_memcmp(&light, &(data_pt->lights_arr[lt_nb]), \
+			sizeof(t_light)) == 0)
 		{
 			data_pt->lt_nb--;
-			return (ft_memmove((void *)&(data_pt->lights_arr[lt_nb]), (void *)&(data_pt->lights_arr[lt_nb + 1]),sizeof(t_light) * (data_pt->lt_nb - lt_nb)));
+			return (ft_memmove((void *)&(data_pt->lights_arr[lt_nb]),  \
+				(void *)&(data_pt->lights_arr[lt_nb + 1]),sizeof(t_light) * (data_pt->lt_nb - lt_nb)));
 		}
+	}
 	return (0);
 }

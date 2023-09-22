@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:18:34 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 13:46:09 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "hit.h"
 
-int	check_shadow(t_point hitpoint, t_light light, t_minirt_data *data)
+int	check_shadow(t_point hitpoint, t_light light, t_data *data)
 {
 	t_hitinfo	close_object;
 	t_ray		bounce_ray;

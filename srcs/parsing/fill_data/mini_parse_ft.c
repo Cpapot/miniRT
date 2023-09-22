@@ -9,9 +9,9 @@ bool	incr_one(char **line_pt)
 
 bool	space_incr(char **line_pt)
 {
-	if (**line_pt != ' ' && **line_pt != '\t')
+	if (**line_pt != ' ' && ** line_pt != '\t')
 		return (false);
-	while (**line_pt == ' ' && **line_pt != '\t')
+	while (**line_pt == ' ' && ** line_pt != '\t')
 		*line_pt = *line_pt + 1;
 	return (true);
 }

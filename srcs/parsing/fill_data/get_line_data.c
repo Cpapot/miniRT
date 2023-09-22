@@ -56,9 +56,10 @@ bool	ft_atof_on(char *line, double *dst)
 bool	ft_material_on(char *line, t_material *dst)
 {
 	int					i;
-	const char			*str_arr[] = {"Me", "Mi", "Ch", "Pl", ""};
-	const t_material	material_arr[] = \
-		{METAL, MIRROR, CHECKERBOARD, PLASTIC, BASIC};
+	static char			*str_arr[] = {"Me", "Mi", "Ch", "Pl", ""};
+	static t_material	material_arr[] = {
+		METAL, MIRROR, CHECKERBOARD, PLASTIC, BASIC
+	};
 
 	i = 0;
 	while (i < 4 && ft_strncmp(str_arr[i], line, 2) != 0)

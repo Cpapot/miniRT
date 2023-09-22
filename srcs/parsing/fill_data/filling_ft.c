@@ -11,6 +11,7 @@ bool	fill_sp(void *data_pt, int flag);
 bool	fill_cy(void *data_pt, int flag);
 bool	fill_co(void *data_pt, int flag);
 bool	fill_di(void *data_pt, int flag);
+
 bool	get_line_data_a(char *line, t_ambient_light *light_pt);
 bool	get_line_data_c(char *line, t_camera *camera);
 bool	get_line_data_l(char *line, t_light *light);
@@ -20,7 +21,7 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder);
 bool	get_line_data_co(char *line, t_cone *cone);
 bool	get_line_data_di(char *line, t_disk *disk);
 
-void	init_filling_ft(t_minirt_data *data_pt)
+void	init_filling_ft(t_data *data_pt)
 {
 	fill_a(data_pt, INIT);
 	fill_c(data_pt, INIT);
@@ -38,7 +39,7 @@ bool	fill_di(void *data_pt, int flag)
 
 	if (flag == INIT)
 	{
-		disk_arr = ((t_minirt_data *)data_pt)->disk_arr;
+		disk_arr = ((t_data *)data_pt)->disk_arr;
 		return (true);
 	}
 	if (get_line_data_di((char *)data_pt, disk_arr) == false)
@@ -53,7 +54,7 @@ bool	fill_co(void *data_pt, int flag)
 
 	if (flag == INIT)
 	{
-		cone_arr = ((t_minirt_data *)data_pt)->cone_arr;
+		cone_arr = ((t_data *)data_pt)->cone_arr;
 		return (true);
 	}
 	if (get_line_data_co((char *)data_pt, cone_arr) == false)
@@ -68,7 +69,7 @@ bool	fill_a(void *data_pt, int flag)
 
 	if (flag == INIT)
 	{
-		ambient_light_arr = ((t_minirt_data *)data_pt)->ambient_light;
+		ambient_light_arr = ((t_data *)data_pt)->ambient_light;
 		return (true);
 	}
 	ambient_light_arr->ratio = 0;
@@ -84,7 +85,7 @@ bool	fill_c(void *data_pt, int flag)
 
 	if (flag == INIT)
 	{
-		camera_arr = ((t_minirt_data *)data_pt)->camera;
+		camera_arr = ((t_data *)data_pt)->camera;
 		return (true);
 	}
 	if (get_line_data_c((char *)data_pt, camera_arr) == false)
@@ -99,7 +100,7 @@ bool	fill_l(void *data_pt, int flag)
 
 	if (flag == INIT)
 	{
-		light_arr = ((t_minirt_data *)data_pt)->lights_arr;
+		light_arr = ((t_data *)data_pt)->lights_arr;
 		return (true);
 	}
 	if (get_line_data_l((char *)data_pt, light_arr) == false)
@@ -114,7 +115,7 @@ bool	fill_sp(void *data_pt, int flag)
 
 	if (flag == INIT)
 	{
-		sphere_arr = ((t_minirt_data *)data_pt)->sphere_arr;
+		sphere_arr = ((t_data *)data_pt)->sphere_arr;
 		return (true);
 	}
 	if (get_line_data_sp((char *)data_pt, sphere_arr) == false)
@@ -129,7 +130,7 @@ bool	fill_pl(void *data_pt, int flag)
 
 	if (flag == INIT)
 	{
-		plane_arr = ((t_minirt_data *)data_pt)->plane_arr;
+		plane_arr = ((t_data *)data_pt)->plane_arr;
 		return (true);
 	}
 	if (get_line_data_pl((char *)data_pt, plane_arr) == false)
@@ -144,7 +145,7 @@ bool	fill_cy(void *data_pt, int flag)
 
 	if (flag == INIT)
 	{
-		cylinder_arr = ((t_minirt_data *)data_pt)->cylinder_arr;
+		cylinder_arr = ((t_data *)data_pt)->cylinder_arr;
 		return (true);
 	}
 	if (get_line_data_cy((char *)data_pt, cylinder_arr) == false)

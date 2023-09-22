@@ -13,6 +13,6 @@ bool fill_sp(void *data_pt, int flag);
 bool fill_cy(void *data_pt, int flag);
 bool fill_co(void *data_pt, int flag);
 bool fill_di(void *data_pt, int flag);
-void init_filling_ft(t_minirt_data *data_pt);
+void init_filling_ft(t_data *data_pt);
 
 #endif

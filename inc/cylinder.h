@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:18:04 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/31 23:14:27 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 t_vec_3		cylinder_normal(t_ray camray);
 double		cylinder_hitted(t_ray camray, t_cylinder cyl);
 t_hit		find_near_cylinder(t_ray camray, size_t count, t_cylinder *cyl_arr);
-int32_t		render_cylinder(t_hitinfo info, t_ray camray, t_minirt_data data, int level);
+int32_t		render_cylinder(t_hitinfo info, t_ray camray, t_data data, int level);
 
 #endif

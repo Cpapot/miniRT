@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 21:48:52 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 14:18:38 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ enum	e_type
 	DISK
 };
 
-typedef struct s_minirt_data	t_minirt_data;
+typedef struct s_minirt_data	t_data;
 typedef struct s_ray			t_ray;
 typedef struct s_point			t_point;
 typedef struct s_vec_3			t_vec_3;
@@ -178,13 +178,17 @@ typedef struct s_hit
 {
 		double	t;
 		int		id;
+		bool	inside;
 }		t_hit;
+
 
 typedef struct s_hitinfo
 {
 	double	t;
 	int		type;
 	void	*struct_info;
+	bool	inside;
+	t_vec_3	normal;
 }			t_hitinfo;
 
 #endif

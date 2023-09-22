@@ -104,7 +104,7 @@ void	print_disk(t_disk cylinder)
 }
 
 
-void print_data(char *msg, t_minirt_data *data)
+void print_data(char *msg, t_data *data)
 {
 	static	int nb = 0;
 
@@ -174,7 +174,7 @@ void print_data(char *msg, t_minirt_data *data)
     tmp_di = data->disk_arr;
     while (size--)
    {
-    
+
         print_disk(*tmp_di);
         tmp_di++;
     }

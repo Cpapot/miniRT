@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reflection.h                                       :+:      :+:    :+:   */
+/*   object_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 22:27:15 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Created: 2023/09/20 15:25:47 by cpapot            #+#    #+#             */
+/*   Updated: 2023/09/21 14:12:05 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REFLECTION_H
-# define REFLECTION_H
-
 #include "miniRT.h"
+#include "vec3.h"
 
-t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray);
-int32_t	reflection(int32_t light, t_data data, t_ray camray, int level, t_material *mat);
+int	cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h)
+{
+	t_vec_3	vec;
 
-#endif
+	vec = set_vec(coord.x - p.x, coord.y - p.y, coord.z - p.z);
+	if (!(scalar_product(norm, vec) >= 0 && scalar_product(norm, vec) <= h))
+		return (1);
+	return (0);
+}
+
+t_hit	set_hit(bool inside, double t)
+{
+	t_hit	result;
+
+	result.t = t;
+	result.inside = inside;
+	return (result);
+}

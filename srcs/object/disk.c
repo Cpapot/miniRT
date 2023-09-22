@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:28:39 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/31 16:03:47 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_hit	find_near_disk(t_ray camray, size_t count, t_disk *disk_arr)
 	return (info);
 }
 
-int32_t	render_disk(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
+int32_t	render_disk(t_hitinfo info, t_ray camray, t_data data, int level)
 {
 	t_disk		*disk;
 	t_color		ratio;
@@ -81,9 +81,9 @@ int32_t	render_disk(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
 	ratio = ft_find_light_ratio(hitpoint, data, \
 	disk->normal_vector, &disk->material);
 	ambient_lightning(&ratio, &data);
-
 	reflect_ray.direction = reflect_vec(disk->normal_vector, camray.direction);
 	reflect_ray.origin = hitpoint;
 	return (reflection(ft_color(disk->color.r * ratio.r, disk->color.g * \
-		ratio.g, disk->color.b * ratio.b, 0), data, reflect_ray, level, &disk->material));
+		ratio.g, disk->color.b * ratio.b, 0), data, reflect_ray, level, \
+		&disk->material));
 }

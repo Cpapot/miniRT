@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:29:07 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/10 15:03:23 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	print_loading(void)
 {
-	static	int	percent = 0;
+	static int	percent = 0;
 	int			total;
 	static int	actual = 0;
 	int			tmp ;
@@ -38,7 +38,7 @@ void	print_loading(void)
 	}
 }
 
-void	print_info(t_minirt_data *data)
+void	print_info(t_data *data)
 {
 	if (data->option.shadow)
 		ft_printf(" ✅ | shadows\n");

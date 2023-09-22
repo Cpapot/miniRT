@@ -4,11 +4,11 @@
 #include "../../../inc/check_lines_ft.h"
 #include "stdio.h"
 
-static bool	_check_lines(t_minirt_data *data_pt, char **lines);
-static bool	_fill_lines_in_data(t_minirt_data *data_pt, char **lines);
+static bool	_check_lines(t_data *data_pt, char **lines);
+static bool	_fill_lines_in_data(t_data *data_pt, char **lines);
 static bool	_call_filling_ft(char **lines);
 
-bool	fill_data(t_minirt_data *data_pt, char *file)
+bool	fill_data(t_data *data_pt, char *file)
 {
 	char	**lines;
 
@@ -16,14 +16,14 @@ bool	fill_data(t_minirt_data *data_pt, char *file)
 	free(file);
 	if (!lines)
 		return (perror("fill_data"), false);
-	if (_check_lines(data_pt, lines) == false \
+	if (_check_lines(data_pt, lines) == false
 		|| allocate_data(data_pt) == false)
 		return (ft_free_split(lines), false);
 	puts("maps checked");
 	return (_fill_lines_in_data(data_pt, lines));
 }
 
-static bool	_fill_lines_in_data(t_minirt_data *data_pt, char **lines)
+static bool	_fill_lines_in_data(t_data *data_pt, char **lines)
 {
 	init_filling_ft(data_pt);
 	if (_call_filling_ft(lines) == false)
@@ -45,10 +45,8 @@ static bool	_call_filling_ft(char **lines)
 	while (*tmp)
 	{
 		i = 0;
-		while (i < 8
-			&& ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
+		while (i < 8 && ft_strncmp(id_arr[i], *tmp, ft_strlen(id_arr[i])) != 0)
 			i++;
-		puts(*tmp);
 		if (i < 8 && ft_arr[i](*tmp, FILLING) == false)
 			return (ft_free_split(lines), false);
 		tmp++;
@@ -57,15 +55,16 @@ static bool	_call_filling_ft(char **lines)
 	return (true);
 }
 
-static bool	_check_lines(t_minirt_data *data_pt, char **lines)
+static bool	_check_lines(t_data *data_pt, char **lines)
 {
 	char				**tmp;
 	int					i;
-	const char			*id_arr[] = \
-			{"A", "C", "L", "sp", "pl", "cy", "di", "co"};
-	const t_parse_ft	parse_ft_arr[] = {&manage_a, &manage_c, &manage_l, \
-								&manage_sp, &manage_pl, &manage_cy, \
-								&manage_di, &manage_co, &emmit_err};
+	const char			*id_arr[] = {
+		"A", "C", "L", "sp", "pl", "cy", "di", "co"};
+	const t_parse_ft	parse_ft_arr[] = {
+		&manage_a, &manage_c, &manage_l,
+		&manage_sp, &manage_pl, &manage_cy,
+		&manage_di, &manage_co, &emmit_err};
 
 	i = 0;
 	tmp = lines;

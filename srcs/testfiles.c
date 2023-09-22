@@ -37,9 +37,9 @@
 	//return (result);
 //}
 //
-//t_minirt_data	create_struct()
+//t_data	create_struct()
 //{
-	//t_minirt_data	test;
+	//t_data	test;
 //
 	//test.co_nb = 0;
 	//test.cone_arr = malloc(sizeof(t_cone));
