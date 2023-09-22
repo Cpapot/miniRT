@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 14:45:34 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:31:10 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_hitinfo	find_close_object(t_ray camray, t_data data)
 		info.type = CYLINDER;
 		info.struct_info = &data.cylinder_arr[hit.id];
 		info.t = hit.t;
+		info.inside = hit.inside;
 	}
 	hit = find_near_disk(camray, data.di_nb, data.disk_arr);
 	if (hit.id != -1 && info.t > hit.t)

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/22 14:30:57 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 #include "checkerboard.h"
 #include "reflection.h"
 
-double	quadratic_equation(double a, double b, double c);
+t_hit	quadratic_equation_inside(double a, double b, double c);
 int		cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h);
+t_hit	set_hit(bool inside, double t);
 
 t_vec_3	cylinder_normal(t_ray camray, double t, t_cylinder cyl)
 {
@@ -35,10 +36,10 @@ t_vec_3	cylinder_normal(t_ray camray, double t, t_cylinder cyl)
 	return (result);
 }
 
-double	cylinder_hitted(t_ray camray, t_cylinder cyl)
+t_hit	cylinder_hitted(t_ray camray, t_cylinder cyl)
 {
 	double	quad[3];
-	double	t;
+	t_hit	t;
 	t_point	p;
 	t_vec_3	vec[3];
 	t_vec_3	tmp;
@@ -54,13 +55,13 @@ double	cylinder_hitted(t_ray camray, t_cylinder cyl)
 	vec[2] = set_vec(vec[0].x - tmp.x, vec[0].y - tmp.y, vec[0].z - tmp.z);
 	quad[0] = scalar_product(vec[1], vec[1]);
 	if (quad[0] <= 0)
-		return (-1);
+		return (set_hit(0, -1));
 	quad[1] = 2 * scalar_product(vec[1], vec[2]);
 	quad[2] = scalar_product(vec[2], vec[2]) - pow(cyl.diameter / 2, 2);
-	t = quadratic_equation(quad[0], quad[1], quad[2]);
-	p = hit_coord(t, camray);
+	t = quadratic_equation_inside(quad[0], quad[1], quad[2]);
+	p = hit_coord(t.t, camray);
 	if (cut_infinite_object(p, cyl.coordinate, cyl.normal_vector, cyl.height))
-		return (-1);
+		return (set_hit(0, -1));
 	return (t);
 }
 
@@ -68,7 +69,7 @@ t_hit	find_near_cylinder(t_ray camray, size_t count, t_cylinder *cyl_arr)
 {
 	size_t		index;
 	double		tmp;
-	double		t;
+	t_hit		t;
 	t_hit		info;
 
 	info.id = -1;
@@ -77,10 +78,11 @@ t_hit	find_near_cylinder(t_ray camray, size_t count, t_cylinder *cyl_arr)
 	while (index != count)
 	{
 		t = cylinder_hitted(camray, cyl_arr[index]);
-		if (tmp > t && (t != -1 || t == -2))
+		if (tmp > t.t && (t.t != -1 || t.t == -2))
 		{
-			tmp = t;
+			tmp = t.t;
 			info.id = index;
+			info.inside = t.inside;
 		}
 		index++;
 	}
@@ -96,15 +98,17 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_data data, int level)
 	t_ray		reflect_ray;
 
 	cy = (t_cylinder *)info.struct_info;
+	if (info.inside)
+		info.normal = multip_vec(cylinder_normal(camray, info.t, *cy), -1);
+	else
+		info.normal = cylinder_normal(camray, info.t, *cy);
 	hit = adjust_hitpoint(hit_coord(info.t, camray), \
-		cylinder_normal(camray, info.t, *cy));
+		info.normal);
 	if (cy->material.is_board && is_black_case(hit))
 		return (ft_color(0, 0, 0, 0));
-	ratio = ft_find_light_ratio(hit, data, \
-	cylinder_normal(camray, info.t, *cy), &cy->material);
+	ratio = ft_find_light_ratio(hit, data, info.normal, &cy->material);
 	ambient_lightning(&ratio, &data);
-	reflect_ray.direction = reflect_vec(cylinder_normal(camray, info.t, \
-		*cy), camray.direction);
+	reflect_ray.direction = reflect_vec(info.normal, camray.direction);
 	reflect_ray.origin = hit;
 	return (reflection(ft_color(cy->color.r * ratio.r, cy->color.g * \
 		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, level, \
