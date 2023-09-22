@@ -159,3 +159,4 @@ bool	emmit_err(t_data *data_pt, char *line)
 		return (false);
 	return (false);
 }
+

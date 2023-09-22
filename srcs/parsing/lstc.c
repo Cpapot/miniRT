@@ -62,7 +62,6 @@ bool	read_fd_in_str(int fd, char **dst)
 	read_lst(lst);
 	if (lst == NULL)
 	{
-		puts("in NULL");
 		*dst = ft_strdup_no("");
 		if (errno)
 			return (false);
@@ -72,7 +71,7 @@ bool	read_fd_in_str(int fd, char **dst)
 	if (*dst)
 		lstc_cpy_in_str(lst, dst);
 	else
-		return (puts("la"), lstc_clear(lst), 1);
+		return (lstc_clear(lst), 1);
 	lstc_clear(lst);
 	return (true);
 }
