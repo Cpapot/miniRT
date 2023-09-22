@@ -108,9 +108,9 @@ bool	ft_atod_on(char *line, double *dst)
 
 void	go_to_next_data(char **line_pt)
 {
-	while (**line_pt != ' ' && **line_pt != '\t')
+	while (**line_pt && **line_pt != ' ' && **line_pt != '\t')
 		*line_pt = (*line_pt) + 1;
-	while (**line_pt == ' ' || **line_pt == '\t')
+	while (**line_pt && (**line_pt == ' ' || **line_pt == '\t'))
 		*line_pt = (*line_pt) + 1;
 }
 
@@ -240,6 +240,7 @@ bool	get_line_data_sp(char *line, t_sphere *sphere)
 	go_to_next_data(&line);
 	if (ft_atorgb_on(line, &sphere->color) == false)
 		return (false);
+	go_to_next_data(&line);
 	return (ft_material_on(line, &sphere->material));
 }
 
@@ -254,6 +255,7 @@ bool	get_line_data_pl(char *line, t_plane *plane)
 	go_to_next_data(&line);
 	if (ft_atorgb_on(line, &plane->color) == false)
 		return (false);
+	go_to_next_data(&line);
 	return (ft_material_on(line, &plane->material));
 }
 
@@ -274,6 +276,7 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder)
 	go_to_next_data(&line);
 	if (ft_atorgb_on(line, &cylinder->color) == false)
 		return (false);
+	go_to_next_data(&line);
 	return (ft_material_on(line, &cylinder->material));
 }
 
@@ -291,6 +294,7 @@ bool	get_line_data_di(char *line, t_disk *disk)
 	go_to_next_data(&line);
 	if (ft_atorgb_on(line, &disk->color) == false)
 		return (false);
+	go_to_next_data(&line);
 	return (ft_material_on(line, &disk->material));
 }
 
@@ -311,5 +315,6 @@ bool	get_line_data_co(char *line, t_cone *cone)
 	go_to_next_data(&line);
 	if (ft_atorgb_on(line, &cone->color) == false)
 		return (false);
+	go_to_next_data(&line);
 	return (ft_material_on(line, &cone->material));
 }
