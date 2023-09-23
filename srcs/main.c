@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/23 18:01:03 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	set_data(t_data *data, t_camera *cam)
 {
 	int						index;
 	t_plane					plane;
-	t_disk					disk;
 
 	index = 0;
 	normalize_vec(&cam->vector);
@@ -66,13 +65,6 @@ void	set_data(t_data *data, t_camera *cam)
 	{
 		plane = data->plane_arr[index];
 		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
-		index++;
-	}
-	index = 0;
-	while (data->di_nb != (size_t)index)
-	{
-		disk = data->disk_arr[index];
-		data->disk_arr[index].normal_vector = plane_normal(cam->vector, disk_to_plane(disk));
 		index++;
 	}
 	reset_light(data);
@@ -116,7 +108,7 @@ t_data	create_struct();
 
 void	init_data(t_data * data)
 {
-    ft_bzero(data, sizeof(t_data));
+	ft_bzero(data, sizeof(t_data));
 	data->option.cam_id = 0;
 	data->option.shadow = true;
 	data->option.anti_aliasing = false;

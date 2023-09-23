@@ -113,6 +113,7 @@ OBJS		=	$(addprefix $(OBJSDIR), $(SRCSPATH:.c=.o))
 #		     \/ \__,_|_|  |_|\__,_|_.__/|_|\___||___/
 
 define HEADER
+"\e[2J\e[H
 \033[1;36m
 	    __  ____       _ ____  ______
 	   /  |/  (_)___  (_) __ \/_  __/
@@ -168,7 +169,7 @@ $(OBJSDIR)%.o: %.c ${HEAD}
 	@$(MKDIR) .objs
 	@$(MKDIR) $(dir $@)
 ifeq ($(MUTE),1)
-	@echo -n "${YELLOW} ${SUPPR}⌛ Creating MiniRT objects : $@"
+	@echo -n "${YELLOW}${SUPPR}	⌛ Creating MiniRT objects : $@"
 	@$(CC) ${CFLAGS} -c $< -o $@ -I$(HEADERSDIR) -Ilibft/includes
 else
 	$(CC) ${CFLAGS} -c $< -o $@ -I$(HEADERSDIR) -Ilibft/includes
@@ -192,7 +193,6 @@ reobj:
 	@${MAKE} --no-print-directory all
 
 header:
-	clear
 	@echo "$$HEADER"
 
 re:

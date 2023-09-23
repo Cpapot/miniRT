@@ -27,7 +27,7 @@ t_material	metal(void)
 t_material	mirror(void)
 {
 	const t_material	ret = {
-		.reflection = 1,
+		.reflection = 0.95,
 		.specular_coef = 0,
 		.alpha = 0,
 		.is_board = false
