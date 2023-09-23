@@ -31,14 +31,23 @@ SRCS		= object/light.c \
 			camera/camera.c \
 			camera/gamma.c \
 			parsing/parsing.c \
-			parsing/list_utils.c \
 			parsing/fill_data/get_line_data.c \
+			parsing/fill_data/get_line_data_object.c \
+			parsing/fill_data/get_line_data_numbers.c \
+			parsing/fill_data/get_line_data_ft.c \
+			parsing/fill_data/get_line_data_motions.c \
+			parsing/fill_data/material.c \
+			parsing/fill_data/basic_material.c \
 			parsing/fill_data/fill_data.c \
 			parsing/fill_data/filling_ft.c \
+			parsing/fill_data/filling_ft_object.c \
 			parsing/fill_data/mini_parse_ft.c \
+			parsing/fill_data/motions.c \
+			parsing/fill_data/number.c \
 			parsing/fill_data/manage_ft.c \
-			parsing/lstc_2.c \
-			parsing/lstc.c \
+			parsing/fill_data/manage_ft_object.c \
+			parsing/listc/lstc_2.c \
+			parsing/listc/lstc.c \
 			utils/object_utils.c \
 			utils/light_utils.c	\
 			utils/minirt_data.c \
@@ -178,6 +187,10 @@ fclean:
 	@echo "${RED}🗑  MLX cleanded"
 	@${MAKE} fclean --no-print-directory -C ${LIBFTDIR}
 	@${MAKE} clean --no-print-directory  --silent -C ${MLXDIR}
+
+reobj:
+	rm -rf $(OBJSDIR)
+	@${MAKE} --no-print-directory all
 
 header:
 	@echo "$$HEADER"
