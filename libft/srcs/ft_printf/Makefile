@@ -6,7 +6,7 @@
 #    By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 14:44:54 by cpapot            #+#    #+#              #
-#    Updated: 2023/02/01 20:48:30 by cpapot           ###   ########.fr        #
+#    Updated: 2023/09/22 17:53:02 by cpapot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ OBJS	= $(SRC_ROOT:.c=.o) ${SRC_DIR:.c=.o} ${LIBFT_DIR:.c=.o}
 
 ${NAME}:	${OBJS}
 	@ar rcs ${NAME} ${OBJS}
-	@echo -n "${SUPPR}	${GREEN} ${NAME} : 🆗${DEFAULT}"
 
 all: ${NAME}
 
