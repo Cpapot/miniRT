@@ -141,12 +141,6 @@ int    clean_minirt_data(t_data *data_pt)
 }
 #include <stdio.h>
 
-void	usage_display(void)
-{
-	dprintf(2, "Usage is : ./MiniRT [ARGUMENTS]\n%s",
-		"ARGUMENTS must be a .rt file with at least one camera\n");
-}
-
 int main(int ac, char **av)
 {
 	t_general		info;
@@ -157,7 +151,7 @@ int main(int ac, char **av)
 
 	init_data(&data);
 	if (ac == 1  || parsing(&data, av[1]) == false)
-		return (usage_display(), clean_minirt_data(&data));
+		return (clean_minirt_data(&data));
 	ft_printf("\e[2J\e[H");
 	//print_data("main", &data);
 	change_cylinder_coord(&data);

@@ -6,7 +6,10 @@ bool	skip_nb(char **line);
 bool	check_float(char **line_pt)
 {
 	if (!ft_isdigit(**line_pt))
+	{
+		ft_printf_fd(2, "element must be float\n");
 		return (false);
+	}
 	while (ft_isdigit(**line_pt))
 		*line_pt = *line_pt + 1;
 	if (**line_pt == '.')
@@ -23,15 +26,24 @@ bool	coord_check(char **line)
 	int	nb;
 
 	if (skip_nb(line) != true)
+	{
+		ft_printf_fd(2, "Invalid coords\n");
 		return (false);
+	}
 	nb = 3;
 	while (--nb)
 	{
 		if (**line != ',')
+		{
+			ft_printf_fd(2, "Invalid coords\n");
 			return (false);
+		}
 		*line = *line + 1;
 		if (skip_nb(line) != true)
+		{
+			ft_printf_fd(2, "Invalid coords\n");
 			return (false);
+		}
 	}
 	return (true);
 }

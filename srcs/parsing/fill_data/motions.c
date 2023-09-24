@@ -21,14 +21,20 @@ bool	skip_nb(char **line)
 	if (**line == '-')
 		*line = *line + 1;
 	if (ft_isdigit(**line) == false)
+	{
+		ft_printf_fd(2, "Non digit detected.\n");
 		return (false);
+	}
 	while (ft_isdigit(**line))
 		*line = *line + 1;
 	if (**line == '.')
 	{
 		*line = *line + 1;
 		if (ft_isdigit(**line) == false)
+		{
+			ft_printf_fd(2, "Non digit detected.\n");
 			return (false);
+		}
 		while (ft_isdigit(**line))
 			*line = *line + 1;
 	}

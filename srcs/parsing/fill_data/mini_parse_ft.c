@@ -3,24 +3,30 @@
 
 bool	space_incr(char **line_pt);
 
+static bool	_rgb_error(void)
+{
+	ft_printf_fd(2, "Error rgb\n");
+	return (false);
+}
+
 bool	rgb_check(char **line_pt)
 {
 	if (!ft_isdigit(**line_pt))
-		return (false);
+		return (_rgb_error());
 	while (ft_isdigit(**line_pt))
 		*line_pt = *line_pt + 1;
 	if (**line_pt != ',')
-		return (false);
+		return (_rgb_error());
 	*line_pt = *line_pt + 1;
 	if (!ft_isdigit(**line_pt))
-		return (false);
+		return (_rgb_error());
 	while (ft_isdigit(**line_pt))
 		*line_pt = *line_pt + 1;
 	if (**line_pt != ',')
-		return (false);
+		return (_rgb_error());
 	*line_pt = *line_pt + 1;
 	if (!ft_isdigit(**line_pt))
-		return (false);
+		return (_rgb_error());
 	while (ft_isdigit(**line_pt))
 		*line_pt = *line_pt + 1;
 	return (true);
@@ -31,19 +37,23 @@ bool	check_empty(char **line)
 	while (**line == ' ')
 		*line = *line + 1;
 	if (**line)
+	{
+		ft_printf_fd(2, "end line not empty.\n");
 		return (false);
+	}
 	return (true);
 }
 
 bool	fov_check(char **line)
 {
 	if (ft_isdigit(**line) == false)
+	{
+		ft_printf_fd(2, "Fov must be digit\n");
 		return (false);
+	}
 	while (ft_isdigit(**line))
 		*line = *line + 1;
-	if (**line == ' ' || **line == 0)
-		return (true);
-	return (false);
+	return (true);
 }
 
 bool	check_for_material(char **line)
@@ -52,7 +62,8 @@ bool	check_for_material(char **line)
 	int			i;
 	int			len;
 
-	space_incr(line);
+	while (**line != 0 && (**line == ' ' || **line == '\t'))
+		*line = *line + 1;
 	if (**line == '\0')
 		return (true);
 	i = 0;
@@ -66,5 +77,6 @@ bool	check_for_material(char **line)
 		}
 		i++;
 	}
+	ft_printf_fd(2, "material not known :\n%s\n", *line);
 	return (false);
 }
