@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 15:22:16 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/24 16:40:32 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_data data, int level)
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(info.normal, camray.direction);
 	reflect_ray.origin = hit;
+	data.level = level;
 	return (reflection(ft_color(sp->color.r * ratio.r, sp->color.g * \
-		ratio.g, sp->color.b * ratio.b, 0), data, reflect_ray, level, \
+		ratio.g, sp->color.b * ratio.b, 0), data, reflect_ray, \
 		&sp->material));
 }

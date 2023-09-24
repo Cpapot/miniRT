@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/22 14:30:57 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/24 16:41:21 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_data data, int level)
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(info.normal, camray.direction);
 	reflect_ray.origin = hit;
+	data.level = level;
 	return (reflection(ft_color(cy->color.r * ratio.r, cy->color.g * \
-		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, level, \
+		ratio.g, cy->color.b * ratio.b, 0), data, reflect_ray, \
 		&cy->material));
 }

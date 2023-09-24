@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/23 18:01:03 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/24 16:45:04 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,6 @@
 #include "../inc/key.h"
 #include "../inc/light.h"
 /**/
-
-//on dois la set pour chaque camera
-
-void	reset_light(t_data *data)
-{
-	static t_light			first_data[LIGHT_BUFF];
-	int						i;
-	static int				index = 0;
-	static int				lt_nb;
-
-	i = 0;
-	if (index == 0)
-	{
-		lt_nb = data->lt_nb;
-		while (i != lt_nb && i != LIGHT_BUFF)
-		{
-			first_data[i] = data->lights_arr[i];
-			i++;
-		}
-	}
-	else
-	{
-		data->lt_nb = lt_nb;
-		while (i != lt_nb && i != LIGHT_BUFF)
-		{
-			data->lights_arr[i] = first_data[i];
-			i++;
-		}
-	}
-	index++;
-}
 
 t_plane	disk_to_plane(t_disk disk);
 
@@ -119,25 +88,25 @@ void	print_data(char *msg, t_data *data);
 void	change_cylinder_coord(t_data *data_pt);
 bool	add_disk(t_data *data_pt);
 
-int    clean_minirt_data(t_data *data_pt)
+int	clean_minirt_data(t_data *data_pt)
 {
-    if (data_pt->ambient_light != NULL)
-        free(data_pt->ambient_light);
-    if (data_pt->camera != NULL)
-        free(data_pt->camera);
-    if (data_pt->lights_arr != NULL)
-        free(data_pt->lights_arr);
-    if (data_pt->sphere_arr != NULL)
-        free(data_pt->sphere_arr);
-    if (data_pt->plane_arr != NULL)
-        free(data_pt->plane_arr);
-    if (data_pt->cylinder_arr != NULL)
-        free(data_pt->cylinder_arr);
-    if (data_pt->cone_arr != NULL)
-        free(data_pt->cone_arr);
-    if (data_pt->disk_arr != NULL)
-        free(data_pt->disk_arr);
-  return (1);
+	if (data_pt->ambient_light != NULL)
+		free(data_pt->ambient_light);
+	if (data_pt->camera != NULL)
+		free(data_pt->camera);
+	if (data_pt->lights_arr != NULL)
+		free(data_pt->lights_arr);
+	if (data_pt->sphere_arr != NULL)
+		free(data_pt->sphere_arr);
+	if (data_pt->plane_arr != NULL)
+		free(data_pt->plane_arr);
+	if (data_pt->cylinder_arr != NULL)
+		free(data_pt->cylinder_arr);
+	if (data_pt->cone_arr != NULL)
+		free(data_pt->cone_arr);
+	if (data_pt->disk_arr != NULL)
+		free(data_pt->disk_arr);
+	return (1);
 }
 #include <stdio.h>
 

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/24 16:44:41 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,33 @@ t_color	ft_find_light_ratio(t_point point, t_data data, t_vec_3 normal, t_materi
 		index++;
 	}
 	return (result);
+}
+
+void	reset_light(t_data *data)
+{
+	static t_light			first_data[LIGHT_BUFF];
+	int						i;
+	static int				index = 0;
+	static int				lt_nb;
+
+	i = 0;
+	if (index == 0)
+	{
+		lt_nb = data->lt_nb;
+		while (i != lt_nb && i != LIGHT_BUFF)
+		{
+			first_data[i] = data->lights_arr[i];
+			i++;
+		}
+	}
+	else
+	{
+		data->lt_nb = lt_nb;
+		while (i != lt_nb && i != LIGHT_BUFF)
+		{
+			data->lights_arr[i] = first_data[i];
+			i++;
+		}
+	}
+	index++;
 }

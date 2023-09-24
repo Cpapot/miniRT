@@ -73,7 +73,6 @@ SRCS		= object/light.c \
 			utils/math.c \
 			checkerboard.c \
 			reflection.c \
-			material.c
 
 MLXSRC		=	libmlx.a
 
