@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 14:59:07 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_data data, int level)
 		info.normal = cylinder_normal(camray, info.t, *cy);
 	hit = adjust_hitpoint(hit_coord(info.t, camray), \
 		info.normal);
-	ratio = ft_find_light_ratio(hit, data, info.normal, &cy->material);
+	ratio = light_ratio(hit, data, info.normal, &cy->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(info.normal, camray.direction);
 	reflect_ray.origin = hit;

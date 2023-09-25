@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 14:59:25 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int32_t	render_plane(t_hitinfo info, t_ray camray, t_data data, int level)
 
 	pl = (t_plane *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), pl->normal_vector);
-	ratio = ft_find_light_ratio(hit, data, \
+	ratio = light_ratio(hit, data, \
 	pl->normal_vector, &pl->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(pl->normal_vector, camray.direction);

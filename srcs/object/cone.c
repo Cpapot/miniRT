@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 15:04:06 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int32_t	render_cone(t_hitinfo info, t_ray camray, t_data data, int level)
 	co = (t_cone *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), \
 		cone_normal(camray, info.t, *co));
-	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+	ratio = light_ratio(hit_coord(info.t, camray), data, \
 	cone_normal(camray, info.t, *(t_cone *)info.struct_info), &co->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(cone_normal(camray, info.t, *co), \

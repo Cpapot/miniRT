@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 14:58:58 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_data data, int level)
 		info.normal = sphere_normal(camray, info.t, sp->origin);
 	hit = adjust_hitpoint(hit_coord(info.t, camray), \
 		info.normal);
-	ratio = ft_find_light_ratio(hit, data, info.normal, &sp->material);
+	ratio = light_ratio(hit, data, info.normal, &sp->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(info.normal, camray.direction);
 	reflect_ray.origin = hit;

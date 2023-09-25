@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:28:39 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 14:59:03 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int32_t	render_disk(t_hitinfo info, t_ray camray, t_data data, int level)
 
 	disk = (t_disk *)info.struct_info;
 	hitpoint = adjust_hitpoint(hit_coord(info.t, camray), disk->normal_vector);
-	ratio = ft_find_light_ratio(hitpoint, data, \
+	ratio = light_ratio(hitpoint, data, \
 	disk->normal_vector, &disk->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(disk->normal_vector, camray.direction);
