@@ -6,7 +6,6 @@
 #				|_|    |_|_|\___||___/
 
 HEADERS 	=	camera.h	\
-				checkerboard.h	\
 				color.h	\
 				cone.h	\
 				cylinder.h	\
@@ -27,8 +26,8 @@ HEADERS 	=	camera.h	\
 				material.h
 
 
-SRCS		=	camera/camera.c \
-				object/light.c \
+SRCS		=	object/light.c \
+				camera/camera.c \
 				camera/gamma.c \
 				parsing/parsing.c \
 				parsing/fill_data/get_line_data.c \
@@ -57,7 +56,6 @@ SRCS		=	camera/camera.c \
 				utils/data_utils.c \
 				utils/vec3_math.c \
 				object/plane.c \
-				debug.c \
 				main.c \
 				color.c \
 				hit.c \
@@ -155,9 +153,9 @@ MUTE		:=	1
 
 all : header lib ${NAME}
 
-${NAME}: $(UTILSOBJS) $(OBJS)  $(LIBFT)
+${NAME}: $(OBJS) $(LIBFT)
 ifeq ($(MUTE),1)
-	@${CC} ${OBJS} ${LIBFT}  ${MLX} -o ${NAME} $(FLAGS)
+	@${CC} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} $(FLAGS)
 	@echo -n "${SUPPR} ${GREEN}	${NAME} : 🆗${DEFAULT}\n"
 else
 	${CC} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} $(FLAGS)

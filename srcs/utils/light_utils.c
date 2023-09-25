@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:07:55 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 15:57:22 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:44:59 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void	find_light(t_data *data, double *t, t_ray ray, size_t *index);
 void	reset_light(t_data *data);
-
 
 void	*suppress_light(t_light light, t_data *data_pt)
 {
@@ -29,8 +28,9 @@ void	*suppress_light(t_light light, t_data *data_pt)
 			sizeof(t_light)) == 0)
 		{
 			data_pt->lt_nb--;
-			return (ft_memmove((void *)&(data_pt->lights_arr[lt_nb]),  \
-				(void *)&(data_pt->lights_arr[lt_nb + 1]),sizeof(t_light) * (data_pt->lt_nb - lt_nb)));
+			return (ft_memmove((void *)&(data_pt->lights_arr[lt_nb]), \
+				(void *)&(data_pt->lights_arr[lt_nb + 1]), sizeof(t_light) \
+					* (data_pt->lt_nb - lt_nb)));
 		}
 	}
 	return (0);

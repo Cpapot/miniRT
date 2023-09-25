@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 16:07:40 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:45:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	find_light(t_data *data, double *t, t_ray ray, size_t *index)
 		*index = *index + 1;
 }
 
-
 double	specular_light(t_vec_3 light_dir, t_vec_3 normal, t_material *mat)
 {
 	t_vec_3	view_vec;
@@ -89,13 +88,13 @@ t_color	light_ratio(t_point p, t_data data, t_vec_3 normal, t_material *mat)
 	while (data.lt_nb != index)
 	{
 		light = data.lights_arr[index];
-		point.x = point.x + (normal.x * 0.0001);
-		point.y = point.y + (normal.y * 0.0001);
-		point.z = point.z + (normal.z * 0.0001);
-		ratio[1] = specular_light(set_vec(point.x - light.coordinate.x, point.y \
-			- light.coordinate.y, point.z - light.coordinate.z), normal, mat);
-		ratio[0] = check_intersection(light, point, normal);
-		if (!data.option.shadow || check_shadow(point, light, &data))
+		p.x = p.x + (normal.x * 0.0001);
+		p.y = p.y + (normal.y * 0.0001);
+		p.z = p.z + (normal.z * 0.0001);
+		ratio[1] = specular_light(set_vec(p.x - light.coordinate.x, p.y \
+			- light.coordinate.y, p.z - light.coordinate.z), normal, mat);
+		ratio[0] = check_intersection(light, p, normal);
+		if (!data.option.shadow || check_shadow(p, light, &data))
 			compute_light(&result, light, ratio, mat);
 		index++;
 	}
