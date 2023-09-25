@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 14:18:38 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:15:06 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ struct s_material
 	double	reflection;
 	double	specular_coef;
 	double	alpha;
-    bool    is_board;
+	bool	is_board;
 };
 
 struct s_option
@@ -118,7 +118,7 @@ struct	s_camera
 
 struct	s_ambient_light
 {
-	t_color color;
+	t_color	color;
 	double	ratio;
 };
 
@@ -126,61 +126,60 @@ struct	s_light
 {
 	t_point	coordinate;
 	double	brightness;
-	t_color color;
+	t_color	color;
 };
 
 struct	s_sphere
 {
-	t_point	origin;
-	double	diameter;
-	t_color	color;
+	t_point		origin;
+	double		diameter;
+	t_color		color;
 	t_material	material;
 };
 
 struct	s_plane
 {
-	t_point	coordinate;
-	t_vec_3	normal_vector;
-	t_color	color;
+	t_point		coordinate;
+	t_vec_3		normal_vector;
+	t_color		color;
 	t_material	material;
 };
 
 struct	s_disk
 {
-	t_point	coordinate;
-	t_vec_3	normal_vector;
-	double	diameter;
-	t_color	color;
+	t_point		coordinate;
+	t_vec_3		normal_vector;
+	double		diameter;
+	t_color		color;
 	t_material	material;
 };
 
 struct	s_cone
 {
-	t_point	coordinate;
-	t_vec_3	vector;
-	double	diameter;
-	double	height;
-	t_color	color;
+	t_point		coordinate;
+	t_vec_3		vector;
+	double		diameter;
+	double		height;
+	t_color		color;
 	t_material	material;
 };
 
 struct	s_cylinder
 {
-	t_point	coordinate;
-	t_vec_3	normal_vector;
-	double	diameter;
-	double	height;
-	t_color	color;
+	t_point		coordinate;
+	t_vec_3		normal_vector;
+	double		diameter;
+	double		height;
+	t_color		color;
 	t_material	material;
 };
 
 typedef struct s_hit
 {
-		double	t;
-		int		id;
-		bool	inside;
-}		t_hit;
-
+	double	t;
+	int		id;
+	bool	inside;
+}	t_hit;
 
 typedef struct s_hitinfo
 {

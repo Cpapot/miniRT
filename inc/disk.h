@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:39:14 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:08:21 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISK_H
 # define DISK_H
 
-#include "miniRT.h"
+# include "miniRT.h"
 
 t_plane	disk_to_plane(t_disk disk);
 double	disk_hited(t_ray ray, t_disk disk);

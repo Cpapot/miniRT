@@ -6,14 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 15:05:06 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/21 12:29:41 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:08:43 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	WINDOW_H
-# define	WINDOW_H
+#ifndef WINDOW_H
+# define WINDOW_H
 
-//XSIZE > YSIZE
 # define XSIZE		1280
 # define YSIZE		720
 
