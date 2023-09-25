@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:03:42 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 16:02:53 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 20:19:13 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void			print_info(t_data *data);
 
 typedef struct s_general
 {
-	t_data			data;
-	t_mlx_info		win;
+	t_data			*data;
+	t_mlx_info		*win;
 }	t_general;
 
 #endif

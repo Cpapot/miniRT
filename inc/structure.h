@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 16:15:06 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 19:37:41 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ struct s_option
 {
 	int		shadow;
 	int		anti_aliasing;
+	size_t	tmp;
 	size_t	cam_id;
 };
 
