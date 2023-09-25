@@ -6,13 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/24 16:41:27 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:04:06 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "vec3.h"
 #include "reflection.h"
+#include "light.h"
 
 double	quadratic_equation(double a, double b, double c);
 int		cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h);

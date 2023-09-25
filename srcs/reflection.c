@@ -6,12 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 14:37:21 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/24 16:43:16 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:04:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structure.h"
 #include "vec3.h"
+#include "color.h"
 
 t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray)
 {

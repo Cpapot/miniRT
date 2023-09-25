@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/24 16:45:04 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:02:29 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,7 @@
 #include "../inc/light.h"
 /**/
 
-t_plane	disk_to_plane(t_disk disk);
-
-void	set_data(t_data *data, t_camera *cam)
-{
-	int						index;
-	t_plane					plane;
-
-	index = 0;
-	normalize_vec(&cam->vector);
-	if (cam->vector.y == 0)
-		cam->vector.y = 0.0000001;
-	while (data->pl_nb != (size_t)index)
-	{
-		plane = data->plane_arr[index];
-		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
-		index++;
-	}
-	reset_light(data);
-	delete_hidden_light(data, cam->origin);
-}
-
+void	set_data(t_data *data, t_camera *cam);
 int32_t	mod_gamma(int32_t object_color);
 void	print_loading(void);
 
@@ -83,7 +63,6 @@ void	init_data(t_data * data)
 	data->option.anti_aliasing = false;
 }
 
-void	*suppress_light(t_light light, t_data *data_pt);
 void	print_data(char *msg, t_data *data);
 void	change_cylinder_coord(t_data *data_pt);
 bool	add_disk(t_data *data_pt);

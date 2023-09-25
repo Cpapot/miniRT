@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:13:13 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/22 14:31:10 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:03:52 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "color.h"
 #include "hit.h"
 #include "light.h"
+#include "plane.h"
+#include "sphere.h"
 #include "cone.h"
 #include "cylinder.h"
 #include "disk.h"

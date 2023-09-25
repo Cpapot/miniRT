@@ -6,12 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/24 16:44:41 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 14:58:17 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "hit.h"
+#include "light.h"
+#include "color.h"
 
 void	find_light(t_data *data, double *t, t_ray ray, size_t *index);
 void	compute_light_ratio(t_color *color, t_light light, double r[2], t_material *mat);

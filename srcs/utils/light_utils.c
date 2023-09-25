@@ -6,14 +6,17 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:07:55 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:03:18 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "hit.h"
+#include "plane.h"
 
 void	*suppress_light(t_light light, t_data *data_pt);
+void	delete_hidden_light(t_data *data, t_point point);
+void	reset_light(t_data *data);
 
 void	compute_light_ratio(
 		t_color *color,
@@ -61,4 +64,23 @@ void	find_light(t_data *data, double *t, t_ray ray, size_t *index)
 		suppress_light(data->lights_arr[*index], data);
 	else
 		*index = *index + 1;
+}
+
+void	set_data(t_data *data, t_camera *cam)
+{
+	int						index;
+	t_plane					plane;
+
+	index = 0;
+	normalize_vec(&cam->vector);
+	if (cam->vector.y == 0)
+		cam->vector.y = 0.0000001;
+	while (data->pl_nb != (size_t)index)
+	{
+		plane = data->plane_arr[index];
+		data->plane_arr[index].normal_vector = plane_normal(cam->vector, plane);
+		index++;
+	}
+	reset_light(data);
+	delete_hidden_light(data, cam->origin);
 }

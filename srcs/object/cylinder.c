@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/24 16:41:21 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 14:59:07 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "vec3.h"
-#include "checkerboard.h"
 #include "reflection.h"
+#include "light.h"
 
 t_hit	quadratic_equation_inside(double a, double b, double c);
 int		cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h);
@@ -104,8 +104,6 @@ int32_t	render_cylinder(t_hitinfo info, t_ray camray, t_data data, int level)
 		info.normal = cylinder_normal(camray, info.t, *cy);
 	hit = adjust_hitpoint(hit_coord(info.t, camray), \
 		info.normal);
-	if (cy->material.is_board && is_black_case(hit))
-		return (ft_color(0, 0, 0, 0));
 	ratio = ft_find_light_ratio(hit, data, info.normal, &cy->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(info.normal, camray.direction);

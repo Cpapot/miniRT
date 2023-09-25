@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 14:49:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/24 16:40:32 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 14:58:58 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "checkerboard.h"
 #include "reflection.h"
 #include "material.h"
+#include "light.h"
 
 t_hit	quadratic_equation_inside(double a, double b, double c);
 t_point	sphere_mapping(t_point point, double radius);
@@ -88,9 +88,6 @@ int32_t	render_sphere(t_hitinfo info, t_ray camray, t_data data, int level)
 		info.normal = sphere_normal(camray, info.t, sp->origin);
 	hit = adjust_hitpoint(hit_coord(info.t, camray), \
 		info.normal);
-	if (sp->material.is_board && is_black_case_sp(\
-		sphere_mapping(hit, sp->diameter / 2)))
-		return (ft_color(0, 0, 0, 0));
 	ratio = ft_find_light_ratio(hit, data, info.normal, &sp->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(info.normal, camray.direction);

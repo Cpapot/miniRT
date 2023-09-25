@@ -27,52 +27,51 @@ HEADERS 	=	camera.h	\
 				material.h
 
 
-SRCS		= object/light.c \
-			camera/camera.c \
-			camera/gamma.c \
-			parsing/parsing.c \
-			parsing/fill_data/get_line_data.c \
-			parsing/fill_data/get_line_data_object.c \
-			parsing/fill_data/get_line_data_numbers.c \
-			parsing/fill_data/get_line_data_ft.c \
-			parsing/fill_data/get_line_data_motions.c \
-			parsing/fill_data/material.c \
-			parsing/fill_data/basic_material.c \
-			parsing/fill_data/fill_data.c \
-			parsing/fill_data/filling_ft.c \
-			parsing/fill_data/filling_ft_object.c \
-			parsing/fill_data/mini_parse_ft.c \
-			parsing/fill_data/motions.c \
-			parsing/fill_data/number.c \
-			parsing/fill_data/manage_ft.c \
-			parsing/fill_data/manage_ft_object.c \
-			parsing/listc/lstc_2.c \
-			parsing/listc/lstc.c \
-			utils/object_utils.c \
-			utils/light_utils.c	\
-			utils/minirt_data.c \
-			utils/vec3_utils.c \
-			utils/vec3_utils2.c \
-			utils/mlx_utils.c \
-			utils/data_utils.c \
-			utils/vec3_math.c \
-			object/plane.c \
-			debug.c \
-			main.c \
-			color.c \
-			hit.c \
-			object/sphere.c \
-			shadow.c \
-			hook.c \
-			camera/print_info.c \
-			camera/anti_aliasing.c \
-			object/ambient_light.c \
-			object/cone.c \
-			object/cylinder.c \
-			object/disk.c \
-			utils/math.c \
-			checkerboard.c \
-			reflection.c \
+SRCS		=	camera/camera.c \
+				object/light.c \
+				camera/gamma.c \
+				parsing/parsing.c \
+				parsing/fill_data/get_line_data.c \
+				parsing/fill_data/get_line_data_object.c \
+				parsing/fill_data/get_line_data_numbers.c \
+				parsing/fill_data/get_line_data_ft.c \
+				parsing/fill_data/get_line_data_motions.c \
+				parsing/fill_data/material.c \
+				parsing/fill_data/basic_material.c \
+				parsing/fill_data/fill_data.c \
+				parsing/fill_data/filling_ft.c \
+				parsing/fill_data/filling_ft_object.c \
+				parsing/fill_data/mini_parse_ft.c \
+				parsing/fill_data/motions.c \
+				parsing/fill_data/number.c \
+				parsing/fill_data/manage_ft.c \
+				parsing/fill_data/manage_ft_object.c \
+				parsing/listc/lstc_2.c \
+				parsing/listc/lstc.c \
+				utils/object_utils.c \
+				utils/light_utils.c	\
+				utils/minirt_data.c \
+				utils/vec3_utils.c \
+				utils/vec3_utils2.c \
+				utils/mlx_utils.c \
+				utils/data_utils.c \
+				utils/vec3_math.c \
+				object/plane.c \
+				debug.c \
+				main.c \
+				color.c \
+				hit.c \
+				object/sphere.c \
+				shadow.c \
+				hook.c \
+				camera/print_info.c \
+				camera/anti_aliasing.c \
+				object/ambient_light.c \
+				object/cone.c \
+				object/cylinder.c \
+				object/disk.c \
+				utils/math.c \
+				reflection.c \
 
 MLXSRC		=	libmlx.a
 
@@ -161,7 +160,7 @@ ifeq ($(MUTE),1)
 	@${CC} ${OBJS} ${LIBFT}  ${MLX} -o ${NAME} $(FLAGS)
 	@echo -n "${SUPPR} ${GREEN}	${NAME} : 🆗${DEFAULT}\n"
 else
-	${CC} ${OBJS} ${LIBFT}  ${MLX} -o ${NAME} $(FLAGS)
+	${CC} ${OBJS} ${LIBFT} ${MLX} -o ${NAME} $(FLAGS)
 endif
 
 $(OBJSDIR)%.o: %.c ${HEAD}
