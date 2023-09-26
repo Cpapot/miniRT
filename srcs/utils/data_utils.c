@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:26:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/26 21:08:26 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 21:48:29 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,52 +62,30 @@ t_point	change_disk_coord(t_vec_3 cyl_vec, t_point first_di, double height)
 	result.z = cyl_vec.z + first_di.z;
 	return (result);
 }
-/*
-		disk_arr[pt->di_nb + i].color = pt->cylinder_arr[index].color;
-		disk_arr[pt->di_nb + i].normal = pt->cylinder_arr[index].normal;
-		disk_arr[pt->di_nb + i].diameter = pt->cylinder_arr[index].diameter;
-		disk_arr[pt->di_nb + i].material = pt->cylinder_arr[index].material;
-		disk_arr[pt->di_nb + i].normal = pt->cylinder_arr[index].normal;
-		disk_arr[pt->di_nb + i].coord = change_disk_coord(pt->cylinder_arr[index].normal, disk_arr[pt->di_nb + i - 1].coord, pt->cylinder_arr[index].height);
-		multiplying_vec(&disk_arr[pt->di_nb + i].normal, -1);
-		i++;
-		disk_arr[pt->di_nb + i].color = pt->cylinder_arr[index].color;
-		disk_arr[pt->di_nb + i].normal = pt->cylinder_arr[index].normal;
-		disk_arr[pt->di_nb + i].diameter = pt->cylinder_arr[index].diameter;
-		disk_arr[pt->di_nb + i].coord = adjust_hitpoint(disk_arr[pt->di_nb + i - 1].coord , disk_arr[pt->di_nb + i].normal);
-		disk_arr[pt->di_nb + i].material = pt->cylinder_arr[index].material;
-		i++;
-*/
-void	set_disk(t_data *pt, int index)
-{
-	int	i;
 
-	i = -1;
-	while ((int)pt->cy_nb != index++)
+void	set_disk(t_data *pt, int y, int i)
+{
+	while ((int)pt->cy_nb - 1 != y++)
 	{
 		while (i++ || true)
 		{
-			printf("i: %d et index: %d\n", i, index);
-			pt->disk_arr[pt->di_nb + i].color = pt->cylinder_arr[index].color;
-			pt->disk_arr[pt->di_nb + i].diameter = pt->cylinder_arr[index].diameter;
-			pt->disk_arr[pt->di_nb + i].material = pt->cylinder_arr[index].material;
-			pt->disk_arr[pt->di_nb + i].normal = pt->cylinder_arr[index].normal;
+			pt->disk_arr[pt->di_nb + i].color = pt->cylinder_arr[y].color;
+			pt->disk_arr[pt->di_nb + i].diameter = pt->cylinder_arr[y].diameter;
+			pt->disk_arr[pt->di_nb + i].material = pt->cylinder_arr[y].material;
+			pt->disk_arr[pt->di_nb + i].normal = pt->cylinder_arr[y].normal;
 			if (i % 4 == 3)
 				multiplying_vec(&pt->disk_arr[pt->di_nb + i].normal, -1);
 			if (i % 4 == 1)
 				pt->disk_arr[pt->di_nb + i].coord = adjust_hitpoint(pt->\
-					cylinder_arr[index].coord , pt->disk_arr[pt->di_nb + i].normal);
+					cylinder_arr[y].coord, pt->disk_arr[pt->di_nb + i].normal);
 			else if (i % 4 == 2)
 				pt->disk_arr[pt->di_nb + i].coord = change_disk_coord(pt->\
-					cylinder_arr[index].normal, pt->disk_arr[pt->di_nb + i - 1].\
-					coord, pt->cylinder_arr[index].height);
+					cylinder_arr[y].normal, pt->disk_arr[pt->di_nb + i - 1].\
+					coord, pt->cylinder_arr[y].height);
 			else
-				pt->disk_arr[pt->di_nb + i].coord = pt->cylinder_arr[index].coord;
+				pt->disk_arr[pt->di_nb + i].coord = pt->cylinder_arr[y].coord;
 			if (i % 4 == 3)
-			{
-				printf("break\n");
-				break;
-			}
+				break ;
 		}
 	}
 }
@@ -115,15 +93,16 @@ void	set_disk(t_data *pt, int index)
 bool	add_disk(t_data *data_pt)
 {
 	t_disk	*disk_arr;
-	int	index;
+	int		index;
+	int		i;
 
+	i = -1;
 	index = -1;
 	disk_arr = copy_old_diskdata(data_pt);
 	if (!disk_arr)
 		return (false);
 	data_pt->disk_arr = disk_arr;
-	set_disk(data_pt, index);
+	set_disk(data_pt, index, i);
 	data_pt->di_nb = data_pt->di_nb + data_pt->cy_nb * 4;
-	data_pt->disk_arr = disk_arr;
 	return (true);
 }

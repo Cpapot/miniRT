@@ -6,14 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/26 19:50:25 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 21:53:33 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HIT_H
 # define HIT_H
 
-#include "miniRT.h"
+# include "miniRT.h"
 
 void		ambient_lightning(t_color *ratio, t_data *data);
 int			check_shadow(t_point hitpoint, t_light light, t_data *data);

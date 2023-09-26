@@ -6,14 +6,19 @@
 #				|_|    |_|_|\___||___/
 
 HEADERS 	=	camera.h	\
+				check_lines_ft.h	\
 				color.h	\
 				cone.h	\
 				cylinder.h	\
 				disk.h	\
+				filling_ft.h	\
+				find_object.h	\
 				hit.h	\
 				key.h	\
 				light.h	\
+				material.h	\
 				miniRT.h	\
+				mini_parse_ft.h	\
 				minirt_data.h	\
 				minirt_manipulation.h	\
 				parsing.h	\
@@ -22,9 +27,7 @@ HEADERS 	=	camera.h	\
 				sphere.h	\
 				structure.h	\
 				vec3.h	\
-				window.h	\
-				material.h
-
+				window.h
 
 SRCS		=	object/light.c \
 				camera/camera.c \
