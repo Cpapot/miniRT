@@ -50,9 +50,9 @@ static bool	_call_filling_ft(char **lines)
 	size_t					i;
 	const t_filling_ft		ft_arr[] = {&fill_a, &fill_c, &fill_l, \
 								&fill_sp, &fill_pl, &fill_cy, \
-								&fill_co, &fill_di};
+								&fill_co};
 	const char				*id_arr[] = \
-		{"A", "C", "L", "sp", "pl", "cy", "co", "di"};
+		{"A", "C", "L", "sp", "pl", "cy", "co"};
 
 	j = -1;
 	while (lines[++j])
@@ -75,10 +75,10 @@ static bool	_check_lines(t_data *data_pt, char **lines)
 	int					j;
 	int					i;
 	const char			*id_arr[] = {
-		"A", "C", "L", "sp", "pl", "cy", "di", "co"};
+		"A", "C", "L", "sp", "pl", "cy", "co"};
 	const t_parse_ft	parse_ft_arr[] = {&manage_a, &manage_c, &manage_l,
 		&manage_sp, &manage_pl, &manage_cy,
-		&manage_di, &manage_co, &emmit_err};
+		&manage_co, &emmit_err};
 
 	j = -1;
 	while (lines[++j])

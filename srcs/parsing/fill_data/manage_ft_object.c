@@ -71,6 +71,7 @@ bool	manage_cy(t_data *data_pt, char *line)
 	return (true);
 }
 
+/*
 bool	manage_di(t_data *data_pt, char *line)
 {
 	size_t					i;
@@ -89,6 +90,7 @@ bool	manage_di(t_data *data_pt, char *line)
 	}
 	return (true);
 }
+*/
 
 bool	manage_co(t_data *data_pt, char *line)
 {
