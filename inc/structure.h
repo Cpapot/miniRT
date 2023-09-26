@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 19:37:41 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 20:25:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,8 @@ struct	s_plane
 
 struct	s_disk
 {
-	t_point		coordinate;
-	t_vec_3		normal_vector;
+	t_point		coord;
+	t_vec_3		normal;
 	double		diameter;
 	t_color		color;
 	t_material	material;
@@ -167,8 +167,8 @@ struct	s_cone
 
 struct	s_cylinder
 {
-	t_point		coordinate;
-	t_vec_3		normal_vector;
+	t_point		coord;
+	t_vec_3		normal;
 	double		diameter;
 	double		height;
 	t_color		color;

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:08:08 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 15:08:54 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 20:25:58 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ bool	get_line_data_pl(char *line, t_plane *plane)
 bool	get_line_data_cy(char *line, t_cylinder *cylinder)
 {
 	go_to_next_data(&line);
-	if (ft_atocoord_on(line, &cylinder->coordinate) == false)
+	if (ft_atocoord_on(line, &cylinder->coord) == false)
 		return (false);
 	go_to_next_data(&line);
-	if (ft_atovec_on(line, &cylinder->normal_vector) == false)
+	if (ft_atovec_on(line, &cylinder->normal) == false)
 		return (false);
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &cylinder->diameter) == false)
@@ -79,10 +79,10 @@ bool	get_line_data_cy(char *line, t_cylinder *cylinder)
 bool	get_line_data_di(char *line, t_disk *disk)
 {
 	go_to_next_data(&line);
-	if (ft_atocoord_on(line, &disk->coordinate) == false)
+	if (ft_atocoord_on(line, &disk->coord) == false)
 		return (false);
 	go_to_next_data(&line);
-	if (ft_atovec_on(line, &disk->normal_vector) == false)
+	if (ft_atovec_on(line, &disk->normal) == false)
 		return (false);
 	go_to_next_data(&line);
 	if (ft_atod_on(line, &disk->diameter) == false)

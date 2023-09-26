@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 15:54:31 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 20:28:01 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ t_vec_3	cylinder_normal(t_ray camray, double t, t_cylinder cyl)
 
 	hit = hit_coord(t, camray);
 	dot = set_vec(hit.x, hit.y, hit.z);
-	result = minus_vec(adding_vec(set_vec(cyl.coordinate.x, cyl.coordinate.y, \
-		cyl.coordinate.z), multip_vec(cyl.normal_vector, scalar_product(\
-		minus_vec(dot, set_vec(cyl.coordinate.x, cyl.coordinate.y, \
-		cyl.coordinate.z)), cyl.normal_vector))), dot);
+	result = minus_vec(adding_vec(set_vec(cyl.coord.x, cyl.coord.y, \
+		cyl.coord.z), multip_vec(cyl.normal, scalar_product(\
+		minus_vec(dot, set_vec(cyl.coord.x, cyl.coord.y, \
+		cyl.coord.z)), cyl.normal))), dot);
 	multiplying_vec(&result, -1);
 	normalize_vec(&result);
 	return (result);
@@ -44,14 +44,14 @@ t_hit	cylinder_hitted(t_ray camray, t_cylinder cyl)
 	t_vec_3	vec[3];
 	t_vec_3	tmp;
 
-	vec[0] = set_vec(camray.origin.x - cyl.coordinate.x, camray.origin.y - \
-		cyl.coordinate.y, camray.origin.z - cyl.coordinate.z);
-	tmp = cyl.normal_vector;
-	multiplying_vec(&tmp, scalar_product(camray.direction, cyl.normal_vector));
+	vec[0] = set_vec(camray.origin.x - cyl.coord.x, camray.origin.y - \
+		cyl.coord.y, camray.origin.z - cyl.coord.z);
+	tmp = cyl.normal;
+	multiplying_vec(&tmp, scalar_product(camray.direction, cyl.normal));
 	vec[1] = set_vec(camray.direction.x - tmp.x, camray.direction.y - tmp.y, \
 		camray.direction.z - tmp.z);
-	tmp = cyl.normal_vector;
-	multiplying_vec(&tmp, scalar_product(vec[0], cyl.normal_vector));
+	tmp = cyl.normal;
+	multiplying_vec(&tmp, scalar_product(vec[0], cyl.normal));
 	vec[2] = set_vec(vec[0].x - tmp.x, vec[0].y - tmp.y, vec[0].z - tmp.z);
 	quad[0] = scalar_product(vec[1], vec[1]);
 	if (quad[0] <= 0)
@@ -60,7 +60,7 @@ t_hit	cylinder_hitted(t_ray camray, t_cylinder cyl)
 	quad[2] = scalar_product(vec[2], vec[2]) - pow(cyl.diameter / 2, 2);
 	t = quadratic_equation_inside(quad[0], quad[1], quad[2]);
 	p = hit_coord(t.t, camray);
-	if (cut_infinite_object(p, cyl.coordinate, cyl.normal_vector, cyl.height))
+	if (cut_infinite_object(p, cyl.coord, cyl.normal, cyl.height))
 		return (set_hit(0, -1));
 	return (t);
 }

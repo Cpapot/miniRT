@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:07:46 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 15:08:02 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 20:01:09 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include "../../../inc/check_lines_ft.h"
 #include "stdio.h"
 #include <stddef.h>
+
+#define PRINT_ERROR	"error filling this object line : "
+#define ARE_YOU		"\nAre you sure about the value\n"
 
 static bool	_check_lines(t_data *data_pt, char **lines);
 static bool	_fill_lines_in_data(t_data *data_pt, char **lines);
@@ -58,11 +61,12 @@ static bool	_call_filling_ft(char **lines)
 	while (lines[++j])
 	{
 		i = 0;
-		while (i < 8 && ft_strncmp(id_arr[i], lines[j], ft_strlen(id_arr[i])) != 0)
+		while (i < 8 && ft_strncmp(id_arr[i], lines[j], \
+			ft_strlen(id_arr[i])) != 0)
 			i++;
 		if (i < 8 && ft_arr[i](lines[j], FILLING) == false)
 		{
-			ft_printf_fd(2, "error filling this object line : %d\n%s\nAre you sure about the value\n", j, lines[j]);
+			ft_printf_fd(2, PRINT_ERROR"%d\n%s"ARE_YOU, j, lines[j]);
 			return (ft_free_split(lines), false);
 		}
 	}
@@ -84,11 +88,12 @@ static bool	_check_lines(t_data *data_pt, char **lines)
 	while (lines[++j])
 	{
 		i = 0;
-		while (i != 8
-			&& ft_strncmp(id_arr[i], lines[j], ft_strlen((char *)id_arr[i])) != 0)
+		while (i != 8 && ft_strncmp(id_arr[i], lines[j], \
+			ft_strlen((char *)id_arr[i])) != 0)
 			i++;
 		if (i < 8 && parse_ft_arr[i](data_pt, lines[j]) == false)
-			return (ft_printf_fd(2, "Error parsing: line %d\n%s\n", j + 1, lines[j]), false);
+			return (ft_printf_fd(2, "Error parsing: line %d\n%s\n", \
+				j + 1, lines[j]), false);
 	}
 	if (data_pt->ca_nb == 0)
 	{
