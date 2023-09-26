@@ -6,3 +6,4 @@ cmake*
 .vscode
 MiniRT
 *.a
+mlx_lin/test/mlx-test
