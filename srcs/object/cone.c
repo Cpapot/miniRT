@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 13:03:18 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ int		cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h);
 
 t_vec_3	cone_normal(t_ray camray, double t, t_cone cone)
 {
-	t_point	hitpoint;
-	t_vec_3	projected_vec;
+	double	k;
+	double	scalar;
 	t_vec_3	result;
+	t_vec_3	tmp;
+	t_point	hitpoint;
 
 	hitpoint = hit_coord(t, camray);
-	projected_vec.x = hitpoint.x;
-	projected_vec.y = hitpoint.y;
-	projected_vec.z = hitpoint.z;
-	result.x = (hitpoint.x * scalar_product(projected_vec, cone.vector)) / \
-		scalar_product(projected_vec, projected_vec) - cone.vector.x;
-	result.y = (hitpoint.y * scalar_product(projected_vec, cone.vector)) / \
-		scalar_product(projected_vec, projected_vec) - cone.vector.y;
-	result.z = (hitpoint.z * scalar_product(projected_vec, cone.vector)) / \
-		scalar_product(projected_vec, projected_vec) - cone.vector.z;
+	k = tan((cone.diameter / 2) * M_PI / 180.0);
+	tmp = set_vec(camray.origin.x - cone.coordinate.x, camray.origin.y - \
+		cone.coordinate.y, camray.origin.z - cone.coordinate.z);
+	scalar = scalar_product(camray.direction, set_vec(hitpoint.x, hitpoint.y, \
+		hitpoint.z)) + scalar_product(tmp, cone.vector);
+	tmp = set_vec(hitpoint.x + camray.origin.x, hitpoint.y + camray.origin.y, hitpoint.z + camray.origin.z);
+	result = minus_vec(minus_vec(tmp, set_vec(cone.coordinate.x, cone.coordinate.y, cone.coordinate.z)), multip_vec(cone.vector, ((1 + pow(k, 2.0))) * scalar));
 	normalize_vec(&result);
 	return (result);
 }
