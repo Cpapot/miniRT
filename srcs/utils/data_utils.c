@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:26:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/23 18:10:04 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 17:12:17 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,22 +149,4 @@ bool	add_disk(t_data *data_pt)
 	data_pt->di_nb = data_pt->di_nb + data_pt->cy_nb * 4 + data_pt->co_nb;
 	data_pt->disk_arr = disk_arr;
 	return (true);
-}
-
-void	*suppress_light(t_light light, t_data *data_pt)
-{
-	size_t	lt_nb;
-
-	lt_nb = data_pt->lt_nb;
-	while (lt_nb--)
-	{
-		if (ft_memcmp(&light, &(data_pt->lights_arr[lt_nb]), \
-			sizeof(t_light)) == 0)
-		{
-			data_pt->lt_nb--;
-			return (ft_memmove((void *)&(data_pt->lights_arr[lt_nb]),  \
-				(void *)&(data_pt->lights_arr[lt_nb + 1]),sizeof(t_light) * (data_pt->lt_nb - lt_nb)));
-		}
-	}
-	return (0);
 }

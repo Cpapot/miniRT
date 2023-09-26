@@ -6,12 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 14:37:21 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:04:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structure.h"
 #include "vec3.h"
+#include "color.h"
 
 t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray)
 {
@@ -24,7 +25,7 @@ t_vec_3	reflect_vec(t_vec_3 normal, t_vec_3 ray)
 	return (result);
 }
 
-int32_t	reflection(int32_t light, t_data data, t_ray camray, int level, t_material *mat)
+int32_t	reflection(int32_t light, t_data data, t_ray camray, t_material *mat)
 {
 	double		reflection;
 	t_color		light_color;
@@ -34,11 +35,12 @@ int32_t	reflection(int32_t light, t_data data, t_ray camray, int level, t_materi
 		reflection = 0.4;
 	else
 		reflection = mat->reflection;
-	if (level == 10 || reflection == 0)
+	if (data.level == 10 || reflection == 0)
 		return (light);
 	light_color = int_to_rgb(light);
-	reflect_color = int_to_rgb(check_ray(camray, data, level + 1));
-	return (ft_color(reflect_color.r * reflection + light_color.r * (1 - reflection), reflect_color.g \
-	 * reflection + light_color.g * (1 - reflection), reflect_color.b * reflection + light_color.b * \
-	 (1 - reflection), 0));
+	reflect_color = int_to_rgb(check_ray(camray, data, data.level + 1));
+	return (ft_color(reflect_color.r * reflection + light_color.r * \
+		(1 - reflection), reflect_color.g * reflection + light_color.g * \
+		(1 - reflection), reflect_color.b * reflection + light_color.b * \
+		(1 - reflection), 0));
 }

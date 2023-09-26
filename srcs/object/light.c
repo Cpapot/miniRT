@@ -6,16 +6,19 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:21:27 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:45:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "hit.h"
+#include "light.h"
+#include "color.h"
+#include "plane.h"
 
-void	find_light(t_data *data, double *t, t_ray ray, size_t *index);
-void	compute_light_ratio(t_color *color, t_light light, double r[2], t_material *mat);
+void	compute_light(t_color *col, t_light li, double r[2], t_material *mat);
 t_vec_3	bounce_vec(t_point hitpoint, t_light light);
+void	*suppress_light(t_light light, t_data *data_pt);
 
 double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 {
@@ -30,23 +33,28 @@ double	check_intersection(t_light light, t_point hitpoint, t_vec_3 normal)
 	return (scalar);
 }
 
-void	delete_hidden_light(t_data *data, t_point point)
+void	find_light(t_data *data, double *t, t_ray ray, size_t *index)
 {
-	size_t	index;
-	double	t;
-	t_ray	light_ray;
+	double	t_max;
+	t_hit	id;
 
-	index = 0;
-	t = -1;
-	while (data->lt_nb != index)
-	{
-		light_ray.origin = point;
-		light_ray.direction.x = data->lights_arr[index].coordinate.x - point.x;
-		light_ray.direction.y = data->lights_arr[index].coordinate.y - point.y;
-		light_ray.direction.z = data->lights_arr[index].coordinate.z - point.z;
-		normalize_vec(&light_ray.direction);
-		find_light(data, &t, light_ray, &index);
-	}
+	t_max = 0;
+	if (ray.direction.x != 0)
+		t_max = (data->lights_arr[*index].coordinate.x - ray.origin.x) \
+			/ ray.direction.x;
+	else if (ray.direction.y != 0)
+		t_max = (data->lights_arr[*index].coordinate.y - ray.origin.y) \
+			/ ray.direction.y;
+	else if (ray.direction.z != 0)
+		t_max = (data->lights_arr[*index].coordinate.z - ray.origin.z) \
+			/ ray.direction.z;
+	id = find_near_plane(ray, data->pl_nb, data->plane_arr);
+	if (id.id != -1)
+		*t = plane_hited(ray, data->plane_arr[id.id]);
+	if (id.id != -1 && *t != -1 && *t < t_max)
+		suppress_light(data->lights_arr[*index], data);
+	else
+		*index = *index + 1;
 }
 
 double	specular_light(t_vec_3 light_dir, t_vec_3 normal, t_material *mat)
@@ -66,7 +74,7 @@ double	specular_light(t_vec_3 light_dir, t_vec_3 normal, t_material *mat)
 	return (result);
 }
 
-t_color	ft_find_light_ratio(t_point point, t_data data, t_vec_3 normal, t_material *mat)
+t_color	light_ratio(t_point p, t_data data, t_vec_3 normal, t_material *mat)
 {
 	size_t	index;
 	t_color	result;
@@ -80,15 +88,44 @@ t_color	ft_find_light_ratio(t_point point, t_data data, t_vec_3 normal, t_materi
 	while (data.lt_nb != index)
 	{
 		light = data.lights_arr[index];
-		point.x = point.x + (normal.x * 0.0001);
-		point.y = point.y + (normal.y * 0.0001);
-		point.z = point.z + (normal.z * 0.0001);
-		ratio[1] = specular_light(set_vec(point.x - light.coordinate.x, point.y \
-			- light.coordinate.y, point.z - light.coordinate.z), normal, mat);
-		ratio[0] = check_intersection(light, point, normal);
-		if (!data.option.shadow || check_shadow(point, light, &data))
-			compute_light_ratio(&result, light, ratio, mat);
+		p.x = p.x + (normal.x * 0.0001);
+		p.y = p.y + (normal.y * 0.0001);
+		p.z = p.z + (normal.z * 0.0001);
+		ratio[1] = specular_light(set_vec(p.x - light.coordinate.x, p.y \
+			- light.coordinate.y, p.z - light.coordinate.z), normal, mat);
+		ratio[0] = check_intersection(light, p, normal);
+		if (!data.option.shadow || check_shadow(p, light, &data))
+			compute_light(&result, light, ratio, mat);
 		index++;
 	}
 	return (result);
+}
+
+void	reset_light(t_data *data)
+{
+	static t_light			first_data[LIGHT_BUFF];
+	int						i;
+	static int				index = 0;
+	static int				lt_nb;
+
+	i = 0;
+	if (index == 0)
+	{
+		lt_nb = data->lt_nb;
+		while (i != lt_nb && i != LIGHT_BUFF)
+		{
+			first_data[i] = data->lights_arr[i];
+			i++;
+		}
+	}
+	else
+	{
+		data->lt_nb = lt_nb;
+		while (i != lt_nb && i != LIGHT_BUFF)
+		{
+			data->lights_arr[i] = first_data[i];
+			i++;
+		}
+	}
+	index++;
 }

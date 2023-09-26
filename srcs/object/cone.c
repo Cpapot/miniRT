@@ -6,13 +6,14 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "vec3.h"
 #include "reflection.h"
+#include "light.h"
 
 double	quadratic_equation(double a, double b, double c);
 int		cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h);
@@ -100,13 +101,14 @@ int32_t	render_cone(t_hitinfo info, t_ray camray, t_data data, int level)
 	co = (t_cone *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), \
 		cone_normal(camray, info.t, *co));
-	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
+	ratio = light_ratio(hit_coord(info.t, camray), data, \
 	cone_normal(camray, info.t, *(t_cone *)info.struct_info), &co->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(cone_normal(camray, info.t, *co), \
 		camray.direction);
 	reflect_ray.origin = hit;
+	data.level = level;
 	return (reflection(ft_color(co->color.r * ratio.r, co->color.g * \
-	ratio.g, co->color.b * ratio.b, 0), data, reflect_ray, level, \
+	ratio.g, co->color.b * ratio.b, 0), data, reflect_ray, \
 		&co->material));
 }
