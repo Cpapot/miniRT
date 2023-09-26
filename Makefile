@@ -56,6 +56,7 @@ SRCS		=	object/light.c \
 				utils/data_utils.c \
 				utils/vec3_math.c \
 				object/plane.c \
+				render.c \
 				main.c \
 				color.c \
 				hit.c \
