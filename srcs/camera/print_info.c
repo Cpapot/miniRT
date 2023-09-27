@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:29:07 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/27 15:41:52 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 15:50:25 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_loading(int cam)
 	int			tmp ;
 
 	total = XSIZE * YSIZE;
-	tmp = (actual++ * 100) / total;
+	tmp = (actual++ *100) / total;
 	if (percent == 100)
 	{
 		percent = 0;
