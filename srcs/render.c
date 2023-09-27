@@ -6,12 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:11:11 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/27 02:12:35 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 13:29:56 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "camera.h"
+#include "close.h"
 
 void	set_data(t_data *data, t_camera *cam);
 int32_t	mod_gamma(int32_t object_color);
@@ -62,7 +63,8 @@ t_img_info	*render_all_img(t_mlx_info *win, t_data *data)
 
 	cam_index = 0;
 	img_array = malloc(sizeof(t_img_info) * (int)data->ca_nb);
-	// secure
+	if (img_array == NULL)
+		close_minirt(win, data, 1);
 	while (cam_index != (int)data->ca_nb)
 	{
 		render_image(win, data, cam_index);

@@ -139,9 +139,9 @@ NAME		=	MiniRT
 
 AR			=	ar rc
 
-FLAGS		=	-lX11 -lXext -L$(MLXDIR) -lm -g
+FLAGS		=	-lX11 -lXext -L$(MLXDIR) -lm
 
-CFLAGS		=	-Wall -Wextra -Werror -O3 -g
+CFLAGS		=	-Wall -Wextra -Werror -Ofast
 
 CC			=	gcc
 

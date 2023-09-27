@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 02:12:21 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/27 02:46:26 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 13:32:46 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	destroy_image_arr(t_mlx_info *win, t_data *data)
 		(void)mlx_destroy_image(win->mlx_ptr, win->img_arr[index].img);
 		index++;
 	}
+	free(win->img_arr);
 }
 
 void	close_minirt(t_mlx_info *win, t_data *data, int status)
@@ -51,5 +52,6 @@ void	close_minirt(t_mlx_info *win, t_data *data, int status)
 	clean_minirt_data(data);
 	mlx_destroy_window(win->mlx_ptr, win->win_ptr);
 	mlx_destroy_display(win->mlx_ptr);
+	free(win->mlx_ptr);
 	exit(status);
 }

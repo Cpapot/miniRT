@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/27 02:29:23 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 13:30:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 		return (clean_minirt_data(&data));
 	change_cylinder_coord(&data);
 	if (!add_disk(&data))
-		return (1);
+		close_minirt(&win, &data, 1);
 	ft_create_win(&win);
 	win.img_arr = render_all_img(&win, &data);
 	screen_loop(&win, &data);
