@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:29:07 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/26 22:14:48 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 15:41:52 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,17 @@ void	print_loading(int cam)
 
 	total = XSIZE * YSIZE;
 	tmp = (actual++ * 100) / total;
-	if (tmp != percent)
-	{
-		percent = tmp;
-		if (percent % 4 == 0)
-			ft_printf(SUPR"LOADING SCENE (CAM: %d).   [%d%%]", cam, percent);
-		else if (percent % 4 == 1)
-			ft_printf(SUPR"LOADING SCENE (CAM: %d)..  [%d%%]", cam, percent);
-		else if (percent % 4 == 2)
-			ft_printf(SUPR"LOADING SCENE (CAM: %d)... [%d%%]", cam, percent);
-		else if (percent % 4 == 3)
-			ft_printf(SUPR"LOADING SCENE (CAM: %d)    [%d%%]", cam, percent);
-	}
 	if (percent == 100)
 	{
 		percent = 0;
 		actual = 0;
-		ft_printf(GREEN"\n"WHITE, cam);
+		ft_printf(SUPR"LOADING SCENE (CAM: %d)... [%d%%]  ", cam, 100);
+	}
+	else if (tmp != percent)
+	{
+		percent = tmp;
+		if (percent != 100)
+			ft_printf(SUPR"LOADING SCENE (CAM: %d)... [%d%%]  ", cam, percent);
 	}
 }
 
