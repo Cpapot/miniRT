@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:11:11 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/26 16:15:17 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 02:12:35 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_img_info	*render_all_img(t_mlx_info *win, t_data *data)
 
 	cam_index = 0;
 	img_array = malloc(sizeof(t_img_info) * (int)data->ca_nb);
+	// secure
 	while (cam_index != (int)data->ca_nb)
 	{
 		render_image(win, data, cam_index);

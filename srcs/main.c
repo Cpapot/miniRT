@@ -6,15 +6,16 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 11:41:35 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/26 16:15:49 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 02:29:23 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/miniRT.h"
-#include "../inc/camera.h"
-#include "../inc/color.h"
-#include "../inc/key.h"
-#include "../inc/light.h"
+#include "miniRT.h"
+#include "camera.h"
+#include "color.h"
+#include "key.h"
+#include "light.h"
+#include "close.h"
 
 bool		parsing(t_data *data_pt, char *file_name);
 t_data		create_struct(void);
@@ -35,27 +36,6 @@ void	init_data(t_data *data)
 	data->option.cam_id = 0;
 	data->option.shadow = true;
 	data->option.anti_aliasing = false;
-}
-
-int	clean_minirt_data(t_data *data_pt)
-{
-	if (data_pt->ambient_light != NULL)
-		free(data_pt->ambient_light);
-	if (data_pt->camera != NULL)
-		free(data_pt->camera);
-	if (data_pt->lights_arr != NULL)
-		free(data_pt->lights_arr);
-	if (data_pt->sphere_arr != NULL)
-		free(data_pt->sphere_arr);
-	if (data_pt->plane_arr != NULL)
-		free(data_pt->plane_arr);
-	if (data_pt->cylinder_arr != NULL)
-		free(data_pt->cylinder_arr);
-	if (data_pt->cone_arr != NULL)
-		free(data_pt->cone_arr);
-	if (data_pt->disk_arr != NULL)
-		free(data_pt->disk_arr);
-	return (1);
 }
 
 int	main(int ac, char **av)

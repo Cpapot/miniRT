@@ -27,7 +27,8 @@ HEADERS 	=	camera.h	\
 				sphere.h	\
 				structure.h	\
 				vec3.h	\
-				window.h
+				window.h	\
+				close.h	\
 
 SRCS		=	object/light.c \
 				camera/camera.c \
@@ -67,6 +68,7 @@ SRCS		=	object/light.c \
 				object/sphere.c \
 				shadow.c \
 				hook.c \
+				close.c \
 				camera/print_info.c \
 				camera/anti_aliasing.c \
 				object/ambient_light.c \
