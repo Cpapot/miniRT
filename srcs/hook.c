@@ -6,12 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:00:33 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 20:59:15 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 02:33:34 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "../inc/key.h"
+#include "close.h"
 
 t_img_info	*render_all_img(t_mlx_info *win, t_data *data);
 void		screen_loop(t_mlx_info *win, t_data *data);
@@ -28,10 +29,11 @@ int	deal_key(int key, t_general *info)
 	else if (key == KP_2)
 	{
 		info->data->option.anti_aliasing = !info->data->option.anti_aliasing;
+		destroy_image_arr(info->win, info->data);
 		info->win->img_arr = render_all_img(info->win, info->data);
 	}
 	else if (key == KB_ESC || key == 17)
-		exit(0);
+		close_minirt(info->win, info->data, 0);
 	else if (key == KB_TAB)
 	{
 		if (info->data->option.cam_id == info->data->ca_nb - 1)

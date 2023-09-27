@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:07:46 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 15:08:02 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 20:01:09 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include "../../../inc/check_lines_ft.h"
 #include "stdio.h"
 #include <stddef.h>
+
+#define PRINT_ERROR	"error filling this object line : "
+#define ARE_YOU		"\nAre you sure about the value\n"
 
 static bool	_check_lines(t_data *data_pt, char **lines);
 static bool	_fill_lines_in_data(t_data *data_pt, char **lines);

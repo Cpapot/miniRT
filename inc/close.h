@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit.h                                              :+:      :+:    :+:   */
+/*   close.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 16:15:19 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/26 21:53:33 by cpapot           ###   ########.fr       */
+/*   Created: 2023/09/27 02:22:36 by cpapot            #+#    #+#             */
+/*   Updated: 2023/09/27 02:32:10 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HIT_H
-# define HIT_H
+#ifndef CLOSE_H
+# define CLOSE_H
 
-# include "miniRT.h"
+#include "miniRT.h"
+#include "camera.h"
 
-void		ambient_lightning(t_color *ratio, t_data *data);
-int			check_shadow(t_point hitpoint, t_light light, t_data *data);
-t_hitinfo	find_close_object(t_ray camray, t_data data);
+void	destroy_image_arr(t_mlx_info *win, t_data *data);
+int		clean_minirt_data(t_data *data_pt);
+void	close_minirt(t_mlx_info *win, t_data *data, int status);
 
 #endif

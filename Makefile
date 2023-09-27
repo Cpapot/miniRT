@@ -6,14 +6,19 @@
 #				|_|    |_|_|\___||___/
 
 HEADERS 	=	camera.h	\
+				check_lines_ft.h	\
 				color.h	\
 				cone.h	\
 				cylinder.h	\
 				disk.h	\
+				filling_ft.h	\
+				find_object.h	\
 				hit.h	\
 				key.h	\
 				light.h	\
+				material.h	\
 				miniRT.h	\
+				mini_parse_ft.h	\
 				minirt_data.h	\
 				minirt_manipulation.h	\
 				parsing.h	\
@@ -23,8 +28,7 @@ HEADERS 	=	camera.h	\
 				structure.h	\
 				vec3.h	\
 				window.h	\
-				material.h
-
+				close.h	\
 
 SRCS		=	object/light.c \
 				camera/camera.c \
@@ -56,12 +60,15 @@ SRCS		=	object/light.c \
 				utils/data_utils.c \
 				utils/vec3_math.c \
 				object/plane.c \
+				render.c \
+				object/find_object.c \
 				main.c \
 				color.c \
 				hit.c \
 				object/sphere.c \
 				shadow.c \
 				hook.c \
+				close.c \
 				camera/print_info.c \
 				camera/anti_aliasing.c \
 				object/ambient_light.c \
@@ -132,9 +139,9 @@ NAME		=	MiniRT
 
 AR			=	ar rc
 
-FLAGS		=	-lX11 -lXext -L$(MLXDIR) -lm -g
+FLAGS		=	-lX11 -lXext -L$(MLXDIR) -lm
 
-CFLAGS		=	-Wall -Wextra -Werror -O3 -g
+CFLAGS		=	-Wall -Wextra -Werror -Ofast
 
 CC			=	gcc
 

@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:28:39 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 20:28:36 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_plane	disk_to_plane(t_disk disk)
 	t_plane	result;
 
 	result.color = disk.color;
-	result.coordinate = disk.coordinate;
-	result.normal_vector = disk.normal_vector;
+	result.coordinate = disk.coord;
+	result.normal_vector = disk.normal;
 	return (result);
 }
 
@@ -35,8 +35,8 @@ double	disk_hited(t_ray ray, t_disk disk)
 	if (t < 0)
 		return (t);
 	hitpoint = hit_coord(t, ray);
-	disk_vec = set_vec(hitpoint.x - disk.coordinate.x, hitpoint.y - \
-	disk.coordinate.y, hitpoint.z - disk.coordinate.z);
+	disk_vec = set_vec(hitpoint.x - disk.coord.x, hitpoint.y - \
+	disk.coord.y, hitpoint.z - disk.coord.z);
 	if (sqrtf(scalar_product(disk_vec, disk_vec)) <= disk.diameter / 2)
 		return (t);
 	else
@@ -75,11 +75,11 @@ int32_t	render_disk(t_hitinfo info, t_ray camray, t_data data, int level)
 	t_ray		reflect_ray;
 
 	disk = (t_disk *)info.struct_info;
-	hitpoint = adjust_hitpoint(hit_coord(info.t, camray), disk->normal_vector);
+	hitpoint = adjust_hitpoint(hit_coord(info.t, camray), disk->normal);
 	ratio = light_ratio(hitpoint, data, \
-	disk->normal_vector, &disk->material);
+	disk->normal, &disk->material);
 	ambient_lightning(&ratio, &data);
-	reflect_ray.direction = reflect_vec(disk->normal_vector, camray.direction);
+	reflect_ray.direction = reflect_vec(disk->normal, camray.direction);
 	reflect_ray.origin = hitpoint;
 	data.level = level;
 	return (reflection(ft_color(disk->color.r * ratio.r, disk->color.g * \
