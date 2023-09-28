@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:26:10 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/26 21:48:29 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/28 12:59:44 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	set_disk(t_data *pt, int y, int i)
 			pt->disk_arr[pt->di_nb + i].diameter = pt->cylinder_arr[y].diameter;
 			pt->disk_arr[pt->di_nb + i].material = pt->cylinder_arr[y].material;
 			pt->disk_arr[pt->di_nb + i].normal = pt->cylinder_arr[y].normal;
-			if (i % 4 == 3)
+			if (i % 4 == 3 || i % 4 == 1)
 				multiplying_vec(&pt->disk_arr[pt->di_nb + i].normal, -1);
 			if (i % 4 == 1)
 				pt->disk_arr[pt->di_nb + i].coord = adjust_hitpoint(pt->\

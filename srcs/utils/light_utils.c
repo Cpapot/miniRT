@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:07:55 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/25 16:44:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/28 13:03:40 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	*suppress_light(t_light light, t_data *data_pt)
 void	compute_light(t_color *col, t_light li, double r[2], t_material *mat)
 {
 	col->r += li.color.r * r[0] * 0.004 * li.brightness + \
-		mat->specular_coef * r[1];
+		mat->specular_coef * r[1] * li.brightness;
 	col->g += li.color.g * r[0] * 0.004 * li.brightness + \
-		mat->specular_coef * r[1];
+		mat->specular_coef * r[1] * li.brightness;
 	col->b += li.color.b * r[0] * 0.004 * li.brightness + \
-		mat->specular_coef * r[1];
+		mat->specular_coef * r[1] * li.brightness;
 }
 
 t_vec_3	bounce_vec(t_point hitpoint, t_light light)
