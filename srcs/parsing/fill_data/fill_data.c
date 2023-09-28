@@ -23,6 +23,7 @@
 static bool	_check_lines(t_data *data_pt, char **lines);
 static bool	_fill_lines_in_data(t_data *data_pt, char **lines);
 static bool	_call_filling_ft(char **lines);
+static bool	_line_is_false(char *line);
 
 bool	fill_data(t_data *data_pt, char *file)
 {
@@ -35,7 +36,6 @@ bool	fill_data(t_data *data_pt, char *file)
 	if (_check_lines(data_pt, lines) == false
 		|| allocate_data(data_pt) == false)
 		return (ft_free_split(lines), false);
-	puts("maps checked");
 	return (_fill_lines_in_data(data_pt, lines));
 }
 
@@ -61,12 +61,13 @@ static bool	_call_filling_ft(char **lines)
 	while (lines[++j])
 	{
 		i = 0;
-		while (i < 8 && ft_strncmp(id_arr[i], lines[j], \
-			ft_strlen(id_arr[i])) != 0)
+		while (i < 8 && ft_strncmp(id_arr[i], \
+					lines[j], ft_strlen(id_arr[i])) != 0)
 			i++;
 		if (i < 8 && ft_arr[i](lines[j], FILLING) == false)
 		{
-			ft_printf_fd(2, PRINT_ERROR"%d\n%s"ARE_YOU, j, lines[j]);
+			ft_printf_fd(2, "error filling this object line : \
+%d\n%s\nAre you sure about the value\n", j + 1, lines[j]);
 			return (ft_free_split(lines), false);
 		}
 	}
@@ -78,27 +79,36 @@ static bool	_check_lines(t_data *data_pt, char **lines)
 {
 	int					j;
 	int					i;
-	const char			*id_arr[] = {
-		"A", "C", "L", "sp", "pl", "cy", "co"};
+	const char			*id_arr[] = {"A", "C", "L", "sp", "pl", "cy"};
 	const t_parse_ft	parse_ft_arr[] = {&manage_a, &manage_c, &manage_l,
 		&manage_sp, &manage_pl, &manage_cy,
-		&manage_co, &emmit_err};
+		&emmit_err};
 
 	j = -1;
 	while (lines[++j])
 	{
 		i = 0;
-		while (i != 8 && ft_strncmp(id_arr[i], lines[j], \
-			ft_strlen((char *)id_arr[i])) != 0)
+		while (i != 6 && ft_strncmp(id_arr[i], \
+					lines[j], ft_strlen((char *)id_arr[i])) != 0)
 			i++;
-		if (i < 8 && parse_ft_arr[i](data_pt, lines[j]) == false)
+		if ((i < 6 && parse_ft_arr[i](data_pt, lines[j]) == false) \
+			|| (i == 6 && _line_is_false(lines[j])))
 			return (ft_printf_fd(2, "Error parsing: line %d\n%s\n", \
-				j + 1, lines[j]), false);
+						j + 1, lines[j]), false);
 	}
 	if (data_pt->ca_nb == 0)
 	{
 		ft_printf_fd(2, "Error : .rt file must contain 1 camera\n");
 		return (false);
 	}
+	return (true);
+}
+
+static bool	_line_is_false(char *line)
+{
+	while (*line && (*line == ' ' || *line == '\t'))
+		line++;
+	if (*line == '#')
+		return (false);
 	return (true);
 }

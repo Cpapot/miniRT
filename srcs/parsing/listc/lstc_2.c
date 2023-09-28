@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/includes/libft.h"
+#include "../../../libft/includes/libft.h"
 #include "stdio.h"
 
 t_lstc	*init_lstc_first_read(int fd)

@@ -69,7 +69,10 @@ bool	ft_atovec_on(char *line, t_vec_3 *dst)
 	_go_to_next_float(&line);
 	if (ft_atod_on(line, &dst->z) == false)
 		return (false);
-	return (true);
+	if (dst->z || dst->y || dst->x)
+		return (true);
+	ft_printf_fd(2, "Vector can't be 0,0,0\n");
+	return (false);
 }
 
 bool	ft_atoratio_on(char *line, double *dst)
