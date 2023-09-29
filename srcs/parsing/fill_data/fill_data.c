@@ -76,8 +76,6 @@ static bool	_call_filling_ft(char **lines)
 	return (true);
 }
 
-
-
 static bool	_check_lines(t_data *data_pt, char **lines)
 {
 	int					j;

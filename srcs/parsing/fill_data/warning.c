@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   warning.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/25 15:07:46 by cpapot            #+#    #+#             */
+/*   Updated: 2023/09/26 20:01:09 by cpapot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../../../inc/minirt_data.h"
 #include "../../../libft/includes/libft.h"
 
@@ -10,12 +21,12 @@ bool	warning_if_invalid_nb(t_data *data)
 	flag = false;
 	if (data->ca_nb != 1)
 		return (ft_printf_fd(2, "Error : A camera must be given.\n"), true);
-	if (data->al_nb != 1)	
+	if (data->al_nb != 1)
 	{
 		flag = true;
 		ft_printf_fd(2, "Warning : Multiple or no ambient ligt.\n");
 	}
-	if (data->lt_nb != 1)	
+	if (data->lt_nb != 1)
 	{
 		flag = true;
 		ft_printf_fd(2, "Warning : Multiple or no light.\n");
@@ -27,9 +38,9 @@ bool	warning_if_invalid_nb(t_data *data)
 
 static bool	_ask_user(void)
 {
-	char c;
+	char	c;
 
-	ft_printf_fd(2, "Do you want to continue ? (press y)\n");	
+	ft_printf_fd(2, "Do you want to continue ? (press y)\n");
 	if (read (0, &c, 1) == -1)
 		ft_printf_fd(2, "Error reading standard input.");
 	if (c == 'Y' || c == 'y')
