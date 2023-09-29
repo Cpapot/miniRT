@@ -8,17 +8,17 @@ bool	warning_if_invalid_nb(t_data *data)
 	int	flag;
 
 	flag = false;
-	if (data->ca_nb < 1)
+	if (data->ca_nb != 1)
 		return (ft_printf_fd(2, "Error : A camera must be given.\n"), true);
-	if (data->al_nb <= 1)	
+	if (data->al_nb != 1)	
 	{
 		flag = true;
-		ft_printf_fd(2, "Warning : Multiple ambient ligt.\n");
+		ft_printf_fd(2, "Warning : Multiple or no ambient ligt.\n");
 	}
-	if (data->lt_nb <= 1)	
+	if (data->lt_nb != 1)	
 	{
 		flag = true;
-		ft_printf_fd(2, "Warning : Multiple light.\n");
+		ft_printf_fd(2, "Warning : Multiple or no light.\n");
 	}
 	if (flag == true)
 		flag = _ask_user();
