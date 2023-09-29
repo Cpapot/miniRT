@@ -43,7 +43,7 @@ static bool	_is_rt_file(char *file_name)
 
 	tmp = ft_strrchr(file_name, '.');
 	if (tmp == NULL \
-		|| ft_strncmp(".rt", tmp, 3))
+		|| ft_strncmp(".rt", tmp, 4))
 		return (false);
 	return (true);
 }

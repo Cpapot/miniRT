@@ -45,7 +45,10 @@ int	main(int ac, char **av)
 	t_data			data;
 
 	init_data(&data);
-	if (ac == 1 || parsing(&data, av[1]) == false)
+	if (ac == 1)
+		return (ft_printf_fd(2, "Error : miniRT takes only one arguments.\n"), \
+				clean_minirt_data(&data));
+	if (parsing(&data, av[1]) == false)
 		return (clean_minirt_data(&data));
 	change_cylinder_coord(&data);
 	if (!add_disk(&data))

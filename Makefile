@@ -49,6 +49,7 @@ SRCS		=	object/light.c \
 				parsing/fill_data/number.c \
 				parsing/fill_data/manage_ft.c \
 				parsing/fill_data/manage_ft_object.c \
+				parsing/fill_data/warning.c \
 				parsing/listc/lstc_2.c \
 				parsing/listc/lstc.c \
 				utils/object_utils.c \
@@ -135,7 +136,7 @@ CYAN		=	\033[1;36m
 DEFAULT		=	\033[0m
 SUPPR		=	\r\033[2K
 
-NAME		=	MiniRT
+NAME		=	miniRT
 
 AR			=	ar rc
 
