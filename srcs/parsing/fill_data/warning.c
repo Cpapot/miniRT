@@ -19,8 +19,13 @@ bool	warning_if_invalid_nb(t_data *data)
 	int	flag;
 
 	flag = false;
-	if (data->ca_nb != 1)
+	if (data->ca_nb < 1)
 		return (ft_printf_fd(2, "Error : A camera must be given.\n"), true);
+	if (data->ca_nb > 1)
+	{
+		flag = true;
+		ft_printf_fd(2, "Warning : Multiple camera.\n");
+	}
 	if (data->al_nb != 1)
 	{
 		flag = true;
