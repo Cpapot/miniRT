@@ -6,11 +6,12 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 15:07:46 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/26 20:01:09 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/10/02 13:15:02 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../../inc/minirt_data.h"
+
 #include "../../../libft/includes/libft.h"
+#include "miniRT.h"
 
 static bool	_ask_user(void);
 
@@ -48,11 +49,10 @@ static bool	_ask_user(void)
 
 	c = 0;
 	ft_printf_fd(2, "Do you want to continue ? (press y)\n");
-
 	n_read = read (0, &c, 1);
 	if (n_read == 0)
 		ft_printf_fd(2, "Error : standard input closed.\n");
-	if (n_read== -1)
+	if (n_read == -1)
 		ft_printf_fd(2, "Error : reading standard input.\n");
 	if (c == 'Y' || c == 'y')
 		return (false);
