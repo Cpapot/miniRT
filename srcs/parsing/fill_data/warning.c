@@ -44,10 +44,16 @@ bool	warning_if_invalid_nb(t_data *data)
 static bool	_ask_user(void)
 {
 	char	c;
+	int		n_read;
 
+	c = 0;
 	ft_printf_fd(2, "Do you want to continue ? (press y)\n");
-	if (read (0, &c, 1) == -1)
-		ft_printf_fd(2, "Error reading standard input.");
+
+	n_read = read (0, &c, 1);
+	if (n_read == 0)
+		ft_printf_fd(2, "Error : standard input closed.\n");
+	if (n_read== -1)
+		ft_printf_fd(2, "Error : reading standard input.\n");
 	if (c == 'Y' || c == 'y')
 		return (false);
 	return (true);
