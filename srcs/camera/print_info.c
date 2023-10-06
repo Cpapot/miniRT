@@ -6,23 +6,47 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 03:29:07 by cpapot            #+#    #+#             */
-/*   Updated: 2023/06/24 17:48:46 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/27 15:50:25 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "window.h"
+#define SUPR "\r\033[20K"
 
-void	print_info(t_minirt_data *data)
+void	print_loading(int cam)
 {
-	t_point	pos;
-	t_vec_3	dir;
+	static int	percent = 0;
+	int			total;
+	static int	actual = 0;
+	int			tmp ;
 
-	pos = data->camera[0].origin;
-	dir = data->camera[0].vector;
-	printf("position : (%f, %f, %f)\n", pos.x, pos.y, pos.z);
-	printf("direction : (%f, %f, %f)\n", dir.x, dir.y, dir.z);
-	printf("shadow : %d\n", data->option.shadow);
-	printf("anti_aliasing : %d\n", data->option.anti_aliasing);
-	printf("cam id: %ld/%ld\n", data->option.cam_id + 1, data->ca_nb);
-	printf(GREEN"RENDER COMPLETE\n"WHITE);
+	total = XSIZE * YSIZE;
+	tmp = (actual++ *100) / total;
+	if (percent == 100)
+	{
+		percent = 0;
+		actual = 0;
+		ft_printf(SUPR"LOADING SCENE (CAM: %d)... [%d%%]  ", cam, 100);
+	}
+	else if (tmp != percent)
+	{
+		percent = tmp;
+		if (percent != 100)
+			ft_printf(SUPR"LOADING SCENE (CAM: %d)... [%d%%]  ", cam, percent);
+	}
+}
+
+void	print_info(t_data *data)
+{
+	ft_printf("\e[2J\e[H");
+	if (data->option.shadow)
+		ft_printf(" ✅ | shadows\n");
+	else
+		ft_printf(" ❌ | shadows\n");
+	if (data->option.anti_aliasing)
+		ft_printf(" ✅ | anti aliasing\n");
+	else
+		ft_printf(" ❌ | anti aliasing\n");
+	ft_printf("%d/%d | cam ID\n", data->option.cam_id + 1, data->ca_nb);
 }

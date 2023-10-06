@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt_data.c                                 :+:      :+:    :+:   */
+/*   minirt_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/09 14:18:24 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 19:16:52 by cpapot           ###   ########.fr       */
+/*   Created: 2023/09/20 16:20:30 by cpapot            #+#    #+#             */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "errno.h"
 #include <stdio.h>
 
-bool	allocate_data(t_minirt_data *data_pt)
+bool	allocate_data(t_data *data_pt)
 {
 	errno = 0;
 	data_pt->cylinder_arr = malloc(sizeof(t_cylinder) * data_pt->cy_nb);

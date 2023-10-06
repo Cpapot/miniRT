@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 16:37:21 by cpapot            #+#    #+#             */
-/*   Updated: 2023/07/30 21:17:14 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/21 13:55:39 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_color	get_average_color(t_color color_arr[4])
 	return (result);
 }
 
-int32_t	anti_aliasing(t_minirt_data *data, int x, int y, t_camera cam)
+int32_t	anti_aliasing(t_data *data, int x, int y, t_camera cam)
 {
 	int			index;
 	t_ray		camray;

@@ -6,72 +6,95 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:40:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/09/01 15:47:06 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 16:10:40 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "vec3.h"
 #include "reflection.h"
+#include "light.h"
 
 double	quadratic_equation(double a, double b, double c);
+int		cut_infinite_object(t_point p, t_point coord, t_vec_3 norm, double h);
+t_hit	quadratic_equation_inside(double a, double b, double c);
+t_hit	set_hit(bool inside, double t);
 
 t_vec_3	cone_normal(t_ray camray, double t, t_cone cone)
 {
-	t_point	hitpoint;
-	t_vec_3	projected_vec;
+	double	k;
+	double	scalar;
 	t_vec_3	result;
+	t_vec_3	tmp;
+	t_point	hitpoint;
 
 	hitpoint = hit_coord(t, camray);
-	projected_vec.x = hitpoint.x;
-	projected_vec.y = hitpoint.y;
-	projected_vec.z = hitpoint.z;
-	result.x = (hitpoint.x * scalar_product(projected_vec, cone.vector)) / scalar_product(projected_vec, projected_vec) - cone.vector.x;
-	result.y = (hitpoint.y * scalar_product(projected_vec, cone.vector)) / scalar_product(projected_vec, projected_vec) - cone.vector.y;
-	result.z = (hitpoint.z * scalar_product(projected_vec, cone.vector)) / scalar_product(projected_vec, projected_vec) - cone.vector.z;
+	k = tan((cone.diameter / 2) * M_PI / 180.0);
+	tmp = set_vec(camray.origin.x - cone.coordinate.x, camray.origin.y - \
+		cone.coordinate.y, camray.origin.z - cone.coordinate.z);
+	scalar = scalar_product(camray.direction, set_vec(hitpoint.x, hitpoint.y, \
+		hitpoint.z)) + scalar_product(tmp, cone.vector);
+	tmp = set_vec(hitpoint.x + camray.origin.x, hitpoint.y + camray.origin.y, \
+		hitpoint.z + camray.origin.z);
+	result = minus_vec(minus_vec(tmp, set_vec(cone.coordinate.x, \
+		cone.coordinate.y, cone.coordinate.z)), multip_vec(cone.vector, \
+		((1 + pow(k, 2.0))) * scalar));
 	normalize_vec(&result);
 	return (result);
 }
 
-double	cone_hitted(t_ray camray, t_cone cone)
+bool	is_inside_cone(t_cone cone, t_point hitpoint)
 {
-	double	A;
-	double	B;
-	double	C;
-	double	t;
+	t_vec_3	tmp;
+	double	dist;
+	double	rad;
+	double	orth;
+
+	tmp = set_vec(hitpoint.x - cone.coordinate.x, hitpoint.y - \
+		cone.coordinate.y, hitpoint.z - cone.coordinate.z);
+	dist = scalar_product(tmp, cone.vector);
+	rad = (dist / cone.height) * (cone.diameter / 2);
+	tmp = minus_vec(tmp, multip_vec(cone.vector, dist));
+	orth = calculate_norm(&tmp);
+	if (orth < rad)
+		return (true);
+	return (false);
+}
+
+t_hit	cone_hitted(t_ray camray, t_cone cone)
+{
+	double	quad[3];
+	double	tmp[3];
+	t_hit	t;
 	t_point	hitpoint;
 	t_vec_3	vec;
-	double	p1;
-	double	p2;
-	double	cosa;
 
 	normalize_vec(&cone.vector);
-	cosa = pow(cone.diameter / 2, 2) / pow(cone.height, 2);
-
-	vec.x = camray.origin.x - cone.coordinate.x;
-	vec.y = camray.origin.y - cone.coordinate.y;
-	vec.z = camray.origin.z - cone.coordinate.z;
-
-	p1 = scalar_product(camray.direction, cone.vector);
-	p2 = scalar_product(vec, cone.vector);
-
-	A = scalar_product(camray.direction, camray.direction) - cosa * pow(p1, 2) - pow(p1, 2);
-	B = 2 * (scalar_product(camray.direction, vec) - cosa * p1 * p2 - p1 * p2);
-	C = scalar_product(vec, vec) - cosa * pow(p2, 2) - pow(p2, 2);
-	t = quadratic_equation(A, B, C);
-	p1 = camray.origin.y + t * camray.direction.y;
-	hitpoint = hit_coord(t, camray);
-	vec = set_vec(cone.coordinate.x - hitpoint.x,cone.coordinate.y - hitpoint.y, cone.coordinate.z - hitpoint.z);
-	if (!(scalar_product(cone.vector, vec) >= 0 && scalar_product(cone.vector, vec) <= cone.height))
-		return (-1);
-	return (t);
+	tmp[2] = pow(cone.diameter / 2, 2) / pow(cone.height, 2);
+	vec = set_vec(camray.origin.x - cone.coordinate.x, camray.origin.y - \
+		cone.coordinate.y, camray.origin.z - cone.coordinate.z);
+	tmp[0] = scalar_product(camray.direction, cone.vector);
+	tmp[1] = scalar_product(vec, cone.vector);
+	quad[0] = scalar_product(camray.direction, camray.direction) - tmp[2] \
+		* pow(tmp[0], 2) - pow(tmp[0], 2);
+	quad[1] = 2 * (scalar_product(camray.direction, vec) - tmp[2] * tmp[0] \
+		* tmp[1] - tmp[0] * tmp[1]);
+	quad[2] = scalar_product(vec, vec) - tmp[2] * pow(tmp[1], 2) - \
+		pow(tmp[1], 2);
+	t = quadratic_equation_inside(quad[0], quad[1], quad[2]);
+	tmp[0] = camray.origin.y + t.t * camray.direction.y;
+	hitpoint = hit_coord(t.t, camray);
+	if (cut_infinite_object(hitpoint, cone.coordinate, cone.vector, \
+		cone.height))
+		return (set_hit(0, -1));
+	return (set_hit(is_inside_cone(cone, hitpoint), t.t));
 }
 
 t_hit	find_near_cone(t_ray camray, size_t count, t_cone *cone_arr)
 {
 	size_t	index;
 	double	tmp;
-	double	t;
+	t_hit	t;
 	t_hit	info;
 
 	info.id = -1;
@@ -80,10 +103,11 @@ t_hit	find_near_cone(t_ray camray, size_t count, t_cone *cone_arr)
 	while (index != count)
 	{
 		t = cone_hitted(camray, cone_arr[index]);
-		if (tmp > t && (t != -1 || t == -2))
+		if (tmp > t.t && (t.t != -1 || t.t == -2))
 		{
-			tmp = t;
+			tmp = t.t;
 			info.id = index;
+			info.inside = t.inside;
 		}
 		index++;
 	}
@@ -91,7 +115,7 @@ t_hit	find_near_cone(t_ray camray, size_t count, t_cone *cone_arr)
 	return (info);
 }
 
-int32_t	render_cone(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
+int32_t	render_cone(t_hitinfo info, t_ray camray, t_data data, int level)
 {
 	t_cone		*co;
 	t_color		ratio;
@@ -99,12 +123,20 @@ int32_t	render_cone(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
 	t_ray		reflect_ray;
 
 	co = (t_cone *)info.struct_info;
-	hit = adjust_hitpoint(hit_coord(info.t, camray), cone_normal(camray, info.t, *co));
-	ratio = ft_find_light_ratio(hit_coord(info.t, camray), data, \
-	cone_normal(camray, info.t, *(t_cone *)info.struct_info), &co->material);
+	if (info.inside)
+		info.normal = multip_vec(cone_normal(camray, info.t, *co), -1);
+	else
+		info.normal = cone_normal(camray, info.t, *co);
+	hit = adjust_hitpoint(hit_coord(info.t, camray), \
+		info.normal);
+	ratio = light_ratio(hit_coord(info.t, camray), data, \
+info.normal, &co->material);
 	ambient_lightning(&ratio, &data);
-	reflect_ray.direction = reflect_vec(cone_normal(camray, info.t, *co), camray.direction);
+	reflect_ray.direction = reflect_vec(info.normal, \
+		camray.direction);
 	reflect_ray.origin = hit;
+	data.level = level;
 	return (reflection(ft_color(co->color.r * ratio.r, co->color.g * \
-	ratio.g, co->color.b * ratio.b, 0), data, reflect_ray, level, &co->material));
+	ratio.g, co->color.b * ratio.b, 0), data, reflect_ray, \
+		&co->material));
 }

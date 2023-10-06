@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:20:49 by cpapot            #+#    #+#             */
-/*   Updated: 2023/05/31 16:15:09 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 21:52:36 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_list_of_char	t_lstc;
 struct s_list_of_char
 {
 	t_lstc	*next;
-	char 	c;
+	char	c;
 };
 
 typedef struct s_memstock

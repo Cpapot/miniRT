@@ -6,11 +6,12 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 22:27:37 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 22:58:59 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 14:31:11 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "color.h"
 
 int32_t	mod_gamma(int32_t object_color)
 {

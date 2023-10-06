@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:19:00 by cpapot            #+#    #+#             */
-/*   Updated: 2022/11/30 12:05:04 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 21:52:21 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_atoi(const char *str)
 bool	ft_atoi_on(const char *str, int *dst)
 {
 	long long int	result;
-	int 			minus;
+	int				minus;
 
 	result = 0;
 	minus = 0;

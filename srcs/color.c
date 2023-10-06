@@ -31,5 +31,5 @@ t_color	int_to_rgb(int32_t color)
 	result.r = (color >> 16) & 0xFF;
 	result.g = (color >> 8) & 0xFF;
 	result.b = color & 0xFF;
-	return(result);
+	return (result);
 }

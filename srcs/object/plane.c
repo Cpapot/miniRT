@@ -6,13 +6,13 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:01:59 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/31 15:31:30 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:45:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "checkerboard.h"
 #include "reflection.h"
+#include "light.h"
 
 t_vec_3	plane_normal(t_vec_3 camdir, t_plane plane)
 {
@@ -75,22 +75,24 @@ t_hit	find_near_plane(t_ray camray, size_t count, t_plane *plane_arr)
 	return (info);
 }
 
-int32_t	render_plane(t_hitinfo info, t_ray camray, t_minirt_data data, int level)
+bool	is_black_case_pl(t_point hit, t_plane *plane);
+
+int32_t	render_plane(t_hitinfo info, t_ray camray, t_data data, int level)
 {
 	t_plane		*pl;
 	t_color		ratio;
-	t_point	hit;
+	t_point		hit;
 	t_ray		reflect_ray;
 
 	pl = (t_plane *)info.struct_info;
 	hit = adjust_hitpoint(hit_coord(info.t, camray), pl->normal_vector);
-	if (pl->material.is_board && is_black_case(hit))
-		return (ft_color(0, 0, 0, 0));
-	ratio = ft_find_light_ratio(hit, data, \
+	ratio = light_ratio(hit, data, \
 	pl->normal_vector, &pl->material);
 	ambient_lightning(&ratio, &data);
 	reflect_ray.direction = reflect_vec(pl->normal_vector, camray.direction);
 	reflect_ray.origin = hit;
+	data.level = level;
 	return (reflection(ft_color(pl->color.r * ratio.r, pl->color.g * \
-		ratio.g, pl->color.b * ratio.b, 0), data, reflect_ray, level, &pl->material));
+		ratio.g, pl->color.b * ratio.b, 0), data, reflect_ray, \
+		&pl->material));
 }

@@ -133,7 +133,7 @@ all : ${NAME} printf printffd
 
 ${NAME}: ${OBJS}
 	@${AR} ${NAME} ${OBJS}
-	@echo -n "${SUPPR}	${GREEN}${NAME} : 🆗${DEFAULT}"
+	@echo -n "${SUPPR}	${GREEN}LIBFT : 🆗${DEFAULT}\n"
 
 clean:
 	@${MAKE} --no-print-directory clean -C ${PRINTF}

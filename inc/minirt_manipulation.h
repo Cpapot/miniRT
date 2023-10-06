@@ -1,12 +1,20 @@
-//
-// Created by bpoumeau on 6/20/23.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt_manipulation.h                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/25 16:03:31 by cpapot            #+#    #+#             */
+/*   Updated: 2023/09/25 16:05:56 by cpapot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef RAYTRACER_MINIRT_MANIPULATION_H
-#define RAYTRACER_MINIRT_MANIPULATION_H
+#ifndef MINIRT_MANIPULATION_H
+# define MINIRT_MANIPULATION_H
 
-#include "structure.h"
+# include "structure.h"
 
-void	*suppress_light(t_light light, t_minirt_data *data_pt);
+void	*suppress_light(t_light light, t_data *data_pt);
 
-#endif //RAYTRACER_MINIRT_MANIPULATION_H
+#endif

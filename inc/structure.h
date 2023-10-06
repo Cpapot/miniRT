@@ -6,7 +6,7 @@
 /*   By: cpapot <cpapot@student.42lyon.fr >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:19:45 by cpapot            #+#    #+#             */
-/*   Updated: 2023/08/01 21:48:52 by cpapot           ###   ########.fr       */
+/*   Updated: 2023/09/26 20:25:22 by cpapot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ enum	e_type
 	DISK
 };
 
-typedef struct s_minirt_data	t_minirt_data;
+typedef struct s_minirt_data	t_data;
 typedef struct s_ray			t_ray;
 typedef struct s_point			t_point;
 typedef struct s_vec_3			t_vec_3;
@@ -49,13 +49,14 @@ struct s_material
 	double	reflection;
 	double	specular_coef;
 	double	alpha;
-    bool    is_board;
+	bool	is_board;
 };
 
 struct s_option
 {
 	int		shadow;
 	int		anti_aliasing;
+	size_t	tmp;
 	size_t	cam_id;
 };
 
@@ -118,7 +119,7 @@ struct	s_camera
 
 struct	s_ambient_light
 {
-	t_color color;
+	t_color	color;
 	double	ratio;
 };
 
@@ -126,65 +127,68 @@ struct	s_light
 {
 	t_point	coordinate;
 	double	brightness;
-	t_color color;
+	t_color	color;
 };
 
 struct	s_sphere
 {
-	t_point	origin;
-	double	diameter;
-	t_color	color;
+	t_point		origin;
+	double		diameter;
+	t_color		color;
 	t_material	material;
 };
 
 struct	s_plane
 {
-	t_point	coordinate;
-	t_vec_3	normal_vector;
-	t_color	color;
+	t_point		coordinate;
+	t_vec_3		normal_vector;
+	t_color		color;
 	t_material	material;
 };
 
 struct	s_disk
 {
-	t_point	coordinate;
-	t_vec_3	normal_vector;
-	double	diameter;
-	t_color	color;
+	t_point		coord;
+	t_vec_3		normal;
+	double		diameter;
+	t_color		color;
 	t_material	material;
 };
 
 struct	s_cone
 {
-	t_point	coordinate;
-	t_vec_3	vector;
-	double	diameter;
-	double	height;
-	t_color	color;
+	t_point		coordinate;
+	t_vec_3		vector;
+	double		diameter;
+	double		height;
+	t_color		color;
 	t_material	material;
 };
 
 struct	s_cylinder
 {
-	t_point	coordinate;
-	t_vec_3	normal_vector;
-	double	diameter;
-	double	height;
-	t_color	color;
+	t_point		coord;
+	t_vec_3		normal;
+	double		diameter;
+	double		height;
+	t_color		color;
 	t_material	material;
 };
 
 typedef struct s_hit
 {
-		double	t;
-		int		id;
-}		t_hit;
+	double	t;
+	int		id;
+	bool	inside;
+}	t_hit;
 
 typedef struct s_hitinfo
 {
 	double	t;
 	int		type;
 	void	*struct_info;
+	bool	inside;
+	t_vec_3	normal;
 }			t_hitinfo;
 
 #endif

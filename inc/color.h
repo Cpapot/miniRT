@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef color_H
-# define color_H
+#ifndef COLOR_H
+# define COLOR_H
 
 int32_t	ft_color(int r, int g, int b, int T);
 t_color	int_to_rgb(int32_t color);

@@ -1,8 +1,0 @@
-*.o
-*.txt
-./miniRT
-cmake*
-.idea
-.vscode
-MiniRT
-*.a
